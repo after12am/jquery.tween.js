@@ -1,0 +1,22 @@
+
+body {
+    padding: 20px;
+    background-color: rgba(220, 220, 220, 1);
+}
+
+div {
+    position: absolute;
+    top: 45%;
+    border: 1px solid #ddd;
+    background-color: rgba(248, 248, 248, 1);
+    width: 48px;
+    height: 48px;
+}
+
+div span {
+    position: absolute;
+    display: block;
+    top: 40%;
+    left: 40%;
+    color: #313131;
+}
