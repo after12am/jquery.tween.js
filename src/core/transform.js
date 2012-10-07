@@ -1,4 +1,0 @@
-
-$.prototype.transform = {
-    
-};

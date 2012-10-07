@@ -17,12 +17,12 @@ $(function() {
         // perspective: 500,
         // position: {x: 100, y: 100, z: 100},
         // position: [100, 100, 100],
-        // x: 300,
+        x: 300,
         // y: 100,
         // z: -100,
         // rotate: 360,
         // rotatex: 360,
-        // rotatey: 360,
+        // rotatey: 90,
         // rotatez: 360,
         // rotate: [1, 0, 0, 180],
         // rotate: {x:1, y:0, z:0, rotate:180},
@@ -30,20 +30,23 @@ $(function() {
         // scalex: 2,
         // scaley: 2,
         // scalez: 2,
+        // perspective: 500,
         // scale: [2, 1, 0],
         // scale: {x:2, y:0, z:0}
         // skew: [45, 0],
         // skew: {x: 45, y: 0},
         // skewx: 45,
         // skewy: 45,
-        //width: '100px',
-        //property: ['width']
-        //property: 'width'
+        // width: '100px',
+        // property: ['width']
+        // property: 'width',
+        // origin: '0% 0%',
+        // style: 'preserve-3d'
     };
     
-    // $('div').transit(params, 3000, 500, callback);
+    $('div').transit(params, 1000, 500, callback);
     
-    $('div').translateX(100, 1000, 500, callback);
+    // $('div').translateX(100, 1000, 500, callback);
     // $('div').translateX(100, 1000, callback);
     // $('div').translateX(100, callback);
     
@@ -79,14 +82,6 @@ $(function() {
     // $('div').scale(2, 2, 1000, callback);
     // $('div').scale(2, 2, callback);
     
-    
-    // rotate: 360,
-    // rotatex: 360,
-    // rotatey: 360,
-    // rotatez: 360,
-    // rotate: [1, 0, 0, 180],
-    // rotate: {x:1, y:0, z:0, rotate:180},
-    
     // $('div').rotateX(180, 1000, 500, callback);
     // $('div').rotateX(180, 1000, callback);
     // $('div').rotateX(45, callback);
@@ -118,6 +113,7 @@ $(function() {
     // $('div').skew(45, 45, 1000, 500, callback);
     // $('div').skew(45, 90, 1000, callback);
     // $('div').skew(45, 20, callback);
+    
 });
 
 </script>

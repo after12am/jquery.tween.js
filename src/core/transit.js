@@ -1,23 +1,18 @@
 
-var Transition = function() {
+function whichTransitionEvent() {
     
-    this.naturalEvent = this.whichTransitionEvent();
-};
-
-Transition.prototype.whichTransitionEvent = function() {
+    var e = $('<div>')[0];
     
-    var t;
-    var el = document.createElement('fakeelement');
     var transitions = {
-      'transition':'transitionEnd',
-      'OTransition':'oTransitionEnd',
-      'MSTransition':'msTransitionEnd',
-      'MozTransition':'transitionend',
-      'WebkitTransition':'webkitTransitionEnd'
+      'transition': 'transitionEnd',
+      'OTransition': 'oTransitionEnd',
+      'MSTransition': 'msTransitionEnd',
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
     }
 
-    for(t in transitions){
-        if(el.style[t] !== undefined){
+    for (var t in transitions) {
+        if(e.style[t] !== undefined) {
             return transitions[t];
         }
     }
@@ -47,19 +42,19 @@ $.fn.transit = function(params, duration, delay, easing, callback) {
         this.parent().css('-webkit-perspective', 'none');
     }
     
-    var transition = new Transition();
-    var css = new Style(params, duration, delay, easing);
+    var style = new Style(params, duration, delay, easing);
+    var onTransitionEvent = whichTransitionEvent();
     
     var onTransitionEnd = function(e) {
         
-        this.unbind(transition.naturalEvent);
+        this.unbind(onTransitionEvent);
         this.trigger('onTransitionEnd');
         
         ($.proxy(callback, this))(e);
     };
     
-    this.bind(transition.naturalEvent, $.proxy(onTransitionEnd, this))
-        .css(css.build())
+    this.bind(onTransitionEvent, $.proxy(onTransitionEnd, this))
+        .css(style.build())
     
     return this;
 };

@@ -16,17 +16,29 @@ var Style = function(params, duration, delay, easing) {
         delete params.easing;
     }
     
+    var origin, style;
+    
+    if (params.origin) {
+        origin = params.origin;
+        delete params.origin;
+    }
+    
+    if (params.style) {
+        origin = params.style;
+        delete params.style;
+    }
+    
+    this.css = {};
+    this.transform = [];
+    
     this.transition = {
         properties: [], // Specifies the name of the CSS properties that apply the transition effect.
         duration: duration || 0, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
         easing: easing || 'ease', // Specifies the timing of the change.
-        origin: '50% 50%', // Specify the origin.
-        style: 'flat' // or preserve-3d
+        origin: origin || '50% 50%', // Specify the origin.
+        style: style || 'flat' // or preserve-3d
     };
-    
-    this.transform = [];
-    this.css = {};
     
     this.parse(params);
 };
