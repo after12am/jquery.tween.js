@@ -1,5 +1,5 @@
 
-var CSS3 = function(params, duration, delay, easing) {
+var Style = function(params, duration, delay, easing) {
     
     if (params.duration) {
         duration = params.duration;
@@ -21,7 +21,7 @@ var CSS3 = function(params, duration, delay, easing) {
         duration: duration || 0, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
         easing: easing || 'ease', // Specifies the timing of the change.
-        origin: '50% 50%', // Specify the origin
+        origin: '50% 50%', // Specify the origin.
         style: 'flat' // or preserve-3d
     };
     
@@ -31,7 +31,7 @@ var CSS3 = function(params, duration, delay, easing) {
     this.parse(params);
 };
 
-CSS3.prototype.build = function() {
+Style.prototype.build = function() {
     
     if (this.transition.properties.length == 0) {
         this.transition.properties = ['all'];
@@ -47,12 +47,10 @@ CSS3.prototype.build = function() {
         '-webkit-transform-style': this.transition.style
     };
     
-    console.log(this.transform)
-    
     return $.extend(properties, this.css);
 };
 
-CSS3.prototype.parse = function(params) {
+Style.prototype.parse = function(params) {
     
     // translate
     if (typeof params.position == 'object') {

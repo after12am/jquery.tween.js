@@ -48,7 +48,7 @@ $.fn.transit = function(params, duration, delay, easing, callback) {
     }
     
     var transition = new Transition();
-    var css = new CSS3(params, duration, delay, easing);
+    var css = new Style(params, duration, delay, easing);
     
     var onTransitionEnd = function(e) {
         
