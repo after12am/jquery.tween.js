@@ -20,7 +20,9 @@ var CSS3 = function(params, duration, delay, easing) {
         properties: [], // Specifies the name of the CSS properties that apply the transition effect.
         duration: duration || 0, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
-        easing: easing || 'ease' // Specifies the timing of the change.
+        easing: easing || 'ease', // Specifies the timing of the change.
+        origin: '50% 50%', // Specify the origin
+        style: 'flat' // or preserve-3d
     };
     
     this.transform = [];
@@ -29,7 +31,7 @@ var CSS3 = function(params, duration, delay, easing) {
     this.parse(params);
 };
 
-CSS3.prototype.properties = function() {
+CSS3.prototype.build = function() {
     
     if (this.transition.properties.length == 0) {
         this.transition.properties = ['all'];
@@ -40,8 +42,12 @@ CSS3.prototype.properties = function() {
         '-webkit-transition-duration': this.transition.duration + 'ms',
         '-webkit-transition-timing-function': this.transition.easing,
         '-webkit-transition-delay': this.transition.delay + 'ms',
-        '-webkit-transform': this.transform.join(' ') // If you separate transform function, you can apply multiple transform effects.
+        '-webkit-transform': this.transform.join(' '), // If you separate transform function, you can apply multiple transform effects.
+        '-webkit-transform-origin': this.transition.origin,
+        '-webkit-transform-style': this.transition.style
     };
+    
+    console.log(this.transform)
     
     return $.extend(properties, this.css);
 };
@@ -207,39 +213,6 @@ CSS3.prototype.parse = function(params) {
     }
     
     this.css = params;
-    
-    return this;
-};
-
-$.fn.transit = function(params, duration, delay, easing, callback) {
-    
-    if (typeof duration === 'function') {
-        callback = duration;
-        duration = undefined;;
-    }
-    
-    if (typeof delay === 'function') {
-        callback = delay;
-        delay = undefined;
-    }
-    
-    if (typeof easing === 'function') {
-        callback = easing;
-        easing = undefined;
-    }
-    
-    var css = new CSS3(params, duration, delay, easing);
-    
-    var end = function(event){
-        
-        this.unbind("webkitTransitionEnd");
-        this.trigger('onTransitionEnd');
-        
-        ($.proxy(callback, this))(event);
-    };
-    
-    this.bind("webkitTransitionEnd", $.proxy(end, this))
-        .css(css.properties());
     
     return this;
 };

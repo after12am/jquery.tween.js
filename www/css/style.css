@@ -12,11 +12,3 @@ div {
     width: 48px;
     height: 48px;
 }
-
-div span {
-    position: absolute;
-    display: block;
-    top: 40%;
-    left: 40%;
-    color: #313131;
-}

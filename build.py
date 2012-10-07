@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 input_path = 'src/'
-output_path = 'www/js/m.accelerator.min.js'
+output_path = 'www/js/jquery.m.accelerator.min.js'
 
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 from SocketServer import TCPServer

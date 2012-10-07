@@ -4,21 +4,26 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/m.accelerator.min.js"></script>
+<script type="text/javascript" src="/js/jquery.m.accelerator.min.js"></script>
 <script type="text/javascript">
 
 $(function() {
     
+    var callback = function(e) {
+        console.log('transit end', e, $(this));
+    };
+    
     var params = {
+        // perspective: 500,
         // position: {x: 100, y: 100, z: 100},
         // position: [100, 100, 100],
-        x: 300,
+        // x: 300,
         // y: 100,
-        // z: 100,
-        // rotate: 45,
-        // rotatex: 45,
-        // rotatey: 45,
-        // rotatez: 45,
+        // z: -100,
+        // rotate: 360,
+        // rotatex: 360,
+        // rotatey: 360,
+        // rotatez: 360,
         // rotate: [1, 0, 0, 180],
         // rotate: {x:1, y:0, z:0, rotate:180},
         // scale: 2,
@@ -31,19 +36,88 @@ $(function() {
         // skew: {x: 45, y: 0},
         // skewx: 45,
         // skewy: 45,
-        width: '100px',
+        //width: '100px',
         //property: ['width']
         //property: 'width'
     };
     
-    var callback = function(e) {
-        console.log('transit end', e);
-    };
+    // $('div').transit(params, 3000, 500, callback);
     
-    $('div').transit(params, 3000, 500, callback);
+    $('div').translateX(100, 1000, 500, callback);
+    // $('div').translateX(100, 1000, callback);
+    // $('div').translateX(100, callback);
     
-    console.log();
+    // $('div').translateY(100, 1000, 500, callback);
+    // $('div').translateY(100, 1000, callback);
+    // $('div').translateY(100, callback);
     
+    // $('div').translateZ(-500, 1000, 1000, 500, callback);
+    // $('div').translateZ(-500, 1000, 1000, callback);
+    // $('div').translateZ(-500, 1000, callback);
+    
+    // $('div').translate(300, 200, 1000, 500, callback);
+    // $('div').translate(300, 200, 1000, callback);
+    // $('div').translate(300, 200, callback);
+    
+    // $('div').translate3d(300, 200, -300, 1000, 1000, 500, callback);
+    // $('div').translate3d(300, 200, -300, 1000, 1000, callback);
+    // $('div').translate3d(300, 200, -300, 1000, callback);
+    
+    // $('div').scaleX(2, 1000, 500, callback);
+    // $('div').scaleX(2, 1000, callback);
+    // $('div').scaleX(2, callback);
+    
+    // $('div').scaleY(2, 1000, 500, callback);
+    // $('div').scaleY(2, 1000, callback);
+    // $('div').scaleY(2, callback);
+    
+    // $('div').scaleZ(2, 1000, 1000, 500, callback);
+    // $('div').scaleZ(2, 1000, 1000, callback);
+    // $('div').scaleZ(2, 1000, callback);
+    
+    // $('div').scale(2, 2, 1000, 500, callback);
+    // $('div').scale(2, 2, 1000, callback);
+    // $('div').scale(2, 2, callback);
+    
+    
+    // rotate: 360,
+    // rotatex: 360,
+    // rotatey: 360,
+    // rotatez: 360,
+    // rotate: [1, 0, 0, 180],
+    // rotate: {x:1, y:0, z:0, rotate:180},
+    
+    // $('div').rotateX(180, 1000, 500, callback);
+    // $('div').rotateX(180, 1000, callback);
+    // $('div').rotateX(45, callback);
+    
+    // $('div').rotateY(180, 1000, 500, callback);
+    // $('div').rotateY(180, 1000, callback);
+    // $('div').rotateY(45, callback);
+    
+    // $('div').rotateZ(360, 1000, 500, callback);
+    // $('div').rotateZ(180, 1000, callback);
+    // $('div').rotateZ(45, callback);
+    
+    // $('div').rotate(180, 1000, 500, callback);
+    // $('div').rotate(180, 1000, callback);
+    // $('div').rotate(45, callback);
+    
+    // $('div').rotate3d(180, 1000, 500, callback);
+    // $('div').rotate3d(180, 1000, callback);
+    // $('div').rotate3d(45, callback);
+    
+    // $('div').skewX(45, 1000, 500, callback);
+    // $('div').skewX(45, 1000, callback);
+    // $('div').skewX(45, callback);
+    
+    // $('div').skewY(45, 1000, 500, callback);
+    // $('div').skewY(45, 1000, callback);
+    // $('div').skewY(45, callback);
+    
+    // $('div').skew(45, 45, 1000, 500, callback);
+    // $('div').skew(45, 90, 1000, callback);
+    // $('div').skew(45, 20, callback);
 });
 
 </script>
