@@ -35,6 +35,8 @@ $.fn.transit = function(params, duration, delay, easing, callback) {
         easing = undefined;
     }
     
+    callback = callback || function() {};
+    
     if (params.perspective) {
         this.parent().css('-webkit-perspective', params.perspective);
         delete params.perspective;
