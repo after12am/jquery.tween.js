@@ -1,31 +1,6 @@
 
 var Style = function(params, duration, delay, easing, origin, style) {
     
-    if (params.duration) {
-        duration = params.duration;
-        delete params.duration;
-    }
-    
-    if (params.delay) {
-        delay = params.delay;
-        delete params.delay;
-    }
-    
-    if (params.easing) {
-        easing = params.easing;
-        delete params.easing;
-    }
-    
-    if (params.origin) {
-        origin = params.origin;
-        delete params.origin;
-    }
-    
-    if (params.style) {
-        origin = params.style;
-        delete params.style;
-    }
-    
     this.css = {};
     this.transform = [];
     
