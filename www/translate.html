@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.m.accelerator.min.js"></script>
+<script type="text/javascript">
+
+$(function() {
+    
+    var destinate_to_x = 100;
+    
+    $('.box.translate.x').mouseover(function() {
+        
+        $(this).transit({
+            x: destinate_to_x,
+            duration: 500
+        });
+        
+        destinate_to_x *= -1;
+    });
+    
+    var destinate_to_y = 50;
+    
+    $('.box.translate.y').mouseover(function() {
+        
+        $(this).transit({
+            y: destinate_to_y,
+            duration: 300
+        });
+        
+        destinate_to_y *= -1;
+    });
+    
+    var destinate_to_z = 150;
+    
+    $('.box.translate.z').mouseover(function() {
+        
+        $(this).transit({
+            z: destinate_to_z,
+            duration: 300,
+            perspective: 500
+        });
+        
+        destinate_to_z *= -1;
+    });
+});
+
+</script>
+</head>
+<body>
+    <div class="container">
+        <h2>translate</h2>
+        <pre>
+$(elem).transit({
+    x: destinate_to,
+    duration: 500
+});
+        </pre>
+        <div class="canvas">
+            <div class="box translate x"></div>
+        </div>
+        
+        
+        <pre>
+$(elem).transit({
+    y: destinate_to,
+    duration: 500
+});
+        </pre>
+        <div class="canvas">
+            <div class="box translate y"></div>
+        </div>
+        
+        
+        <pre>
+$(elem).transit({
+    z: destinate_to,
+    duration: 500
+});
+        </pre>
+        <div class="canvas">
+            <div class="box translate z"></div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="container">
+        
+    </div>
+</body>
+</html>

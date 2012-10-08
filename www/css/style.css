@@ -1,10 +1,25 @@
 
 body {
     padding: 20px;
-    background-color: rgba(220, 220, 220, 1);
 }
 
-div {
+div.container {
+    
+    width: 90%;
+    margin: 0 auto;
+}
+
+div.canvas {
+    position: relative;
+    background-color: rgba(248, 248, 248, 1);
+    height: 200px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 60px;
+}
+
+div.box {
     position: absolute;
     top: 50%;
     left: 50%;
