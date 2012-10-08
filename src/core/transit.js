@@ -16,7 +16,7 @@ function whichTransitionEvent() {
             return transitions[t];
         }
     }
-}
+};
 
 $.fn.transit = function(params, duration, delay, easing, callback) {
     
@@ -35,8 +35,6 @@ $.fn.transit = function(params, duration, delay, easing, callback) {
         easing = undefined;
     }
     
-    callback = callback || function() {};
-    
     if (params.perspective) {
         this.parent().css('-webkit-perspective', params.perspective);
         delete params.perspective;
@@ -46,16 +44,17 @@ $.fn.transit = function(params, duration, delay, easing, callback) {
     
     var style = new Style(params, duration, delay, easing);
     var onTransitionEvent = whichTransitionEvent();
-    
-    var onTransitionEnd = function(e) {
+    var end = function(e) {
         
         this.unbind(onTransitionEvent);
         this.trigger('onTransitionEnd');
         
-        ($.proxy(callback, this))(e);
+        if (typeof callback === 'function') {
+            ($.proxy(callback, this))(e);
+        }
     };
     
-    this.bind(onTransitionEvent, $.proxy(onTransitionEnd, this))
+    this.bind(event, $.proxy(onTransitionEvent, this))
         .css(style.build())
     
     return this;

@@ -44,7 +44,7 @@ $(function() {
         // style: 'preserve-3d'
     };
     
-    $('div').transit(params, 1000, 500, callback);
+    //$('div').transit(params, 1000);
     
     // $('div').translateX(100, 1000, 500, callback);
     // $('div').translateX(100, 1000, callback);
@@ -114,6 +114,22 @@ $(function() {
     // $('div').skew(45, 90, 1000, callback);
     // $('div').skew(45, 20, callback);
     
+    
+    //$('div').transition('duration', 'delay', 'ease-in-out', '50% 50%', 'perspective-3d');
+    
+    var destinate_to = 100;
+    
+    $('body').mouseover(function() {
+        
+        
+        var params = {
+            x: destinate_to
+        };
+
+        $('div').transit(params, 500);
+        
+        destinate_to *= -1;
+    });
 });
 
 </script>
