@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>m.accelerator</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.m.accelerator.min.js"></script>
+    <script type="text/javascript">
+        
+        $(function() {
+            
+            $('.toggle-source').click(function() {
+                
+                $(this).parent().prev().toggle();
+                
+                if ($(this).text() == 'Show source »') {
+                    $(this).text('Hide source »');
+                } else {
+                    $(this).text('Show source »');
+                }
+            });
+            
+            
+            $('.transit.translate.x').click(function() {
+                
+                var box = $('.box.transit.translate.x');
+                
+                box.transit({ x: 0 });
+                
+                var params = {
+                    x: box.parent().width() - box.width() - 22
+                };
+                
+                box.transit(params, 1000);
+            });
+            
+            $('.transit.translate.y').click(function() {
+                
+                var box = $('.box.transit.translate.y');
+                
+                box.transit({ y: 1 });
+                
+                var params = {
+                    y: 50
+                };
+                
+                box.transit(params, 500, 500);
+            });
+            
+            $('.transit.translate.z').click(function() {
+                
+                var box = $('.box.transit.translate.z');
+                
+                box.transit({ z: 1, perspective: 5000 });
+                
+                var params = {
+                    z: -1000,
+                    perspective: 5000
+                };
+                
+                box.transit(params, 1000);
+            });
+            
+            
+            
+        });
+        
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Hello, mobile!</h1>
+            <p>
+                This is jquery plugin which steps on accelerator of mobile animation.
+            </p>
+            <p><a class="btn btn-primary btn-large" href="#study">Learn more »</a></p>
+        </div>
+        
+        <div id="study">
+            <div>
+                <h2>Translate to x</h2>
+                <div class="canvas">
+                    <div class="box transit translate x"></div>
+                </div>
+                <p><a class="btn btn-primary transit translate x">View animation »</a></p>
+<pre style="display:none;">
+var params = {
+    x: destination_to_x
+};
+
+$(elem).transit(params, [duration], [delay], [easing], [callback]);
+</pre>
+                <p><a class="btn btn-primary toggle-source">Show source »</a></p>
+            </div>
+            
+            
+            
+            
+            <div>
+                <h2>Translate to y</h2>
+                <div class="canvas">
+                    <div class="box transit translate y"></div>
+                </div>
+                <p><a class="btn btn-primary transit translate y">View animation »</a></p>
+<pre style="display:none;">
+var params = {
+    y: destination_to_y
+};
+
+$(elem).transit(params, [duration], [delay], [easing], [callback]);
+</pre>
+                <p><a class="btn btn-primary toggle-source">Show source »</a></p>
+            </div>
+            
+            
+            
+            
+            
+            <div>
+                <h2>Translate to z</h2>
+                <div class="canvas">
+                    <div class="box transit translate z"></div>
+                </div>
+                <p><a class="btn btn-primary transit translate z">View animation »</a></p>
+<pre style="display:none;">
+var params = {
+    z: destination_to_z,
+    perspective: perspective_value
+};
+
+$(elem).transit(params, [duration], [delay], [easing], [callback]);
+</pre>
+                <p><a class="btn btn-primary toggle-source">Show source »</a></p>
+            </div>
+            
+            
+        </div>
+        
+        <hr>
+        
+        <footer>
+            <p>© Company 2012</p>
+        </footer>
+    </div>
+    
+</body>
+</html>
