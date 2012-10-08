@@ -1,5 +1,5 @@
 
-var Style = function(params, duration, delay, easing) {
+var Style = function(params, duration, delay, easing, origin, style) {
     
     if (params.duration) {
         duration = params.duration;
@@ -15,8 +15,6 @@ var Style = function(params, duration, delay, easing) {
         easing = params.easing;
         delete params.easing;
     }
-    
-    var origin, style;
     
     if (params.origin) {
         origin = params.origin;
@@ -81,30 +79,30 @@ Style.prototype.parse = function(params) {
         delete params.z;
     }
     
-    if (params.x && params.y && params.z) {
+    if (params.x != undefined && params.y != undefined && params.z != undefined) {
         this.transform.push('translate3d(' + params.x + 'px,' + params.y + 'px,' + params.z + 'px)');
         delete params.x;
         delete params.y;
         delete params.z;
     }
     
-    if (params.x && params.y) {
+    if (params.x != undefined && params.y != undefined) {
         this.transform.push('translate(' + params.x + 'px,' + params.y + 'px)');
         delete params.x;
         delete params.y;
     }
     
-    if (params.x) {
+    if (params.x != undefined) {
         this.transform.push('translateX(' + params.x + 'px)');
         delete params.x;
     }
     
-    if (params.y) {
+    if (params.y != undefined) {
         this.transform.push('translateY(' + params.y + 'px)');
         delete params.y;
     }
     
-    if (params.z) {
+    if (params.z != undefined) {
         this.transform.push('translateZ(' + params.z + 'px)');
         delete params.z;
     }
@@ -112,11 +110,11 @@ Style.prototype.parse = function(params) {
     // rotate
     if (typeof params.rotate == 'object') {
         
-        if (params.rotate['x']) {
+        if (params.rotate['x'] != undefined) {
             this.transform.push('rotate3d(' + params.rotate['x'] + ',' + params.rotate['y'] + ',' + params.rotate['z'] + ',' + params.rotate['rotate'] + 'deg)');
         }
         
-        if (params.rotate[0]) {
+        if (params.rotate[0] != undefined) {
             this.transform.push('rotate3d(' + params.rotate[0] + ',' + params.rotate[1] + ',' + params.rotate[2] + ',' + params.rotate[3] + 'deg)');
         }
         
@@ -126,22 +124,22 @@ Style.prototype.parse = function(params) {
         delete params.rotatez;
     }
     
-    if (params.rotate) {
+    if (params.rotate != undefined) {
         this.transform.push('rotate(' + params.rotate + 'deg)');
         delete params.rotate;
     }
     
-    if (params.rotatex) {
+    if (params.rotatex != undefined) {
         this.transform.push('rotateX(' + params.rotatex + 'deg)');
         delete params.rotatex;
     }
     
-    if (params.rotatey) {
+    if (params.rotatey != undefined) {
         this.transform.push('rotateY(' + params.rotatey + 'deg)');
         delete params.rotatey;
     }
     
-    if (params.rotatez) {
+    if (params.rotatez != undefined) {
         this.transform.push('rotateZ(' + params.rotatez + 'deg)');
         delete params.rotatez;
     }
@@ -149,11 +147,11 @@ Style.prototype.parse = function(params) {
     // scale
     if (typeof params.scale == 'object') {
 
-        if (params.scale['x']) {
+        if (params.scale['x'] != undefined) {
             this.transform.push('scale3d(' + params.scale['x'] + ',' + params.scale['y'] + ',' + params.scale['z'] + ')');
         }
         
-        if (params.scale[0]) {
+        if (params.scale[0] != undefined) {
             this.transform.push('scale3d(' + params.scale[0] + ',' + params.scale[1] + ',' + params.scale[2] + ')');
         }
 
@@ -163,22 +161,22 @@ Style.prototype.parse = function(params) {
         delete params.scalez;
     }
     
-    if (params.scale) {
+    if (params.scale != undefined) {
         this.transform.push('scale(' + params.scale + ',' + params.scale + ')');
         delete params.scale;
     }
 
-    if (params.scalex) {
+    if (params.scalex != undefined) {
         this.transform.push('scaleX(' + params.scalex + ')');
         delete params.scalex;
     }
 
-    if (params.scaley) {
+    if (params.scaley != undefined) {
         this.transform.push('scaleY(' + params.scaley + ')');
         delete params.scaley;
     }
 
-    if (params.scalez) {
+    if (params.scalez != undefined) {
         this.transform.push('scaleZ(' + params.scalez + ')');
         delete params.scalez;
     }
@@ -186,11 +184,11 @@ Style.prototype.parse = function(params) {
     // skew
     if (typeof params.skew == 'object') {
         
-        if (params.skew['x']) {
+        if (params.skew['x'] != undefined) {
             this.transform.push('skew(' + params.skew['x'] + 'deg,' + params.skew['y'] + 'deg)');
         }
 
-        if (params.skew[0]) {
+        if (params.skew[0] != undefined) {
             this.transform.push('skew(' + params.skew[0] + 'deg,' + params.skew[1] + 'deg)');
         }
         
@@ -199,26 +197,23 @@ Style.prototype.parse = function(params) {
         delete params.skewy;
     }
     
-    if (params.skewx) {
+    if (params.skewx != undefined) {
         this.transform.push('skewX(' + params.skewx + 'deg)');
         delete params.skewx;
     }
     
-    if (params.skewy) {
+    if (params.skewy != undefined) {
         this.transform.push('skewY(' + params.skewy + 'deg)');
         delete params.skewy;
     }
     
-    if (params.property) {
-        
-        if (typeof params.property == 'object') {
-            this.transition.properties = params.property;
-        }
-        
-        if (typeof params.property == 'string') {
-            this.transition.properties.push(params.property);
-        }
-        
+    if (typeof params.property == 'object') {
+        this.transition.properties = params.property;
+        delete params.property;
+    }
+    
+    if (typeof params.property == 'string') {
+        this.transition.properties.push(params.property);
         delete params.property;
     }
     
