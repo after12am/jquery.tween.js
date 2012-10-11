@@ -45,6 +45,15 @@ $(function() {
         
         destinate_to_z *= -1;
     });
+    
+    var destinate_to_z = 150;
+
+    $('.box.rotate.z').mouseover(function() {
+        
+        $(this).rotateY(destinate_to_z, 100, 1000);
+
+        destinate_to_z *= -1;
+    });
 });
 
 </script>
@@ -87,9 +96,15 @@ $(elem).transit({
     </div>
     
     
-    
     <div class="container">
-        
+        <h2>rotate</h2>
+        <pre>
+$(this).rotateY(100, 100, 1000);
+        </pre>
+        <div class="canvas">
+            <div class="box rotate z"></div>
+        </div>
     </div>
+    
 </body>
 </html>

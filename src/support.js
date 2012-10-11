@@ -113,10 +113,11 @@ $.fn.rotateX = function(rotatex, duration, delay, easing, callback) {
     this.transit(params, duration, delay, easing, callback);
 };
 
-$.fn.rotateY = function(rotatey, duration, delay, easing, callback) {
+$.fn.rotateY = function(rotatey, perspective, duration, delay, easing, callback) {
     
     var params = {
-        rotatey: rotatey
+        rotatey: rotatey,
+        perspective: perspective
     };
     
     this.transit(params, duration, delay, easing, callback);
@@ -140,10 +141,11 @@ $.fn.rotate = function(rotate, duration, delay, easing, callback) {
     this.transit(params, duration, delay, easing, callback);
 };
 
-$.fn.rotate3d = function(x, y, z, rotate, duration, delay, easing, callback) {
+$.fn.rotate3d = function(x, y, z, rotate, perspective, duration, delay, easing, callback) {
     
     var params = {
-        rotate: [x, y, z, rotate]
+        rotate: [x, y, z, rotate],
+        perspective: perspective
     };
     
     this.transit(params, duration, delay, easing, callback);
@@ -176,9 +178,4 @@ $.fn.skew = function(skewx, skewy, duration, delay, easing, callback) {
     };
     
     this.transit(params, duration, delay, easing, callback);
-};
-
-$.fn.perspective = function() {
-    
-    throw new Error('perspective function is not available');
 };
