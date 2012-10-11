@@ -37,23 +37,6 @@ Style.prototype.build = function() {
 
 Style.prototype.parse = function(params) {
     
-    // translate
-    if (typeof params.position == 'object') {
-        
-        if (params.position['x']) {
-            this.transform.push('translate3d(' + params.position['x'] + 'px,' + params.position['y'] + 'px,' + params.position['z'] + 'px)');
-        }
-        
-        if (params.position[0]) {
-            this.transform.push('translate3d(' + params.position[0] + 'px,' + params.position[1] + 'px,' + params.position[2] + 'px)');
-        }
-        
-        delete params.position;
-        delete params.x;
-        delete params.y;
-        delete params.z;
-    }
-    
     if (params.x != undefined && params.y != undefined && params.z != undefined) {
         this.transform.push('translate3d(' + params.x + 'px,' + params.y + 'px,' + params.z + 'px)');
         delete params.x;

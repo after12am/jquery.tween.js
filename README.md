@@ -15,8 +15,6 @@ $(elem).transit(params, [duration], [delay], [easing], [callback]);
 ## property
 
 ```
-@position object {x:x, y:y, z:z}
-@position object [x, y, z]
 @x int
 @y int
 @z int
