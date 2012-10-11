@@ -63,7 +63,7 @@ $.fn.transit = function(params, duration, delay, easing, callback) {
         delete params.style;
     }
     
-    if (params.perspective) {
+    if (params.perspective != undefined) {
         this.parent().css('-webkit-perspective', params.perspective);
         delete params.perspective;
     } else {
