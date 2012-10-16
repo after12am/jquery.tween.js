@@ -18,7 +18,7 @@ function whichTransitionEvent() {
     }
 };
 
-$.fn.transit = function(params, duration, delay, easing, callback) {
+$.fn.smoosy = function(params, duration, delay, easing, callback) {
     
     var origin = undefined;
     var style = undefined;

@@ -5,7 +5,7 @@ $.fn.translateX = function(x, duration, delay, easing, callback) {
         x: x
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.translateY = function(y, duration, delay, easing, callback) {
@@ -14,7 +14,7 @@ $.fn.translateY = function(y, duration, delay, easing, callback) {
         y: y
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.translateZ = function(z, perspective, duration, delay, easing, callback) {
@@ -24,7 +24,7 @@ $.fn.translateZ = function(z, perspective, duration, delay, easing, callback) {
         perspective : perspective
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.translate = function(x, y, duration, delay, easing, callback) {
@@ -34,7 +34,7 @@ $.fn.translate = function(x, y, duration, delay, easing, callback) {
         y: y
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.translate3d = function(x, y, z, perspective, duration, delay, easing, callback) {
@@ -46,7 +46,7 @@ $.fn.translate3d = function(x, y, z, perspective, duration, delay, easing, callb
         perspective: perspective
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.scaleX = function(scalex, duration, delay, easing, callback) {
@@ -55,7 +55,7 @@ $.fn.scaleX = function(scalex, duration, delay, easing, callback) {
         scalex: scalex
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.scaleY = function(scaley, duration, delay, easing, callback) {
@@ -64,7 +64,7 @@ $.fn.scaleY = function(scaley, duration, delay, easing, callback) {
         scaley: scaley
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.scaleZ = function(scalez, perspective, duration, delay, easing, callback) {
@@ -77,7 +77,7 @@ $.fn.scaleZ = function(scalez, perspective, duration, delay, easing, callback) {
         perspective: perspective
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
     */
 };
 
@@ -88,7 +88,7 @@ $.fn.scale = function(scalex, scaley, duration, delay, easing, callback) {
         scaley: scaley
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.scale3d = function(scalex, scaley, scalez, perspective, duration, delay, easing, callback) {
@@ -100,7 +100,7 @@ $.fn.scale3d = function(scalex, scaley, scalez, perspective, duration, delay, ea
         scale: [scalex, scaley, scalez]
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
     */
 };
 
@@ -110,7 +110,7 @@ $.fn.rotateX = function(rotatex, duration, delay, easing, callback) {
         rotatex: rotatex
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.rotateY = function(rotatey, perspective, duration, delay, easing, callback) {
@@ -120,7 +120,7 @@ $.fn.rotateY = function(rotatey, perspective, duration, delay, easing, callback)
         perspective: perspective
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.rotateZ = function(rotatez, duration, delay, easing, callback) {
@@ -129,7 +129,7 @@ $.fn.rotateZ = function(rotatez, duration, delay, easing, callback) {
         rotatez: rotatez
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.rotate = function(rotate, duration, delay, easing, callback) {
@@ -138,7 +138,7 @@ $.fn.rotate = function(rotate, duration, delay, easing, callback) {
         rotate: rotate
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.rotate3d = function(x, y, z, rotate, perspective, duration, delay, easing, callback) {
@@ -148,7 +148,7 @@ $.fn.rotate3d = function(x, y, z, rotate, perspective, duration, delay, easing, 
         perspective: perspective
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 
@@ -159,7 +159,7 @@ $.fn.skewX = function(skewx, duration, delay, easing, callback) {
         skewx: skewx
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.skewY = function(skewy, duration, delay, easing, callback) {
@@ -168,7 +168,7 @@ $.fn.skewY = function(skewy, duration, delay, easing, callback) {
         skewy: skewy
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
 
 $.fn.skew = function(skewx, skewy, duration, delay, easing, callback) {
@@ -177,5 +177,5 @@ $.fn.skew = function(skewx, skewy, duration, delay, easing, callback) {
         skew: [skewx, skewy]
     };
     
-    this.transit(params, duration, delay, easing, callback);
+    this.smoosy(params, duration, delay, easing, callback);
 };
