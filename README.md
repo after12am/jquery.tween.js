@@ -1,8 +1,8 @@
-# m.accelerator
+# jquery.smoosy
 
-This is jQuery plugin which steps on accelerator of mobile animation and provides smoothful api for mobile developper.
+jquery.smoosy is a jquery plugin that provides smooth animation for smartphone. jquery.smoosy implements animation using css3. In case of making animation in mobile, css3 is essencial. unfortunately javascript don't give a good performance in mobile. In contrast, css3 give your app lightness and interactivity. css3 is very useful and powerful in smartphone. Get experience.
 
-## basic usage
+## Usage
 ```
 var params = {
     x: destinate_to_x,
