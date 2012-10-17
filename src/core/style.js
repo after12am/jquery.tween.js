@@ -1,6 +1,27 @@
 
-var Style = function(params, duration, delay, easing, origin, style) {
+function whichTransitionEvent() {
     
+    var e = $('<div>')[0];
+    
+    var transitions = {
+      'transition': 'transitionEnd',
+      'OTransition': 'oTransitionEnd',
+      'MSTransition': 'msTransitionEnd',
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
+    }
+
+    for (var t in transitions) {
+        if(e.style[t] !== undefined) {
+            return transitions[t];
+        }
+    }
+};
+
+var Style = function(elem, params, duration, delay, easing, origin, style, callback) {
+    
+    this.elem = elem;
+    this.callback = callback;
     this.css = {};
     this.transform = [];
     
@@ -32,7 +53,23 @@ Style.prototype.build = function() {
         '-webkit-transform-style': this.transition.style
     };
     
-    return $.extend(properties, this.css);
+    var onTransitionEvent = whichTransitionEvent();
+    var that = this;
+    var callback = function(e) {
+        
+        
+        this.unbind(onTransitionEvent);
+        this.trigger('onTransitionEnd');
+        
+        if (typeof callback === 'function') {
+            ($.proxy(that.callback, this))(e);
+        }
+    };
+    
+    
+    this.elem
+        .bind(onTransitionEvent, $.proxy(callback, this.elem))
+        .css($.extend(properties, this.css));
 };
 
 Style.prototype.parse = function(params) {

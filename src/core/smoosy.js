@@ -1,23 +1,4 @@
 
-function whichTransitionEvent() {
-    
-    var e = $('<div>')[0];
-    
-    var transitions = {
-      'transition': 'transitionEnd',
-      'OTransition': 'oTransitionEnd',
-      'MSTransition': 'msTransitionEnd',
-      'MozTransition': 'transitionend',
-      'WebkitTransition': 'webkitTransitionEnd'
-    }
-
-    for (var t in transitions) {
-        if(e.style[t] !== undefined) {
-            return transitions[t];
-        }
-    }
-};
-
 $.fn.smoosy = function(params, duration, delay, easing, callback) {
     
     var origin = undefined;
@@ -63,27 +44,10 @@ $.fn.smoosy = function(params, duration, delay, easing, callback) {
         delete params.style;
     }
     
-    if (params.perspective != undefined) {
-        this.parent().css('-webkit-perspective', params.perspective);
-        delete params.perspective;
-    } else {
-        this.parent().css('-webkit-perspective', 'none');
-    }
+    this.parent().css('-webkit-perspective', params.perspective || 'none');
+    delete params.perspective;
     
-    var css = new Style(params, duration, delay, easing, origin, style);
-    var onTransitionEvent = whichTransitionEvent();
-    var end = function(e) {
-        
-        this.unbind(onTransitionEvent);
-        this.trigger('onTransitionEnd');
-        
-        if (typeof callback === 'function') {
-            ($.proxy(callback, this))(e);
-        }
-    };
-    
-    this.bind(event, $.proxy(onTransitionEvent, this))
-        .css(css.build())
+    new Style(this, params, duration, delay, easing, origin, style, callback).build();
     
     return this;
 };
