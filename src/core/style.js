@@ -37,7 +37,7 @@ var Style = function(elem, params, duration, delay, easing, origin, style, callb
     this.parse(params);
 };
 
-Style.prototype.build = function() {
+Style.prototype.adopt = function() {
     
     if (this.transition.properties.length == 0) {
         this.transition.properties = ['all'];
@@ -49,8 +49,8 @@ Style.prototype.build = function() {
         '-webkit-transition-timing-function': this.transition.easing,
         '-webkit-transition-delay': this.transition.delay + 'ms',
         '-webkit-transform': this.transform.join(' '), // If you separate transform function, you can apply multiple transform effects.
-        '-webkit-transform-origin': this.transition.origin,
-        '-webkit-transform-style': this.transition.style
+        // '-webkit-transform-origin': this.transition.origin,
+        // '-webkit-transform-style': this.transition.style
     };
     
     var onTransitionEvent = whichTransitionEvent();
@@ -61,11 +61,10 @@ Style.prototype.build = function() {
         this.unbind(onTransitionEvent);
         this.trigger('onTransitionEnd');
         
-        if (typeof callback === 'function') {
+        if (typeof that.callback === 'function') {
             ($.proxy(that.callback, this))(e);
         }
     };
-    
     
     this.elem
         .bind(onTransitionEvent, $.proxy(callback, this.elem))

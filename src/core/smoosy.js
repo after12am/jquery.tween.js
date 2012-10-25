@@ -47,7 +47,7 @@ $.fn.smoosy = function(params, duration, delay, easing, callback) {
     this.parent().css('-webkit-perspective', params.perspective || 'none');
     delete params.perspective;
     
-    new Style(this, params, duration, delay, easing, origin, style, callback).build();
+    new Style(this, params, duration, delay, easing, origin, style, callback).adopt();
     
     return this;
 };
