@@ -1,27 +1,37 @@
 # jquery.smoosy
 
-jquery.smoosy is a jquery plugin that provides smooth animation for smartphone. jquery.smoosy implements animation using css3. In case of making animation in mobile, css3 is essencial. Because unfortunately javascript wouldn't give a good performance to mobile. In contrast, css3 give your app lightness and interactivity. css3 is very useful and powerful in smartphone. Let's get it started.
+jquery.smoosy is a jquery plugin that provides smooth animation for smartphone. jquery.smoosy implements animation using css3. In case of making animation in smartphone, css3 is essencial, because unfortunately javascript will not give a good performance to smartphone. css3 give your app lightness and interactivity. css3 is powerful especially in smartphone, because using gpu, not cpu. This is why I recommend css3. Let's get it started.
 
 ## Usage
 
-Include this for use.
+### include
 
 ```
 <script src='jquery.js'></script>
 <script src='jquery.smoosy.min.js'></script>
 ```
 
-Here is a basic usage.
+### basic usage
 
 ```
 var params = {
-    x: destinate_to_x,
-    rotatez: destinate_to_rotatex
+    x: {#x},
+    rotatez: {#rotatex},
+    duration: {#time} // milliseconds
 };
-$(elem).transit(params, [duration], [delay], [easing], [callback]);
+$(elem).smoosy(params, [duration], [delay], [easing], [callback]);
 ```
 
-## property
+### other ways
+
+```
+$.smoosy(params, [callback]);
+$.smoosy(params, [duration], [callback]);
+$.smoosy(params, [duration], [delay], [callback]);
+$.smoosy(params, [duration], [delay], [easing], [callback]);
+```
+
+### available properties
 
 ```
 @x int
@@ -44,14 +54,22 @@ $(elem).transit(params, [duration], [delay], [easing], [callback]);
 @skewx int
 @skewy int
 @perspective int
-@property ['width'] // target property of animation. if you don't set 'all' would be used.
-@property 'width'
+@property ['width'] // target property for animation. if you don't set 'all' would be used.
 @origin '0% 0%'
 @style 'flat' // or 'preserve-3d'
-@duration int
-@delay int
-@easing int
+@duration int // duration time
+@delay int // delay time
+@easing string // value css3 transition provides
+```
 
-and css properties... 
-for example, width, height, opacity...
+and css properties are available. width, height, opacity...
+
+```
+var params = {
+    x: {#x},
+    rotatez: {#rotatex},
+    width: {#width},
+    duration: {#time} // milliseconds
+};
+$(elem).smoosy(params, [duration], [delay], [easing], [callback]);
 ```
