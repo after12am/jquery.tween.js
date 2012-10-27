@@ -6,14 +6,14 @@ jquery.smoosy is a jquery plugin that provides smooth animation for smartphone. 
 
 ### include
 
-```
+```html
 <script src='jquery.js'></script>
 <script src='jquery.smoosy.min.js'></script>
 ```
 
 ### basic usage
 
-```
+```javascript
 var params = {
     x: {#x},
     rotatez: {#rotatex},
@@ -24,7 +24,7 @@ $(elem).smoosy(params, [duration], [delay], [easing], [callback]);
 
 ### other ways
 
-```
+```javascript
 $.smoosy(params, [callback]);
 $.smoosy(params, [duration], [callback]);
 $.smoosy(params, [duration], [delay], [callback]);
@@ -33,7 +33,7 @@ $.smoosy(params, [duration], [delay], [easing], [callback]);
 
 ### available properties
 
-```
+```javascript
 @x int
 @y int
 @z int
@@ -62,13 +62,14 @@ $.smoosy(params, [duration], [delay], [easing], [callback]);
 @easing string // value css3 transition provides
 ```
 
-and css properties are available. width, height, opacity...
+### also able to use css properties
 
-```
+```javascript
 var params = {
     x: {#x},
     rotatez: {#rotatex},
     width: {#width},
+    opacity: {#opacity},
     duration: {#time} // milliseconds
 };
 $(elem).smoosy(params, [duration], [delay], [easing], [callback]);
