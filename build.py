@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
 input_path = 'src/'
-output_path = 'www/js/jquery.smoosy.min.js'
+output_path = 'www/js/jquery.boost.js'
 
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 from SocketServer import TCPServer
 import re, os, sys, time, tempfile, threading
 
 header = '''/*
- * jquery.smoosy
+ * jquery.boost
  *
- * https://github.com/after12am/jquery.smoosy
+ * https://github.com/after12am/jquery.boost
  *
  * Copyright 2012 Satoshi Okami
  * Released under the MIT license

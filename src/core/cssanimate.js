@@ -1,5 +1,5 @@
 
-$.fn.smoosy = function(params, duration, delay, easing, callback) {
+$.fn.cssanimate = function(params, duration, delay, easing, callback) {
     
     var origin = undefined;
     var style = undefined;
@@ -44,10 +44,23 @@ $.fn.smoosy = function(params, duration, delay, easing, callback) {
         delete params.style;
     }
     
-    this.parent().css('-webkit-perspective', params.perspective || 'none');
+    // keep 3d control parameter disable.
+    // this.parent().css('-webkit-perspective', params.perspective || 'none');
     delete params.perspective;
     
-    new Style(this, params, duration, delay, easing, origin, style, callback).adopt();
+    /*
+        wrap with setTimeout() due to following code.
+        If not use setTimeout(), cssanimate would be executed 
+        before setting attribute of width='100' to $('.any').
+        
+        $('.any').css("width", 100);
+        $('.any').cssanimate({"width": 200}, duration, easing, complete);
+    */
+    setTimeout($.proxy(function() {
+        
+        new Style(this, params, duration, delay, easing, origin, style, callback).adopt();
+        
+    }, this), 1);
     
     return this;
 };
