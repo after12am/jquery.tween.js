@@ -24,7 +24,6 @@ var Style = function(elem, params, duration, delay, easing, origin, style, callb
     this.callback = callback;
     this.css = {};
     this.transform = [];
-    
     this.transition = {
         properties: [], // Specifies the name of the CSS properties that apply the transition effect.
         duration: duration || 0, // Specifies the amount of time it takes to change.
@@ -33,8 +32,8 @@ var Style = function(elem, params, duration, delay, easing, origin, style, callb
         origin: origin || '50% 50%', // Specify the origin.
         style: style || 'flat' // or preserve-3d
     };
-    // console.log(this.transition.origin)
-    this.parse(params);
+    
+    this.parse(params).adopt();
 };
 
 Style.prototype.adopt = function() {

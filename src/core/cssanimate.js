@@ -48,6 +48,10 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     // this.parent().css('-webkit-perspective', params.perspective || 'none');
     delete params.perspective;
     
+    function animate() {
+        new Style(this, params, duration, delay, easing, origin, style, callback);
+    }
+    
     /*
         wrap with setTimeout() due to following code.
         If not use setTimeout(), cssanimate would be executed 
@@ -56,11 +60,7 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         $('.any').css("width", 100);
         $('.any').cssanimate({"width": 200}, duration, easing, complete);
     */
-    setTimeout($.proxy(function() {
-        
-        new Style(this, params, duration, delay, easing, origin, style, callback).adopt();
-        
-    }, this), 1);
+    setTimeout($.proxy(animate, this), 1);
     
     return this;
 };

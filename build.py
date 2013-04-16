@@ -1,18 +1,18 @@
 #!/usr/bin/python
 
 input_path = 'src/'
-output_path = 'www/js/jquery.boost.js'
+output_path = 'jquery.cssanimate.js'
 
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 from SocketServer import TCPServer
 import re, os, sys, time, tempfile, threading
 
 header = '''/*
- * jquery.boost
+ * jquery.cssanimate
  *
- * https://github.com/after12am/jquery.boost
+ * https://github.com/after12am/cssanimate.js
  *
- * Copyright 2012 Satoshi Okami
+ * Copyright 2013 Satoshi Okami
  * Released under the MIT license
  */
 '''
