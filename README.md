@@ -1,4 +1,5 @@
-# jquery.boost
+jquery.animation.js
+===================
 
 jquery.boost is a jquery plugin that provides smooth animation for smartphone. 
 jquery.boost implements animation using css3. In case of making animation in smartphone, 
@@ -8,11 +9,11 @@ because using gpu, not cpu. This is why I recommend css3.
 
 ## Usage
 
-Basic example is:
+The usage is easy because it was designed by reference to the jquery. The example is:
 
 ```html
 <script src='jquery.js'></script>
-<script src='jquery.boost.js'></script>
+<script src='jquery.animation.js'></script>
 <script type="text/javascript">
     
     var params = {
