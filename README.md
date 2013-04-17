@@ -1,15 +1,16 @@
 jquery.cssanimate.js
 ====================
 
-jquery.boost is a jquery plugin that provides smooth animation for smartphone. 
-jquery.boost implements animation using css3. In case of making animation in smartphone, 
-css3 is essencial, because unfortunately javascript will not give a good performance to smartphone. 
-css3 give your app lightness and interactivity. css3 is powerful especially in smartphone, 
-because using gpu, not cpu. This is why I recommend css3.
+This is a jquery plugin that provides smooth animation for smartphone using CSS3. 
+CSS3 is only way for making animation in smartphone if except WebGL. Javascript is also available
+in smartphone, but would not give a good animation to smartphone. In contrast, CSS3 would give 
+your app lightness and interactivity. CSS3 is powerful especially in smartphone for using gpu. 
+But CSS3 is a bit difficult to controll under dynamic usage.  So this has designed to take advantage 
+of knowledge of jquery of you.
 
 ## Usage
 
-The usage is easy because it was designed by reference to the jquery. The example is:
+The usage is easy because this was designed by reference to the jquery. The example is:
 
 ```html
 <script src='jquery.js'></script>
