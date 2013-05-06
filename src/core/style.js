@@ -89,30 +89,43 @@ Style.prototype.adopt = function() {
 Style.prototype.parse = function(params) {
     
     if (params.x != undefined && params.y != undefined && params.z != undefined) {
-        this.transform.push('translate3d(' + params.x + 'px,' + params.y + 'px,' + params.z + 'px)');
+        this.transform.push('translate3d({0}px,{1}px,{2}px)'.format(
+            params.x, 
+            params.y, 
+            params.z
+        ));
         delete params.x;
         delete params.y;
         delete params.z;
     }
     
     if (params.x != undefined && params.y != undefined) {
-        this.transform.push('translate(' + params.x + 'px,' + params.y + 'px)');
+        this.transform.push('translate({0}px,{1}px)'.format(
+            params.x, 
+            params.y
+        ));
         delete params.x;
         delete params.y;
     }
     
     if (params.x != undefined) {
-        this.transform.push('translateX(' + params.x + 'px)');
+        this.transform.push('translateX({0}px)'.format(
+            params.x
+        ));
         delete params.x;
     }
     
     if (params.y != undefined) {
-        this.transform.push('translateY(' + params.y + 'px)');
+        this.transform.push('translateY({0}px)'.format(
+            params.y
+        ));
         delete params.y;
     }
     
     if (params.z != undefined) {
-        this.transform.push('translateZ(' + params.z + 'px)');
+        this.transform.push('translateZ({0}px)'.format(
+            params.z
+        ));
         delete params.z;
     }
     
@@ -120,12 +133,21 @@ Style.prototype.parse = function(params) {
     if (typeof params.rotate == 'object') {
         
         if (params.rotate['x'] != undefined) {
-            this.transform.push('rotate3d(' + params.rotate['x'] + ',' + params.rotate['y'] + ',' + params.rotate['z'] + ',' + params.rotate['rotate'] + 'deg)');
+            this.transform.push('rotate3d({0},{1},{2},{3}deg)'.format(
+                params.rotate['x'], 
+                params.rotate['y'], 
+                params.rotate['z'], 
+                params.rotate['rotate']
+            ));
         }
         
         if (params.rotate[0] != undefined) {
-            console.log('rotate3d(' + params.rotate[0] + ',' + params.rotate[1] + ',' + params.rotate[2] + ',' + params.rotate[3] + 'deg)')
-            this.transform.push('rotate3d(' + params.rotate[0] + ',' + params.rotate[1] + ',' + params.rotate[2] + ',' + params.rotate[3] + 'deg)');
+            this.transform.push('rotate3d({0},{1},{2},{3}deg)'.format(
+                params.rotate[0], 
+                params.rotate[1], 
+                params.rotate[2], 
+                params.rotate[3]
+            ));
         }
         
         delete params.rotate;
@@ -135,22 +157,30 @@ Style.prototype.parse = function(params) {
     }
     
     if (params.rotate != undefined) {
-        this.transform.push('rotate(' + params.rotate + 'deg)');
+        this.transform.push('rotate({0}deg)'.format(
+            params.rotate
+        ));
         delete params.rotate;
     }
     
     if (params.rotatex != undefined) {
-        this.transform.push('rotateX(' + params.rotatex + 'deg)');
+        this.transform.push('rotateX({0}deg)'.format(
+            params.rotatex
+        ));
         delete params.rotatex;
     }
     
     if (params.rotatey != undefined) {
-        this.transform.push('rotateY(' + params.rotatey + 'deg)');
+        this.transform.push('rotateY({0}deg)'.format(
+            params.rotatey
+        ));
         delete params.rotatey;
     }
     
     if (params.rotatez != undefined) {
-        this.transform.push('rotateZ(' + params.rotatez + 'deg)');
+        this.transform.push('rotateZ({0}deg)'.format(
+            params.rotatez
+        ));
         delete params.rotatez;
     }
     
@@ -158,11 +188,19 @@ Style.prototype.parse = function(params) {
     if (typeof params.scale == 'object') {
 
         if (params.scale['x'] != undefined) {
-            this.transform.push('scale3d(' + params.scale['x'] + ',' + params.scale['y'] + ',' + params.scale['z'] + ')');
+            this.transform.push('scale3d({0},{1},{2})'.format(
+                params.scale['x'],
+                params.scale['y'],
+                params.scale['z']
+            ));
         }
         
         if (params.scale[0] != undefined) {
-            this.transform.push('scale3d(' + params.scale[0] + ',' + params.scale[1] + ',' + params.scale[2] + ')');
+            this.transform.push('scale3d({0},{1},{2})'.format(
+                params.scale[0],
+                params.scale[1],
+                params.scale[2]
+            ));
         }
 
         delete params.scale;
@@ -172,22 +210,31 @@ Style.prototype.parse = function(params) {
     }
     
     if (params.scale != undefined) {
-        this.transform.push('scale(' + params.scale + ',' + params.scale + ')');
+        this.transform.push('scale({0},{1})'.format(
+            params.scale,
+            params.scale
+        ));
         delete params.scale;
     }
 
     if (params.scalex != undefined) {
-        this.transform.push('scaleX(' + params.scalex + ')');
+        this.transform.push('scaleX({0})'.format(
+            params.scalex
+        ));
         delete params.scalex;
     }
 
     if (params.scaley != undefined) {
-        this.transform.push('scaleY(' + params.scaley + ')');
+        this.transform.push('scaleY({0})'.format(
+            params.scaley
+        ));
         delete params.scaley;
     }
 
     if (params.scalez != undefined) {
-        this.transform.push('scaleZ(' + params.scalez + ')');
+        this.transform.push('scaleZ({0})'.format(
+            params.scalez
+        ));
         delete params.scalez;
     }
     
@@ -195,11 +242,17 @@ Style.prototype.parse = function(params) {
     if (typeof params.skew == 'object') {
         
         if (params.skew['x'] != undefined) {
-            this.transform.push('skew(' + params.skew['x'] + 'deg,' + params.skew['y'] + 'deg)');
+            this.transform.push('skew({0}deg,{1}deg)'.format(
+                params.skew['x'],
+                params.skew['y']
+            ));
         }
 
         if (params.skew[0] != undefined) {
-            this.transform.push('skew(' + params.skew[0] + 'deg,' + params.skew[1] + 'deg)');
+            this.transform.push('skew({0}deg,{1}deg)'.format(
+                params.skew[0],
+                params.skew[1]
+            ));
         }
         
         delete params.skew;
@@ -208,12 +261,16 @@ Style.prototype.parse = function(params) {
     }
     
     if (params.skewx != undefined) {
-        this.transform.push('skewX(' + params.skewx + 'deg)');
+        this.transform.push('skewX({0}deg)'.format(
+            params.skewx
+        ));
         delete params.skewx;
     }
     
     if (params.skewy != undefined) {
-        this.transform.push('skewY(' + params.skewy + 'deg)');
+        this.transform.push('skewY({0}deg)'.format(
+            params.skewy
+        ));
         delete params.skewy;
     }
     
