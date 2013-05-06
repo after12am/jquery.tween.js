@@ -1,4 +1,3 @@
-
 $.fn.translateX = function(x, duration, delay, easing, callback) {
     
     var params = {
@@ -69,7 +68,7 @@ $.fn.scaleY = function(scaley, duration, delay, easing, callback) {
 
 $.fn.scaleZ = function(scalez, perspective, duration, delay, easing, callback) {
     
-    throw new Error('scaleZ is under untested');
+    throw new Error('not implemented');
     
     /*
     var params = {
@@ -93,7 +92,7 @@ $.fn.scale = function(scalex, scaley, duration, delay, easing, callback) {
 
 $.fn.scale3d = function(scalex, scaley, scalez, perspective, duration, delay, easing, callback) {
     
-    throw new Error('scale3d is under untested');
+    throw new Error('not implemented');
     
     /*
     var params = {
@@ -150,8 +149,6 @@ $.fn.rotate3d = function(x, y, z, rotate, perspective, duration, delay, easing, 
     
     this.smoosy(params, duration, delay, easing, callback);
 };
-
-
 
 $.fn.skewX = function(skewx, duration, delay, easing, callback) {
     
