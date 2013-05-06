@@ -18,6 +18,14 @@ function whichTransitionEvent() {
     }
 };
 
+var prefixes = [
+    '-webkit-',
+    '-moz-',
+    '-ms-',
+    '-o-',
+    ''
+];
+
 var Style = function(elem, params, duration, delay, easing, origin, style, callback) {
     
     this.elem = elem;
@@ -42,24 +50,32 @@ Style.prototype.adopt = function() {
         this.transition.properties = ['all'];
     }
     
-    var properties = {
-        '-webkit-transition-property': this.transition.properties.join(','),
-        '-webkit-transition-duration': this.transition.duration + 'ms',
-        '-webkit-transition-timing-function': this.transition.easing,
-        '-webkit-transition-delay': this.transition.delay + 'ms',
-        '-webkit-transform': this.transform.join(' '), // If you separate transform function, you can apply multiple transform effects.
-        '-webkit-transform-origin': this.transition.origin,
-        '-webkit-transform-style': this.transition.style
-    };
-    
-    var onTransitionEvent = whichTransitionEvent();
     var that = this;
+    var onTransitionEvent = whichTransitionEvent();
+    var properties = {};
+    
+    prefixes.forEach(function(prefix) {
+        var transitionProperty = '{prefix}transition-property'.format({prefix: prefix});
+        var transitionDuration = '{prefix}transition-duration'.format({prefix: prefix});
+        var transitionTimingFunction = '{prefix}transition-timing-function'.format({prefix: prefix});
+        var transitionDelay = '{prefix}transition-delay'.format({prefix: prefix});
+        var transform = '{prefix}transform'.format({prefix: prefix});
+        var transformOrigin = '{prefix}transform-origin'.format({prefix: prefix});
+        var transformStyle = '{prefix}transform-style'.format({prefix: prefix});
+        
+        properties[transitionProperty] = that.transition.properties.join(',');
+        properties[transitionDuration] = that.transition.duration + 'ms';
+        properties[transitionTimingFunction] = that.transition.easing;
+        properties[transitionDelay] = that.transition.delay + 'ms';
+        properties[transform] = that.transform.join(' '); // If you separate transform function, you can apply multiple transform effects.
+        properties[transformOrigin] = that.transition.origin;
+        properties[transformStyle] = that.transition.style;
+    });
+    
+    
     var callback = function(e) {
-        
-        
         this.unbind(onTransitionEvent);
         this.trigger('onTransitionEnd');
-        
         if (typeof that.callback === 'function') {
             ($.proxy(that.callback, this))(e);
         }
