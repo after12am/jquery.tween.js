@@ -5,7 +5,7 @@ var Style = function(elem, params, duration, delay, easing, origin, style, callb
     this.transform = [];
     this.transition = {
         properties: [], // Specifies the name of the CSS properties that apply the transition effect.
-        duration: duration || 0, // Specifies the amount of time it takes to change.
+        duration: duration || 1, // Specifies the amount of time it takes to change. Set 1 as default because no event fired when set 0.
         delay: delay || 0, // Specifies whether the change begins when.
         easing: easing || 'ease-in-out', // Specifies the timing of the change.
         origin: origin || '50% 50%', // Specify the origin.
