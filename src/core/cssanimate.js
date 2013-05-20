@@ -48,7 +48,7 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     delete params.perspective;
     
     function animate() {
-        new Style(this, params, duration, delay, easing, origin, style, callback);
+        new Style(this, duration, delay, easing, origin, style, callback).parse(params).adopt();
     }
     
     /*

@@ -1,72 +1,16 @@
-var Style = function(elem, params, duration, delay, easing, origin, style, callback) {
+var Style = function(elem, duration, delay, easing, origin, style, callback) {
     this.elem = elem;
     this.callback = callback;
     this.css = {};
     this.transform = [];
     this.transition = {
-        properties: [], // Specifies the name of the CSS properties that apply the transition effect.
+        properties: ['all'], // Specifies the name of the CSS properties that apply the transition effect.
         duration: duration || 1, // Specifies the amount of time it takes to change. Set 1 as default because no event fired when set 0.
         delay: delay || 0, // Specifies whether the change begins when.
         easing: easing || 'ease-in-out', // Specifies the timing of the change.
         origin: origin || '50% 50%', // Specify the origin.
         style: style || 'flat' // or preserve-3d
     };
-    this.parse(params).adopt();
-};
-
-Style.prototype.adopt = function() {
-    
-    if (this.transition.properties.length == 0) {
-        this.transition.properties = ['all'];
-    }
-    
-    var e = $('<div>')[0];
-    var that = this;
-    var prefix;
-    var onTransitionEvent;
-    
-    var transitions = {
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'transitionend',
-        'MSTransition': 'msTransitionEnd',
-        'OTransition': 'oTransitionEnd',
-        'transition': 'transitionEnd'
-    };
-    
-    var prefixes = {
-        'WebkitTransition': '-webkit-',
-        'MozTransition': '-moz-',
-        'MSTransition': '-ms-',
-        'OTransition': '-o-',
-        'transition': ''
-    };
-    
-    for (var t in transitions) {
-        if(e.style[t] !== undefined) {
-            prefix = prefixes[t];
-            onTransitionEvent = transitions[t];
-            break;
-        }
-    }
-    
-    var properties = {};
-    properties['{0}transition-property'.format(prefix)] = that.transition.properties.join(',');
-    properties['{0}transition-duration'.format(prefix)] = that.transition.duration + 'ms';
-    properties['{0}transition-timing-function'.format(prefix)] = that.transition.easing;
-    properties['{0}transition-delay'.format(prefix)] = that.transition.delay + 'ms';
-    properties['{0}transform'.format(prefix)] = that.transform.join(' '); // If you separate transform function, you can apply multiple transform effects.
-    properties['{0}transform-origin'.format(prefix)] = that.transition.origin;
-    properties['{0}transform-style'.format(prefix)] = that.transition.style;
-    
-    var callback = function(e) {
-        this.unbind(onTransitionEvent);
-        this.trigger('onTransitionEnd');
-        if (typeof that.callback === 'function') {
-            ($.proxy(that.callback, this))(e);
-        }
-    };
-    
-    this.elem.bind(onTransitionEvent, $.proxy(callback, this.elem)).css($.extend(properties, this.css));
 };
 
 Style.prototype.parse = function(params) {
@@ -269,4 +213,56 @@ Style.prototype.parse = function(params) {
     
     this.css = params;
     return this;
+};
+
+Style.prototype.adopt = function() {
+    
+    var e = $('<div>')[0];
+    var prefix;
+    var onTransitionEvent;
+    
+    var transitions = {
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'transitionend',
+        'MSTransition': 'msTransitionEnd',
+        'OTransition': 'oTransitionEnd',
+        'transition': 'transitionEnd'
+    };
+    
+    var prefixes = {
+        'WebkitTransition': '-webkit-',
+        'MozTransition': '-moz-',
+        'MSTransition': '-ms-',
+        'OTransition': '-o-',
+        'transition': ''
+    };
+    
+    for (var t in transitions) {
+        if(e.style[t] !== undefined) {
+            prefix = prefixes[t];
+            onTransitionEvent = transitions[t];
+            break;
+        }
+    }
+    
+    var properties = {};
+    properties['{0}transition-property'.format(prefix)] = this.transition.properties.join(',');
+    properties['{0}transition-duration'.format(prefix)] = this.transition.duration + 'ms';
+    properties['{0}transition-timing-function'.format(prefix)] = this.transition.easing;
+    properties['{0}transition-delay'.format(prefix)] = this.transition.delay + 'ms';
+    properties['{0}transform'.format(prefix)] = this.transform.join(' '); // If you separate transform function, you can apply multiple transform effects.
+    properties['{0}transform-origin'.format(prefix)] = this.transition.origin;
+    properties['{0}transform-style'.format(prefix)] = this.transition.style;
+    
+    this.elem.bind(onTransitionEvent, $.proxy(this.proxy(onTransitionEvent), this.elem)).css($.extend(properties, this.css));
+};
+
+Style.prototype.proxy = function(onTransitionEvent) {
+    var that = this;
+    return function(e) {
+        this.unbind(onTransitionEvent);
+        this.trigger('onTransitionEnd');
+        if (typeof that.callback !== 'function') return;
+        ($.proxy(that.callback, this))(e);
+    };
 };
