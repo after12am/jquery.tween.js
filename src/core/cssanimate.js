@@ -1,4 +1,3 @@
-
 $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     
     var origin = undefined;
