@@ -58,8 +58,15 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         
         $('.any').css("width", 100);
         $('.any').cssanimate({"width": 200}, duration, easing, complete);
+         |
+         v
+        below code could solve execution order problem.
+        
+        $('.any').cssanimate({"width": 100});
+        $('.any').cssanimate({"width": 200}, duration, easing, complete);
     */
-    setTimeout($.proxy(animate, this), 1);
+    // setTimeout($.proxy(animate, this), 1);
+    $.proxy(animate, this)();
     
     return this;
 };
