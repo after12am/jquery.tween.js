@@ -16,7 +16,6 @@ var Style = function(elem, duration, delay, easing, origin, style, callback) {
 // declaration as const for the purpose of cache
 Style.prefix = prefix();
 Style.onTransitionEvent = transitionEvent();
-
 Style.prototype.parse = function(params) {
     
     if (params.x != undefined && params.y != undefined && params.z != undefined) {
@@ -214,6 +213,11 @@ Style.prototype.adopt = function() {
     
     var that = this;
     var properties = {};
+    var callback = function() {
+        if (typeof that.callback === 'function') that.callback();
+        that.elem.unbind(Style.onTransitionEvent);
+        that.elem.dequeue();
+    };
     
     properties['{0}transition-property'.format(Style.prefix)] = this.transition.properties.join(',');
     properties['{0}transition-duration'.format(Style.prefix)] = this.transition.duration + 'ms';
@@ -224,15 +228,7 @@ Style.prototype.adopt = function() {
     properties['{0}transform-style'.format(Style.prefix)] = this.transition.style;
     
     this.elem.queue(function() {
-        
-        var callback = function() {
-            if (typeof that.callback === 'function') that.callback();
-            that.elem.unbind(Style.onTransitionEvent);
-            that.elem.dequeue();
-        };
-        
         that.elem.bind(Style.onTransitionEvent, callback).css($.extend(properties, that.css));
-        
         if (that.transition.duration === 0) {
             while (1) {
                 var adopted = that.elem.css('{0}transition-delay'.format(Style.prefix));
