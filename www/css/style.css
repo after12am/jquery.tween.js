@@ -1,67 +1,102 @@
+/*
+    Copyright (C) 2013 by evanw
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+*/
+@import url(http://fonts.googleapis.com/css?family=Fredericka+the+Great);
 
 body {
-    padding: 20px;
-    background-image: url(../img/paper.jpeg);
+    margin: 50px 0 100px 0;
+    background: #20211C;
+    color: #A7A599;
+    font: 14px/18px Arial, sans-serif;
 }
 
-/*div.container {
-    width: 90%;
+.container, .editor-inner, footer {
     margin: 0 auto;
+    padding: 0 50px;
+    max-width: 800px;
 }
 
-div.canvas {
-    position: relative;
-    background-color: rgba(248, 248, 248, 1);
-    height: 200px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 60px;
+footer {
+    margin-top: 60px;
 }
 
-div.box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 1px solid #ddd;
-    background-color: rgba(248, 248, 248, 1);
-    width: 48px;
-    height: 48px;
-    margin-top: -24px;
-    margin-left: -24px;
-}*/
-header {
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
+footer a {
+    text-decoration: none;
+}
+
+.editor {
+    background: #272822;
+    padding: 20px 0;
+    color: #464742;
+}
+
+.separator {
+    margin: 0.4em 0;
+    border-top: 1px dotted #464741;
+}
+
+h1 {
+    font: 150px/150px 'Fredericka the Great', Georgia, serif;
     text-align: center;
-    margin-top: 20px;
+    margin: 0;
+    color: white;
 }
 
-header a {
-    color: #717171;
+h2 {
+    font: 75px/75px 'Fredericka the Great', Georgia, serif;
+    margin: 100px 0 0 0;
+    color: white;
 }
 
-div.animate {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    border: 1px solid #ddd;
-    background-color: rgba(100, 100, 100, 1);
-    width: 48px;
-    height: 48px;
-    margin-top: -24px;
-    margin-left: -24px;
+p {
+    margin: 20px 0;
 }
 
-div.cssanimate {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    border: 1px solid #ddd;
-    background-color: rgba(100, 100, 100, 1);
-    width: 48px;
-    height: 48px;
-    margin-top: -24px;
-    margin-left: -24px;
+b {
+    color: white;
 }
+
+a {
+    color: inherit;
+}
+
+/*pre, .CodeMirror {
+    font: 12px/16px Menlo, monospace;
+}*/
+
+pre {
+    color: white;
+    font: 12px/16px Menlo, monospace;
+    padding: 10px;
+    background: #171814;
+    border-radius: 10px;
+}
+
+/*.CodeMirror {
+    margin-left: -2.4em;
+}
+
+.CodeMirror-scroll {
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+}*/
