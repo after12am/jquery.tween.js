@@ -5,7 +5,7 @@ var Style = function(elem, duration, delay, easing, origin, style, callback) {
     this.transform = [];
     this.transition = {
         properties: ['all'], // Specifies the name of the CSS properties that apply the transition effect.
-        duration: duration || 0, // Specifies the amount of time it takes to change. Set 1 as default because no event fired when set 0.
+        duration: duration || 0, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
         easing: easing || 'ease-in-out', // Specifies the timing of the change.
         origin: origin || '50% 50%', // Specify the origin.
@@ -205,20 +205,7 @@ Style.prototype.parse = function(params) {
         delete params.property;
     }
     
-    this.css = params;
-    return this;
-};
-
-Style.prototype.adopt = function() {
-    
-    var that = this;
     var properties = {};
-    var callback = function() {
-        if (typeof that.callback === 'function') that.callback();
-        that.elem.unbind(Style.onTransitionEvent);
-        that.elem.dequeue();
-    };
-    
     properties['{0}transition-property'.format(Style.prefix)] = this.transition.properties.join(',');
     properties['{0}transition-duration'.format(Style.prefix)] = this.transition.duration + 'ms';
     properties['{0}transition-timing-function'.format(Style.prefix)] = this.transition.easing;
@@ -227,9 +214,26 @@ Style.prototype.adopt = function() {
     properties['{0}transform-origin'.format(Style.prefix)] = this.transition.origin;
     properties['{0}transform-style'.format(Style.prefix)] = this.transition.style;
     
+    this.css = $.extend(properties, params);
+    return this;
+};
+
+Style.prototype.adopt = function() {
+    
+    var that = this;
+    var callback = function() {
+        if (typeof that.callback === 'function') that.callback();
+        that.elem.unbind(Style.onTransitionEvent);
+        that.elem.dequeue();
+    };
+    
     this.elem.queue(function() {
-        that.elem.bind(Style.onTransitionEvent, callback).css($.extend(properties, that.css));
+        that.elem.bind(Style.onTransitionEvent, callback).css(that.css);
+        // If transition-duration css property is set 0 as default, no transitionEvent fired.
+        // We have to call callback function instead.
         if (that.transition.duration === 0) {
+            // We have to wait until css property is set.
+            // If not so, next queue would be executed before setting css property.
             while (1) {
                 var adopted = that.elem.css('{0}transition-delay'.format(Style.prefix));
                 if (adopted === '0s') break;

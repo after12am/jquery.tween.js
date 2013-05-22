@@ -56,17 +56,13 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         If not use setTimeout(), cssanimate would be executed 
         before setting attribute of width='100' to $('.any').
         
-        $('.any').css("width", 100);
-        $('.any').cssanimate({"width": 200}, duration, easing, complete);
-         |
-         v
-        below code could solve execution order problem.
+        setTimeout($.proxy(animate, this), 1);
+        
+        But using setTimeout is not good approach. Here is the best I think.
         
         $('.any').cssanimate({"width": 100});
         $('.any').cssanimate({"width": 200}, duration, easing, complete);
     */
-    // setTimeout($.proxy(animate, this), 1);
     $.proxy(animate, this)();
-    
     return this;
 };
