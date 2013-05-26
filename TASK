@@ -1,0 +1,9 @@
++ add latest commit message after author using [github api](http://developer.github.com/v3/repos/commits/)
++ add more ecellent examples
+http://ricostacruz.com/jquery.transit/
+http://leaverou.github.io/animatable/#
+
++ change translateX(), translateY() of support to to(x, y, z, ...)
++ delete translate(), translate3d() of support
++ change scaleX(), scaleY() of support to scale(x, y, z, ...)
+And change as well to others of support shortcut function
