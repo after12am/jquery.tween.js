@@ -1,5 +1,7 @@
 $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     
+    params = params || {};
+    
     var origin = undefined;
     var style = undefined;
     
