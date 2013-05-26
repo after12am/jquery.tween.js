@@ -29,38 +29,6 @@ The usage is easy because this was designed by reference to the jquery. The exam
 </script>
 ```
 
-## Shortcuts
-
-Some shortcuts are prepared.
-
-```javascript
-// Translate on specific axis.
-$('.any').translateX(x, [duration], [delay], [easing], [callback]);
-$('.any').translateY(y, [duration], [delay], [easing], [callback]);
-$('.any').translateZ(z, perspective, [duration], [delay], [easing], [callback]);
-$('.any').translate(x, y, [duration], [delay], [easing], [callback]);
-$('.any').translate3d(x, y, z, perspective, [duration], [delay], [easing], [callback]);
-
-// Scale on specific axis.
-$('.any').scaleX(scalex, [duration], [delay], [easing], [callback]);
-$('.any').scaleY(scaley, [duration], [delay], [easing], [callback]);
-$('.any').scale(scalex, scaley, [duration], [delay], [easing], [callback]);
-// $('.any').scaleZ(scalez, perspective, [duration], [delay], [easing], [callback]);
-// $('.any').scale3d(scalex, scaley, scalez, perspective, [duration], [delay], [easing], [callback]);
-
-// Rotate on specific axis.
-$('.any').rotateX(rotatex, [duration], [delay], [easing], [callback]);
-$('.any').rotateY(rotatey, perspective, [duration], [delay], [easing], [callback]);
-$('.any').rotateZ(rotatez, [duration], [delay], [easing], [callback]);
-$('.any').rotate(rotate, [duration], [delay], [easing], [callback]);
-$('.any').rotate3d(x, y, z, rotate, perspective, [duration], [delay], [easing], [callback]);
-
-// Skew on specific axis.
-$('.any').skewX(skewx, [duration], [delay], [easing], [callback]);
-$('.any').skewY(skewy, [duration], [delay], [easing], [callback]);
-$('.any').skew(skewx, skewy, [duration], [delay], [easing], [callback]);
-```
-
 ## Notes
 
 * `scaleZ``scale3d` are not implemented.
