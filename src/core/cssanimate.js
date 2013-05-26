@@ -41,7 +41,7 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         
         function animated() {
             $(this).unbind(Style.onTransitionEvent, $.proxy(animated, this));
-            $.proxy(callback, this)();
+            if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
         }
         
