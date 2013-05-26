@@ -1,74 +1,381 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="m.accelerator : jquery plugin that provides smooth animation for smartphone." />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>m.accelerator</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/after12am/m.accelerator">View on GitHub</a>
-
-          <h1 id="project_title">m.accelerator</h1>
-          <h2 id="project_tagline">jquery plugin that provides smooth animation for smartphone.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/after12am/m.accelerator/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/after12am/m.accelerator/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+<!DOCTYPE HTML>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>jquery.cssanimate.js</title>
+<meta name="description" content="">
+<!-- Mobile viewport optimized: h5bp.com/viewport -->
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" media="screen" href="css/superfish.css" /> 
+<link rel="stylesheet" href="css/nivo-slider.css" media="all"  /> 
+<link rel="stylesheet" href="css/tweet.css" media="all"  />
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" media="all" href="css/lessframework.css"/>
+<link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<!--
+ All JavaScript at the bottom, except this Modernizr build.
+ Modernizr enables HTML5 elements & feature detects for optimal performance.
+ Create your own custom Modernizr build: www.modernizr.com/download/
+-->
+<script src="js/modernizr-2.5.3.min.js"></script>
+</head>
+<body>
+<div class="wrapper cf">
+    <header class="cf">
+        <div id="social-bar-holder">
+            <ul id="social-bar" class="cf">
+                <li class="github"><a href="https://github.com/after12am/jquery.cssanimate.js"  title="Github" ></a></li>
+                <li class="facebook"><a href="https://www.facebook.com/satoshi.okami"  title="Facebook" ></a></li>
+            </ul>
+        </div>
+        <div class="cf"></div>
+        <div id="logo" class="cf">
+            <a href="/" >cssanimate</a>
+        </div>
+        <nav class="cf">
+            <ul id="nav" class="sf-menu">
+                <li class="current-menu-item"><a href="/#translateX"><span>Translate</span></a></li>
+                <li><a href="/#rotateX"><span>Rotate</span></a></li>
+                <li><a href="/#scaleX"><span>Scale</span></a></li>
+                <li><a href="/#skewX"><span>Skew</span></a></li>
+                <li><a href="/#opacity"><span>Attribute</span></a></li>
+            </ul>
+            <div id="combo-holder"></div>
+        </nav>
+    </header>
+    <div role="main" id="main" class="cf">        
+        <div class="headline">CSSANIMATE IS STYLISH AND CUTE</div>
+        <ul class="feature cf">
+            <li id="translateX">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Translate X</a>
+                <div class="code">$('.box').cssanimate(<em>{ x: 30 }</em>)</div>
+            </li>
+            <li id="translateY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Translate Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ y: 30 }</em>)</div>
+            </li>
+            <li id="translateXY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Translate X / Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ x: 30, y: 30 }</em>)</div>
+            </li>
+        </ul>
+        <ul class="feature cf">
+            <li id="rotateX">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Rotate X</a>
+                <div class="code">$('.box').cssanimate(<em>{ rotatex: 90 }</em>)</div>
+            </li>
+            <li id="rotateY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Rotate Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ rotatey: 90 }</em>)</div>
+            </li>
+            <li id="rotateXY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Rotate X / Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ rotatex: 90, rotatey: 90 }</em>)</div>
+            </li>
+        </ul>
+        <ul class="feature cf">
+            <li id="scaleX">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Scale X</a>
+                <div class="code">$('.box').cssanimate(<em>{ scalex: 4 }</em>)</div>
+            </li>
+            <li id="scaleY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Scale Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ scaley: 4 }</em>)</div>
+            </li>
+            <li id="scaleXY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Scale X / Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ scalex: 4, scaley: 4 }</em>)</div>
+            </li>
+        </ul>
+        <ul class="feature cf">
+            <li id="skewX">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Skew X</a>
+                <div class="code">$('.box').cssanimate(<em>{ skewx: 45 }</em>)</div>
+            </li>
+            <li id="skewY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Skew Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ skewy: 45 }</em>)</div>
+            </li>
+            <li id="skewXY">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Skew X / Y</a>
+                <div class="code">$('.box').cssanimate(<em>{ skewx: 45, skewy: 45 }</em>)</div>
+            </li>
+        </ul>
+        <ul class="feature cf">
+            <li id="opacity">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Opacity</a>
+                <div class="code">$('.box').cssanimate(<em>{ opacity: 0 }</em>)</div>
+            </li>
+            <li id="width">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Width</a>
+                <div class="code">$('.box').cssanimate(<em>{ width: 120 }</em>)</div>
+            </li>
+            <li id="radius">
+                <a class="thumb" >
+                    <div class="ghost-area"><div class="ghost-box"></div></div>
+                    <div class="img-overlay"></div>
+                    <div class="box"></div>
+                </a>
+                <a class="excerpt">Radius</a>
+                <div class="code">$('.box').cssanimate(<em>{ border-radius: 30 }</em>)</div>
+            </li>
+        </ul>
+        <div class="page-content">
+            <div class="block-divider"></div>
+            <div class="headline">OTHER PROPERTIES</div>
+			<a class="link-button">{ rotate: [90, 90] }</a>
+			<a class="link-button red">{ rotate: [x: 90, y: 90] }</a>
+			<a class="link-button green">{ scale: [4, 4] }</a>
+			<a class="link-button blue">{ scale: [x: 4, y: 4] }</a>
+			<a class="link-button">{ skew: [45, 45] }</a>
+			<a class="link-button red">{ skew: [x: 45, y: 45] }</a>
+			<a class="link-button green">{ origin: '50% 50%' }</a>
+			<a class="link-button blue">{ style: 'flat' }</a>
+			<a class="link-button">And Any CSS Properties</a>
+        </div>
     </div>
+    <footer>
+        <div id="twitter-holder">
+            <div class="ribbon-left"></div>
+            <div class="ribbon">
+                <div id="tweets-bar" class="tweet">
+                    <ul class="tweet_list">
+                        <li class="tweet_first tweet_odd">
+                            <span class="tweet_time"><a href="#" class="date"></a></span>
+                            <span class="tweet_text"><a class="committer">@</a> <a class="message"></a></span>
+                            <span style="display:block;">authored by <a href="https://github.com/after12am/jquery.cssanimate.js">@after12am</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ribbon-right"></div>
+        </div>
+        <ul  class="widget-cols cf">
+            <!--
+            <li class="first-col">
+                
+                <div class="widget-block">
+                    <h4>RECENT POSTS</h4>
+                    <div class="recent-post cf">
+                        <a href="#" class="thumb"><img src="img/dummies/54x54.gif" alt="Post" /></a>
+                        <div class="post-head">
+                            <a href="#">Pellentesque habitant morbi senectus </a><span> March 12, 2011</span>
+                        </div>
+                    </div>
+                    <div class="recent-post cf">
+                        <a href="#" class="thumb"><img src="img/dummies/54x54b.gif" alt="Post" /></a>
+                        <div class="post-head">
+                            <a href="#">Pellentesque habitant morbi senectus</a><span> March 12, 2011</span>
+                        </div>
+                    </div>
+                    <div class="recent-post cf">
+                        <a href="#" class="thumb"><img src="img/dummies/54x54c.gif" alt="Post" /></a>
+                        <div class="post-head">
+                            <a href="#">Pellentesque habitant morbi senectus</a><span> March 12, 2011</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            
+            <li class="second-col">
+                
+                <div class="widget-block">
+                    <h4>ABOUT</h4>
+                    <p>Vintage Template it's completely free this means you don't have to pay anything <a href="http://luiszuno.com/blog/license" >read license</a>.</p> 
+                    
+                    <p>Placeholder images by <a href="http://twistedfork.me/" >Dan Matutina</a></p>
+                    <p>Visit <a href="http://templatecreme.com/" >Template Creme</a> and find the most beautiful free templates up to date.</p>
+                </div>
+                
+            </li>
+            
+            <li class="third-col">
+                
+                <div class="widget-block">
+                    <h4>DUMMY TEXT</h4>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. </p>
+                 </div>
+                 
+            </li>
+            
+            <li class="fourth-col">
+                
+                <div class="widget-block">
+                    <h4>CATEGORIES</h4>
+                    <ul>
+                        <li class="cat-item"><a href="#" >Design</a></li>
+                        <li class="cat-item"><a href="#" >Photo</a></li>
+                        <li class="cat-item"><a href="#" >Art</a></li>
+                        <li class="cat-item"><a href="#" >Game</a></li>
+                        <li class="cat-item"><a href="#" >Film</a></li>
+                        <li class="cat-item"><a href="#" >TV</a></li>
+                    </ul>
+                </div>
+                 
+            </li>
+            -->
+        </ul>
+        <div id="bottom">
+            <!-- <div id="widget-trigger-holder"><a id="widget-trigger" href="#" title="View More" class="poshytip"></a></div> -->
+            <div id="content">HalfTone Theme by <a href="http://www.luiszuno.com" >luiszuno.com</a> </div>
+        </div>
+    </footer>
+</div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+<!-- JavaScript at the bottom for fast page loading -->
+<script src="js/jquery-1.7.1.min.js"></script>
+<!-- scripts concatenated and minified via build script -->
+<script src="js/custom.js"></script>
+<!-- superfish -->
+<script  src="js/superfish-1.4.8/js/hoverIntent.js"></script>
+<script  src="js/superfish-1.4.8/js/superfish.js"></script>
+<script  src="js/superfish-1.4.8/js/supersubs.js"></script>
+<!-- ENDS superfish -->
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.nivo.slider.js" ></script>
+<script src="js/css3-mediaqueries.js"></script>
+<script src="js/tabs.js"></script>
+<script  src="js/poshytip-1.1/src/jquery.poshytip.min.js"></script>
+<script src="js/jquery.cssanimate.js"></script>
+<script src="js/script.js"></script>
+<script type="text/javascript">
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+var niceTime = (function() {
+ 
+    var ints = {
+        second: 1,
+        minute: 60,
+        hour: 3600,
+        day: 86400,
+        week: 604800,
+        month: 2592000,
+        year: 31536000
+    };
+ 
+    return function(time) {
+ 
+        time = +new Date(time);
+ 
+        var gap = ((+new Date()) - time) / 1000,
+            amount, measure;
+ 
+        for (var i in ints) {
+            if (gap > ints[i]) { measure = i; }
+        }
+ 
+        amount = gap / ints[measure];
+        amount = 'about ' + Math.round(amount);//gap > ints.day ? (Math.round(amount * 100) / 100) : Math.round(amount);
+        amount += ' ' + measure + (amount > 1 ? 's' : '') + ' ago';
+ 
+        return amount;
+    };
+ 
+})();
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+var sha = '';
+$.ajax({
+    type: "GET",
+    url: "https://api.github.com/repos/after12am/jquery.cssanimate.js/git/refs/heads/master",
+    async: false,
+    success: function(data) {
+        sha = data.object.sha;
+    },
+    error: function(data) {
+        console.log(data)
+    }
+});
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+$.ajax({
+    type: "GET",
+    url: "https://api.github.com/repos/after12am/jquery.cssanimate.js/commits/" + sha,
+    async: false,
+    success: function(data) {
+        // console.log(data.commit.committer)
+        // console.log(data.commit.message)
+        $('.tweet_time .date').append(niceTime(data.commit.committer.date));
+        $('.tweet_text .committer').append(data.commit.committer.name);
+        $('.tweet_text .message').append(data.commit.message);
+    },
+    error: function(data) {
+        console.log(data)
+    }
+});
 
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">m.accelerator maintained by <a href="https://github.com/after12am">after12am</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+</script>
+</body>
 </html>
