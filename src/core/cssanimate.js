@@ -29,7 +29,7 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     }
     
     if (params.style) {
-        origin = params.style;
+        style = params.style;
         delete params.style;
     }
     
