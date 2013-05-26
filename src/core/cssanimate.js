@@ -18,16 +18,6 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         easing = undefined;
     }
     
-    if (params.duration) {
-        duration = params.duration;
-        delete params.duration;
-    }
-    
-    if (params.delay) {
-        delay = params.delay;
-        delete params.delay;
-    }
-    
     if (params.easing) {
         easing = params.easing;
         delete params.easing;
@@ -47,22 +37,36 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     // this.parent().css('-webkit-perspective', params.perspective || 'none');
     delete params.perspective;
     
-    function animate() {
-        new Style(this, duration, delay, easing, origin, style, callback).parse(params).adopt();
-    }
+    this.queue(function() {
+        
+        function animated() {
+            $(this).unbind(Style.onTransitionEvent, $.proxy(animated, this));
+            $.proxy(callback, this)();
+            $(this).dequeue();
+        }
+        
+        var style = new Style(duration, delay, easing, origin, style);
+        var css = style.assemble(params).css;
+        
+        // When transition-duration propery is zero, we have to call callback function 
+        // because onTransitionEvent would not be fired.
+        if (style.transition.duration === 0) {
+            $(this).css(css);
+            // We have to wait until css property is set.
+            // If not so, next queue might be executed before setting css to dom.
+            var i = 0;
+            while (1) {
+                var adopted = $(this).css('{0}transition-delay'.format(Style.prefix));
+                if (adopted === '0s') break;
+                if (++i > 50) break; // avoid infinite loop
+            }
+            $.proxy(callback, this)();
+            $(this).dequeue();
+            return;
+        }
+        
+        $(this).bind(Style.onTransitionEvent, $.proxy(animated, this)).css(css);
+    })
     
-    /*
-        wrap with setTimeout() due to following code.
-        If not use setTimeout(), cssanimate would be executed 
-        before setting attribute of width='100' to $('.any').
-        
-        setTimeout($.proxy(animate, this), 1);
-        
-        But using setTimeout is not good approach. Here is the best I think.
-        
-        $('.any').cssanimate({"width": 100});
-        $('.any').cssanimate({"width": 200}, duration, easing, complete);
-    */
-    $.proxy(animate, this)();
     return this;
 };
