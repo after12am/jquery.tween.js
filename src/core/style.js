@@ -16,16 +16,7 @@ Style.prefix = prefix();
 Style.onTransitionEvent = transitionEvent();
 Style.prototype.assemble = function(params) {
     
-    if (params.duration) {
-        this.transition.duration = params.duration;
-        delete params.duration;
-    }
-    
-    if (params.delay) {
-        this.transition.delay = params.delay;
-        delete params.delay;
-    }
-    
+    /*
     if (params.x != undefined && params.y != undefined && params.z != undefined) {
         this.transform.push('translate3d({0}px,{1}px,{2}px)'.format(
             params.x, 
@@ -45,6 +36,7 @@ Style.prototype.assemble = function(params) {
         delete params.x;
         delete params.y;
     }
+    */
     
     if (params.x != undefined) {
         this.transform.push('translateX({0}px)'.format(
@@ -71,18 +63,18 @@ Style.prototype.assemble = function(params) {
     if (typeof params.rotate == 'object') {
         if (params.rotate['x'] != undefined) {
             this.transform.push('rotate3d({0},{1},{2},{3}deg)'.format(
-                params.rotate['x'], 
-                params.rotate['y'], 
-                params.rotate['z'], 
+                params.rotate['x'] || 0, 
+                params.rotate['y'] || 0, 
+                params.rotate['z'] || 0, 
                 params.rotate['rotate']
             ));
         }
         if (params.rotate[0] != undefined) {
             this.transform.push('rotate3d({0},{1},{2},{3}deg)'.format(
-                params.rotate[0], 
-                params.rotate[1], 
-                params.rotate[2], 
-                params.rotate[3]
+                params.rotate[0] || 0, 
+                params.rotate[1] || 0, 
+                params.rotate[2] || 0, 
+                params.rotate[3] || 0
             ));
         }
         delete params.rotate;
@@ -123,16 +115,16 @@ Style.prototype.assemble = function(params) {
     if (typeof params.scale == 'object') {
         if (params.scale['x'] != undefined) {
             this.transform.push('scale3d({0},{1},{2})'.format(
-                params.scale['x'],
-                params.scale['y'],
-                params.scale['z']
+                params.scale['x'] || 0,
+                params.scale['y'] || 0,
+                params.scale['z'] || 0
             ));
         }
         if (params.scale[0] != undefined) {
             this.transform.push('scale3d({0},{1},{2})'.format(
-                params.scale[0],
-                params.scale[1],
-                params.scale[2]
+                params.scale[0] || 0,
+                params.scale[1] || 0,
+                params.scale[2] || 0
             ));
         }
         delete params.scale;
@@ -174,14 +166,14 @@ Style.prototype.assemble = function(params) {
     if (typeof params.skew == 'object') {
         if (params.skew['x'] != undefined) {
             this.transform.push('skew({0}deg,{1}deg)'.format(
-                params.skew['x'],
-                params.skew['y']
+                params.skew['x'] || 0,
+                params.skew['y'] || 0
             ));
         }
         if (params.skew[0] != undefined) {
             this.transform.push('skew({0}deg,{1}deg)'.format(
-                params.skew[0],
-                params.skew[1]
+                params.skew[0] || 0,
+                params.skew[1] || 0
             ));
         }
         delete params.skew;

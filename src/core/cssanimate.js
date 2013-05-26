@@ -20,6 +20,16 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         easing = undefined;
     }
     
+    if (params.duration) {
+        duration = params.duration;
+        delete params.duration;
+    }
+    
+    if (params.delay) {
+        delay = params.delay;
+        delete params.delay;
+    }
+    
     if (params.easing) {
         easing = params.easing;
         delete params.easing;
