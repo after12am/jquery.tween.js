@@ -222,7 +222,7 @@ Style.prototype.adopt = function() {
     
     var that = this;
     var callback = function() {
-        if (typeof that.callback === 'function') that.callback();
+        if (typeof that.callback === 'function') $.proxy(that.callback, that.elem)();
         that.elem.unbind(Style.onTransitionEvent);
         that.elem.dequeue();
     };
@@ -238,7 +238,7 @@ Style.prototype.adopt = function() {
                 var adopted = that.elem.css('{0}transition-delay'.format(Style.prefix));
                 if (adopted === '0s') break;
             }
-            callback();
+            $.proxy(that.callback, that.elem)();
             return;
         }
     });
