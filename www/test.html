@@ -1,144 +1,69 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="js/jquery.cssanimate.js"></script>
-<style type="text/css">
-	div {
-		width: 100px;
-		height: 100px;
-		background-color: #aaa;
-	}
-</style>
 <script type="text/javascript">
+var s = +new Date()
 
-$(function() {
+$('.box')
+.queue(function() {
     
-    var callback = function(e) {
-        console.log('transit end', e, $(this));
-    };
-    
-    var params = {
-        perspective: 500,
-        x: 300,
-        y: 100,
-        z: -100,
-        // rotate: 360,
-        // rotatex: 360,
-        // rotatey: 90,
-        // rotatez: 360,
-        // rotate: [1, 0, 0, 180],
-        // rotate: {x:1, y:0, z:0, rotate:180},
-        // scale: 2,
-        // scalex: 2,
-        // scaley: 2,
-        // scalez: 2,
-        // scale: [2, 1, 0],
-        // scale: {x:2, y:0, z:0}
-        // skew: [45, 0],
-        // skew: {x: 45, y: 0},
-        // skewx: 45,
-        // skewy: 45,
-        // width: '100px',
-        // property: ['width']
-        // property: 'width',
-        // origin: '0% 0%',
-        // style: 'preserve-3d'
-    };
-    
-    //$('div').cssanimate(params, 1000);
-    
-    // $('div').translateX(100, 1000, 500, callback);
-    // $('div').translateX(100, 1000, callback);
-    // $('div').translateX(100, callback);
-    
-    // $('div').translateY(100, 1000, 500, callback);
-    // $('div').translateY(100, 1000, callback);
-    // $('div').translateY(100, callback);
-    
-    // $('div').translateZ(-500, 1000, 1000, 500, callback);
-    // $('div').translateZ(-500, 1000, 1000, callback);
-    // $('div').translateZ(-500, 1000, callback);
-    
-    // $('div').translate(300, 200, 1000, 500, callback);
-    // $('div').translate(300, 200, 1000, callback);
-    // $('div').translate(300, 200, callback);
-    
-    // $('div').translate3d(300, 200, -300, 1000, 1000, 500, callback);
-    // $('div').translate3d(300, 200, -300, 1000, 1000, callback);
-    // $('div').translate3d(300, 200, -300, 1000, callback);
-    
-    // $('div').scaleX(2, 1000, 500, callback);
-    // $('div').scaleX(2, 1000, callback);
-    // $('div').scaleX(2, callback);
-    
-    // $('div').scaleY(2, 1000, 500, callback);
-    // $('div').scaleY(2, 1000, callback);
-    // $('div').scaleY(2, callback);
-    
-    // $('div').scaleZ(2, 1000, 1000, 500, callback);
-    // $('div').scaleZ(2, 1000, 1000, callback);
-    // $('div').scaleZ(2, 1000, callback);
-    
-    // $('div').scale(2, 2, 1000, 500, callback);
-    // $('div').scale(2, 2, 1000, callback);
-    // $('div').scale(2, 2, callback);
-    
-    // $('div').rotateX(180, 1000, 500, callback);
-    // $('div').rotateX(180, 1000, callback);
-    // $('div').rotateX(45, callback);
-    
-    // $('div').rotateY(180, 1000, 500, callback);
-    // $('div').rotateY(180, 1000, callback);
-    // $('div').rotateY(45, callback);
-    
-    // $('div').rotateZ(360, 1000, 500, callback);
-    // $('div').rotateZ(180, 1000, callback);
-    // $('div').rotateZ(45, callback);
-    
-    // $('div').rotate(180, 1000, 500, callback);
-    // $('div').rotate(180, 1000, callback);
-    // $('div').rotate(45, callback);
-    
-    // $('div').rotate3d(180, 1000, 500, callback);
-    // $('div').rotate3d(180, 1000, callback);
-    // $('div').rotate3d(45, callback);
-    
-    // $('div').skewX(45, 1000, 500, callback);
-    // $('div').skewX(45, 1000, callback);
-    // $('div').skewX(45, callback);
-    
-    // $('div').skewY(45, 1000, 500, callback);
-    // $('div').skewY(45, 1000, callback);
-    // $('div').skewY(45, callback);
-    
-    // $('div').skew(45, 45, 1000, 500, callback);
-    // $('div').skew(45, 90, 1000, callback);
-    // $('div').skew(45, 20, callback);
-    
-    //$('div').transition('duration', 'delay', 'ease-in-out', '50% 50%', 'perspective-3d');
-    
-    var destinate_to = 100;
-    
-    $('div').mouseover(function() {
+    var that = this;
+    var callback = function() {
         
+        $(that).bind('webkitTransitionEnd', $.proxy(callback, $(that)));
+        console.log("1", (+new Date()) - s)
+    }
+    
+    $(this).bind('webkitTransitionEnd', $.proxy(callback, $(this))).css({
+        '-webkit-transition': 'all 500ms ease-in-out 0ms',
+        '-webkit-transform': 'translateX(30px)',
+        '-webkit-transform-origin': '50% 50%',
+        '-webkit-transform-style': 'flat'
+    }).dequeue()
+})
+.queue(function() {
+    
+    var that = this;
+    var callback = function() {
         
-        var params = {
-            x: destinate_to,
-            duration: 500
-        };
-
-        $('div').cssanimate(params, 500);
+        $(that).bind('webkitTransitionEnd', $.proxy(callback, $(that)));
+        console.log("2", (+new Date()) - s)
+    }
+    
+    $(this).bind('webkitTransitionEnd', $.proxy(callback, $(this))).css({
+        '-webkit-transition': 'all 500ms ease-in-out 0ms',
+        '-webkit-transform': 'translateX(60px)',
+        '-webkit-transform-origin': '50% 50%',
+        '-webkit-transform-style': 'flat'
+    }).dequeue()
+})
+.queue(function() {
+    
+    var that = this;
+    var callback = function() {
         
-        destinate_to *= -1;
-    });
-});
-
+        $(that).bind('webkitTransitionEnd', $.proxy(callback, $(that)));
+        console.log("3", (+new Date()) - s)
+    }
+    
+    $(this).bind('webkitTransitionEnd', $.proxy(callback, $(this))).css({
+        '-webkit-transition': 'all 500ms ease-in-out 0ms',
+        '-webkit-transform': 'translateX(90px)',
+        '-webkit-transform-origin': '50% 50%',
+        '-webkit-transform-style': 'flat'
+    }).dequeue()
+})
+.queue(function() {
+    
+    var that = this;
+    var callback = function() {
+        
+        $(that).bind('webkitTransitionEnd', $.proxy(callback, $(that)));
+        console.log("4", (+new Date()) - s)
+    }
+    
+    $(this).bind('webkitTransitionEnd', $.proxy(callback, $(this))).css({
+        '-webkit-transition': 'all 500ms ease-in-out 0ms',
+        '-webkit-transform': 'translateX(120px)',
+        '-webkit-transform-origin': '50% 50%',
+        '-webkit-transform-style': 'flat'
+    }).dequeue()
+})
 </script>
-</head>
-<body>
-<div class="box"></div>
-</body>
-</html>
