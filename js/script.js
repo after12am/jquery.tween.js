@@ -1,93 +1,104 @@
 var mouseover = false;
 
-$('#translateX .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ x: 30 });
+$('#translateX .thumb .box').mouseover(function() {
+    $(this).cssanimate({ x: 30 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate(); // cssanimate() equals cssanimate({ x: 0 })
+    $(this).cssanimate(); // cssanimate() equals cssanimate({ x: 0 })
 });
 
-$('#translateY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ y: 30 });
+$('#translateY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ y: 30 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#translateXY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ x: 30, y: 30 });
+$('#translateXY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ x: 30, y: 30 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#rotateX .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatex: 90 });
+$('#rotateX .thumb .box').mouseover(function() {
+    $(this).cssanimate({ rotatex: 180 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#rotateY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatey: 90 });
+$('#rotateY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ rotatey: 180 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#rotateXYZ .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatex: 90, rotatey: 90, rotatez: 90 });
+$('#rotateXYZ .thumb .box').mouseover(function() {
+    $(this).cssanimate({ rotate: [1, 1, 0, 180] });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#scaleX .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ scalex: 4 });
+$('#scaleX .thumb .box').mouseover(function() {
+    $(this).cssanimate({ scalex: 4 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#scaleY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ scaley: 4 });
+$('#scaleY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ scaley: 4 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#scaleXY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ scalex: 4, scaley: 4 });
+$('#scaleXY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ scalex: 4, scaley: 4 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#skewX .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ skewx: 45 });
+$('#skewX .thumb .box').mouseover(function() {
+    $(this).cssanimate({ skewx: 45 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#skewY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ skewy: 45 });
+$('#skewY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ skewy: 45 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#skewXY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ skewx: 45, skewy: 45 });
+$('#skewXY .thumb .box').mouseover(function() {
+    $(this).cssanimate({ skewx: 45, skewy: 45 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate();
+    $(this).cssanimate();
 });
 
-$('#opacity .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ opacity: 0 });
+$('#opacity .thumb .box').mouseover(function() {
+    $(this).cssanimate({ opacity: 0 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate({ opacity: 1 });
+    $(this).cssanimate({ opacity: 1 });
 });
 
-$('#width .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ width: 120 });
+$('#width .thumb .box').mouseover(function() {
+    $(this).cssanimate({ width: 120 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate({ width: 30 });
+    $(this).cssanimate({ width: 30 });
 });
 
-$('#radius .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ "border-radius": 30 });
+$('#radius .thumb .box').mouseover(function() {
+    $(this).cssanimate({ "border-radius": 30 });
 }).mouseout(function() {
-    $(this).find('.box').cssanimate({ "border-radius": 0 });
+    $(this).cssanimate({ "border-radius": 0 });
+});
+
+$('.method-chaine .box').mouseover(function() {
+    $(this)
+        .cssanimate({ x: 100, y: 0, scale: 0.5, rotatez: 90 })
+        .cssanimate({ x: 100, y: 100, scale: 1, rotatez: 180 })
+        .cssanimate({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
+        .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
+        .cssanimate({ x: 0, y: 0, scale: 1 })
+}).mouseout(function() {
+    $(this).cssanimate();
 });
 
 /*

@@ -103,7 +103,7 @@ px      68    160    252    344    436    528    620    712    */
     width: 210px;
   }
   /* TABLET WIDGETS  ----------------------------------------------------*/.widget-cols > li {
-    width: 153px;
+    width: 210px;
     margin-left: 20px;
   }
 }
