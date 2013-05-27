@@ -1,12 +1,15 @@
 jquery.cssanimate.js
 ====================
 
-This is a jquery plugin that provides smooth animation for smartphone using css3. 
-css3 is the only way for making animation in smartphone if except WebGL. Javascript is also available
+jquery.cssanimate.js is a jquery plugin provides smooth animation for smartphone using css3. 
+css3 is the only way for making stylish animation in smartphone if except WebGL. Javascript is also available
 in smartphone, but would not give a good animation to smartphone. In contrast, css3 would give 
-your app lightness and interactivity. css3 is powerful especially in smartphone for using gpu. 
-But css3 is a bit difficult to controll under dynamic usage.  So this has been designed to take advantage 
+your app lightness, interactivity and powerful for using gpu. 
+But css3 is a bit difficult to controll under dynamic usage.  So jquery.cssanimate.js has been designed to take advantage 
 of knowledge of jquery of you.
+
+## Demo
+### [View Live Demo](http://after12am.github.io/jquery.cssanimate.js/)
 
 ## Usage
 
