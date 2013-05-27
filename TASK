@@ -1,9 +1,19 @@
-+ add latest commit message after author using [github api](http://developer.github.com/v3/repos/commits/)
-+ add more ecellent examples
-http://ricostacruz.com/jquery.transit/
-http://leaverou.github.io/animatable/#
-
 + change translateX(), translateY() of support to to(x, y, z, ...)
 + delete translate(), translate3d() of support
-+ change scaleX(), scaleY() of support to scale(x, y, z, ...)
-And change as well to others of support shortcut function
++ change scaleX(), scaleY() of support to scale(x, y, z, ...) and change as well to others of support shortcut function
++ add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
++ add ease. see [move.js](https://github.com/visionmedia/move.js/blob/master/move.js)
++ add stopanimate
++ support relative values. e.g. +=30 -=30
++ support getters method. e.g. $('.box').cssanimate('rotate');
++ add example of `Transformation origins` You can use `transform-origin` to get/set where rotations and scales start from.
++ add description of `able to pass duration and easing and complete as values in options`
+
+$(".box").cssanimate({
+    opacity:0.1,
+    scale:0.3,
+    duration:500,
+    easing:'in',
+    complete:function(){}
+});
+
