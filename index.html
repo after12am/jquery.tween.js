@@ -98,14 +98,14 @@
                 <a class="excerpt">Rotate Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ rotatey: 90 }</em>)</div>
             </li>
-            <li id="rotateXY">
+            <li id="rotateXYZ">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
                     <div class="img-overlay"></div>
                     <div class="box"></div>
                 </a>
-                <a class="excerpt">Rotate X / Y</a>
-                <div class="code">$('.box').cssanimate(<em>{ rotatex: 90, rotatey: 90 }</em>)</div>
+                <a class="excerpt">Rotate X / Y / Z</a>
+                <div class="code">$('.box').cssanimate(<em>{ rotatex: 90, rotatey: 90, rotatez: 90 }</em>)</div>
             </li>
         </ul>
         <ul class="feature cf">
@@ -368,8 +368,11 @@ $.ajax({
         // console.log(data.commit.committer)
         // console.log(data.commit.message)
         $('.tweet_time .date').append(niceTime(data.commit.committer.date));
-        $('.tweet_text .committer').append(data.commit.committer.name);
+        $('.tweet_time .date').attr('href', 'https://github.com/after12am/jquery.cssanimate.js/commit/' + sha);
+        $('.tweet_text .committer').append(data.committer.login);
+        $('.tweet_text .committer').attr('href', data.committer.html_url);
         $('.tweet_text .message').append(data.commit.message);
+        $('.tweet_text .message').attr('href', 'https://github.com/after12am/jquery.cssanimate.js/commit/' + sha);
     },
     error: function(data) {
         console.log(data)
