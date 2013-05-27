@@ -30,8 +30,8 @@ $('#rotateY .thumb').mouseover(function() {
     $(this).find('.box').cssanimate();
 });
 
-$('#rotateXY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatex: 90, rotatey: 90 });
+$('#rotateXYZ .thumb').mouseover(function() {
+    $(this).find('.box').cssanimate({ rotatex: 90, rotatey: 90, rotatez: 90 });
 }).mouseout(function() {
     $(this).find('.box').cssanimate();
 });
