@@ -722,6 +722,42 @@ nav {
 .widget-cols a:hover {
   color: #fdd600;
 }
+.widget-cols .container {
+    width: 58px;
+    height: 58px;
+    box-sizing: border-box;
+    margin: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 18px;
+    padding: 0;
+    border: 4px solid #fff;
+/*    float: left;*/
+}
+.widget-cols .box {
+  width: 100%;
+  height: 100%;
+  background: #a8c8ca url(../img/bg.png);
+}
+.widget-cols li .code {
+  font-size: 12px;
+  font-style: italic;
+  color: #ece9d6;
+  letter-spacing: 0.1em;
+/*  width: 212px;
+  margin-right: auto;
+  margin-left: auto;*/
+}
+.widget-cols li .code span {
+    display: block;
+    text-indent: 6px;
+}
+.widget-cols li .code em {
+    border-radius: 2px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+    background-color: #CF3932;
+}
+
 .widget-cols h1,
 .widget-cols h2,
 .widget-cols h3,

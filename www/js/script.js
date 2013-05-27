@@ -88,6 +88,15 @@ $('#radius .thumb').mouseover(function() {
     $(this).find('.box').cssanimate({ "border-radius": 30 });
 }).mouseout(function() {
     $(this).find('.box').cssanimate({ "border-radius": 0 });
+$('.method-chaine .box').mouseover(function() {
+    $(this)
+        .cssanimate({ x: 100, y: 0, scale: 0.5, rotatez: 90 })
+        .cssanimate({ x: 100, y: 100, scale: 1, rotatez: 180 })
+        .cssanimate({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
+        .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
+        .cssanimate({ x: 0, y: 0, scale: 1 })
+}).mouseout(function() {
+    $(this).cssanimate();
 });
 
 /*

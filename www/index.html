@@ -216,33 +216,40 @@
             <div class="ribbon-right"></div>
         </div>
         <ul id="more" class="widget-cols cf">
-            
             <li class="first-col">
-                
                 <div class="widget-block">
-                    <h4>RECENT POSTS</h4>
-                    <div class="recent-post cf">
-                        <a href="#" class="thumb"><img src="img/dummies/54x54.gif" alt="Post" /></a>
+                    <h4>METHOD CHAINE</h4>
+                    <div class="recent-post cf method-chaine">
+                        <div class="container"><div class="box"></div></div>
                         <div class="post-head">
-                            <a href="#">Pellentesque habitant morbi senectus </a><span> March 12, 2011</span>
+                            <div class="code">
+                                $('.box')
+                                .cssanimate({ x: 100, y: 0, scale: 0.5, rotatez: 90 })
+                                .cssanimate({ x: 100, y: 100, scale: 1, rotatez: 180 })
+                                .cssanimate({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
+                                .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
+                                .cssanimate({ x: 0, y: 0, scale: 1 })
+                            </div>
                         </div>
                     </div>
+                    <!--
                     <div class="recent-post cf">
-                        <a href="#" class="thumb"><img src="img/dummies/54x54b.gif" alt="Post" /></a>
+                        <a class="thumb"><img src="img/dummies/54x54b.gif" alt="Post" /></a>
                         <div class="post-head">
                             <a href="#">Pellentesque habitant morbi senectus</a><span> March 12, 2011</span>
                         </div>
                     </div>
                     <div class="recent-post cf">
-                        <a href="#" class="thumb"><img src="img/dummies/54x54c.gif" alt="Post" /></a>
+                        <a class="thumb"><img src="img/dummies/54x54c.gif" alt="Post" /></a>
                         <div class="post-head">
                             <a href="#">Pellentesque habitant morbi senectus</a><span> March 12, 2011</span>
                         </div>
                     </div>
+                    -->
                 </div>
             </li>
             
-            
+            <!--
             <li class="second-col">
                 
                 <div class="widget-block">
@@ -275,7 +282,7 @@
                     </div>
                 </div>
             </li>
-            
+            -->
         </ul>
         <div id="bottom">
             <div id="widget-trigger-holder"><a id="widget-trigger" href="#" title="View More" class="poshytip"></a></div>
