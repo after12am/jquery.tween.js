@@ -19,6 +19,9 @@
   padding: 0;
   overflow-y: hidden;
 }
+.tweet .tweet_list span.tweet_time a:hover {
+  text-decoration: none;
+}
 .tweet .awesome,
 .query .awesome,
 .tweet .epic,
