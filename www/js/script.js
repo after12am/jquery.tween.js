@@ -19,19 +19,19 @@ $('#translateXY .thumb').mouseover(function() {
 });
 
 $('#rotateX .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatex: 90 });
+    $(this).find('.box').cssanimate({ rotatex: 180 });
 }).mouseout(function() {
     $(this).find('.box').cssanimate();
 });
 
 $('#rotateY .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatey: 90 });
+    $(this).find('.box').cssanimate({ rotatey: 180 });
 }).mouseout(function() {
     $(this).find('.box').cssanimate();
 });
 
 $('#rotateXYZ .thumb').mouseover(function() {
-    $(this).find('.box').cssanimate({ rotatex: 90, rotatey: 90, rotatez: 90 });
+    $(this).find('.box').cssanimate({ rotate: [1, 1, 0, 180] });
 }).mouseout(function() {
     $(this).find('.box').cssanimate();
 });
