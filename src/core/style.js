@@ -1,4 +1,4 @@
-var Style = function(duration, delay, easing, origin, style) {
+var Style = function(duration, delay, easing, style) {
     this.css = {};
     this.transform = [];
     this.transition = {
@@ -6,7 +6,7 @@ var Style = function(duration, delay, easing, origin, style) {
         duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
         easing: easing || 'ease-in-out', // Specifies the timing of the change.
-        origin: origin || '50% 50%', // Specify the origin.
+        //origin: origin || '50% 50%', // Specify the origin.
         style: style || 'flat' // or preserve-3d
     };
 };
@@ -205,15 +205,15 @@ Style.prototype.assemble = function(params) {
         delete params.property;
     }
     
-    var properties = {};
-    properties['{0}transition-property'.format(Style.prefix)] = this.transition.properties.join(',');
-    properties['{0}transition-duration'.format(Style.prefix)] = this.transition.duration + 'ms';
-    properties['{0}transition-timing-function'.format(Style.prefix)] = this.transition.easing;
-    properties['{0}transition-delay'.format(Style.prefix)] = this.transition.delay + 'ms';
-    properties['{0}transform'.format(Style.prefix)] = this.transform.join(' '); // If you separate transform function, you can apply multiple transform effects.
-    properties['{0}transform-origin'.format(Style.prefix)] = this.transition.origin;
-    properties['{0}transform-style'.format(Style.prefix)] = this.transition.style;
+    var props = {};
+    props['{0}transition-property'.format(Style.prefix)] = this.transition.properties.join(',');
+    props['{0}transition-duration'.format(Style.prefix)] = this.transition.duration + 'ms';
+    props['{0}transition-timing-function'.format(Style.prefix)] = this.transition.easing;
+    props['{0}transition-delay'.format(Style.prefix)] = this.transition.delay + 'ms';
+    props['{0}transform'.format(Style.prefix)] = this.transform.join(' '); // If you separate transform function, you can apply multiple transform effects.
+    //props['{0}transform-origin'.format(Style.prefix)] = this.transition.origin;
+    props['{0}transform-style'.format(Style.prefix)] = this.transition.style;
     
-    this.css = $.extend(properties, params);
+    this.css = $.extend(props, params);
     return this;
 };

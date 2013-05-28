@@ -1,8 +1,6 @@
 $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     
-    params = params || {};
-    
-    var origin = undefined;
+    var params = params || {};
     var style = undefined;
     
     if (typeof duration === 'function') {
@@ -35,11 +33,6 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
         delete params.easing;
     }
     
-    if (params.origin) {
-        origin = params.origin;
-        delete params.origin;
-    }
-    
     if (params.style) {
         style = params.style;
         delete params.style;
@@ -51,14 +44,13 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
     
     this.queue(function() {
         
-        function animated() {
+        var style = new Style(duration, delay, easing, style);
+        var css = style.assemble(params).css;
+        var animated = function() {
             $(this).unbind(Style.onTransitionEvent, $.proxy(animated, this));
             if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
         }
-        
-        var style = new Style(duration, delay, easing, origin, style);
-        var css = style.assemble(params).css;
         
         // When transition-duration propery is zero, we have to call callback function 
         // because onTransitionEvent would not be fired.
@@ -66,13 +58,13 @@ $.fn.cssanimate = function(params, duration, delay, easing, callback) {
             $(this).css(css);
             // We have to wait until css property is set.
             // If not so, next queue might be executed before setting css to dom.
-            var i = 0;
+            var i = 0, prefix = Style.prefix;
             while (1) {
-                var adopted = $(this).css('{0}transition-delay'.format(Style.prefix));
+                var adopted = $(this).css('{0}transition-duration'.format(prefix));
                 if (adopted === '0s') break;
                 if (++i > 50) break; // avoid infinite loop
             }
-            $.proxy(callback, this)();
+            if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
             return;
         }

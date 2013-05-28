@@ -218,47 +218,48 @@
         <ul id="more" class="widget-cols cf">
             <li class="first-col">
                 <div class="widget-block">
-                    <h4>METHOD CHAINE</h4>
+                    <h4>method chain</h4>
                     <div class="recent-post cf method-chaine">
                         <div class="container"><div class="box"></div></div>
                         <div class="post-head">
-                            <div class="code">
-                                $('.box')
-                                .cssanimate({ x: 100, y: 0, scale: 0.5, rotatez: 90 })
-                                .cssanimate({ x: 100, y: 100, scale: 1, rotatez: 180 })
-                                .cssanimate({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
-                                .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
-                                .cssanimate({ x: 0, y: 0, scale: 1 })
+                            <span>method chain is supported. Animation will be executed serially exactly like animate of jQuery.</span>
+                            <div class="code" style="margin-top:14px;">
+                                <em>e.g.</em>
+                                <span>
+                                    $('.box')
+                                    .cssanimate({ x: 100, y: 0, scale: 0.5, rotatez: 90 })
+                                    .cssanimate({ x: 100, y: 100, scale: 1, rotatez: 180 })
+                                    .cssanimate({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
+                                    .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
+                                    .cssanimate({ x: 0, y: 0, scale: 1 })
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <div class="recent-post cf">
-                        <a class="thumb"><img src="img/dummies/54x54b.gif" alt="Post" /></a>
-                        <div class="post-head">
-                            <a href="#">Pellentesque habitant morbi senectus</a><span> March 12, 2011</span>
-                        </div>
-                    </div>
-                    <div class="recent-post cf">
-                        <a class="thumb"><img src="img/dummies/54x54c.gif" alt="Post" /></a>
-                        <div class="post-head">
-                            <a href="#">Pellentesque habitant morbi senectus</a><span> March 12, 2011</span>
-                        </div>
-                    </div>
-                    -->
                 </div>
             </li>
-            
-            <!--
             <li class="second-col">
-                
                 <div class="widget-block">
-                    <h4>DUMMY TEXT</h4>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. </p>
-                 </div>
-                 
+                    <h4>origin</h4>
+                    <div class="recent-post cf transformation-origins">
+                        <div class="container"><div class="box"></div></div>
+                        <div class="post-head">
+                            <span>You can use origin to set where rotations and scales start from.</span>
+                            <div class="code" style="margin-top:14px;">
+                                <em>e.g.</em>
+                                <span>
+                                    $('.box')
+                                    .origin(0, 0)
+                                    .cssanimate({ rotatez: 45 })
+                                </span>
+                                <em>alternate</em>
+                                <span>origin('50%', '50%') origin('bottom', 'right') origin('30px', '20px')</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
-            
+            <!--
             <li class="third-col">
                 <div class="widget-block">
                     <h4>RECENT POSTS</h4>

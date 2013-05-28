@@ -6,7 +6,6 @@
 + add stopanimate
 + support relative values. e.g. +=30 -=30
 + support getters method. e.g. $('.box').cssanimate('rotate');
-+ add example of `Transformation origins` You can use `transform-origin` to get/set where rotations and scales start from.
 + add description of `able to pass duration and easing and complete as values in options`
 
 $(".box").cssanimate({

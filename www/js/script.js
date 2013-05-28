@@ -101,6 +101,12 @@ $('.method-chaine .box').mouseover(function() {
     $(this).cssanimate();
 });
 
+$('.transformation-origins .box').mouseover(function() {
+    $(this).origin(0, 0).cssanimate({ rotatez: 45 })
+}).mouseout(function() {
+    $(this).cssanimate({ rotatez: 0 });
+});
+
 /*
 $('#transitions .thumb').eq(0).mouseover(function() {
     mouseover = true;
