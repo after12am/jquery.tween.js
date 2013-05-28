@@ -107,6 +107,18 @@ $('.transformation-origins .box').mouseover(function() {
     $(this).cssanimate({ rotatez: 0 });
 });
 
+$('.ease-example .box').mouseover(function() {
+    // var range = 600;
+    // $(this).cssanimate({
+    //     x: Math.random() * range - range / 2,
+    //     y: Math.random() * range - range / 2,
+    //     ease: 'in',
+    // })
+    $(this).cssanimate({ scaleX: 3, rotate: 360, 'background-color': '#CF3932', ease: 'snap' }, 400)
+}).mouseout(function() {
+    $(this).cssanimate({ 'background-color': '#a8c8ca' });
+});
+
 /*
 $('#transitions .thumb').eq(0).mouseover(function() {
     mouseover = true;

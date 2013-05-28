@@ -1,11 +1,11 @@
-var Style = function(duration, delay, easing, style) {
+var Style = function(duration, delay, ease, style) {
     this.css = {};
     this.transform = [];
     this.transition = {
         properties: ['all'], // Specifies the name of the CSS properties that apply the transition effect.
         duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
-        easing: easing || 'ease-in-out', // Specifies the timing of the change.
+        ease: cssanimate.ease[ease] || 'ease-in-out', // Specifies the timing of the change.
         //origin: origin || '50% 50%', // Specify the origin.
         style: style || 'flat' // or preserve-3d
     };
@@ -208,7 +208,7 @@ Style.prototype.assemble = function(params) {
     var props = {};
     props['{0}transition-property'.format(Style.prefix)] = this.transition.properties.join(',');
     props['{0}transition-duration'.format(Style.prefix)] = this.transition.duration + 'ms';
-    props['{0}transition-timing-function'.format(Style.prefix)] = this.transition.easing;
+    props['{0}transition-timing-function'.format(Style.prefix)] = this.transition.ease;
     props['{0}transition-delay'.format(Style.prefix)] = this.transition.delay + 'ms';
     props['{0}transform'.format(Style.prefix)] = this.transform.join(' '); // If you separate transform function, you can apply multiple transform effects.
     //props['{0}transform-origin'.format(Style.prefix)] = this.transition.origin;
