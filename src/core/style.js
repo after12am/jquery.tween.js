@@ -41,9 +41,7 @@ Style.ease = {
 }
 
 Style.prototype.compile = function(params) {
-    
     var transform = [];
-    
     for (var name in params) {
         switch (name) {
         case 'x': transform.push(this.parseX(params[name])); break;
@@ -64,21 +62,12 @@ Style.prototype.compile = function(params) {
         }
         delete params[name];
     }
-    
-    var css = this.build(params, transform);
-    this.css = css['css'];
-    this.transition = css['transition'];
-    
-    this.queue();
-    
-    return this;
+    return this.build(params, transform);
 }
 
 Style.prototype.build = function(css, transform) {
-    
     var transition = {};
     var prefix = Style.prefix;
-    
     // If separate transform with space, we can use multiple transform.
     transition['{0}transform'.format(prefix)] = transform.join(' ');
     transition['{0}transition-property'.format(prefix)] = this.property(css);
@@ -86,17 +75,13 @@ Style.prototype.build = function(css, transform) {
     transition['{0}transition-delay'.format(prefix)] = this.delay(css);
     transition['{0}transition-timing-function'.format(prefix)] = this.ease(css);
     transition['{0}transform-style'.format(prefix)] = this.style(css);
-    
-    delete css['property'];
-    delete css['duration'];
-    delete css['delay'];
-    delete css['ease'];
-    delete css['style'];
-    
-    return {
-        'css': $.extend(transition, css), // combine css and transition
-        'transition': transition
-    };
+    ['property', 'duration', 'delay', 'ease', 'style'].forEach(function(prop) {
+        delete css[prop];
+    });
+    // combine css and transition
+    this.css = $.extend(transition, css);
+    this.transition = transition;
+    return this;
 }
 
 Style.prototype.queue = function(elem, callback) {
