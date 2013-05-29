@@ -417,6 +417,17 @@ nav {
     box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
     background-color: #a8c8ca;
 }
+.feature li .alternate {
+    width: 100%;
+    text-align: left;
+    margin: 12px 0;
+}
+.feature li .alternate em.alternate {
+    border-radius: 2px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+    background-color: #CF3932;
+    color: #ece9d6;
+}
 .feature li .categories a,
 .work-list li .categories a {
   color: #888888;
@@ -757,7 +768,6 @@ nav {
     box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
     background-color: #CF3932;
 }
-
 .widget-cols h1,
 .widget-cols h2,
 .widget-cols h3,

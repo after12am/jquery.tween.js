@@ -85,6 +85,10 @@
                 </a>
                 <a class="excerpt">Rotate X</a>
                 <div class="code">$('.box').cssanimate(<em>{ rotatex: 180 }</em>)</div>
+                <div class="alternate" style="display:none">
+                    <em class="alternate">alternate</em>
+                    <div class="code">$('.box').cssanimate(<em>{ rotate: [180, 0] }</em>)</div>
+                </div>
             </li>
             <li id="rotateY">
                 <a class="thumb" >
@@ -219,10 +223,10 @@
             <li class="first-col">
                 <div class="widget-block">
                     <h4>method chain</h4>
-                    <div class="recent-post cf method-chaine">
+                    <div class="page-content recent-post cf method-chaine">
                         <div class="container"><div class="box"></div></div>
                         <div class="post-head">
-                            <span>method chain is supported. Animation will be executed serially exactly like animate of jQuery.</span>
+                            <span>&nbsp&nbspmethod chain is supported. Animation will be executed serially exactly like animate of jQuery.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
                                 <span>
@@ -241,10 +245,10 @@
             <li class="second-col">
                 <div class="widget-block">
                     <h4>origin</h4>
-                    <div class="recent-post cf transformation-origins">
+                    <div class="page-content recent-post cf transformation-origins">
                         <div class="container"><div class="box"></div></div>
                         <div class="post-head">
-                            <span>You can use origin to set where rotations and scales start from.</span>
+                            <span>&nbsp&nbspYou can use origin to set where rotations and scales start from.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
                                 <span>
@@ -253,7 +257,9 @@
                                     .cssanimate({ rotatez: 45 })
                                 </span>
                                 <em>alternate</em>
-                                <span>origin('50%', '50%') origin('bottom', 'right') origin('30px', '20px')</span>
+                                <span>origin('50%', '50%')</span>
+                                <span>origin('bottom', 'right')</span>
+                                <span>origin('30px', '20px')</span>
                             </div>
                         </div>
                     </div>
@@ -333,9 +339,6 @@
 <script src="js/jquery.cssanimate.js"></script>
 <script src="js/script.js"></script>
 <script type="text/javascript">
-
-
-
 </script>
 </body>
 </html>
