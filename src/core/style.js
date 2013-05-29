@@ -1,6 +1,8 @@
-var Style = function() {
+var Style = function(duration) {
     this.css = {};
-    this.transition = {};
+    this.transition = {
+        duration: duration || 400
+    }
 };
 
 // declaration as const for the purpose of cache.
@@ -71,22 +73,20 @@ Style.prototype.build = function(css, transform) {
     // If separate transform with space, we can use multiple transform.
     transition['{0}transform'.format(prefix)] = transform.join(' ');
     transition['{0}transition-property'.format(prefix)] = this.property(css);
-    transition['{0}transition-duration'.format(prefix)] = this.duration(css);
+    transition['{0}transition-duration'.format(prefix)] = '{0}ms'.format(this.transition.duration);
     transition['{0}transition-delay'.format(prefix)] = this.delay(css);
     transition['{0}transition-timing-function'.format(prefix)] = this.ease(css);
     transition['{0}transform-style'.format(prefix)] = this.style(css);
-    ['property', 'duration', 'delay', 'ease', 'style'].forEach(function(prop) {
+    ['property', 'duration', 'delay', 'ease', 'style', 'origin'].forEach(function(prop) {
         delete css[prop];
     });
     // combine css and transition
     this.css = $.extend(transition, css);
-    this.transition = transition;
     return this;
 }
 
 Style.prototype.queue = function(elem, callback) {
     var that = this;
-    var duration = this.duration();
     var prefix = Style.prefix;
     var animated = function() {
         $(elem).unbind(Style.transitionEvent, $.proxy(animated, elem));
@@ -96,7 +96,7 @@ Style.prototype.queue = function(elem, callback) {
     return function() {
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
-        if (duration === 0) {
+        if (that.transition.duration === 0) {
             $(elem).css(css);
             // We have to wait until css property is set.
             // If not so, next queue might be executed before setting css to dom.
@@ -109,7 +109,6 @@ Style.prototype.queue = function(elem, callback) {
             $(elem).dequeue();
             return;
         }
-        
         $(elem).bind(Style.transitionEvent, $.proxy(animated, elem)).css(that.css);
     }
 }
@@ -289,16 +288,13 @@ Style.prototype.property = function(params) {
 /*
     Specifies the amount of time it takes to change.
 */
-Style.prototype.duration = function(params) {
-    if (!params) {
-        var prefix = Style.prefix;
-        var k = '{0}transition-duration'.format(prefix);
-        return this.transition[k].replace('ms', '');
-    }
+/*Style.prototype.duration = function(params) {
+    if (!params) return this.duration;
+    this.duration = params['duration'];
     return '{0}ms'.format(
-        params['duration'] || 400
+        params['duration'] !== undefined ? params['duration'] : 400
     );
-}
+}*/
 
 /*
     Specifies whether the change begins when.
