@@ -1,7 +1,9 @@
 /*
- * jquery.cssanimate
+ * jquery.cssanimate.js
  *
- * https://github.com/after12am/cssanimate.js
+ * A jQuery plugin provides a stylish and cute animation for your smartphone app.
+ *
+ * https://github.com/after12am/jquery.cssanimate.js
  *
  * Copyright 2013 Satoshi Okami
  * Released under the MIT license
