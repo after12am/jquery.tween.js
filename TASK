@@ -2,7 +2,6 @@
 + delete translate(), translate3d() of support
 + change scaleX(), scaleY() of support to scale(x, y, z, ...) and change as well to others of support shortcut function
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
-+ add ease. see [move.js](https://github.com/visionmedia/move.js/blob/master/move.js)
 + add stopanimate
 + support relative values. e.g. +=30 -=30
 + support getters method. e.g. $('.box').cssanimate('rotate');
@@ -16,3 +15,5 @@ $(".box").cssanimate({
     complete:function(){}
 });
 
++ fix width of 3rd column
++ ease default cubic-besizer

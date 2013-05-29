@@ -114,7 +114,7 @@ $('.ease-example .box').mouseover(function() {
     //     y: Math.random() * range - range / 2,
     //     ease: 'in',
     // })
-    $(this).cssanimate({ scaleX: 3, rotate: 360, 'background-color': '#CF3932', ease: 'snap' }, 400)
+    $(this).cssanimate({ scaleX: 3, rotate: 360, 'background-color': '#CF3932', ease: 'snap' })
 }).mouseout(function() {
     $(this).cssanimate({ 'background-color': '#a8c8ca' });
 });
