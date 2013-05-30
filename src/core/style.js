@@ -76,7 +76,7 @@ Style.prototype.build = function(css, transform) {
     var transition = {};
     var prefix = Style.prefix;
     // If separate transform with space, we can use multiple transform.
-    transition['{0}transform'.format(prefix)] = transform.join(' ');
+    transition[browser.css.property('transform')] = transform.join(' ');
     transition[browser.css.property('property')] = this.transition.property; // Specifies the name of the CSS properties that apply the transition effect.
     transition[browser.css.property('duration')] = '{0}ms'.format(this.transition.duration);
     transition[browser.css.property('delay')] = this.transition.delay;
