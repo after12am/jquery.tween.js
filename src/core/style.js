@@ -1,13 +1,18 @@
-var Style = function(duration) {
+var Style = function(elem, duration, delay, ease, style, property) {
     this.css = {};
+    this.elem = elem;
     this.transition = {
-        duration: duration || 400
+        duration: duration || 400, // Specifies the amount of time it takes to change.
+        delay: delay || 0, // Specifies whether the change begins when.
+        ease: Style.ease[ease] || 'ease-in-out', // Specifies the timing of the change.
+        style: style || 'flat', // flat || preserve-3d
+        property: property || 'all'
     }
 };
 
 // declaration as const for the purpose of cache.
 Style.prefix = browser.prefix();
-Style.transitionEvent = browser.transitionEnd();
+Style.transitionEvent = browser.event.transitionEnd();
 
 // ease have been written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
 Style.ease = {
@@ -72,45 +77,43 @@ Style.prototype.build = function(css, transform) {
     var prefix = Style.prefix;
     // If separate transform with space, we can use multiple transform.
     transition['{0}transform'.format(prefix)] = transform.join(' ');
-    transition['{0}transition-property'.format(prefix)] = this.property(css);
-    transition['{0}transition-duration'.format(prefix)] = '{0}ms'.format(this.transition.duration);
-    transition['{0}transition-delay'.format(prefix)] = this.delay(css);
-    transition['{0}transition-timing-function'.format(prefix)] = this.ease(css);
-    transition['{0}transform-style'.format(prefix)] = this.style(css);
-    ['property', 'duration', 'delay', 'ease', 'style', 'origin'].forEach(function(prop) {
-        delete css[prop];
-    });
+    transition[browser.css.property('property')] = this.transition.property; // Specifies the name of the CSS properties that apply the transition effect.
+    transition[browser.css.property('duration')] = '{0}ms'.format(this.transition.duration);
+    transition[browser.css.property('delay')] = this.transition.delay;
+    transition[browser.css.property('ease')] = this.transition.ease;
+    transition[browser.css.property('style')] = this.transition.style;
     // combine css and transition
     this.css = $.extend(transition, css);
     return this;
 }
 
-Style.prototype.queue = function(elem, callback) {
+
+Style.prototype.queue = function(callback) {
     var that = this;
-    var prefix = Style.prefix;
     var animated = function() {
-        $(elem).unbind(Style.transitionEvent, $.proxy(animated, elem));
-        if (typeof callback === 'function') $.proxy(callback, elem)();
-        $(elem).dequeue();
-    };
-    return function() {
+        $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
+        if (typeof callback === 'function') $.proxy(callback, this)();
+        $(this).dequeue();
+    }
+    // add to $.fn.queue()
+    $(this.elem).queue(function() {
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
         if (that.transition.duration === 0) {
-            $(elem).css(css);
+            $(that.elem).css(css);
             // We have to wait until css property is set.
             // If not so, next queue might be executed before setting css to dom.
             var i = 0;
             while (1) {
-                if ($(elem).css('{0}transition-duration'.format(prefix)).match(/^0/)) break;
+                if ($(that.elem).css(browser.css.property('duration')).match(/^0/)) break;
                 if (++i > 50) break; // avoid infinite loop
             }
-            if (typeof callback === 'function') $.proxy(callback, elem)();
-            $(elem).dequeue();
+            if (typeof callback === 'function') $.proxy(callback, that.elem)();
+            $(that.elem).dequeue();
             return;
         }
-        $(elem).bind(Style.transitionEvent, $.proxy(animated, elem)).css(that.css);
-    }
+        $(that.elem).bind(Style.transitionEvent, $.proxy(animated, that.elem)).css(that.css);
+    });
 }
 
 Style.prototype.parseX = function(x) {
@@ -132,15 +135,8 @@ Style.prototype.parseZ = function(z) {
 }
 
 Style.prototype.parseRotate = function(rotate) {
-    
-    if (rotate.constructor === Object) {
-        return this.parseRotateObjectInitialiser(rotate);
-    }
-    
-    if (rotate.constructor === Array) {
-        return this.parseRotateArrayInitialiser(rotate);
-    }
-    
+    if (rotate.constructor === Object) return this.parseRotateObjectInitialiser(rotate);
+    if (rotate.constructor === Array) return this.parseRotateArrayInitialiser(rotate);
     return 'rotate({0}deg)'.format(
         rotate || 0
     );
@@ -182,15 +178,8 @@ Style.prototype.parseRotateZ = function(rotatez) {
 }
 
 Style.prototype.parseScale = function(scale) {
-    
-    if (scale.constructor === Object) {
-        return this.parseScaleObjectInitialiser(scale);
-    }
-    
-    if (scale.constructor === Array) {
-        return this.parseScaleArrayInitialiser(scale);
-    }
-    
+    if (scale.constructor === Object) return this.parseScaleObjectInitialiser(scale);
+    if (scale.constructor === Array) return this.parseScaleArrayInitialiser(scale);
     return 'scale({0},{1})'.format(
         scale || 0,
         scale || 0
@@ -232,16 +221,9 @@ Style.prototype.parseScaleZ = function(scalez) {
 }
 
 Style.prototype.parseSkew = function(skew) {
-    
-    if (skew.constructor === Object) {
-        return this.parseSkewObjectInitialiser(skew);
-    }
-    
-    if (skew.constructor === Array) {
-        return this.parseSkewArrayInitialiser(skew);
-    }
-    
-    // alternate of `skew({x}deg,{y}deg)` which is something wrong
+    if (skew.constructor === Object) return this.parseSkewObjectInitialiser(skew);
+    if (skew.constructor === Array) return this.parseSkewArrayInitialiser(skew);
+    // alternate of `skew({x}deg,{y}deg)` that is something wrong
     return [
         this.parseSkewX(skew),
         this.parseSkewY(skew)
@@ -272,50 +254,4 @@ Style.prototype.parseSkewY = function(skewy) {
     return 'skewY({0}deg)'.format(
         skewy || 0
     );
-}
-
-/*
-    Specifies the name of the CSS properties that apply the transition effect.
-*/
-Style.prototype.property = function(params) {
-    var property = params['property'] || 'all';
-    if (property.constructor === Array) {
-        return property.join(',');
-    }
-    return property;
-}
-
-/*
-    Specifies the amount of time it takes to change.
-*/
-/*Style.prototype.duration = function(params) {
-    if (!params) return this.duration;
-    this.duration = params['duration'];
-    return '{0}ms'.format(
-        params['duration'] !== undefined ? params['duration'] : 400
-    );
-}*/
-
-/*
-    Specifies whether the change begins when.
-*/
-Style.prototype.delay = function(params) {
-    return params['delay'] || 0;
-}
-
-/*
-    Specifies the timing of the change.
-*/
-Style.prototype.ease = function(params) {
-    return params['ease'] ? Style.ease[params['ease']] : 'ease-in-out';
-}
-
-/*
-    flat || preserve-3d
-*/
-Style.prototype.style = function(params) {
-    return [
-        'flat',
-        'preserve-3d'
-    ].indexOf(params['style']) >= 0 ? params['style'] : 'flat';
 }

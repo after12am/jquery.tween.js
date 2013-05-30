@@ -1,6 +1,4 @@
-var browser = {
-    
-}
+var browser = {};
 
 browser.prefix = function() {
     var e = $('<div>')[0];
@@ -14,14 +12,14 @@ browser.prefix = function() {
     };
     for (var prefix in prefixes) {
         if(e.style[prefix] !== undefined) {
-            prefix = prefixes[prefix];
-            break;
+            return prefixes[prefix];
         }
     }
     return prefix;
 }
 
-browser.transitionEnd = function() {
+browser.event = {};
+browser.event.transitionEnd = function() {
     var e = $('<div>')[0];
     var name = 'transitionEnd';
     var transitions = {
@@ -33,9 +31,22 @@ browser.transitionEnd = function() {
     };
     for (var transition in transitions) {
         if(e.style[transition] !== undefined) {
-            name = transitions[transition];
-            break;
+            return transitions[transition];
         }
     }
     return name;
+}
+
+browser.css = {};
+browser.css.property = function(name) {
+    var prefix = Style.prefix;
+    var with_prefix = {
+        'origin': '{0}transform-origin'.format(prefix),
+        'duration': '{0}transition-duration'.format(prefix),
+        'property': '{0}transition-property'.format(prefix),
+        'delay': '{0}transition-delay'.format(prefix),
+        'ease': '{0}transition-timing-function'.format(prefix),
+        'style': '{0}transition-style'.format(prefix)
+    }
+    return with_prefix[name] || name;
 }
