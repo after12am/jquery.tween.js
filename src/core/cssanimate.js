@@ -39,13 +39,9 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
         delete params.property;
     }
     
-    ['property', 'duration', 'delay', 'ease', 'style', 'origin'].forEach(function(name) {
+    ['property', 'duration', 'delay', 'ease', 'style', 'origin', 'perspective'].forEach(function(name) {
         delete params[name];
     });
-    
-    // keep 3d control parameter disable.
-    // this.parent().css('-webkit-perspective', params.perspective || 'none');
-    delete params.perspective;
     
     // compile and then add to $.fn.queue() to animate serially
     new Style($(this), duration, delay, ease, style, property).compile(params).queue(callback);
