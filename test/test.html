@@ -9,9 +9,21 @@
     top: 100px;
     left: 100px;
 }
+
+.snap-box {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #CF3932;
+    position: absolute;
+    top: 180px;
+    left: 100px;
+}
 </style>
 
 <div class="box"></div>
+<div class="snap-box"></div>
 
 <script src="/www/js/jquery-1.7.1.min.js"></script>
 <script src="/www/js/jquery.cssanimate.js"></script>
@@ -27,7 +39,7 @@ $(function() {
         // $('.box').cssanimate({ rotatez: 360 });
         // $('.box').cssanimate({ rotate: 360 });
         // $('.box').cssanimate({ rotate: {'x': 360, 'y': 0, 'z': 360} });
-        // $('.box').cssanimate({ rotate: [0, 0, 1, 360] });
+        // $('.box').cssanimate({ rotate: [0, 0, 1, 360], ease: 'snap' });
         // $('.box').cssanimate({ scalex: 3 });
         // $('.box').cssanimate({ scaley: 3 });
         // $('.box').cssanimate({ scalez: 3 });
@@ -43,6 +55,9 @@ $(function() {
         // $('.box').cssanimate({ x: 100, property: ['all'] });
         // $('.box').cssanimate({ x: 100 }, 800);
         // $('.box').cssanimate({ x: 100, duration: 800 });
+        // $('.box').cssanimate({ rotate: 360, ease: 'cubic-bezier(0,1,.5,1)' });
+        // $('.snap-box').cssanimate({ rotate: 360, ease: 'snap' });
+        // $('.snap-box').cssanimate({ rotate: 360 });
         // $('.box').cssanimate({ rotate: 360, ease: 'in' });
         // $('.box').cssanimate({ rotate: 360 }, 400, 0, 'in');
         // $('.box').cssanimate({ rotate: 360 }, 400, 400);
@@ -56,6 +71,7 @@ $(function() {
         // });
         // $('.box').cssanimate({ rotate: 360 }, 0, function() {
         //     console.log("animated")
+        //     console.log(this)
         // });
         // $('.box').origin(0, 0).cssanimate({ rotate: 60 });
     }, 50);

@@ -4,4 +4,3 @@
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
 + support relative values. e.g. +=30 -=30
 + support getters method. e.g. $('.box').cssanimate('rotate');
-+ ease default cubic-besizer

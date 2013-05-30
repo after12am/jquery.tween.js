@@ -4,7 +4,7 @@ var Style = function(elem, duration, delay, ease, style, property) {
     this.transition = {
         duration: duration || 400, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
-        ease: Style.ease[ease] || 'ease-in-out', // Specifies the timing of the change.
+        ease: Style.ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
         style: style || 'flat', // flat || preserve-3d
         property: property || 'all'
     }
