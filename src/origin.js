@@ -7,6 +7,8 @@ $.fn.origin = function(top, left) {
     params['{0}transition-duration'.format(p)] = '0';
     $(this).css(params);
     var i = 0;
+    // We have to wait until css property is set.
+    // If not so, next queue might be executed before setting css to dom.
     while (1) {
         if ($(this).css('{0}transition-duration'.format(p)).match(/^0/)) break;
         if (++i > 50) break; // avoid infinite loop
