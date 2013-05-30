@@ -1,5 +1,2 @@
-+ change translateX(), translateY() of support to to(x, y, z, ...)
-+ delete translate(), translate3d() of support
-+ change scaleX(), scaleY() of support to scale(x, y, z, ...) and change as well to others of support shortcut function
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
 + support relative values. e.g. +=30 -=30
