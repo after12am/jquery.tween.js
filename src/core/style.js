@@ -79,7 +79,7 @@ Style.prototype.build = function() {
     // If separate transform with space, we can use multiple transformation
     transition[browser.css.property('transform')] = this.transition.transform.join(' ');
     transition[browser.css.property('property')] = this.transition.property;
-    transition[browser.css.property('duration')] = '{0}ms'.format(this.transition.duration);
+    transition[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
     transition[browser.css.property('delay')] = this.transition.delay;
     transition[browser.css.property('ease')] = this.transition.ease;
     transition[browser.css.property('style')] = this.transition.style;
@@ -116,19 +116,19 @@ Style.prototype.queue = function(callback) {
 }
 
 Style.prototype.parseX = function(x) {
-    return 'translateX({0}px)'.format(
+    return str('translateX({0}px)').format(
         x || 0
     );
 }
 
 Style.prototype.parseY = function(y) {
-    return 'translateY({0}px)'.format(
+    return str('translateY({0}px)').format(
         y || 0
     );
 }
 
 Style.prototype.parseZ = function(z) {
-    return 'translateZ({0}px)'.format(
+    return str('translateZ({0}px)').format(
         z || 0
     );
 }
@@ -136,7 +136,7 @@ Style.prototype.parseZ = function(z) {
 Style.prototype.parseRotate = function(rotate) {
     if (rotate.constructor === Object) return this.parseRotateObjectInitialiser(rotate);
     if (rotate.constructor === Array) return this.parseRotateArrayInitialiser(rotate);
-    return 'rotate({0}deg)'.format(
+    return str('rotate({0}deg)').format(
         rotate || 0
     );
 }
@@ -150,7 +150,7 @@ Style.prototype.parseRotateObjectInitialiser = function(rotate) {
 }
 
 Style.prototype.parseRotateArrayInitialiser = function(rotate) {
-    return 'rotate3d({0},{1},{2},{3}deg)'.format(
+    return str('rotate3d({0},{1},{2},{3}deg)').format(
         rotate[0] || 0, 
         rotate[1] || 0, 
         rotate[2] || 0, 
@@ -159,19 +159,19 @@ Style.prototype.parseRotateArrayInitialiser = function(rotate) {
 }
 
 Style.prototype.parseRotateX = function(rotatex) {
-    return 'rotateX({0}deg)'.format(
+    return str('rotateX({0}deg)').format(
         rotatex || 0
     );
 }
 
 Style.prototype.parseRotateY = function(rotatey) {
-    return 'rotateY({0}deg)'.format(
+    return str('rotateY({0}deg)').format(
         rotatey || 0
     );
 }
 
 Style.prototype.parseRotateZ = function(rotatez) {
-    return 'rotateZ({0}deg)'.format(
+    return str('rotateZ({0}deg)').format(
         rotatez || 0
     );
 }
@@ -179,14 +179,14 @@ Style.prototype.parseRotateZ = function(rotatez) {
 Style.prototype.parseScale = function(scale) {
     if (scale.constructor === Object) return this.parseScaleObjectInitialiser(scale);
     if (scale.constructor === Array) return this.parseScaleArrayInitialiser(scale);
-    return 'scale({0},{1})'.format(
+    return str('scale({0},{1})').format(
         scale || 0,
         scale || 0
     );
 }
 
 Style.prototype.parseScaleObjectInitialiser = function(scale) {
-    return 'scale3d({0},{1},{2})'.format(
+    return str('scale3d({0},{1},{2})').format(
         scale['x'] || 0,
         scale['y'] || 0,
         scale['z'] || 0
@@ -194,7 +194,7 @@ Style.prototype.parseScaleObjectInitialiser = function(scale) {
 }
 
 Style.prototype.parseScaleArrayInitialiser = function(scale) {
-    return 'scale3d({0},{1},{2})'.format(
+    return str('scale3d({0},{1},{2})').format(
         scale[0] || 0,
         scale[1] || 0,
         scale[2] || 0
@@ -202,19 +202,19 @@ Style.prototype.parseScaleArrayInitialiser = function(scale) {
 }
 
 Style.prototype.parseScaleX = function(scalex) {
-    return 'scaleX({0})'.format(
+    return str('scaleX({0})').format(
         scalex || 0
     );
 }
 
 Style.prototype.parseScaleY = function(scaley) {
-    return 'scaleY({0})'.format(
+    return str('scaleY({0})').format(
         scaley || 0
     );
 }
 
 Style.prototype.parseScaleZ = function(scalez) {
-    return 'scaleZ({0})'.format(
+    return str('scaleZ({0})').format(
         scalez || 0
     );
 }
@@ -244,13 +244,13 @@ Style.prototype.parseSkewArrayInitialiser = function(skew) {
 }
 
 Style.prototype.parseSkewX = function(skewx) {
-    return 'skewX({0}deg)'.format(
+    return str('skewX({0}deg)').format(
         skewx || 0
     );
 }
 
 Style.prototype.parseSkewY = function(skewy) {
-    return 'skewY({0}deg)'.format(
+    return str('skewY({0}deg)').format(
         skewy || 0
     );
 }

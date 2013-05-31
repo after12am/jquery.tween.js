@@ -2,7 +2,7 @@
 // confirmed in Chrome.
 $.fn.origin = function(top, left) {
     var params = {};
-    params[browser.css.property('origin')] = '{0} {1}'.format(top, left);
+    params[browser.css.property('origin')] = str('{0} {1}').format(top, left);
     params[browser.css.property('duration')] = '0';
     $(this).css(params);
     var i = 0;

@@ -44,14 +44,14 @@ browser.css = {};
 browser.css.property = function(name) {
     var prefix = Style.prefix;
     var with_prefix = {
-        'transform': '{0}transform'.format(prefix),
-        'origin': '{0}transform-origin'.format(prefix),
-        'duration': '{0}transition-duration'.format(prefix),
-        'property': '{0}transition-property'.format(prefix),
-        'delay': '{0}transition-delay'.format(prefix),
-        'ease': '{0}transition-timing-function'.format(prefix),
-        'style': '{0}transition-style'.format(prefix),
-        'perspective': '{0}perspective'.format(prefix)
+        'transform': str('{0}transform').format(prefix),
+        'origin': str('{0}transform-origin').format(prefix),
+        'duration': str('{0}transition-duration').format(prefix),
+        'property': str('{0}transition-property').format(prefix),
+        'delay': str('{0}transition-delay').format(prefix),
+        'ease': str('{0}transition-timing-function').format(prefix),
+        'style': str('{0}transition-style').format(prefix),
+        'perspective': str('{0}perspective').format(prefix)
     }
     return with_prefix[name] || name;
 }

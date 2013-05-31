@@ -29,4 +29,3 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 ## Notes
 
 * `scaleZ``scale3d` are not implemented.
-* not override `String.format`.
