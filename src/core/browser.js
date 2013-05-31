@@ -1,5 +1,6 @@
 var browser = {};
 
+// return vendor prefix
 browser.prefix = function() {
     var e = $('<div>')[0];
     var prefix = '';
@@ -19,6 +20,7 @@ browser.prefix = function() {
 }
 
 browser.event = {};
+// return event name with vendor prefix
 browser.event.transitionEnd = function() {
     var e = $('<div>')[0];
     var name = 'transitionEnd';
@@ -38,6 +40,7 @@ browser.event.transitionEnd = function() {
 }
 
 browser.css = {};
+// return property name with vendor prefix
 browser.css.property = function(name) {
     var prefix = Style.prefix;
     var with_prefix = {

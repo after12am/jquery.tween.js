@@ -72,6 +72,7 @@ Style.prototype.compile = function(params) {
     return this.build(params, transform);
 }
 
+// private
 Style.prototype.build = function(css, transform) {
     var transition = {};
     var prefix = Style.prefix;
@@ -89,13 +90,14 @@ Style.prototype.build = function(css, transform) {
 
 Style.prototype.queue = function(callback) {
     var that = this;
-    var animated = function() {
-        $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
-        if (typeof callback === 'function') $.proxy(callback, this)();
-        $(this).dequeue();
-    }
     // add to $.fn.queue()
     $(this.elem).queue(function() {
+        // callback that would execute after transition
+        var animated = function() {
+            $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
+            if (typeof callback === 'function') $.proxy(callback, this)();
+            $(this).dequeue();
+        }
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
         if (that.transition.duration === 0) {
