@@ -2,11 +2,12 @@ var Style = function(elem, duration, delay, ease, style, property) {
     this.css = {};
     this.elem = elem;
     this.transition = {
-        duration: duration || 400, // Specifies the amount of time it takes to change.
+        transform: [],
+        duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
         ease: Style.ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
         style: style || 'flat', // flat || preserve-3d
-        property: property || 'all'
+        property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
     }
 };
 
@@ -48,44 +49,41 @@ Style.ease = {
 }
 
 Style.prototype.compile = function(params) {
-    var transform = [];
     for (var name in params) {
         switch (name) {
-        case 'x': transform.push(this.parseX(params[name])); break;
-        case 'y': transform.push(this.parseY(params[name])); break;
-        case 'z': transform.push(this.parseZ(params[name])); break;
-        case 'rotate': transform.push(this.parseRotate(params[name])); break;
-        case 'rotatex': transform.push(this.parseRotateX(params[name])); break;
-        case 'rotatey': transform.push(this.parseRotateY(params[name])); break;
-        case 'rotatez': transform.push(this.parseRotateZ(params[name])); break;
-        case 'scale': transform.push(this.parseScale(params[name])); break;
-        case 'scalex': transform.push(this.parseScaleX(params[name])); break;
-        case 'scaley': transform.push(this.parseScaleY(params[name])); break;
-        case 'scalez': transform.push(this.parseScaleZ(params[name])); break;
-        case 'skew': transform.push(this.parseSkew(params[name])); break;
-        case 'skewx': transform.push(this.parseSkewX(params[name])); break;
-        case 'skewy': transform.push(this.parseSkewY(params[name])); break;
-        default: continue;
+            case 'x': this.transition.transform.push(this.parseX(params[name])); break;
+            case 'y': this.transition.transform.push(this.parseY(params[name])); break;
+            case 'z': this.transition.transform.push(this.parseZ(params[name])); break;
+            case 'rotate': this.transition.transform.push(this.parseRotate(params[name])); break;
+            case 'rotatex': this.transition.transform.push(this.parseRotateX(params[name])); break;
+            case 'rotatey': this.transition.transform.push(this.parseRotateY(params[name])); break;
+            case 'rotatez': this.transition.transform.push(this.parseRotateZ(params[name])); break;
+            case 'scale': this.transition.transform.push(this.parseScale(params[name])); break;
+            case 'scalex': this.transition.transform.push(this.parseScaleX(params[name])); break;
+            case 'scaley': this.transition.transform.push(this.parseScaleY(params[name])); break;
+            case 'scalez': this.transition.transform.push(this.parseScaleZ(params[name])); break;
+            case 'skew': this.transition.transform.push(this.parseSkew(params[name])); break;
+            case 'skewx': this.transition.transform.push(this.parseSkewX(params[name])); break;
+            case 'skewy': this.transition.transform.push(this.parseSkewY(params[name])); break;
+            default: continue;
         }
         delete params[name];
     }
-    return this.build(params, transform);
+    this.css = $.extend(property = params, this.build());
+    return this;
 }
 
 // private
-Style.prototype.build = function(css, transform) {
+Style.prototype.build = function() {
     var transition = {};
-    var prefix = Style.prefix;
-    // If separate transform with space, we can use multiple transform.
-    transition[browser.css.property('transform')] = transform.join(' ');
-    transition[browser.css.property('property')] = this.transition.property; // Specifies the name of the CSS properties that apply the transition effect.
+    // If separate transform with space, we can use multiple transformation
+    transition[browser.css.property('transform')] = this.transition.transform.join(' ');
+    transition[browser.css.property('property')] = this.transition.property;
     transition[browser.css.property('duration')] = '{0}ms'.format(this.transition.duration);
     transition[browser.css.property('delay')] = this.transition.delay;
     transition[browser.css.property('ease')] = this.transition.ease;
     transition[browser.css.property('style')] = this.transition.style;
-    // combine css and transition
-    this.css = $.extend(transition, css);
-    return this;
+    return transition;
 }
 
 Style.prototype.queue = function(callback) {
@@ -101,7 +99,7 @@ Style.prototype.queue = function(callback) {
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
         if (that.transition.duration === 0) {
-            $(that.elem).css(css);
+            $(that.elem).css(that.css);
             // We have to wait until css property is set.
             // If not so, next queue might be executed before setting css to dom.
             var i = 0;
