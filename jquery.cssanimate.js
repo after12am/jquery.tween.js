@@ -5,7 +5,7 @@
  *
  * https://github.com/after12am/jquery.cssanimate.js
  *
- * Copyright 2013 Satoshi Okami
+ * Copyright 2012-2013 Satoshi Okami
  * Released under the MIT license
  */
 (function(e){e.fn.origin=function(a,b){var c={};c[f.css.property("origin")]="{0} {1}".format(a,b);c[f.css.property("duration")]="0";e(this).css(c);for(c=0;!e(this).css(f.css.property("duration")).match(/^0/)&&!(50<++c););return this};e.fn.perspective=function(a){e(this).parent().css(f.css.property("perspective"),"{0}px".format(+a||0));for(a=0;!e(this).parent().css(f.css.property("duration")).match(/^0/)&&!(50<++a););return this};e.fn.to=function(a,b,c,d,e){if(a.constructor!==Array)return this;2===

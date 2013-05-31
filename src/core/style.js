@@ -87,7 +87,6 @@ Style.prototype.build = function(css, transform) {
     return this;
 }
 
-
 Style.prototype.queue = function(callback) {
     var that = this;
     var animated = function() {

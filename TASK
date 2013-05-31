@@ -1,2 +1,4 @@
++ add perspective example with description about parent css property to index.html of gh-pages.
++ can use more array format. e.g. rotate: [45, 45], rotate: [45, 45, 45], to: [100, 0], to: [100, 0, 100], scale: [2, 2], scale: [2, 2, 2] of argument of $.fn.cssanimate()
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
 + support relative values. e.g. +=30 -=30
