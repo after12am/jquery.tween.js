@@ -8,5 +8,4 @@
 + test whether cssanimate affects dom.
 
 [usage]
-+ add perspective example with description about parent css property to index.html of gh-pages.
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
