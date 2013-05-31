@@ -80,7 +80,6 @@ $(function() {
         // $('.box').origin(0, 0).cssanimate({ rotate: 60 });
         // $('.box').perspective(1000).cssanimate({ rotatey: 80 });
         // $('.box').perspective(1000).cssanimate({ rotatey: 80 }).perspective(false).cssanimate({ rotatey: 280 });
-        
         // alias
         // $('.box').to([100, 0]);
         // $('.box').perspective(100).to([0, 0, 40]);
@@ -89,6 +88,24 @@ $(function() {
         // $('.box').scale([2, 2]);
         // $('.box').scale([4, 0, 3]);
         // $('.box').skew([45, 45]);
+        // animate css property
+        // $('.box').cssanimate({ width: 360 }, 0);
+        // $('.box').cssanimate({ x: 155, scalex: 7.2 });
+        // $('.snap-box').cssanimate({ width: 360 });
+        // usage of more array format
+        // $('.box').cssanimate({ rotatez: 360 });
+        // $('.box').cssanimate({ rotate: [300, 230] });
+        // $('.snap-box').cssanimate({ rotatez: 360 });
+        // $('.snap-box').cssanimate({ rotatex: 300, rotatey: 230, rotatez: 660 });
+        // $('.snap-box').cssanimate({ rotatez: 360 });
+        // $('.snap-box').cssanimate({ rotate: [300, 230, 0] });
+        // $('.box').cssanimate({ x: 100, y: 50, z: 360 });
+        // $('.snap-box').cssanimate({ to: [100, 50, 360] });
+        // $('.snap-box').cssanimate({ to: 100 });
+        // $('.box').cssanimate({ scale: [3, 1] });
+        // $('.snap-box').cssanimate({ scalex: 3, scaley: 1, scalez: 1 });
+        // $('.box').cssanimate({ scale: 3 });
+        // $('.snap-box').cssanimate({ scale: [3, 1.2, 1] });
     }, 50);
 })
 </script>

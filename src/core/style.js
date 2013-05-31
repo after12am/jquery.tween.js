@@ -51,6 +51,7 @@ Style.ease = {
 Style.prototype.compile = function(params) {
     for (var name in params) {
         switch (name) {
+            case 'to': this.transition.transform.push(this.parseTranslate(params[name])); break;
             case 'x': this.transition.transform.push(this.parseX(params[name])); break;
             case 'y': this.transition.transform.push(this.parseY(params[name])); break;
             case 'z': this.transition.transform.push(this.parseZ(params[name])); break;
@@ -115,6 +116,41 @@ Style.prototype.queue = function(callback) {
     });
 }
 
+Style.prototype.parseTranslate = function(to) {
+    if (to.constructor === Object) return this.parseTranslateObjectInitialiser(to);
+    if (to.constructor === Array) return this.parseTranslateArrayInitialiser(to);
+    return str('translate({0}px, {1}px)').format(
+        to,
+        to
+    );
+}
+
+Style.prototype.parseTranslateObjectInitialiser = function(to) {
+    return [
+        this.parseX(to['x']),
+        this.parseY(to['y']),
+        this.parseZ(to['z'])
+    ].join(' ');
+}
+
+Style.prototype.parseTranslateArrayInitialiser = function(to) {
+    if (to.length === 2 || to.length === 3) {
+        return [
+            this.parseX(to[0]),
+            this.parseY(to[1]),
+            this.parseZ(to[2])
+        ].join(' ');
+    }
+    if (to.length === 4) {
+        return str('translate3d({0},{1},{2},{3}deg)').format(
+            to[0] || 0, 
+            to[1] || 0, 
+            to[2] || 0, 
+            to[3] || 0
+        );
+    }
+}
+
 Style.prototype.parseX = function(x) {
     return str('translateX({0}px)').format(
         x || 0
@@ -150,12 +186,21 @@ Style.prototype.parseRotateObjectInitialiser = function(rotate) {
 }
 
 Style.prototype.parseRotateArrayInitialiser = function(rotate) {
-    return str('rotate3d({0},{1},{2},{3}deg)').format(
-        rotate[0] || 0, 
-        rotate[1] || 0, 
-        rotate[2] || 0, 
-        rotate[3] || 0
-    );
+    if (rotate.length === 2 || rotate.length === 3) {
+        return [
+            this.parseRotateX(rotate[0]),
+            this.parseRotateY(rotate[1]),
+            this.parseRotateZ(rotate[2])
+        ].join(' ');
+    }
+    if (rotate.length === 4) {
+        return str('rotate3d({0},{1},{2},{3}deg)').format(
+            rotate[0] || 0, 
+            rotate[1] || 0, 
+            rotate[2] || 0, 
+            rotate[3] || 0
+        );
+    }
 }
 
 Style.prototype.parseRotateX = function(rotatex) {
@@ -194,6 +239,12 @@ Style.prototype.parseScaleObjectInitialiser = function(scale) {
 }
 
 Style.prototype.parseScaleArrayInitialiser = function(scale) {
+    if (scale.length === 2) {
+        return [
+            this.parseScaleX(scale[0]),
+            this.parseScaleY(scale[1])
+        ].join(' ');
+    }
     return str('scale3d({0},{1},{2})').format(
         scale[0] || 0,
         scale[1] || 0,
