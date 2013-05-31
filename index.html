@@ -198,7 +198,6 @@
             <a class="link-button blue">{ scale: {x: 4, y: 4} }</a>
             <a class="link-button">{ skew: [45, 45] }</a>
             <a class="link-button red">{ skew: {x: 45, y: 45} }</a>
-            <a class="link-button green">{ origin: '50% 50%' }</a>
             <a class="link-button blue">{ style: 'flat' }</a>
             <a class="link-button">Any Other CSS Properties</a>
         </div>
@@ -311,6 +310,32 @@
                             ease-in-out-circ
                             ease-in-out-back
                         </span>
+                    </div>
+                </div>
+            </li>
+            <li class="first-col">
+                <div class="widget-block">
+                    <h4>perspective</h4>
+                    <div class="page-content recent-post cf perspective">
+                        <div class="container">
+                            <div class="box"></div>
+                        </div>
+                        <div class="post-head">
+                            <span>&nbsp&nbspYou can control elements using 3D transforms. Set value on $.fn.perspective() which is how 3D elements are viewed.</span>
+                            <div class="code" style="margin-top:14px;">
+                                <em>e.g.</em>
+                                <span>
+                                    $('.box')
+                                    .perspective(100)
+                                    .cssanimate({ x: 50, z: 50, rotatey: 60 })
+                                </span>
+                                <span>
+                                    $('.box')
+                                    .perspective(false)
+                                    .cssanimate({ rotatey: 60 })
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </li>

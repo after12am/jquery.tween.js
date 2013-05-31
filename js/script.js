@@ -119,6 +119,13 @@ $('.ease-example .box').mouseover(function() {
     $(this).cssanimate({ 'background-color': '#a8c8ca' });
 });
 
+
+$('.perspective .box').mouseover(function() {
+    $(this).perspective(100).cssanimate({ x: 50, z: 50, rotatey: 60 })
+}).mouseout(function() {
+    $(this).cssanimate({});
+});
+
 /*
 $('#transitions .thumb').eq(0).mouseover(function() {
     mouseover = true;
