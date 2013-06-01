@@ -9,3 +9,16 @@
 
 [usage]
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
+
++ delete from input params
+transform
+transform-origin
+transition-duration
+transition-property
+transition-delay
+transition-timing-function
+transition-style
+perspective
+
+
++ change internal design around compile and build function for supporting relative values.
