@@ -28,4 +28,7 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 
 ## Notes
 
-* `scaleZ``scale3d` are not implemented.
+* support `method chain` that animation will be executed serially
+* support `origin` to set where rotations and scales start from
+* support advanced `easing` function specifies the speed curve of the transition effect
+* support `2d/3d` transformation
