@@ -26,7 +26,7 @@ px      68    160    252    344    436    528    620    712    804    896    */
 -----------------------------------------------------------------
 cols    1     2      3      4      5      6      7      8
 px      68    160    252    344    436    528    620    712    */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) /* and (max-width: 991px) */ {
   /* TABLET GENERAL  ----------------------------------------------------*/.wrapper {
     width: 712px;
   }
