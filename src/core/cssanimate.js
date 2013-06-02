@@ -43,6 +43,16 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
         delete params[name];
     });
     
+    for (var name in params) {
+        if (name.match(/transform$/)) delete params[name];
+        else if (name.match(/transform-origin$/)) delete params[name];
+        else if (name.match(/transition-duration$/)) delete params[name];
+        else if (name.match(/transition-property$/)) delete params[name];
+        else if (name.match(/transition-delete$/)) delete params[name];
+        else if (name.match(/transition-timing-function$/)) delete params[name];
+        else if (name.match(/transition-style$/)) delete params[name];
+    }
+    
     // compile and then add to $.fn.queue() to animate serially
     new Style($(this), duration, delay, ease, style, property).compile(params).queue(callback);
     
