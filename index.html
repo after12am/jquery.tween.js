@@ -40,9 +40,9 @@
         <nav class="cf">
             <ul id="nav" class="sf-menu">
                 <li class="current-menu-item"><a href="#main"><span>Basic Transition</span></a></li>
-                <li><a href="#other-properties"><span>Other Properties</span></a></li>
+                <!-- <li><a href="#advance"><span>Advance</span></a></li> -->
                 <li><a href="#twitter-holder"><span>Latest Commit</span></a></li>
-                <li><a href="#more"><span>More</span></a></li>
+                <li><a href="#bottom"><span>View More</span></a></li>
             </ul>
             <div id="combo-holder"></div>
         </nav>
@@ -50,6 +50,7 @@
     <div role="main" id="main" class="cf">
         <div class="headline">CSSANIMATE IS STYLISH AND CUTE</div>
         <ul class="feature cf">
+            <!--
             <li id="translateX">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -68,6 +69,7 @@
                 <a class="excerpt">Translate Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ y: 30 }</em>)</div>
             </li>
+            -->
             <li id="translateXY">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -77,6 +79,7 @@
                 <a class="excerpt">Translate X / Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ x: 30, y: 30 }</em>)</div>
             </li>
+            <!--
             <li id="rotateX">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -99,6 +102,7 @@
                 <a class="excerpt">Rotate Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ rotatey: 180 }</em>)</div>
             </li>
+            -->
             <li id="rotateXYZ">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -108,6 +112,7 @@
                 <a class="excerpt">Rotate X / Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ rotate: [1, 1, 0, 180] }</em>)</div>
             </li>
+            <!--
             <li id="scaleX">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -126,6 +131,7 @@
                 <a class="excerpt">Scale Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ scaley: 4 }</em>)</div>
             </li>
+            -->
             <li id="scaleXY">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -135,6 +141,7 @@
                 <a class="excerpt">Scale X / Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ scalex: 4, scaley: 4 }</em>)</div>
             </li>
+            <!--
             <li id="skewX">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -153,6 +160,7 @@
                 <a class="excerpt">Skew Y</a>
                 <div class="code">$('.box').cssanimate(<em>{ skewy: 45 }</em>)</div>
             </li>
+            -->
             <li id="skewXY">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -171,6 +179,7 @@
                 <a class="excerpt">Opacity</a>
                 <div class="code">$('.box').cssanimate(<em>{ opacity: 0 }</em>)</div>
             </li>
+            <!--
             <li id="width">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -180,6 +189,7 @@
                 <a class="excerpt">Width</a>
                 <div class="code">$('.box').cssanimate(<em>{ width: 120 }</em>)</div>
             </li>
+            -->
             <li id="radius">
                 <a class="thumb" >
                     <div class="ghost-area"><div class="ghost-box"></div></div>
@@ -190,7 +200,7 @@
                 <div class="code">$('.box').cssanimate(<em>{ border-radius: 30 }</em>)</div>
             </li>
         </ul>
-        <div id="other-properties" class="headline">OTHER PROPERTIES</div>
+        <!-- <div id="advance" class="headline">Advance</div>
         <div class="feature page-content">
             <a class="link-button">{ rotate: [90, 90] }</a>
             <a class="link-button red">{ rotate: {x: 90, y: 90} }</a>
@@ -199,8 +209,7 @@
             <a class="link-button">{ skew: [45, 45] }</a>
             <a class="link-button red">{ skew: {x: 45, y: 45} }</a>
             <a class="link-button blue">{ style: 'flat' }</a>
-            <a class="link-button">Any Other CSS Properties</a>
-        </div>
+        </div> -->
     </div>
     <footer>
         <div id="twitter-holder">
@@ -278,11 +287,28 @@
                                     $('.box')
                                     .origin(0, 0)
                                     .cssanimate({ rotatez: 45 })
+                                    .cssanimate({ rotatez: 20 })
+                                    .cssanimate({ rotatez: 45 })
                                 </span>
                                 <em>alternate</em>
                                 <span>origin('50%', '50%')</span>
                                 <span>origin('bottom', 'right')</span>
                                 <span>origin('30px', '20px')</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-block" style="margin-top:50px;">
+                    <h4>CSS Transformation</h4>
+                    <div class="page-content recent-post cf css-property">
+                        <div class="container"><div class="box"></div></div>
+                        <div class="post-head">
+                            <span>&nbsp&nbspYou can transform any css properties much smoother than $.fn.animate because GPU is used in animation.</span>
+                            <div class="code" style="margin-top:14px;">
+                                <em>e.g.</em>
+                                <span>
+                                    $('.box')
+                                    .cssanimate({ width: 0, 'background-color': '#CF3932' })
                             </div>
                         </div>
                     </div>

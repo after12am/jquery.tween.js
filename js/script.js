@@ -102,7 +102,10 @@ $('.method-chaine .box').mouseover(function() {
 });
 
 $('.transformation-origins .box').mouseover(function() {
-    $(this).origin(0, 0).cssanimate({ rotatez: 45 })
+    $(this).origin(0, 0)
+        .cssanimate({ rotatez: 45 })
+        .cssanimate({ rotatez: 20 })
+        .cssanimate({ rotatez: 45 })
 }).mouseout(function() {
     $(this).cssanimate({ rotatez: 0 });
 });
@@ -114,9 +117,9 @@ $('.ease-example .box').mouseover(function() {
     //     y: Math.random() * range - range / 2,
     //     ease: 'in',
     // })
-    $(this).cssanimate({ scaleX: 3, rotate: 360, 'background-color': '#CF3932', ease: 'snap' })
+    $(this).cssanimate({ rotate: 360, 'background-color': '#CF3932', ease: 'snap' })
 }).mouseout(function() {
-    $(this).cssanimate({ 'background-color': '#a8c8ca' });
+    $(this).cssanimate({ rotate: 0, 'background-color': '#a8c8ca' });
 });
 
 
@@ -124,6 +127,14 @@ $('.perspective .box').mouseover(function() {
     $(this).perspective(100).cssanimate({ x: 50, z: 50, rotatey: 60 })
 }).mouseout(function() {
     $(this).cssanimate({});
+});
+
+$('.css-property .box').mouseover(function() {
+    $(this).cssanimate({ width: 0, 'background-color': '#CF3932' }, function() {
+        // fly stars out when door is opend completely
+    })
+}).mouseout(function() {
+    $(this).cssanimate({ width: 44, 'background-color': '#a8c8ca' });
 });
 
 /*

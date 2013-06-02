@@ -412,6 +412,9 @@ nav {
   text-align: center;
   color: #888888;
 }
+.feature li .code {
+    text-align: left;
+}
 .feature li .code em {
     border-radius: 2px;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
@@ -426,6 +429,10 @@ nav {
     border-radius: 2px;
     box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
     background-color: #CF3932;
+    text-align: left;
+    font-style: italic;
+    font-size: 10pt;
+    padding-right: 1px;
     color: #ece9d6;
 }
 .feature li .categories a,
