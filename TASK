@@ -2,6 +2,7 @@
 + support relative values and add position, rotation, scale property to Style. e.g. +=30 -=30
 + support filter option. e.g. [css-shaders](http://www.adobe.com/devnet/html5/articles/css-shaders.html), [cssshaders1](http://yomotsu.net/blog/2012/12/06/cssshaders1.html)
 + support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
++ support [animation](http://www.htmq.com/css3/animation.shtml), [](http://leaverou.github.io/animatable/), [](http://msto.jp/p/4/)
 
 [test]
 + test comparing with $.fn.animate.
@@ -9,16 +10,5 @@
 
 [usage]
 + add more excellent examples [jquery.transit](http://ricostacruz.com/jquery.transit/), [animatable](http://leaverou.github.io/animatable/)
-
-+ delete from input params
-transform
-transform-origin
-transition-duration
-transition-property
-transition-delay
-transition-timing-function
-transition-style
-perspective
-
 
 + change internal design around compile and build function for supporting relative values.
