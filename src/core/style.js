@@ -98,6 +98,11 @@ Style.prototype.queue = function(callback) {
             if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
         }
+        var i = 0;
+        while (1) {
+            if ($(that.elem).css(browser.css.property('duration'))) break;
+            if (++i > 50) break; // avoid infinite loop
+        }
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
         if (that.transition.duration === 0) {
