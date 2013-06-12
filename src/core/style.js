@@ -81,9 +81,10 @@ Style.prototype.build = function() {
     transition[browser.css.property('transform')] = this.transition.transform.join(' ');
     transition[browser.css.property('property')] = this.transition.property;
     transition[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
-    transition[browser.css.property('delay')] = this.transition.delay;
+    transition[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
     transition[browser.css.property('ease')] = this.transition.ease;
     transition[browser.css.property('style')] = this.transition.style;
+    console.log(browser.css.property('delay'))
     return transition;
 }
 
