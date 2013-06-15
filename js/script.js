@@ -135,6 +135,12 @@ $('.css-property .box').mouseover(function() {
     $(this).cssanimate({ width: 44, 'background-color': '#a8c8ca' });
 });
 
+$('.prefix-free .box').mouseover(function() {
+    $(this).cssanimate({ opacity: 0 });
+}).mouseout(function() {
+    $(this).cssanimate({ opacity: 1 });
+});
+
 $('.loopback-example .box').mouseover(function() {
     var steps = [];
     for (var i = 0; i < 10; i++) {
