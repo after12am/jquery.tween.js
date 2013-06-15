@@ -3,7 +3,6 @@
 + support filter option. e.g. [css-shaders](http://www.adobe.com/devnet/html5/articles/css-shaders.html), [cssshaders1](http://yomotsu.net/blog/2012/12/06/cssshaders1.html)
 + support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
 + support [animation](http://www.htmq.com/css3/animation.shtml), [](http://leaverou.github.io/animatable/), [](http://msto.jp/p/4/)
-+ support prefix free
 
 [test]
 + test comparing with $.fn.animate.
