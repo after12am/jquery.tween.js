@@ -32,4 +32,4 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support `origin` to set where rotations and scales start from
 * support advanced `easing` function specifies the speed curve of the transition effect
 * support `2d/3d` transformation
-* support `loop animation`
+* support `loopback` which helps you to make infinite loop animation easily
