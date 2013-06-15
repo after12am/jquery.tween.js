@@ -362,6 +362,36 @@
                         </span>
                     </div>
                 </div>
+                <div class="widget-block">
+                    <h4>Loopback</h4>
+                    <div class="page-content loopback-example">
+                        <div class="container"><div class="box"></div></div>
+                        <div class="post-head">
+                            <span>&nbsp&nbspLoopback allows you to make infinite loop animation easily. When want to stop, click <a class="stop" href="#">stop animation</a>.</span>
+                            <div class="code" style="margin-top:14px; margin-bottom: 10px">
+                                <em>e.g.</em>
+                                <span>
+                                    $('.box').cssanimate([
+                                        [{ x: 80, rotate: 540 }],
+                                        [{ x: -80, rotate: 0 }],
+                                        [{ x: 80 }, 800]
+                                    ]);
+                                </span>
+                                <em>usage</em>
+                                <span>
+                                    <span style="display: inline-block; margin: 10px; color: #fff">var step1 = [params, [duration], [delay], [easing], [callback]];</span>
+                                    $('.any').cssanimate([
+                                        step1,
+                                        step2,
+                                        ...
+                                    ]);
+                                    <span style="display: inline-block; margin: 10px; color: #fff">When you will stop animation, call stop function of jQuery.</span>
+                                    $('.any').stop(true, true);
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
         <div id="bottom">

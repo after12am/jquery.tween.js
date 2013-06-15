@@ -134,3 +134,21 @@ $('.css-property .box').mouseover(function() {
 }).mouseout(function() {
     $(this).cssanimate({ width: 44, 'background-color': '#a8c8ca' });
 });
+
+$('.loopback-example .box').mouseover(function() {
+    var steps = [];
+    for (var i = 0; i < 10; i++) {
+        steps.push([{
+            to: [Math.random() * 200 - 100, Math.random() * 200 - 100, Math.random() * 200 - 100],
+            scale: Math.random() * 1.4,
+            rotate: [Math.random() * 720, Math.random() * 720, Math.random() * 720]
+        }]);
+    }
+    $(this).perspective(1000).cssanimate(steps);
+})
+
+$('.loopback-example .stop').click(function() {
+    $('.loopback-example .box').stop(true, true);
+    $('.loopback-example .box').cssanimate({});
+    return false;
+});
