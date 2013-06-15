@@ -97,6 +97,7 @@ Style.prototype.queue = function(callback) {
             if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
         }
+        // could animate just after element have been appended to dom
         var i = 0;
         while (1) {
             if ($(that.elem).css(browser.css.property('duration'))) break;
