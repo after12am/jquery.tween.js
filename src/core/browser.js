@@ -1,15 +1,14 @@
 var browser = {};
+var e = $('<div>')[0];
 
 // return vendor prefix
 browser.prefix = function() {
-    var e = $('<div>')[0];
     var prefix = '';
     var prefixes = {
         'WebkitTransition': '-webkit-',
         'MozTransition': '-moz-',
         'MSTransition': '-ms-',
-        'OTransition': '-o-',
-        'transition': ''
+        'OTransition': '-o-'
     };
     for (var prefix in prefixes) {
         if(e.style[prefix] !== undefined) {
@@ -22,14 +21,12 @@ browser.prefix = function() {
 browser.event = {};
 // return event name with vendor prefix
 browser.event.transitionEnd = function() {
-    var e = $('<div>')[0];
     var name = 'transitionEnd';
     var transitions = {
         'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'transitionend',
+        'MozTransition': 'mozTransitionend',
         'MSTransition': 'msTransitionEnd',
         'OTransition': 'oTransitionEnd',
-        'transition': 'transitionEnd'
     };
     for (var transition in transitions) {
         if(e.style[transition] !== undefined) {
