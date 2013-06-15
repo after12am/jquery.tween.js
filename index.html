@@ -371,10 +371,12 @@
                             <div class="code" style="margin-top:14px; margin-bottom: 10px">
                                 <em>e.g.</em>
                                 <span>
+                                    var rand = Math.random;
+                                    var to = [rand() * 100, rand() * 100, rand() * 100];
+                                    var scale = rand()* 1.4;
+                                    var rotate = [rand() * 720, rand() * 720, rand() * 720];
                                     $('.box').cssanimate([
-                                        [{ x: 80, rotate: 540 }],
-                                        [{ x: -80, rotate: 0 }],
-                                        [{ x: 80 }, 800]
+                                        [{ to: to, scale: scale, rotate: rotate }]
                                     ]);
                                 </span>
                                 <em>usage</em>
