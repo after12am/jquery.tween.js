@@ -7,73 +7,73 @@ $('.wrapper').mouseover(function() {
 $('#translateX .thumb .box').mouseover(function() {
     $(this).cssanimate({ x: 30 });
 }).mouseout(function() {
-    $(this).cssanimate(); // cssanimate() equals cssanimate({ x: 0 })
+    $(this).cssanimate({ }); // cssanimate() equals cssanimate({ x: 0 })
 });
 
 $('#translateY .thumb .box').mouseover(function() {
     $(this).cssanimate({ y: 30 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 */
 $('#translateXY .thumb .box').mouseover(function() {
     $(this).cssanimate({ x: 30, y: 30 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 /*
 $('#rotateX .thumb .box').mouseover(function() {
     $(this).cssanimate({ rotatex: 180 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 
 $('#rotateY .thumb .box').mouseover(function() {
     $(this).cssanimate({ rotatey: 180 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 */
 $('#rotateXYZ .thumb .box').mouseover(function() {
     $(this).cssanimate({ rotate: [1, 1, 0, 180] });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 /*
 $('#scaleX .thumb .box').mouseover(function() {
     $(this).cssanimate({ scalex: 4 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 
 $('#scaleY .thumb .box').mouseover(function() {
     $(this).cssanimate({ scaley: 4 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 */
 $('#scaleXY .thumb .box').mouseover(function() {
     $(this).cssanimate({ scalex: 4, scaley: 4 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 /*
 $('#skewX .thumb .box').mouseover(function() {
     $(this).cssanimate({ skewx: 45 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 
 $('#skewY .thumb .box').mouseover(function() {
     $(this).cssanimate({ skewy: 45 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 */
 $('#skewXY .thumb .box').mouseover(function() {
     $(this).cssanimate({ skewx: 45, skewy: 45 });
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 
 $('#opacity .thumb .box').mouseover(function() {
@@ -102,7 +102,7 @@ $('.method-chaine .box').mouseover(function() {
         .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
         .cssanimate({ x: 0, y: 0, scale: 1 })
 }).mouseout(function() {
-    $(this).cssanimate();
+    $(this).cssanimate({ });
 });
 
 $('.transformation-origins .box').mouseover(function() {
