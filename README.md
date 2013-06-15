@@ -26,7 +26,7 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 </script>
 ```
 
-## Notes
+## Features
 
 * support `method chain` that animation will be executed serially
 * support `origin` to set where rotations and scales start from
