@@ -83,7 +83,11 @@ Style.prototype.build = function(remained_css) {
     transition[browser.css.property('ease')] = this.transition.ease;
     transition[browser.css.property('style')] = this.transition.style;
     // prefix free helps you from vendor prefix hell
-    for (var name in remained_css) css[browser.css.property(name)] = remained_css[name];
+    for (var name in remained_css) {
+        css[browser.css.property(name)] = remained_css[name];
+        // have to attach non prefixed property. try opacity css property.
+        css[name] = remained_css[name];
+    }
     // combine and build css property 
     this.css = $.extend(css, transition);
     return this;
