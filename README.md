@@ -33,3 +33,4 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support advanced `easing` function specifies the speed curve of the transition effect
 * support `2d/3d` transformation
 * support `loopback` which helps you to make infinite loop animation easily
+* support prefix free which free you from vendor prefix hell

@@ -14,9 +14,8 @@ var Style = function(elem, duration, delay, ease, style, property) {
 // declaration as const for the purpose of cache.
 Style.prefix = browser.prefix();
 Style.transitionEvent = browser.event.transitionEnd();
-
-// ease have been written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
 Style.ease = {
+    // have been written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
     'in'                : 'ease-in',
     'out'               : 'ease-out',
     'in-out'            : 'ease-in-out',
@@ -70,21 +69,24 @@ Style.prototype.compile = function(params) {
         }
         delete params[name];
     }
-    this.css = $.extend(property = params, this.build());
-    return this;
+    return this.build(remained_css = params);
 }
 
 // private
-Style.prototype.build = function() {
-    var transition = {};
-    // If separate transform with space, we can use multiple transformation
+Style.prototype.build = function(remained_css) {
+    var css = {}, transition = {};
+    // could use multiple transformation, if separate transform with space.
     transition[browser.css.property('transform')] = this.transition.transform.join(' ');
     transition[browser.css.property('property')] = this.transition.property;
     transition[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
     transition[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
     transition[browser.css.property('ease')] = this.transition.ease;
     transition[browser.css.property('style')] = this.transition.style;
-    return transition;
+    // prefix free helps you from vendor prefix hell
+    for (var name in remained_css) css[browser.css.property(name)] = remained_css[name];
+    // combine and build css property 
+    this.css = $.extend(css, transition);
+    return this;
 }
 
 Style.prototype.queue = function(callback) {
