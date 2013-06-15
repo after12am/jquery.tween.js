@@ -26,7 +26,7 @@ browser.event.transitionEnd = function() {
         'WebkitTransition': 'webkitTransitionEnd',
         'MozTransition': 'mozTransitionend',
         'MSTransition': 'msTransitionEnd',
-        'OTransition': 'oTransitionEnd',
+        'OTransition': 'oTransitionEnd'
     };
     for (var transition in transitions) {
         if(e.style[transition] !== undefined) {

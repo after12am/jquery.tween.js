@@ -1,5 +1,10 @@
 $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     
+    if (params.constructor === Array) {
+        this.cssanimate.loop(this, params);
+        return this;
+    }
+    
     var duration, delay, ease, property, style;
     
     params = params || {};
@@ -57,4 +62,24 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     new Style($(this), duration, delay, ease, style, property).compile(params).queue(callback);
     
     return this;
+};
+
+// When you want to stop the loop, call $.fn.stop(true, true).
+$.fn.cssanimate.loop = function(elem, cssanimates) {
+    
+    var _ = [];
+    cssanimates.forEach(function(args, i) {
+        _[i] = $.extend(true, {}, args);
+    });
+    
+    _.forEach(function(args, i) {
+        $(elem).cssanimate(args[0], args[1], args[2], args[3], args[4]);
+    });
+    
+    $(elem).queue(function() {
+        $(elem).cssanimate(cssanimates);
+        $(elem).dequeue();
+    });
+    
+    return elem;
 };

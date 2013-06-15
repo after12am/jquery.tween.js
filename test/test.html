@@ -33,7 +33,15 @@ body {
 <script src="/jquery.cssanimate.js"></script>
 <script type="text/javascript">
 $(function() {
+    var s = +new Date();
+    
     setTimeout(function() {
+        // var e = $('<div class="box"></div>')
+        // $('body').append(e)
+        // console.log(new Date() - s)
+        // e.cssanimate({ x: 100 }, 400);
+        // $('.box').cssanimate({ x: 100 }, 400, 1000);
+        // console.log(new Date() - s)
         // $('.box').cssanimate({ x: 100 });
         // $('.box').cssanimate({ y: 100 });
         // $('.box').cssanimate({ z: 100 }); // untested
@@ -110,6 +118,25 @@ $(function() {
         // $('.snap-box').cssanimate({ scalex: 3, scaley: 1, scalez: 1 });
         // $('.box').cssanimate({ scale: 3 });
         // $('.snap-box').cssanimate({ scale: [3, 1.2, 1] });
+        
+        // loop
+        // $('.box')
+        //     .cssanimate({ x: 100 })
+        //     .cssanimate({ x: 100, y: 100 })
+        //     .cssanimate({ x: 0, y: 100 })
+        //     .cssanimate({ x: 0 })
+        // 
+        // $('.box').cssanimate([
+        //     [{ x: 100 }, 600],
+        //     [{ x: 100, rotate: 540 }],
+        //     [{ x: -100, rotate: 0 }]
+        // ]);
+        // 
+        // setTimeout(function() {
+        //     $('.box').stop(true, true);
+        //     console.log("cssanimation stopped")
+        // }, 1600);
+        
     }, 50);
 })
 </script>
