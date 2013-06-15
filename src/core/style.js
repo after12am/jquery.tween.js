@@ -103,7 +103,7 @@ Style.prototype.queue = function(callback) {
             if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
         }
-        // could animate just after element have been appended to dom
+        // could animate with this even just after element have been appended to dom
         var i = 0;
         while (1) {
             if ($(that.elem).css(browser.css.property('duration'))) break;
@@ -124,6 +124,8 @@ Style.prototype.queue = function(callback) {
             $(that.elem).dequeue();
             return;
         }
+        // transition-duration propery is set with condition of (> 0)
+        // transitionEnd event will completely fired.
         $(that.elem).bind(Style.transitionEvent, $.proxy(animated, that.elem)).css(that.css);
     });
 }
