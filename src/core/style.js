@@ -120,6 +120,7 @@ Style.prototype.queue = function(callback) {
                 if ($(that.elem).css(browser.css.property('duration')).match(/^0/)) break;
                 if (++i > 50) break; // avoid infinite loop
             }
+            // alternate callback process of animate()
             if (typeof callback === 'function') $.proxy(callback, that.elem)();
             $(that.elem).dequeue();
             return;
