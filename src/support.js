@@ -41,7 +41,7 @@ $.fn.saturate = function(value, duration, delay, easing, callback) {
 };
 
 // specify angle to rotate the color wheel between 0deg to 100deg
-$.fn.hueRoate = function(value, duration, delay, easing, callback) {
+$.fn.rotateHue = function(value, duration, delay, easing, callback) {
     if (value.constructor !== Number) return this;
     return this.cssanimate({ 'hue-rotate': value }, duration, delay, easing, callback);
 };
@@ -59,7 +59,7 @@ $.fn.opacity = function(value, duration, delay, easing, callback) {
 };
 
 // specify between 0% (completely black) to 100% (normal)
-$.fn.brightness = function(value, duration, delay, easing, callback) {
+$.fn.brighten = function(value, duration, delay, easing, callback) {
     if (value.constructor !== Number) return this;
     return this.cssanimate({ brightness: value }, duration, delay, easing, callback);
 };
