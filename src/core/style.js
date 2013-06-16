@@ -1,15 +1,11 @@
-var Style = function(elem, duration, delay, ease, style, property) {
-    this.css = {};
+var Style = function(elem) {
     this.elem = elem;
-    this.filters = [];
-    this.transition = {
-        transform: [],
-        duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
-        delay: delay || 0, // Specifies whether the change begins when.
-        ease: Style.ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
-        style: style || 'flat', // flat || preserve-3d
-        property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
-    }
+    this.transition = {};
+    this.position = { x: 0, y: 0, z: 0 };
+    this.rotation = { x: 0, y: 0, z: 0 };
+    this.scale = { x: 1, y: 1, z: 1 };
+    this.skew = { x: 0, y: 0 };
+    this.filter = {};
 };
 
 // declaration as const for the purpose of cache.
@@ -48,70 +44,24 @@ Style.ease = {
     'ease-in-out-back'  : 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
 }
 
-Style.prototype.compile = function(params) {
-    for (var name in params) {
-        switch (name) {
-            // related to transformation options
-            case 'to': this.transition.transform.push(this.parseTranslate(params[name])); break;
-            case 'x': this.transition.transform.push(this.parseX(params[name])); break;
-            case 'y': this.transition.transform.push(this.parseY(params[name])); break;
-            case 'z': this.transition.transform.push(this.parseZ(params[name])); break;
-            case 'rotate': this.transition.transform.push(this.parseRotate(params[name])); break;
-            case 'rotatex': this.transition.transform.push(this.parseRotateX(params[name])); break;
-            case 'rotatey': this.transition.transform.push(this.parseRotateY(params[name])); break;
-            case 'rotatez': this.transition.transform.push(this.parseRotateZ(params[name])); break;
-            case 'scale': this.transition.transform.push(this.parseScale(params[name])); break;
-            case 'scalex': this.transition.transform.push(this.parseScaleX(params[name])); break;
-            case 'scaley': this.transition.transform.push(this.parseScaleY(params[name])); break;
-            case 'scalez': this.transition.transform.push(this.parseScaleZ(params[name])); break;
-            case 'skew': this.transition.transform.push(this.parseSkew(params[name])); break;
-            case 'skewx': this.transition.transform.push(this.parseSkewX(params[name])); break;
-            case 'skewy': this.transition.transform.push(this.parseSkewY(params[name])); break;
-            // related to filter options
-            case 'grayscale': this.filters.push(this.parseGrayscale(params[name])); break;
-            case 'sepia': this.filters.push(this.parseSepia(params[name])); break;
-            case 'saturate': this.filters.push(this.parseSaturate(params[name])); break;
-            case 'hue-rotate': this.filters.push(this.parseHueRotate(params[name])); break;
-            case 'invert': this.filters.push(this.parseInvert(params[name])); break;
-            case 'opacity': this.filters.push(this.parseOpacity(params[name])); break;
-            case 'brightness': this.filters.push(this.parseBrightness(params[name])); break;
-            case 'contrast': this.filters.push(this.parseContrast(params[name])); break;
-            case 'blur': this.filters.push(this.parseBlur(params[name])); break;
-            case 'drop-shadow': this.filters.push(this.parseDropShadow(params[name])); break;
-            case 'shader': this.filters.push(this.parseShader(params[name])); break;
-            default: continue;
-        }
-        delete params[name];
+Style.prototype.compile = function(params, duration, delay, ease, style, property, callback) {
+    this.transition = {
+        duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
+        delay: delay || 0, // Specifies whether the change begins when.
+        ease: Style.ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
+        style: style || 'flat', // flat || preserve-3d
+        property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
     }
-    return this.build(remained_css = params);
-}
-
-// private
-Style.prototype.build = function(remained_css) {
-    this.css = {};
-    // set transition properties
-    this.css[browser.css.property('transform')] = this.transition.transform.join(' '); // could use multiple transformation, if separate transform with space.
-    this.css[browser.css.property('property')] = this.transition.property;
-    this.css[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
-    this.css[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
-    this.css[browser.css.property('ease')] = this.transition.ease;
-    this.css[browser.css.property('style')] = this.transition.style;
-    // set filter properties
-    if (this.filters.length > 0) {
-        // attach both prefixed and unprefixed filer property as a preventive measure
-        this.css[browser.css.property('filter')] = this.filters.join(' ');
-        this.css['filter'] = this.filters.join(' ');
-    }
-    // prefix free helps you from vendor prefix hell
-    for (var name in remained_css) {
-        this.css[browser.css.property(name)] = remained_css[name];
-        // have to attach non prefixed property. try opacity css property.
-        this.css[name] = remained_css[name];
-    }
+    // parse cssanimate properties and take over the values
+    this.parse(params);
+    // deep copy for avoiding to overwrite by the time lag
+    var css = $.extend(true, {}, this.build(params));
+    this.queue(css, callback);
     return this;
 }
 
-Style.prototype.queue = function(callback) {
+// private
+Style.prototype.queue = function(css, callback) {
     var that = this;
     // add to $.fn.queue()
     $(this.elem).queue(function() {
@@ -130,7 +80,7 @@ Style.prototype.queue = function(callback) {
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
         if (that.transition.duration === 0) {
-            $(that.elem).css(that.css);
+            $(that.elem).css(css);
             // We have to wait until css property is set.
             // If not so, next queue might be executed before setting css to dom.
             var i = 0;
@@ -145,261 +95,319 @@ Style.prototype.queue = function(callback) {
         }
         // transition-duration propery is set with condition of (> 0)
         // transitionEnd event will completely fired.
-        $(that.elem).bind(Style.transitionEvent, $.proxy(animated, that.elem)).css(that.css);
+        $(that.elem).bind(Style.transitionEvent, $.proxy(animated, that.elem)).css(css);
     });
 }
 
+// private
+Style.prototype.parse = function(params) {
+    // take over the values
+    for (var name in params) {
+        if (name == 'to') this.parseTranslate(params[name]);
+        else if (name == 'x') this.parseTranslateX(params[name]);
+        else if (name == 'y') this.parseTranslateY(params[name]);
+        else if (name == 'z') this.parseTranslateZ(params[name]);
+        else if (name == 'rotate') this.parseRotate(params[name]);
+        else if (name == 'rotatex') this.parseRotateX(params[name]);
+        else if (name == 'rotatey') this.parseRotateY(params[name]);
+        else if (name == 'rotatez') this.parseRotateZ(params[name]);
+        else if (name == 'scale') this.parseScale(params[name]);
+        else if (name == 'scalex') this.parseScaleX(params[name]);
+        else if (name == 'scaley') this.parseScaleY(params[name]);
+        else if (name == 'scalez') this.parseScaleZ(params[name]);
+        else if (name == 'skew') this.parseSkew(params[name]);
+        else if (name == 'skewx') this.parseSkewX(params[name]);
+        else if (name == 'skewy') this.parseSkewY(params[name]);
+        else continue;
+        delete params[name];
+    }
+    // hold the value in the same way as transformation
+    if (params.filter) {
+        for (var name in params.filter) {
+            if (name == 'grayscale') this.filter['grayscale'] = this.buildGrayscale(params.filter[name]);
+            else if (name == 'sepia') this.filter['sepia'] = this.buildSepia(params.filter[name]);
+            else if (name == 'saturate') this.filter['saturate'] = this.buildSaturate(params.filter[name]);
+            else if (name == 'hue-rotate') this.filter['hue-rotate'] = this.buildHueRotate(params.filter[name]);
+            else if (name == 'invert') this.filter['invert'] = this.buildInvert(params.filter[name]);
+            else if (name == 'opacity') this.filter['opacity'] = this.buildOpacity(params.filter[name]);
+            else if (name == 'brightness') this.filter['brightness'] = this.buildBrightness(params.filter[name]);
+            else if (name == 'contrast') this.filter['contrast'] = this.buildContrast(params.filter[name]);
+            else if (name == 'blur') this.filter['blur'] = this.buildBlur(params.filter[name]);
+            else if (name == 'drop-shadow') this.filter['drop-shadow'] = this.buildDropShadow(params.filter[name]);
+            else if (name == 'shader') this.filter['shader'] = this.buildShader(params.filter[name]);
+        }
+        delete params.filter;
+    }
+}
+
 Style.prototype.parseTranslate = function(to) {
-    if (to.constructor === Object) return this.parseTranslateObjectInitialiser(to);
-    if (to.constructor === Array) return this.parseTranslateArrayInitialiser(to);
-    return str('translate({0}px, {1}px)').format(
-        to,
-        to
-    );
+    if (to.constructor === Array) this.parseTranslateArrayInitialiser(to);
+    if (to.constructor === Object) this.parseTranslateObjectInitialiser(to);
+    if (to.constructor === Number) this.position.x = to;
+}
+
+Style.prototype.parseTranslateX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.position.x = x;
+}
+
+Style.prototype.parseTranslateY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.position.y = y;
+}
+
+Style.prototype.parseTranslateZ = function(z) {
+    if (z !== undefined && z.constructor === Number) this.position.z = z;
 }
 
 Style.prototype.parseTranslateObjectInitialiser = function(to) {
-    return [
-        this.parseX(to['x']),
-        this.parseY(to['y']),
-        this.parseZ(to['z'])
-    ].join(' ');
+    if (to.x !== undefined && to.x.constructor === Number) this.position.x = to.x;
+    if (to.y !== undefined && to.y.constructor === Number) this.position.y = to.y;
+    if (to.z !== undefined && to.z.constructor === Number) this.position.z = to.z;
 }
 
 Style.prototype.parseTranslateArrayInitialiser = function(to) {
-    if (to.length === 2 || to.length === 3) {
-        return [
-            this.parseX(to[0]),
-            this.parseY(to[1]),
-            this.parseZ(to[2])
-        ].join(' ');
-    }
-    if (to.length === 4) {
-        return str('translate3d({0},{1},{2},{3}deg)').format(
-            to[0] || 0, 
-            to[1] || 0, 
-            to[2] || 0, 
-            to[3] || 0
-        );
-    }
+    if (to[0] !== undefined && to[0].constructor === Number) this.position.x = to[0];
+    if (to[1] !== undefined && to[1].constructor === Number) this.position.y = to[1];
+    if (to[2] !== undefined && to[2].constructor === Number) this.position.z = to[2];
 }
 
-Style.prototype.parseX = function(x) {
-    return str('translateX({0}px)').format(
-        x || 0
-    );
+Style.prototype.parseRotate = function(rotation) {
+    if (rotation.constructor === Array) this.parseRotateArrayInitialiser(rotation);
+    if (rotation.constructor === Object) this.parseRotateObjectInitialiser(rotation);
+    if (rotation.constructor === Number) this.rotation.z = rotation;
 }
 
-Style.prototype.parseY = function(y) {
-    return str('translateY({0}px)').format(
-        y || 0
-    );
+Style.prototype.parseRotateX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.rotation.x = x;
 }
 
-Style.prototype.parseZ = function(z) {
-    return str('translateZ({0}px)').format(
-        z || 0
-    );
+Style.prototype.parseRotateY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.rotation.y = y;
 }
 
-Style.prototype.parseRotate = function(rotate) {
-    if (rotate.constructor === Object) return this.parseRotateObjectInitialiser(rotate);
-    if (rotate.constructor === Array) return this.parseRotateArrayInitialiser(rotate);
-    return str('rotate({0}deg)').format(
-        rotate || 0
-    );
+Style.prototype.parseRotateZ = function(z) {
+    if (z !== undefined && z.constructor === Number) this.rotation.z = z;
 }
 
-Style.prototype.parseRotateObjectInitialiser = function(rotate) {
-    return [
-        this.parseRotateX(rotate['x']),
-        this.parseRotateY(rotate['y']),
-        this.parseRotateZ(rotate['z'])
-    ].join(' ');
+Style.prototype.parseRotateObjectInitialiser = function(rotation) {
+    if (rotation.x !== undefined && rotation.x.constructor === Number) this.rotation.x = rotation.x;
+    if (rotation.y !== undefined && rotation.y.constructor === Number) this.rotation.y = rotation.y;
+    if (rotation.z !== undefined && rotation.z.constructor === Number) this.rotation.z = rotation.z;
 }
 
-Style.prototype.parseRotateArrayInitialiser = function(rotate) {
-    if (rotate.length === 2 || rotate.length === 3) {
-        return [
-            this.parseRotateX(rotate[0]),
-            this.parseRotateY(rotate[1]),
-            this.parseRotateZ(rotate[2])
-        ].join(' ');
-    }
-    if (rotate.length === 4) {
-        return str('rotate3d({0},{1},{2},{3}deg)').format(
-            rotate[0] || 0, 
-            rotate[1] || 0, 
-            rotate[2] || 0, 
-            rotate[3] || 0
-        );
-    }
-}
-
-Style.prototype.parseRotateX = function(rotatex) {
-    return str('rotateX({0}deg)').format(
-        rotatex || 0
-    );
-}
-
-Style.prototype.parseRotateY = function(rotatey) {
-    return str('rotateY({0}deg)').format(
-        rotatey || 0
-    );
-}
-
-Style.prototype.parseRotateZ = function(rotatez) {
-    return str('rotateZ({0}deg)').format(
-        rotatez || 0
-    );
+Style.prototype.parseRotateArrayInitialiser = function(rotation) {
+    if (rotation[0] !== undefined && rotation[0].constructor === Number) this.rotation.x = rotation[0];
+    if (rotation[1] !== undefined && rotation[1].constructor === Number) this.rotation.y = rotation[1];
+    if (rotation[2] !== undefined && rotation[2].constructor === Number) this.rotation.z = rotation[2];
 }
 
 Style.prototype.parseScale = function(scale) {
-    if (scale.constructor === Object) return this.parseScaleObjectInitialiser(scale);
-    if (scale.constructor === Array) return this.parseScaleArrayInitialiser(scale);
-    return str('scale({0},{1})').format(
-        scale || 0,
-        scale || 0
-    );
+    if (scale.constructor === Array) this.parseScaleArrayInitialiser(scale);
+    if (scale.constructor === Object) this.parseScaleObjectInitialiser(scale);
+    if (scale.constructor === Number) this.scale.x = this.scale.y = scale;
+}
+
+Style.prototype.parseScaleX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.scale.x = x;
+}
+
+Style.prototype.parseScaleY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.scale.y = y;
+}
+
+Style.prototype.parseScaleZ = function(z) {
+    if (z !== undefined && z.constructor === Number) this.scale.z = z;
 }
 
 Style.prototype.parseScaleObjectInitialiser = function(scale) {
-    return str('scale3d({0},{1},{2})').format(
-        scale['x'] || 0,
-        scale['y'] || 0,
-        scale['z'] || 0
-    );
+    if (scale.x !== undefined && scale.x.constructor === Number) this.scale.x = scale.x;
+    if (scale.y !== undefined && scale.y.constructor === Number) this.scale.y = scale.y;
+    if (scale.z !== undefined && scale.z.constructor === Number) this.scale.z = scale.z;
 }
 
 Style.prototype.parseScaleArrayInitialiser = function(scale) {
-    if (scale.length === 2) {
-        return [
-            this.parseScaleX(scale[0]),
-            this.parseScaleY(scale[1])
-        ].join(' ');
-    }
-    return str('scale3d({0},{1},{2})').format(
-        scale[0] || 0,
-        scale[1] || 0,
-        scale[2] || 0
-    );
-}
-
-Style.prototype.parseScaleX = function(scalex) {
-    return str('scaleX({0})').format(
-        scalex || 0
-    );
-}
-
-Style.prototype.parseScaleY = function(scaley) {
-    return str('scaleY({0})').format(
-        scaley || 0
-    );
-}
-
-Style.prototype.parseScaleZ = function(scalez) {
-    return str('scaleZ({0})').format(
-        scalez || 0
-    );
+    if (scale[0] !== undefined && scale[0].constructor === Number) this.scale.x = scale[0];
+    if (scale[1] !== undefined && scale[1].constructor === Number) this.scale.y = scale[1];
+    if (scale[2] !== undefined && scale[2].constructor === Number) this.scale.z = scale[2];
 }
 
 Style.prototype.parseSkew = function(skew) {
-    if (skew.constructor === Object) return this.parseSkewObjectInitialiser(skew);
-    if (skew.constructor === Array) return this.parseSkewArrayInitialiser(skew);
-    // Here is the alternate of `skew({x}deg,{y}deg)` which is something wrong.
-    // If use that specification, we would get unexpected result.
-    return [
-        this.parseSkewX(skew),
-        this.parseSkewY(skew)
-    ].join(' ');
+    if (skew.constructor === Array) this.parseSkewArrayInitialiser(skew);
+    if (skew.constructor === Object) this.parseSkewObjectInitialiser(skew);
+    if (skew.constructor === Number) this.skew.x = this.skew.y = skew;
+}
+
+Style.prototype.parseSkewX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.skew.x = x;
+}
+
+Style.prototype.parseSkewY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.skew.y = y;
 }
 
 Style.prototype.parseSkewObjectInitialiser = function(skew) {
-    return [
-        this.parseSkewX(skew['x']),
-        this.parseSkewY(skew['y'])
-    ].join(' ');
+    if (skew.x !== undefined && skew.x.constructor === Number) this.skew.x = skew.x;
+    if (skew.y !== undefined && skew.y.constructor === Number) this.skew.y = skew.y;
 }
 
 Style.prototype.parseSkewArrayInitialiser = function(skew) {
+    if (skew[0] !== undefined && skew[0].constructor === Number) this.skew.x = skew[0];
+    if (skew[1] !== undefined && skew[1].constructor === Number) this.skew.y = skew[1];
+}
+
+// private
+Style.prototype.build = function(css) {
+    var _css = {};
+    // build transition properties
+    _css[browser.css.property('property')] = this.transition.property;
+    _css[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
+    _css[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
+    _css[browser.css.property('ease')] = this.transition.ease;
+    _css[browser.css.property('style')] = this.transition.style;
+    // could use multiple transformation, if separate transform with space.
+    _css[browser.css.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
+    // set filter properties
+    var filter = [];
+    for (var name in this.filter) {
+        filter.push(this.filter[name]);
+    }
+    if (filter.length > 0) {
+        // attach both prefixed and unprefixed filer property as a preventive measure
+        _css[browser.css.property('filter')] = filter.join(' ');
+        _css['filter'] = filter.join(' ');
+    }
+    // prefix free helps you from vendor prefix hell
+    for (var name in css) {
+        _css[browser.css.property(name)] = css[name];
+        // have to attach non prefixed property. try opacity css property.
+        _css[name] = css[name];
+    }
+    return _css;
+}
+
+Style.prototype.buildTranslate = function() {
+    return str('translate3d({0}px,{1}px,{2}px)').format(
+        this.position.x || 0,
+        this.position.y || 0,
+        this.position.z || 0
+    );
+}
+
+Style.prototype.buildRotate = function() {
     return [
-        this.parseSkewX(skew[0]),
-        this.parseSkewY(skew[1])
+        this.buildRotateX(),
+        this.buildRotateY(),
+        this.buildRotateZ()
     ].join(' ');
 }
 
-Style.prototype.parseSkewX = function(skewx) {
+Style.prototype.buildRotateX = function() {
+    return str('rotateX({0}deg)').format(
+        this.rotation.x || 0
+    );
+}
+
+Style.prototype.buildRotateY = function() {
+    return str('rotateY({0}deg)').format(
+        this.rotation.y || 0
+    );
+}
+
+Style.prototype.buildRotateZ = function() {
+    return str('rotateZ({0}deg)').format(
+        this.rotation.z || 0
+    );
+}
+
+Style.prototype.buildScale = function() {
+    return str('scale3d({0},{1},{2})').format(
+        this.scale.x,
+        this.scale.y,
+        this.scale.z
+    );
+}
+
+Style.prototype.buildSkew = function() {
+    // Here is the alternate of `skew({x}deg,{y}deg)` which is something wrong.
+    // If use that specification, we would get unexpected result.
+    return [
+        this.buildSkewX(),
+        this.buildSkewY()
+    ].join(' ');
+}
+
+Style.prototype.buildSkewX = function() {
     return str('skewX({0}deg)').format(
-        skewx || 0
+        this.skew.x || 0
     );
 }
 
-Style.prototype.parseSkewY = function(skewy) {
+Style.prototype.buildSkewY = function() {
     return str('skewY({0}deg)').format(
-        skewy || 0
+        this.skew.y || 0
     );
 }
 
-Style.prototype.parseGrayscale = function(value) {
+
+Style.prototype.buildGrayscale = function(value) {
     return str('grayscale({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseSepia = function(value) {
+Style.prototype.buildSepia = function(value) {
     return str('sepia({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseSaturate = function(value) {
+Style.prototype.buildSaturate = function(value) {
     return str('saturate({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseHueRotate = function(value) {
+Style.prototype.buildHueRotate = function(value) {
     return str('hue-rotate({0}deg)').format(
         value || 0
     );
 }
 
-Style.prototype.parseInvert = function(value) {
+Style.prototype.buildInvert = function(value) {
     return str('invert({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseOpacity = function(value) {
+Style.prototype.buildOpacity = function(value) {
     return str('opacity({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseBrightness = function(value) {
+Style.prototype.buildBrightness = function(value) {
     return str('brightness({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseContrast = function(value) {
+Style.prototype.buildContrast = function(value) {
     return str('contrast({0}%)').format(
         value || 0
     );
 }
 
-Style.prototype.parseBlur = function(value) {
+Style.prototype.buildBlur = function(value) {
     return str('blur({0}px)').format(
         value || 0
     );
 }
 
-Style.prototype.parseDropShadow = function(value) {
-    if (value.constructor === Array) return this.parseDropShadowArrayInitialiser(value);
+Style.prototype.buildDropShadow = function(value) {
+    if (value.constructor === Array) return this.buildDropShadowArrayInitialiser(value);
     return 'drop-shadow(0px 0px)'; // no drop-shadow affected
 }
 
-Style.prototype.parseDropShadowArrayInitialiser = function(value) {
+Style.prototype.buildDropShadowArrayInitialiser = function(value) {
     
     var color = '';
     
@@ -438,6 +446,6 @@ Style.prototype.parseDropShadowArrayInitialiser = function(value) {
     }
 }
 
-Style.prototype.parseShader = function(value) {
+Style.prototype.buildShader = function(value) {
     throw 'shader property is not implemented';
 }

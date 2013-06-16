@@ -34,16 +34,94 @@ body {
 <script src="/jquery.cssanimate.js"></script>
 <script type="text/javascript">
 $(function() {
-    var s = +new Date();
-    
     setTimeout(function() {
-        // var e = $('<div class="box"></div>')
-        // $('body').append(e)
-        // console.log(new Date() - s)
-        // e.cssanimate({ x: 100 }, 400);
-        // $('.box').cssanimate({ x: 100 }, 400, 1000);
-        // console.log(new Date() - s)
+        
+        /*
+            translate
+        */
+        // to: object
+        // $('.box').cssanimate({ to: {x: 100, y: 100} });
+        // $('.box').cssanimate({ to: {x: 100} }).cssanimate({ to: {y: 100} });
+        // $('.box').perspective(100).cssanimate({ to: {x: 100, y: 100, z: -1000} });
+        // $('.box').perspective(100).cssanimate({ to: {x: 100} }).cssanimate({ to: {y: 100} }).cssanimate({ to: {x: 0} });
+        
+        // to: array
+        // $('.box').cssanimate({ to: [100] });
+        // $('.box').cssanimate({ to: [100, 100] });
+        // $('.box').perspective(100).cssanimate({ to: [100, 100, -1000] });
+        // $('.box').cssanimate({ to: [100, 100] }).cssanimate({ to: [100, 0] });
+        // $('.box').cssanimate({ to: [100, 100] }).cssanimate({ y: 0 });
+        
+        // to: number
+        // $('.box').cssanimate({ to: 100 });
         // $('.box').cssanimate({ x: 100 });
+        // $('.box').cssanimate({ y: 100 });
+        // $('.box').perspective(100).cssanimate({ z: -1000 });
+        // $('.box').perspective(100).cssanimate({ x: 100, y: 100, z: -1000 });
+        
+        /*
+            rotation
+        */
+        // to: object
+        // $('.box').cssanimate({ rotate: {x: 100, y: 100} });
+        // $('.box').cssanimate({ rotate: {x: 100} }).cssanimate({ rotate: {y: 100} });
+        // $('.box').perspective(100).cssanimate({ rotate: {x: 100, y: 100, z: -1000} });
+
+        // rotate: array
+        // $('.box').cssanimate({ rotate: [100] });
+        // $('.box').cssanimate({ rotate: [100, 100] });
+        // $('.box').perspective(100).cssanimate({ rotate: [100, 100, -1000] });
+
+        // rotate: number
+        // $('.box').cssanimate({ rotate: 100 });
+        // $('.box').cssanimate({ rotatex: 100 });
+        // $('.box').cssanimate({ rotatey: 100 });
+        // $('.box').perspective(100).cssanimate({ rotatez: -1000 });
+        // $('.box').perspective(100).cssanimate({ rotatex: 100, rotatey: 100, rotatez: -1000 });
+        
+        /*
+            scale
+        */
+        // to: object
+        // $('.box').cssanimate({ scale: {x: 2, y: 2} });
+        // $('.box').cssanimate({ scale: {x: 2} }).cssanimate({ scale: {y: 2} });
+        // $('.box').perspective(2).cssanimate({ scale: {x: 2, y: 2, z: -20} });
+
+        // scale: array
+        // $('.box').cssanimate({ scale: [2] });
+        // $('.box').cssanimate({ scale: [2, 2] });
+        // $('.box').perspective(2).cssanimate({ scale: [2, 2, -20] });
+
+        // scale: number
+        // $('.box').cssanimate({ scale: 2 });
+        // $('.box').cssanimate({ scalex: 2 });
+        // $('.box').cssanimate({ scaley: 2 });
+        // $('.box').perspective(2).cssanimate({ scalex: 2, scaley: 2, scalez: -20 });
+        // $('.box').cssanimate({ scalex: 2, scaley: 2 }).cssanimate({ scalex: 1 });
+        
+        /*
+            skew
+        */
+        // to: object
+        // $('.box').cssanimate({ skew: {x: 45, y: 45} });
+        // $('.box').cssanimate({ skew: {x: 45} }).cssanimate({ skew: {y: 45} });
+        // $('.box').perspective(45).cssanimate({ skew: {x: 45, y: 45 } });
+
+        // skew: array
+        // $('.box').cssanimate({ skew: [45] });
+        // $('.box').cssanimate({ skew: [45, 45] });
+
+        // skew: number
+        // $('.box').cssanimate({ skew: 45 });
+        // $('.box').cssanimate({ skewx: 45 });
+        // $('.box').cssanimate({ skewy: 45 });
+        // $('.box').cssanimate({ skewx: 45, skewy: 45 });
+        
+        
+        
+        
+        
+        // $('.box').cssanimate({ to: [100] });
         // $('.box').cssanimate({ y: 100 });
         // $('.box').cssanimate({ z: 100 }); // untested
         // $('.box').cssanimate({ rotate: 360 });
@@ -141,25 +219,41 @@ $(function() {
         // free from vendor prefix
         // $('.box').cssanimate({ opacity: 0 });
         
-        
+        // filter
         // $('img').cssanimate({blur: 10, sepia: 60})
-        
         // $('.box').cssanimate({ 'grayscale': 100 }, 1000)
         // $('.box').cssanimate({ 'saturate': 0 })
         // $('.box').cssanimate({ 'hue-rotate': 80 })
         // $('img')
-        //     // .cssanimate({ 'sepia': 80 })
-        //     // .cssanimate({ 'invert': 80 })
-        //     // .cssanimate({ 'opacity': 10 })
-        //     // .cssanimate({ 'brightness': 10 })
-        //     // .cssanimate({ 'contrast': 10 })
-        //     // .cssanimate({ 'blur': 10 })
-        //     // .cssanimate({ 'drop-shadow': [10, 10] })
-        //     // .cssanimate({ 'drop-shadow': [10, 10, '#f00'] })
-        //     // .cssanimate({ 'drop-shadow': [10, 10, 10] })
-        //     // .cssanimate({ 'drop-shadow': [10, 10, 10, 1] })
-        //     // .cssanimate({ 'drop-shadow': [10, 10, 10, 'rgba(0, 0, 0, .3)'] })
-        //     // .cssanimate({ 'drop-shadow': [10, 10, 10, '#f00'] })
+        //     .cssanimate({ filter: { 'sepia': 80 } })
+        //     .cssanimate({ filter: { 'invert': 80 } })
+        //     // .cssanimate({ filter: { 'sepia': 80 } })
+        //     // .cssanimate({ filter: { 'opacity': 10 } })
+        //     // .cssanimate({ filter: { 'brightness': 10 } })
+        //     // .cssanimate({ filter: { 'contrast-filter': 10 } })
+        //     // .cssanimate({ filter: { 'blur-filter': 10 } })
+        //     // .cssanimate({ filter: { 'drop-shadow': [10, 10] } })
+        //     // .cssanimate({ filter: { 'drop-shadow': [10, 10, '#f00'] } })
+        //     // .cssanimate({ filter: { 'drop-shadow': [10, 10, 10] } })
+        //     // .cssanimate({ filter: { 'drop-shadow': [10, 10, 10, 1] } })
+        //     // .cssanimate({ filter: { 'drop-shadow': [10, 10, 10, 'rgba(0, 0, 0, .3)'] } })
+        //     // .cssanimate({ filter: { 'drop-shadow': [10, 10, 10, '#f00'] } })
+            
+        // cache property setting
+        // $('.box')
+        //     .cssanimate({ x: 100, y: 100 }, function() {
+        //         //$('.snap-box').cssanimate({ scale: [3, 1.2, 1] });
+        //     })
+        //     .cssanimate({ x: 200 })
+        
+        
+        // var s = +new Date();
+        // var e = $('<div class="box"></div>')
+        // $('body').append(e)
+        // console.log(new Date() - s)
+        // e.cssanimate({ x: 100 }, 400);
+        // $('.box').cssanimate({ x: 100 }, 400, 1000);
+        // console.log(new Date() - s)
     }, 50);
 })
 </script>

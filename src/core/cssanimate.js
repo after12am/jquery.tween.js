@@ -59,8 +59,10 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
         else if (name.match(/transition-style$/)) delete params[name];
     }
     
-    // compile and then add to $.fn.queue() to animate serially
-    new Style($(this), duration, delay, ease, style, property).compile(params).queue(callback);
+    // cache current property setting
+    this.cache = this.cache || new Style($(this));
+    // add to $.fn.queue() to animate serially after building appropriate css properties
+    this.cache.compile(params, duration, delay, ease, style, property, callback);
     
     return this;
 };
@@ -69,6 +71,7 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
 $.fn.cssanimate.loopback = function(elem, cssanimates) {
     
     var _ = [];
+    
     cssanimates.forEach(function(args, i) {
         _[i] = $.extend(true, {}, args);
     });

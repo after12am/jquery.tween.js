@@ -28,9 +28,9 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 
 ## Features
 
-* support `method chain` that will executed animation serially
+* support `method chain` which will executed animation serially
 * support `origin` to set where rotations and scales start from
-* support advanced `easing` function specifies the speed curve of the transition effect
+* support advanced `easing` function which specifies the speed curve of the transition effect
 * support `2d/3d` transformation
 * support `loopback` which helps you to make infinite loop animation easily
 * support `prefix free` which free you from vendor prefix hell
