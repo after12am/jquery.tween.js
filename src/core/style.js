@@ -121,7 +121,7 @@ Style.prototype.queue = function(callback) {
             if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
         }
-        // could animate just after element have been appended to dom
+        // could animate with this even just after element have been appended to dom
         var i = 0;
         while (1) {
             if ($(that.elem).css(browser.css.property('duration'))) break;
@@ -138,10 +138,13 @@ Style.prototype.queue = function(callback) {
                 if ($(that.elem).css(browser.css.property('duration')).match(/^0/)) break;
                 if (++i > 50) break; // avoid infinite loop
             }
+            // alternate callback process of animate()
             if (typeof callback === 'function') $.proxy(callback, that.elem)();
             $(that.elem).dequeue();
             return;
         }
+        // transition-duration propery is set with condition of (> 0)
+        // transitionEnd event will completely fired.
         $(that.elem).bind(Style.transitionEvent, $.proxy(animated, that.elem)).css(that.css);
     });
 }
@@ -336,6 +339,7 @@ Style.prototype.parseSkewY = function(skewy) {
         skewy || 0
     );
 }
+<<<<<<< HEAD
 
 Style.prototype.parseGrayscale = function(value) {
     return str('grayscale({0}%)').format(
@@ -438,3 +442,5 @@ Style.prototype.parseDropShadowArrayInitialiser = function(value) {
 Style.prototype.parseShader = function(value) {
     throw 'shader property is not implemented';
 }
+=======
+>>>>>>> 0c5c4a3966cc46eb27cf3700d54e6324c62dd31f
