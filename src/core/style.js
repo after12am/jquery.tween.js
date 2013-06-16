@@ -339,7 +339,6 @@ Style.prototype.parseSkewY = function(skewy) {
         skewy || 0
     );
 }
-<<<<<<< HEAD
 
 Style.prototype.parseGrayscale = function(value) {
     return str('grayscale({0}%)').format(
@@ -442,5 +441,3 @@ Style.prototype.parseDropShadowArrayInitialiser = function(value) {
 Style.prototype.parseShader = function(value) {
     throw 'shader property is not implemented';
 }
-=======
->>>>>>> 0c5c4a3966cc46eb27cf3700d54e6324c62dd31f
