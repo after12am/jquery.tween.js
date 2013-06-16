@@ -5,9 +5,6 @@
 
 # Low priority
 + support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
-+ would not animate. In the end of sepia animation, it is suddenly switched to blurred.
-    + e.g. $('img').cssanimate({filter: {sepia: 80}}).cssanimate({filter: {blur: 10}});
-+ incorporate browser.js into style.js
 + support relative values and add position, rotation, scale property to Style. e.g. +=30 -=30
 
 # see

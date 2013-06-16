@@ -3,12 +3,12 @@
 */
 $.fn.perspective = function(depth) {
     $(this).queue(function() {
-        $(this).parent().css(browser.css.property('perspective'), str('{0}px').format(+depth || 0));
+        $(this).parent().css(Style.property('perspective'), str('{0}px').format(+depth || 0));
         var i = 0;
         // We have to wait until css property is set.
         // If not so, next queue might be executed before setting css to dom.
         while (1) {
-            if ($(this).parent().css(browser.css.property('perspective'))) break;
+            if ($(this).parent().css(Style.property('perspective'))) break;
             if (++i > 50) break; // avoid infinite loop
         }
         $(this).dequeue();

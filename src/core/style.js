@@ -5,12 +5,81 @@ var Style = function(elem) {
     this.rotation = { x: 0, y: 0, z: 0 };
     this.scale = { x: 1, y: 1, z: 1 };
     this.skew = { x: 0, y: 0 };
-    this.filter = {};
+    // If set default value on all filter parameters, continuous animation would correctly work.
+    // If not so, it is suddenly switched to blurred after end of the sepia turn.
+    // e.g. $('.any').cssanimate({filter: {sepia: 80}}).cssanimate({filter: {blur: 10}});
+    this.filter = {
+        contrast: this.buildContrast(100),
+        brightness: this.buildBrightness(100),
+        grayscale: this.buildGrayscale(0),
+        saturate: this.buildSaturate(100),
+        opacity: this.buildOpacity(100),
+        invert: this.buildInvert(0),
+        'hue-rotate': this.buildHueRotate(0),
+        sepia: this.buildSepia(0),
+        blur: this.buildBlur(0),
+        'drop-shadow': this.buildDropShadow(0)
+    };
 };
 
-// declaration as const for the purpose of cache.
-Style.prefix = browser.prefix();
-Style.transitionEvent = browser.event.transitionEnd();
+// return vendor prefix
+Style.prefix = (function() {
+    var e = $('<div>')[0];
+    var prefix = '';
+    var prefixes = {
+        'WebkitTransition': '-webkit-',
+        'MozTransition': '-moz-',
+        'MSTransition': '-ms-',
+        'OTransition': '-o-'
+    };
+    for (var prefix in prefixes) {
+        if(e.style[prefix] !== undefined) {
+            return prefixes[prefix];
+        }
+    }
+    return prefix;
+})();
+
+Style.transitionEvent = (function() {
+    var e = $('<div>')[0];
+    var name = 'transitionEnd';
+    var transitions = {
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'mozTransitionend',
+        'MSTransition': 'msTransitionEnd',
+        'OTransition': 'oTransitionEnd'
+    };
+    for (var transition in transitions) {
+        if(e.style[transition] !== undefined) {
+            return transitions[transition];
+        }
+    }
+    return name;
+})();
+
+Style.property = function(name) {
+    var e = $('<div>')[0];
+    var prefix = Style.prefix;
+    var translate = {
+        'transform': str('{0}transform').format(prefix),
+        'origin': str('{0}transform-origin').format(prefix),
+        'duration': str('{0}transition-duration').format(prefix),
+        'property': str('{0}transition-property').format(prefix),
+        'delay': str('{0}transition-delay').format(prefix),
+        'ease': str('{0}transition-timing-function').format(prefix),
+        'style': str('{0}transition-style').format(prefix),
+        'perspective': str('{0}perspective').format(prefix)
+    };
+    var with_prefix = str('{0}{1}').format(
+        prefix,
+        name
+    );
+    if (translate[name]) return translate[name];
+    // free from vendor prefix
+    if (e.style[with_prefix] !== undefined) return with_prefix;
+    return name;
+}
+
 Style.ease = {
     // have been written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
     'in'                : 'ease-in',
@@ -74,7 +143,7 @@ Style.prototype.queue = function(css, callback) {
         // could animate with this even just after element have been appended to dom
         var i = 0;
         while (1) {
-            if ($(that.elem).css(browser.css.property('duration'))) break;
+            if ($(that.elem).css(Style.property('duration'))) break;
             if (++i > 50) break; // avoid infinite loop
         }
         // When transition-duration propery is zero, we have to call callback function 
@@ -85,7 +154,7 @@ Style.prototype.queue = function(css, callback) {
             // If not so, next queue might be executed before setting css to dom.
             var i = 0;
             while (1) {
-                if ($(that.elem).css(browser.css.property('duration')).match(/^0/)) break;
+                if ($(that.elem).css(Style.property('duration')).match(/^0/)) break;
                 if (++i > 50) break; // avoid infinite loop
             }
             // alternate callback process of animate()
@@ -258,13 +327,13 @@ Style.prototype.parseSkewArrayInitialiser = function(skew) {
 Style.prototype.build = function(css) {
     var _css = {};
     // build transition properties
-    _css[browser.css.property('property')] = this.transition.property;
-    _css[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
-    _css[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
-    _css[browser.css.property('ease')] = this.transition.ease;
-    _css[browser.css.property('style')] = this.transition.style;
+    _css[Style.property('property')] = this.transition.property;
+    _css[Style.property('duration')] = str('{0}ms').format(this.transition.duration);
+    _css[Style.property('delay')] = str('{0}ms').format(this.transition.delay);
+    _css[Style.property('ease')] = this.transition.ease;
+    _css[Style.property('style')] = this.transition.style;
     // could use multiple transformation, if separate transform with space.
-    _css[browser.css.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
+    _css[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
     // set filter properties
     var filter = [];
     for (var name in this.filter) {
@@ -272,12 +341,12 @@ Style.prototype.build = function(css) {
     }
     if (filter.length > 0) {
         // attach both prefixed and unprefixed filer property as a preventive measure
-        _css[browser.css.property('filter')] = filter.join(' ');
+        _css[Style.property('filter')] = filter.join(' ');
         _css['filter'] = filter.join(' ');
     }
     // prefix free helps you from vendor prefix hell
     for (var name in css) {
-        _css[browser.css.property(name)] = css[name];
+        _css[Style.property(name)] = css[name];
         // have to attach non prefixed property. try opacity css property.
         _css[name] = css[name];
     }
@@ -346,7 +415,6 @@ Style.prototype.buildSkewY = function() {
         this.skew.y || 0
     );
 }
-
 
 Style.prototype.buildGrayscale = function(value) {
     return str('grayscale({0}%)').format(
