@@ -1,6 +1,7 @@
 var Style = function(elem, duration, delay, ease, style, property) {
     this.css = {};
     this.elem = elem;
+    this.filters = [];
     this.transition = {
         transform: [],
         duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
@@ -50,6 +51,7 @@ Style.ease = {
 Style.prototype.compile = function(params) {
     for (var name in params) {
         switch (name) {
+            // related to transformation options
             case 'to': this.transition.transform.push(this.parseTranslate(params[name])); break;
             case 'x': this.transition.transform.push(this.parseX(params[name])); break;
             case 'y': this.transition.transform.push(this.parseY(params[name])); break;
@@ -65,6 +67,18 @@ Style.prototype.compile = function(params) {
             case 'skew': this.transition.transform.push(this.parseSkew(params[name])); break;
             case 'skewx': this.transition.transform.push(this.parseSkewX(params[name])); break;
             case 'skewy': this.transition.transform.push(this.parseSkewY(params[name])); break;
+            // related to filter options
+            case 'grayscale': this.filters.push(this.parseGrayscale(params[name])); break;
+            case 'sepia': this.filters.push(this.parseSepia(params[name])); break;
+            case 'saturate': this.filters.push(this.parseSaturate(params[name])); break;
+            case 'hue-rotate': this.filters.push(this.parseHueRotate(params[name])); break;
+            case 'invert': this.filters.push(this.parseInvert(params[name])); break;
+            case 'opacity': this.filters.push(this.parseOpacity(params[name])); break;
+            case 'brightness': this.filters.push(this.parseBrightness(params[name])); break;
+            case 'contrast': this.filters.push(this.parseContrast(params[name])); break;
+            case 'blur': this.filters.push(this.parseBlur(params[name])); break;
+            case 'drop-shadow': this.filters.push(this.parseDropShadow(params[name])); break;
+            case 'shader': this.filters.push(this.parseShader(params[name])); break;
             default: continue;
         }
         delete params[name];
@@ -74,22 +88,26 @@ Style.prototype.compile = function(params) {
 
 // private
 Style.prototype.build = function(remained_css) {
-    var css = {}, transition = {};
-    // could use multiple transformation, if separate transform with space.
-    transition[browser.css.property('transform')] = this.transition.transform.join(' ');
-    transition[browser.css.property('property')] = this.transition.property;
-    transition[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
-    transition[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
-    transition[browser.css.property('ease')] = this.transition.ease;
-    transition[browser.css.property('style')] = this.transition.style;
+    this.css = {};
+    // set transition properties
+    this.css[browser.css.property('transform')] = this.transition.transform.join(' '); // could use multiple transformation, if separate transform with space.
+    this.css[browser.css.property('property')] = this.transition.property;
+    this.css[browser.css.property('duration')] = str('{0}ms').format(this.transition.duration);
+    this.css[browser.css.property('delay')] = str('{0}ms').format(this.transition.delay);
+    this.css[browser.css.property('ease')] = this.transition.ease;
+    this.css[browser.css.property('style')] = this.transition.style;
+    // set filter properties
+    if (this.filters.length > 0) {
+        // attach both prefixed and unprefixed filer property as a preventive measure
+        this.css[browser.css.property('filter')] = this.filters.join(' ');
+        this.css['filter'] = this.filters.join(' ');
+    }
     // prefix free helps you from vendor prefix hell
     for (var name in remained_css) {
-        css[browser.css.property(name)] = remained_css[name];
+        this.css[browser.css.property(name)] = remained_css[name];
         // have to attach non prefixed property. try opacity css property.
-        css[name] = remained_css[name];
+        this.css[name] = remained_css[name];
     }
-    // combine and build css property 
-    this.css = $.extend(css, transition);
     return this;
 }
 
@@ -285,7 +303,8 @@ Style.prototype.parseScaleZ = function(scalez) {
 Style.prototype.parseSkew = function(skew) {
     if (skew.constructor === Object) return this.parseSkewObjectInitialiser(skew);
     if (skew.constructor === Array) return this.parseSkewArrayInitialiser(skew);
-    // alternate of `skew({x}deg,{y}deg)` that is something wrong
+    // Here is the alternate of `skew({x}deg,{y}deg)` which is something wrong.
+    // If use that specification, we would get unexpected result.
     return [
         this.parseSkewX(skew),
         this.parseSkewY(skew)
@@ -316,4 +335,106 @@ Style.prototype.parseSkewY = function(skewy) {
     return str('skewY({0}deg)').format(
         skewy || 0
     );
+}
+
+Style.prototype.parseGrayscale = function(value) {
+    return str('grayscale({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseSepia = function(value) {
+    return str('sepia({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseSaturate = function(value) {
+    return str('saturate({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseHueRotate = function(value) {
+    return str('hue-rotate({0}deg)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseInvert = function(value) {
+    return str('invert({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseOpacity = function(value) {
+    return str('opacity({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseBrightness = function(value) {
+    return str('brightness({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseContrast = function(value) {
+    return str('contrast({0}%)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseBlur = function(value) {
+    return str('blur({0}px)').format(
+        value || 0
+    );
+}
+
+Style.prototype.parseDropShadow = function(value) {
+    if (value.constructor === Array) return this.parseDropShadowArrayInitialiser(value);
+    return 'drop-shadow(0px 0px)'; // no drop-shadow affected
+}
+
+Style.prototype.parseDropShadowArrayInitialiser = function(value) {
+    
+    var color = '';
+    
+    value.forEach(function(v, i) {
+        if (v.constructor === String && !v.match(/^[0-9]+/)) {
+            color = v;
+            value.splice(i, 1);
+        }
+    });
+    
+    if (value.length === 2) {
+        return str('drop-shadow({0}px {1}px {2})').format(
+            value[0] || 0, // offset-x
+            value[1] || 0, // offset-y
+            color || '#000000'
+        );
+    }
+    
+    if (value.length === 3) {
+        return str('drop-shadow({0}px {1}px {2}px {3})').format(
+            value[0] || 0, // offset-x
+            value[1] || 0, // offset-y
+            value[2] || 0, // blur-radius
+            color || '#000000'
+        );
+    }
+    
+    if (value.length === 4) {
+        return str('drop-shadow({0}px {1}px {2}px {3} {4})').format(
+            value[0] || 0, // offset-x
+            value[1] || 0, // offset-y
+            value[2] || 0, // blur-radius
+            value[3] || 0, // spread-radius. Positive values will cause the shadow to expand and grow bigger, negative values will cause the shadow to shrink.
+            color || '#000000'
+        );
+    }
+}
+
+Style.prototype.parseShader = function(value) {
+    throw 'shader property is not implemented';
 }

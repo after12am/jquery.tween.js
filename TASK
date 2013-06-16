@@ -1,4 +1,9 @@
 + support relative values and add position, rotation, scale property to Style. e.g. +=30 -=30
-+ support filter option. e.g. [css-shaders](http://www.adobe.com/devnet/html5/articles/css-shaders.html), [cssshaders1](http://yomotsu.net/blog/2012/12/06/cssshaders1.html)
 + support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
++ support shadow effect. e.g. [css-drop-shadows-without-images](http://nicolasgallagher.com/css-drop-shadows-without-images/)
 + test comparing with $.fn.animate.
++ Style.prototype.compile = function(params) switch to if statement
++ incorporate browser.js into style.js
+
++ [filter](https://developer.mozilla.org/en-US/docs/Web/CSS/filter?redirectlocale=en-US&redirectslug=CSS%2Ffilter)
++ [css-shaders](http://www.adobe.com/devnet/html5/articles/css-shaders.html)

@@ -1,13 +1,14 @@
 $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     
+    // If params property is not specified, the argument is initialized.
+    params = params || {};
+    
+    var property, style;
+    
     if (params.constructor === Array) {
         this.cssanimate.loopback(this, params);
         return this;
     }
-    
-    var duration, delay, ease, property, style;
-    
-    params = params || {};
     
     if (typeof duration === 'function') {
         callback = duration;

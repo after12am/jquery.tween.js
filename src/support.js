@@ -21,3 +21,69 @@ $.fn.skew = function(skew, duration, delay, easing, callback) {
     if (skew.constructor !== Array) return this;
     return this.cssanimate({ skew: skew }, duration, delay, easing, callback);
 };
+
+// specify between 0% (normal) to 100% (completely gray)
+$.fn.grayscale = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ grayscale: value }, duration, delay, easing, callback);
+};
+
+// specify between 0% (normal) to 100% (completely sepia)
+$.fn.sepia = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ sepia: value }, duration, delay, easing, callback);
+};
+
+// specify between 0% (completely gray) to 100% (normal)
+$.fn.saturate = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ saturate: value }, duration, delay, easing, callback);
+};
+
+// specify angle to rotate the color wheel between 0deg to 100deg
+$.fn.hueRoate = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ 'hue-rotate': value }, duration, delay, easing, callback);
+};
+
+// specify between 0% (normal) to 100% (completely invert)
+$.fn.invert = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ invert: value }, duration, delay, easing, callback);
+};
+
+// specify between 0% (transparent) to 100% (normal)
+$.fn.opacity = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ opacity: value }, duration, delay, easing, callback);
+};
+
+// specify between 0% (completely black) to 100% (normal)
+$.fn.brightness = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ brightness: value }, duration, delay, easing, callback);
+};
+
+// specify between 0% (low) to 100% (high)
+$.fn.contrast = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ contrast: value }, duration, delay, easing, callback);
+};
+
+// specify blur width with pixel
+$.fn.blur = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Number) return this;
+    return this.cssanimate({ blur: value }, duration, delay, easing, callback);
+};
+
+// specify drop shadow
+$.fn.dropShadow = function(value, duration, delay, easing, callback) {
+    if (value.constructor !== Array) return this;
+    return this.cssanimate({ 'drop-shadow': value }, duration, delay, easing, callback);
+};
+
+// specify custom shader
+$.fn.shader = function(value, duration, delay, easing, callback) {
+    throw '$.fn.shader() is not implemented';
+    // return this.cssanimate({ 'shader': value }, duration, delay, easing, callback);
+};
