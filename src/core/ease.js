@@ -1,4 +1,4 @@
-// have been written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
+// written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
 var Ease = {
     'in'                : 'ease-in',
     'out'               : 'ease-out',

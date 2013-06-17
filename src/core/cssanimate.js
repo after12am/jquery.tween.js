@@ -6,8 +6,7 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     var property, style;
     
     if (params.constructor === Array) {
-        this.cssanimate.loopback(this, params);
-        return this;
+        return this.cssanimate.loopback(this, params);
     }
     
     if (typeof duration === 'function') {
@@ -43,20 +42,6 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     if (params.property !== undefined) {
         property = (params.property.constructor === Array) ? params.property.join(',') : params.property;
         delete params.property;
-    }
-    
-    ['property', 'duration', 'delay', 'ease', 'style', 'origin', 'perspective'].forEach(function(name) {
-        delete params[name];
-    });
-    
-    for (var name in params) {
-        if (name.match(/transform$/)) delete params[name];
-        else if (name.match(/transform-origin$/)) delete params[name];
-        else if (name.match(/transition-duration$/)) delete params[name];
-        else if (name.match(/transition-property$/)) delete params[name];
-        else if (name.match(/transition-delete$/)) delete params[name];
-        else if (name.match(/transition-timing-function$/)) delete params[name];
-        else if (name.match(/transition-style$/)) delete params[name];
     }
     
     // cache current property setting

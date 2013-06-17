@@ -137,6 +137,18 @@ Style.prototype.queue = function(css, callback) {
 
 // private
 Style.prototype.parse = function(params) {
+    for (var name in params) {
+        if (name === 'style') delete params[name];
+        else if (name === 'origin') delete params[name];
+        else if (name === 'perspective') delete params[name];
+        else if (name.match(/transform$/)) delete params[name];
+        else if (name.match(/transform-origin$/)) delete params[name];
+        else if (name.match(/transition-duration$/)) delete params[name];
+        else if (name.match(/transition-property$/)) delete params[name];
+        else if (name.match(/transition-delete$/)) delete params[name];
+        else if (name.match(/transition-timing-function$/)) delete params[name];
+        else if (name.match(/transition-style$/)) delete params[name];
+    }
     // take over the values
     for (var name in params) {
         if (name == 'to') this.parseTranslate(params[name]);
@@ -174,6 +186,36 @@ Style.prototype.parse = function(params) {
         }
         delete params.filter;
     }
+}
+
+// private
+Style.prototype.build = function(css) {
+    var _css = {};
+    // build transition properties
+    _css[Style.property('property')] = this.transition.property;
+    _css[Style.property('duration')] = str('{0}ms').format(this.transition.duration);
+    _css[Style.property('delay')] = str('{0}ms').format(this.transition.delay);
+    _css[Style.property('ease')] = this.transition.ease;
+    _css[Style.property('style')] = this.transition.style;
+    // could use multiple transformation, if separate transform with space.
+    _css[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
+    // set filter properties
+    var filter = [];
+    for (var name in this.filter) {
+        filter.push(this.filter[name]);
+    }
+    if (filter.length > 0) {
+        // attach both prefixed and unprefixed filer property as a preventive measure
+        _css[Style.property('filter')] = filter.join(' ');
+        _css['filter'] = filter.join(' ');
+    }
+    // prefix free helps you from vendor prefix hell
+    for (var name in css) {
+        _css[Style.property(name)] = css[name];
+        // have to attach non prefixed property. try opacity css property.
+        _css[name] = css[name];
+    }
+    return _css;
 }
 
 Style.prototype.parseTranslate = function(to) {
@@ -288,36 +330,6 @@ Style.prototype.parseSkewObjectInitialiser = function(skew) {
 Style.prototype.parseSkewArrayInitialiser = function(skew) {
     this.parseSkewX(skew[0]);
     this.parseSkewY(skew[1]);
-}
-
-// private
-Style.prototype.build = function(css) {
-    var _css = {};
-    // build transition properties
-    _css[Style.property('property')] = this.transition.property;
-    _css[Style.property('duration')] = str('{0}ms').format(this.transition.duration);
-    _css[Style.property('delay')] = str('{0}ms').format(this.transition.delay);
-    _css[Style.property('ease')] = this.transition.ease;
-    _css[Style.property('style')] = this.transition.style;
-    // could use multiple transformation, if separate transform with space.
-    _css[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
-    // set filter properties
-    var filter = [];
-    for (var name in this.filter) {
-        filter.push(this.filter[name]);
-    }
-    if (filter.length > 0) {
-        // attach both prefixed and unprefixed filer property as a preventive measure
-        _css[Style.property('filter')] = filter.join(' ');
-        _css['filter'] = filter.join(' ');
-    }
-    // prefix free helps you from vendor prefix hell
-    for (var name in css) {
-        _css[Style.property(name)] = css[name];
-        // have to attach non prefixed property. try opacity css property.
-        _css[name] = css[name];
-    }
-    return _css;
 }
 
 Style.prototype.buildTranslate = function() {
