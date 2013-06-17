@@ -69,22 +69,20 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
 
 // When you want to stop the loop, call $.fn.stop(true, true).
 $.fn.cssanimate.loopback = function(elem, cssanimates) {
-    
     var _ = [];
-    
+    // we have to copy deeply for avoid that the values is overridden
     cssanimates.forEach(function(args, i) {
         _[i] = $.extend(true, {}, args);
     });
-    
     _.forEach(function(args, i) {
+        // no problem even if some of the arguments are undefined
         $(elem).cssanimate(args[0], args[1], args[2], args[3], args[4]);
     });
-    
+    // add function which loopback to the end of the queue
     $(elem).queue(function() {
         $(elem).cssanimate(cssanimates);
         $(elem).dequeue();
     });
-    
     return elem;
 };
 
