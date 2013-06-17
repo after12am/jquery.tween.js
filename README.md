@@ -1,7 +1,7 @@
 [jQuery cssanimate](http://after12am.github.io/jquery.cssanimate.js/)
 ========================================================================
 
-jquery.cssanimate.js is a jquery plugin that provides a stylish and cute animation for your smartphone application using css3.
+jquery.cssanimate.js is a jquery plugin that provides a stylish and cute animation especially for your smartphone app using css3.
 Using css3 in dom animation will have been excellent select. Because css3 would give your app lightness and interactivity compared with javascript.
 However, it is a bit difficult to controll under dynamic usage. In view of this, I have designed jquery.cssanimate.js to take advantage of knowledge of jquery of you.
 
