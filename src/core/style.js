@@ -18,7 +18,7 @@ var Style = function(elem) {
         'hue-rotate': this.buildHueRotate(0),
         sepia: this.buildSepia(0),
         blur: this.buildBlur(0),
-        'drop-shadow': this.buildDropShadow(0)
+        'drop-shadow': this.buildDropShadow([0, 0, '#000'])
     };
 };
 
@@ -80,44 +80,11 @@ Style.property = function(name) {
     return name;
 }
 
-Style.ease = {
-    // have been written by [visionmedia](https://github.com/visionmedia/move.js/blob/master/move.js)
-    'in'                : 'ease-in',
-    'out'               : 'ease-out',
-    'in-out'            : 'ease-in-out',
-    'snap'              : 'cubic-bezier(0,1,.5,1)',
-    'linear'            : 'cubic-bezier(0.250, 0.250, 0.750, 0.750)',
-    'ease-in-quad'      : 'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
-    'ease-in-cubic'     : 'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
-    'ease-in-quart'     : 'cubic-bezier(0.895, 0.030, 0.685, 0.220)',
-    'ease-in-quint'     : 'cubic-bezier(0.755, 0.050, 0.855, 0.060)',
-    'ease-in-sine'      : 'cubic-bezier(0.470, 0.000, 0.745, 0.715)',
-    'ease-in-expo'      : 'cubic-bezier(0.950, 0.050, 0.795, 0.035)',
-    'ease-in-circ'      : 'cubic-bezier(0.600, 0.040, 0.980, 0.335)',
-    'ease-in-back'      : 'cubic-bezier(0.600, -0.280, 0.735, 0.045)',
-    'ease-out-quad'     : 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
-    'ease-out-cubic'    : 'cubic-bezier(0.215, 0.610, 0.355, 1.000)',
-    'ease-out-quart'    : 'cubic-bezier(0.165, 0.840, 0.440, 1.000)',
-    'ease-out-quint'    : 'cubic-bezier(0.230, 1.000, 0.320, 1.000)',
-    'ease-out-sine'     : 'cubic-bezier(0.390, 0.575, 0.565, 1.000)',
-    'ease-out-expo'     : 'cubic-bezier(0.190, 1.000, 0.220, 1.000)',
-    'ease-out-circ'     : 'cubic-bezier(0.075, 0.820, 0.165, 1.000)',
-    'ease-out-back'     : 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
-    'ease-out-quad'     : 'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
-    'ease-out-cubic'    : 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-    'ease-in-out-quart' : 'cubic-bezier(0.770, 0.000, 0.175, 1.000)',
-    'ease-in-out-quint' : 'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
-    'ease-in-out-sine'  : 'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
-    'ease-in-out-expo'  : 'cubic-bezier(1.000, 0.000, 0.000, 1.000)',
-    'ease-in-out-circ'  : 'cubic-bezier(0.785, 0.135, 0.150, 0.860)',
-    'ease-in-out-back'  : 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
-}
-
 Style.prototype.compile = function(params, duration, delay, ease, style, property, callback) {
     this.transition = {
         duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
         delay: delay || 0, // Specifies whether the change begins when.
-        ease: Style.ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
+        ease: Ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
         style: style || 'flat', // flat || preserve-3d
         property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
     }
@@ -228,15 +195,15 @@ Style.prototype.parseTranslateZ = function(z) {
 }
 
 Style.prototype.parseTranslateObjectInitialiser = function(to) {
-    if (to.x !== undefined && to.x.constructor === Number) this.position.x = to.x;
-    if (to.y !== undefined && to.y.constructor === Number) this.position.y = to.y;
-    if (to.z !== undefined && to.z.constructor === Number) this.position.z = to.z;
+    this.parseTranslateX(to.x);
+    this.parseTranslateY(to.y);
+    this.parseTranslateZ(to.z);
 }
 
 Style.prototype.parseTranslateArrayInitialiser = function(to) {
-    if (to[0] !== undefined && to[0].constructor === Number) this.position.x = to[0];
-    if (to[1] !== undefined && to[1].constructor === Number) this.position.y = to[1];
-    if (to[2] !== undefined && to[2].constructor === Number) this.position.z = to[2];
+    this.parseTranslateX(to[0]);
+    this.parseTranslateY(to[1]);
+    this.parseTranslateZ(to[2]);
 }
 
 Style.prototype.parseRotate = function(rotation) {
@@ -258,15 +225,15 @@ Style.prototype.parseRotateZ = function(z) {
 }
 
 Style.prototype.parseRotateObjectInitialiser = function(rotation) {
-    if (rotation.x !== undefined && rotation.x.constructor === Number) this.rotation.x = rotation.x;
-    if (rotation.y !== undefined && rotation.y.constructor === Number) this.rotation.y = rotation.y;
-    if (rotation.z !== undefined && rotation.z.constructor === Number) this.rotation.z = rotation.z;
+    this.parseRotateX(rotation.x);
+    this.parseRotateY(rotation.y);
+    this.parseRotateZ(rotation.z);
 }
 
 Style.prototype.parseRotateArrayInitialiser = function(rotation) {
-    if (rotation[0] !== undefined && rotation[0].constructor === Number) this.rotation.x = rotation[0];
-    if (rotation[1] !== undefined && rotation[1].constructor === Number) this.rotation.y = rotation[1];
-    if (rotation[2] !== undefined && rotation[2].constructor === Number) this.rotation.z = rotation[2];
+    this.parseRotateX(rotation[0]);
+    this.parseRotateY(rotation[1]);
+    this.parseRotateZ(rotation[2]);
 }
 
 Style.prototype.parseScale = function(scale) {
@@ -288,15 +255,15 @@ Style.prototype.parseScaleZ = function(z) {
 }
 
 Style.prototype.parseScaleObjectInitialiser = function(scale) {
-    if (scale.x !== undefined && scale.x.constructor === Number) this.scale.x = scale.x;
-    if (scale.y !== undefined && scale.y.constructor === Number) this.scale.y = scale.y;
-    if (scale.z !== undefined && scale.z.constructor === Number) this.scale.z = scale.z;
+    this.parseScaleX(scale.x);
+    this.parseScaleY(scale.y);
+    this.parseScaleZ(scale.z);
 }
 
 Style.prototype.parseScaleArrayInitialiser = function(scale) {
-    if (scale[0] !== undefined && scale[0].constructor === Number) this.scale.x = scale[0];
-    if (scale[1] !== undefined && scale[1].constructor === Number) this.scale.y = scale[1];
-    if (scale[2] !== undefined && scale[2].constructor === Number) this.scale.z = scale[2];
+    this.parseScaleX(scale[0]);
+    this.parseScaleY(scale[1]);
+    this.parseScaleZ(scale[2]);
 }
 
 Style.prototype.parseSkew = function(skew) {
@@ -314,13 +281,13 @@ Style.prototype.parseSkewY = function(y) {
 }
 
 Style.prototype.parseSkewObjectInitialiser = function(skew) {
-    if (skew.x !== undefined && skew.x.constructor === Number) this.skew.x = skew.x;
-    if (skew.y !== undefined && skew.y.constructor === Number) this.skew.y = skew.y;
+    this.parseSkewX(skew.x);
+    this.parseSkewY(skew.y);
 }
 
 Style.prototype.parseSkewArrayInitialiser = function(skew) {
-    if (skew[0] !== undefined && skew[0].constructor === Number) this.skew.x = skew[0];
-    if (skew[1] !== undefined && skew[1].constructor === Number) this.skew.y = skew[1];
+    this.parseSkewX(skew[0]);
+    this.parseSkewY(skew[1]);
 }
 
 // private
@@ -472,13 +439,11 @@ Style.prototype.buildBlur = function(value) {
 
 Style.prototype.buildDropShadow = function(value) {
     if (value.constructor === Array) return this.buildDropShadowArrayInitialiser(value);
-    return 'drop-shadow(0px 0px)'; // no drop-shadow affected
+    return 'drop-shadow(0px 0px #000)'; // no drop-shadow affected
 }
 
 Style.prototype.buildDropShadowArrayInitialiser = function(value) {
-    
     var color = '';
-    
     value.forEach(function(v, i) {
         if (v.constructor === String && !v.match(/^[0-9]+/)) {
             color = v;
@@ -490,7 +455,7 @@ Style.prototype.buildDropShadowArrayInitialiser = function(value) {
         return str('drop-shadow({0}px {1}px {2})').format(
             value[0] || 0, // offset-x
             value[1] || 0, // offset-y
-            color || '#000000'
+            color || '#000'
         );
     }
     
@@ -499,7 +464,7 @@ Style.prototype.buildDropShadowArrayInitialiser = function(value) {
             value[0] || 0, // offset-x
             value[1] || 0, // offset-y
             value[2] || 0, // blur-radius
-            color || '#000000'
+            color || '#000'
         );
     }
     
@@ -509,9 +474,10 @@ Style.prototype.buildDropShadowArrayInitialiser = function(value) {
             value[1] || 0, // offset-y
             value[2] || 0, // blur-radius
             value[3] || 0, // spread-radius. Positive values will cause the shadow to expand and grow bigger, negative values will cause the shadow to shrink.
-            color || '#000000'
+            color || '#000'
         );
     }
+    return 'drop-shadow(0px 0px #000)'; // no drop-shadow affected
 }
 
 Style.prototype.buildShader = function(value) {

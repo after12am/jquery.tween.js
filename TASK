@@ -6,6 +6,7 @@
 # Low priority
 + support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
 + support relative values and add position, rotation, scale property to Style. e.g. +=30 -=30
++ add filter example
 
 # see
 + [filter](http://www.propra.nl/playground/css_filters/)

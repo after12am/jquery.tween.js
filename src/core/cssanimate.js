@@ -87,3 +87,37 @@ $.fn.cssanimate.loopback = function(elem, cssanimates) {
     
     return elem;
 };
+
+// The transform-origin has to applied to element before apply any other transformation.
+// If not so, transform-origin of element would have shifted a little.
+$.fn.cssanimate.origin = function(elem, top, left) {
+    $(elem).queue(function() {
+        $(elem).css(Style.property('origin'), str('{0} {1}').format(top, left));
+        var i = 0;
+        // We have to wait until css property is set.
+        // If not so, next queue might be executed before setting css to dom.
+        while (1) {
+            if ($(elem).css(Style.property('origin'))) break;
+            if (++i > 50) break; // avoid infinite loop
+        }
+        $(elem).dequeue();
+    });
+    return elem;
+}
+
+// Whether you use perspective.
+// If you want to make perspective disable, set false on depth.
+$.fn.cssanimate.perspective = function(elem, depth) {
+    $(elem).queue(function() {
+        $(elem).parent().css(Style.property('perspective'), str('{0}px').format(+depth || 0));
+        var i = 0;
+        // We have to wait until css property is set.
+        // If not so, next queue might be executed before setting css to dom.
+        while (1) {
+            if ($(elem).parent().css(Style.property('perspective'))) break;
+            if (++i > 50) break; // avoid infinite loop
+        }
+        $(elem).dequeue();
+    });
+    return elem;
+}
