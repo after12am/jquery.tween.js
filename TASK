@@ -5,10 +5,10 @@
 
 # Low priority
 + support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
-+ support relative values and add position, rotation, scale property to Style. e.g. +=30 -=30
++ support relative values. e.g. +=30 -=30
 + add filter example
 
-# see
+# watch
 + [filter](http://www.propra.nl/playground/css_filters/)
 + [filter](https://developer.mozilla.org/en-US/docs/Web/CSS/filter?redirectlocale=en-US&redirectslug=CSS%2Ffilter)
 + [css-shaders](http://www.adobe.com/devnet/html5/articles/css-shaders.html)
