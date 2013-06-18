@@ -1,5 +1,6 @@
 var Style = function(elem) {
     this.elem = elem;
+    this.executable = {};
     this.position = new Vector3(0, 0, 0);
     this.rotation = new Vector3(0, 0, 0);
     this.scale = new Vector3(1, 1, 1);
@@ -8,16 +9,16 @@ var Style = function(elem) {
     // If not so, it is suddenly switched to blurred after end of the sepia turn.
     // e.g. $('.any').cssanimate({filter: {sepia: 80}}).cssanimate({filter: {blur: 10}});
     this.filter = {
-        'contrast': 'contrast(100%)',
-        'brightness': 'brightness(100%)',
-        'grayscale': 'grayscale(0%)',
-        'saturate': 'saturate(100%)',
-        'opacity': 'opacity(100%)',
-        'invert': 'invert(0%)',
-        'hue-rotate': 'hue-rotate(0deg)',
-        'sepia': 'sepia(0%)',
-        'blur': 'blur(0px)',
-        'drop-shadow': 'drop-shadow(rgb(0, 0, 0) 0px 0px)'
+        contrast: 'contrast(100%)',
+        brightness: 'brightness(100%)',
+        grayscale: 'grayscale(0%)',
+        saturate: 'saturate(100%)',
+        opacity: 'opacity(100%)',
+        invert: 'invert(0%)',
+        hue: 'hue-rotate(0deg)',
+        sepia: 'sepia(0%)',
+        blur: 'blur(0px)',
+        shadow: 'drop-shadow(rgb(0, 0, 0) 0px 0px)'
     };
 };
 
@@ -25,10 +26,10 @@ var Style = function(elem) {
 Style.prefix = (function() {
     var e = $('<div>')[0];
     var prefixes = {
-        'WebkitTransition': '-webkit-',
-        'MozTransition': '-moz-',
-        'MSTransition': '-ms-',
-        'OTransition': '-o-'
+        WebkitTransition: '-webkit-',
+        MozTransition: '-moz-',
+        MSTransition: '-ms-',
+        OTransition: '-o-'
     };
     for (p in prefixes) {
         if(p in e.style) {
@@ -41,10 +42,10 @@ Style.prefix = (function() {
 Style.transitionEvent = (function() {
     var e = $('<div>')[0];
     var transitions = {
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'mozTransitionend',
-        'MSTransition': 'msTransitionEnd',
-        'OTransition': 'oTransitionEnd'
+        WebkitTransition: 'webkitTransitionEnd',
+        MozTransition: 'mozTransitionend',
+        MSTransition: 'msTransitionEnd',
+        OTransition: 'oTransitionEnd'
     };
     for (var t in transitions) {
         if(t in e.style) {
@@ -58,14 +59,14 @@ Style.property = function(name) {
     var e = $('<div>')[0];
     var prefix = Style.prefix;
     var translate = {
-        'transform': str('{0}transform').format(prefix),
-        'origin': str('{0}transform-origin').format(prefix),
-        'duration': str('{0}transition-duration').format(prefix),
-        'property': str('{0}transition-property').format(prefix),
-        'delay': str('{0}transition-delay').format(prefix),
-        'ease': str('{0}transition-timing-function').format(prefix),
-        'style': str('{0}transition-style').format(prefix),
-        'perspective': str('{0}perspective').format(prefix)
+        transform: str('{0}transform').format(prefix),
+        origin: str('{0}transform-origin').format(prefix),
+        duration: str('{0}transition-duration').format(prefix),
+        property: str('{0}transition-property').format(prefix),
+        delay: str('{0}transition-delay').format(prefix),
+        ease: str('{0}transition-timing-function').format(prefix),
+        style: str('{0}transition-style').format(prefix),
+        perspective: str('{0}perspective').format(prefix)
     };
     var with_prefix = str('{0}{1}').format(
         prefix,
@@ -77,33 +78,25 @@ Style.property = function(name) {
     return name;
 }
 
-Style.prototype.compile = function(params, duration, delay, ease, style, property, callback) {
-    var transition = {
-        duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
-        delay: delay || 0, // Specifies whether the change begins when.
-        ease: Ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
-        style: style || 'flat', // flat || preserve-3d
-        property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
-    };
+Style.prototype.compile = function(transition, params) {
     // parse cssanimate properties and take over the values
     this.parse(params);
     // deep copy for avoiding to overwrite by the time lag
-    var css = $.extend(true, {}, this.build(transition, params));
-    this.queue(css, callback);
-    return this.elem;
+    this.executable = $.extend(true, {}, this.build(transition, params));
+    return this;
 }
 
 // private
-Style.prototype.queue = function(css, callback) {
+Style.prototype.queue = function(callback) {
     var that = this;
     var animate = function() {
-        this.is_animate = 1
+        this.is_animated = true;
         // callback that would execute after transition
         var animated = function() {
             $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
             if (typeof callback === 'function') $.proxy(callback, this)();
             $(this).dequeue();
-            this.is_animate = 0;
+            this.is_animated = false;
         }
         // could animate with this even just after element have been appended to dom
         var i = 0;
@@ -113,8 +106,8 @@ Style.prototype.queue = function(css, callback) {
         }
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
-        if (css[Style.property('duration')].match(/^0/)) {
-            $(this).css(css);
+        if (that.executable[Style.property('duration')].match(/^0/)) {
+            $(this).css(that.executable);
             // We have to wait until css property is set.
             // If not so, next queue might be executed before setting css to dom.
             var i = 0;
@@ -129,19 +122,17 @@ Style.prototype.queue = function(css, callback) {
         }
         // transition-duration propery is set with condition of (> 0)
         // transitionEnd event will completely fired.
-        $(this).bind(Style.transitionEvent, $.proxy(animated, this)).css(css);
+        $(this).bind(Style.transitionEvent, $.proxy(animated, this)).css(that.executable);
         return this;
     };
-    
-    // add to $.fn.queue()
-    this.elem.queue(function() {
-        // jquery bug of [Ticket #6576](http://bugs.jquery.com/ticket/6576) seems to be still in remained
-        if (this.is_animate) setTimeout($.proxy(animate, this), 1);
-        else $.proxy(animate, this)();
+    // jquery bug of [Ticket #6576](http://bugs.jquery.com/ticket/6576) seems to be still in remained
+    // test code is: $('.box').cssanimate({ x: 100 }).cssanimate({ y: -100 }).cssanimate({ y: 100 });
+    if (this.elem.is_animated) {
+        setTimeout($.proxy(animate, this.elem));
         return this;
-    });
-    
-    return this.elem;
+    }
+    $.proxy(animate, this.elem)();
+    return this;
 }
 
 // private
@@ -178,52 +169,50 @@ Style.prototype.parse = function(params) {
         else continue;
         delete params[name];
     }
-    // hold the value in the same way as transformation
+    return this;
+}
+
+// private
+Style.prototype.build = function(transition, params) {
+    var executable = {};
+    // build transition properties
+    executable[Style.property('property')] = transition.property;
+    executable[Style.property('duration')] = str('{0}ms').format(transition.duration);
+    executable[Style.property('delay')] = str('{0}ms').format(transition.delay);
+    executable[Style.property('ease')] = transition.ease;
+    executable[Style.property('style')] = transition.style;
+    executable[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
+    // set filter properties
     if (params.filter) {
+        // hold the value in the same way as transformation
         for (var name in params.filter) {
             if (name == 'grayscale') this.filter['grayscale'] = this.buildGrayscale(params.filter[name]);
             else if (name == 'sepia') this.filter['sepia'] = this.buildSepia(params.filter[name]);
             else if (name == 'saturate') this.filter['saturate'] = this.buildSaturate(params.filter[name]);
-            else if (name == 'hue-rotate') this.filter['hue-rotate'] = this.buildHueRotate(params.filter[name]);
+            else if (name == 'hue') this.filter['hue'] = this.buildHueRotate(params.filter[name]);
             else if (name == 'invert') this.filter['invert'] = this.buildInvert(params.filter[name]);
             else if (name == 'opacity') this.filter['opacity'] = this.buildOpacity(params.filter[name]);
             else if (name == 'brightness') this.filter['brightness'] = this.buildBrightness(params.filter[name]);
             else if (name == 'contrast') this.filter['contrast'] = this.buildContrast(params.filter[name]);
             else if (name == 'blur') this.filter['blur'] = this.buildBlur(params.filter[name]);
-            else if (name == 'drop-shadow') this.filter['drop-shadow'] = this.buildDropShadow(params.filter[name]);
+            else if (name == 'shadow') this.filter['shadow'] = this.buildDropShadow(params.filter[name]);
         }
         delete params.filter;
     }
-}
-
-// private
-Style.prototype.build = function(transition, css) {
-    var _css = {};
-    // build transition properties
-    _css[Style.property('property')] = transition.property;
-    _css[Style.property('duration')] = str('{0}ms').format(transition.duration);
-    _css[Style.property('delay')] = str('{0}ms').format(transition.delay);
-    _css[Style.property('ease')] = transition.ease;
-    _css[Style.property('style')] = transition.style;
-    // could use multiple transformation, if separate transform with space.
-    _css[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
-    // set filter properties
     var filter = [];
-    for (var name in this.filter) {
-        filter.push(this.filter[name]);
-    }
+    for (var name in this.filter) filter.push(this.filter[name]);
     if (filter.length > 0) {
         // attach both prefixed and unprefixed filer property as a preventive measure
-        _css[Style.property('filter')] = filter.join(' ');
-        _css['filter'] = filter.join(' ');
+        executable[Style.property('filter')] = filter.join(' ');
+        executable['filter'] = filter.join(' ');
     }
     // prefix free helps you from vendor prefix hell
-    for (var name in css) {
-        _css[Style.property(name)] = css[name];
+    for (var name in params) {
+        executable[Style.property(name)] = params[name];
         // have to attach non prefixed property. try opacity css property.
-        _css[name] = css[name];
+        executable[name] = params[name];
     }
-    return _css;
+    return executable;
 }
 
 Style.prototype.parseTranslate = function(to) {
@@ -320,9 +309,9 @@ Style.prototype.buildScale = function() {
     );
 }
 
+// Here is the alternate of `skew({x}deg,{y}deg)` which is something wrong.
+// If use that specification, we would get unexpected result.
 Style.prototype.buildSkew = function() {
-    // Here is the alternate of `skew({x}deg,{y}deg)` which is something wrong.
-    // If use that specification, we would get unexpected result.
     return str('skewX({0}deg) skewY({1}deg)').format(
         this.skew.x || 0,
         this.skew.y || 0

@@ -36,6 +36,9 @@ body {
 $(function() {
     setTimeout(function() {
         
+        // $('.box').cssanimate({x: 100}).cssanimate({y: 100});
+        // $('.snap-box').cssanimate({x: 100}); $('.snap-box').cssanimate({y: 100})
+        
         /*
             translate
         */
@@ -43,7 +46,7 @@ $(function() {
         // $('.box').cssanimate({ to: {x: 100, y: 100} });
         // $('.box').cssanimate({ to: {x: 100} }).cssanimate({ to: {y: 100} });
         // $('.box').perspective(100).cssanimate({ to: {x: 100, y: 100, z: -1000} });
-        // $('.box').perspective(100).cssanimate({ to: {x: 100} }).cssanimate({ to: {y: -100}, rotatez: 45 }).cssanimate({ to: {y: 100} });
+        // $('.box').cssanimate({ x: 100 }, 100).cssanimate({ y: -100 }, 1000).cssanimate({ y: 100 }, 100);
         
         // to: array
         // $('.box').cssanimate({ to: [100] });
@@ -222,7 +225,7 @@ $(function() {
         
         // filter
         // $('img').cssanimate({blur: 10, sepia: 60})
-        // $('.box').cssanimate({ 'grayscale': 100 }, 1000)
+        // $('.box').cssanimate({ filter: {'grayscale': 100} }, 1000)
         // $('.box').cssanimate({ 'saturate': 0 })
         // $('.box').cssanimate({ 'hue-rotate': 80 })
         // $('img')

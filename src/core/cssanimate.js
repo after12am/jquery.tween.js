@@ -45,12 +45,20 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
         delete params.property;
     }
     
-    // cache current property setting
-    this.cache = this.cache || new Style($(this));
-    // add to $.fn.queue() to animate serially after building appropriate css properties
-    this.cache.compile(params, duration, delay, ease, style, property, callback);
+    var transition = {
+        duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
+        delay: delay || 0, // Specifies whether the change begins when.
+        ease: Ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
+        style: style || 'flat', // flat || preserve-3d
+        property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
+    };
     
-    return this;
+    return this.queue(function() {
+        // cache current property setting
+        this.cache = this.cache || new Style($(this));
+        // add to $.fn.queue() to animate serially after building appropriate css properties
+        this.cache.compile(transition, params).queue(callback);
+    });
 };
 
 // When you want to stop the loop, call $.fn.stop(true, true).
