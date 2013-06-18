@@ -152,20 +152,20 @@ Style.prototype.parse = function(params) {
     // take over the values
     for (var name in params) {
         if (name == 'to') this.parseTranslate(params[name]);
-        else if (name == 'x') this.parseTranslateX(params[name]);
-        else if (name == 'y') this.parseTranslateY(params[name]);
-        else if (name == 'z') this.parseTranslateZ(params[name]);
+        else if (name == 'x') this.setX(params[name]);
+        else if (name == 'y') this.setY(params[name]);
+        else if (name == 'z') this.setZ(params[name]);
         else if (name == 'rotate') this.parseRotate(params[name]);
-        else if (name == 'rotatex') this.parseRotateX(params[name]);
-        else if (name == 'rotatey') this.parseRotateY(params[name]);
-        else if (name == 'rotatez') this.parseRotateZ(params[name]);
+        else if (name == 'rotatex') this.setRotateX(params[name]);
+        else if (name == 'rotatey') this.setRotateY(params[name]);
+        else if (name == 'rotatez') this.setRotateZ(params[name]);
         else if (name == 'scale') this.parseScale(params[name]);
-        else if (name == 'scalex') this.parseScaleX(params[name]);
-        else if (name == 'scaley') this.parseScaleY(params[name]);
-        else if (name == 'scalez') this.parseScaleZ(params[name]);
+        else if (name == 'scalex') this.setScaleX(params[name]);
+        else if (name == 'scaley') this.setScaleY(params[name]);
+        else if (name == 'scalez') this.setScaleZ(params[name]);
         else if (name == 'skew') this.parseSkew(params[name]);
-        else if (name == 'skewx') this.parseSkewX(params[name]);
-        else if (name == 'skewy') this.parseSkewY(params[name]);
+        else if (name == 'skewx') this.setSkewX(params[name]);
+        else if (name == 'skewy') this.setSkewY(params[name]);
         else continue;
         delete params[name];
     }
@@ -218,34 +218,66 @@ Style.prototype.build = function(css) {
     return _css;
 }
 
+Style.prototype.setX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.position.x = x;
+}
+
+Style.prototype.setY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.position.y = y;
+}
+
+Style.prototype.setZ = function(z) {
+    if (z !== undefined && z.constructor === Number) this.position.z = z;
+}
+
+Style.prototype.setRotateX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.rotation.x = x;
+}
+
+Style.prototype.setRotateY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.rotation.y = y;
+}
+
+Style.prototype.setRotateZ = function(z) {
+    if (z !== undefined && z.constructor === Number) this.rotation.z = z;
+}
+
+Style.prototype.setScaleX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.scale.x = x;
+}
+
+Style.prototype.setScaleY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.scale.y = y;
+}
+
+Style.prototype.setScaleZ = function(z) {
+    if (z !== undefined && z.constructor === Number) this.scale.z = z;
+}
+
+Style.prototype.setSkewX = function(x) {
+    if (x !== undefined && x.constructor === Number) this.skew.x = x;
+}
+
+Style.prototype.setSkewY = function(y) {
+    if (y !== undefined && y.constructor === Number) this.skew.y = y;
+}
+
 Style.prototype.parseTranslate = function(to) {
     if (to.constructor === Array) this.parseTranslateArrayInitialiser(to);
     if (to.constructor === Object) this.parseTranslateObjectInitialiser(to);
     if (to.constructor === Number) this.position.x = to;
 }
 
-Style.prototype.parseTranslateX = function(x) {
-    if (x !== undefined && x.constructor === Number) this.position.x = x;
-}
-
-Style.prototype.parseTranslateY = function(y) {
-    if (y !== undefined && y.constructor === Number) this.position.y = y;
-}
-
-Style.prototype.parseTranslateZ = function(z) {
-    if (z !== undefined && z.constructor === Number) this.position.z = z;
-}
-
 Style.prototype.parseTranslateObjectInitialiser = function(to) {
-    this.parseTranslateX(to.x);
-    this.parseTranslateY(to.y);
-    this.parseTranslateZ(to.z);
+    this.setX(to.x);
+    this.setY(to.y);
+    this.setZ(to.z);
 }
 
 Style.prototype.parseTranslateArrayInitialiser = function(to) {
-    this.parseTranslateX(to[0]);
-    this.parseTranslateY(to[1]);
-    this.parseTranslateZ(to[2]);
+    this.setX(to[0]);
+    this.setY(to[1]);
+    this.setZ(to[2]);
 }
 
 Style.prototype.parseRotate = function(rotation) {
@@ -254,28 +286,16 @@ Style.prototype.parseRotate = function(rotation) {
     if (rotation.constructor === Number) this.rotation.z = rotation;
 }
 
-Style.prototype.parseRotateX = function(x) {
-    if (x !== undefined && x.constructor === Number) this.rotation.x = x;
-}
-
-Style.prototype.parseRotateY = function(y) {
-    if (y !== undefined && y.constructor === Number) this.rotation.y = y;
-}
-
-Style.prototype.parseRotateZ = function(z) {
-    if (z !== undefined && z.constructor === Number) this.rotation.z = z;
-}
-
 Style.prototype.parseRotateObjectInitialiser = function(rotation) {
-    this.parseRotateX(rotation.x);
-    this.parseRotateY(rotation.y);
-    this.parseRotateZ(rotation.z);
+    this.setRotateX(rotation.x);
+    this.setRotateY(rotation.y);
+    this.setRotateZ(rotation.z);
 }
 
 Style.prototype.parseRotateArrayInitialiser = function(rotation) {
-    this.parseRotateX(rotation[0]);
-    this.parseRotateY(rotation[1]);
-    this.parseRotateZ(rotation[2]);
+    this.setRotateX(rotation[0]);
+    this.setRotateY(rotation[1]);
+    this.setRotateZ(rotation[2]);
 }
 
 Style.prototype.parseScale = function(scale) {
@@ -284,28 +304,16 @@ Style.prototype.parseScale = function(scale) {
     if (scale.constructor === Number) this.scale.x = this.scale.y = scale;
 }
 
-Style.prototype.parseScaleX = function(x) {
-    if (x !== undefined && x.constructor === Number) this.scale.x = x;
-}
-
-Style.prototype.parseScaleY = function(y) {
-    if (y !== undefined && y.constructor === Number) this.scale.y = y;
-}
-
-Style.prototype.parseScaleZ = function(z) {
-    if (z !== undefined && z.constructor === Number) this.scale.z = z;
-}
-
 Style.prototype.parseScaleObjectInitialiser = function(scale) {
-    this.parseScaleX(scale.x);
-    this.parseScaleY(scale.y);
-    this.parseScaleZ(scale.z);
+    this.setScaleX(scale.x);
+    this.setScaleY(scale.y);
+    this.setScaleZ(scale.z);
 }
 
 Style.prototype.parseScaleArrayInitialiser = function(scale) {
-    this.parseScaleX(scale[0]);
-    this.parseScaleY(scale[1]);
-    this.parseScaleZ(scale[2]);
+    this.setScaleX(scale[0]);
+    this.setScaleY(scale[1]);
+    this.setScaleZ(scale[2]);
 }
 
 Style.prototype.parseSkew = function(skew) {
@@ -314,22 +322,14 @@ Style.prototype.parseSkew = function(skew) {
     if (skew.constructor === Number) this.skew.x = this.skew.y = skew;
 }
 
-Style.prototype.parseSkewX = function(x) {
-    if (x !== undefined && x.constructor === Number) this.skew.x = x;
-}
-
-Style.prototype.parseSkewY = function(y) {
-    if (y !== undefined && y.constructor === Number) this.skew.y = y;
-}
-
 Style.prototype.parseSkewObjectInitialiser = function(skew) {
-    this.parseSkewX(skew.x);
-    this.parseSkewY(skew.y);
+    this.setSkewX(skew.x);
+    this.setSkewY(skew.y);
 }
 
 Style.prototype.parseSkewArrayInitialiser = function(skew) {
-    this.parseSkewX(skew[0]);
-    this.parseSkewY(skew[1]);
+    this.setSkewX(skew[0]);
+    this.setSkewY(skew[1]);
 }
 
 Style.prototype.buildTranslate = function() {
