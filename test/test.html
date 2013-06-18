@@ -43,7 +43,7 @@ $(function() {
         // $('.box').cssanimate({ to: {x: 100, y: 100} });
         // $('.box').cssanimate({ to: {x: 100} }).cssanimate({ to: {y: 100} });
         // $('.box').perspective(100).cssanimate({ to: {x: 100, y: 100, z: -1000} });
-        // $('.box').perspective(100).cssanimate({ to: {x: 100} }).cssanimate({ to: {y: 100} }).cssanimate({ to: {x: 0} });
+        // $('.box').perspective(100).cssanimate({ to: {x: 100} }).cssanimate({ to: {y: -100}, rotatez: 45 }).cssanimate({ to: {y: 100} });
         
         // to: array
         // $('.box').cssanimate({ to: [100] });
@@ -208,7 +208,7 @@ $(function() {
         // 
         // $('.box').cssanimate([
         //     [{ x: 100 }, 600],
-        //     [{ x: 100, rotate: 540 }],
+        //     [{ rotate: 540 }],
         //     [{ x: -100, rotate: 0 }]
         // ]);
         // 
@@ -265,6 +265,8 @@ $(function() {
         // e.cssanimate({ x: 100 }, 400);
         // $('.box').cssanimate({ x: 100 }, 400, 1000);
         // console.log(new Date() - s)
+        
+        // $('.box').cssanimate({ to: {x: 100, y: 100}, origin: '10% 0%' });
     }, 50);
 })
 </script>

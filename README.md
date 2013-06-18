@@ -35,3 +35,7 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support `loopback` which helps you to make infinite loop animation easily
 * support `prefix free` which free you from vendor prefix hell
 + support `filter aliases` which applies filter effects more easily
+
+## Notes
+
+* If main usage of your app is to animate lots of elements, more than 100 elements, at the same time in pc browser, I recommend you to use $.fn.animate.

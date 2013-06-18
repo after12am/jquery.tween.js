@@ -6,6 +6,7 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     var property, style;
     
     if (params.constructor === Array) {
+        this.cache = this.cache || new Style($(this));
         return this.cssanimate.loopback(this, params);
     }
     
@@ -61,12 +62,12 @@ $.fn.cssanimate.loopback = function(elem, cssanimates) {
     });
     _.forEach(function(args, i) {
         // no problem even if some of the arguments are undefined
-        $(elem).cssanimate(args[0], args[1], args[2], args[3], args[4]);
+        elem.cssanimate(args[0], args[1], args[2], args[3], args[4]);
     });
     // add function which loopback to the end of the queue
-    $(elem).queue(function() {
-        $(elem).cssanimate(cssanimates);
-        $(elem).dequeue();
+    elem.queue(function() {
+        elem.cssanimate(cssanimates);
+        elem.dequeue();
     });
     return elem;
 };

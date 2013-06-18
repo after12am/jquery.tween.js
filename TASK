@@ -4,9 +4,7 @@
         + $('.box').cssanimate({x: 100}); $('.box').cssanimate({y: 100})
 
 # Low priority
-+ support clip option. e.g. [css masking](http://www.html5rocks.com/en/tutorials/masking/adobe/?redirect_from_locale=ja)
 + support relative values. e.g. +=30 -=30
-+ add filter example
 
 # watch
 + [filter](http://www.propra.nl/playground/css_filters/)
