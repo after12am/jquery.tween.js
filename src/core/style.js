@@ -9,16 +9,16 @@ var Style = function(elem) {
     // If not so, it is suddenly switched to blurred after end of the sepia turn.
     // e.g. $('.any').cssanimate({filter: {sepia: 80}}).cssanimate({filter: {blur: 10}});
     this.filter = {
-        contrast: 'contrast(100%)',
-        brightness: 'brightness(100%)',
-        grayscale: 'grayscale(0%)',
-        saturate: 'saturate(100%)',
-        opacity: 'opacity(100%)',
-        invert: 'invert(0%)',
-        hue: 'hue-rotate(0deg)',
-        sepia: 'sepia(0%)',
-        blur: 'blur(0px)',
-        shadow: 'drop-shadow(rgb(0, 0, 0) 0px 0px)'
+        contrast: 100,
+        brightness: 100,
+        grayscale: 0,
+        saturate: 100,
+        opacity: 100,
+        invert: 0,
+        hue: 0,
+        sepia: 0,
+        blur: 0,
+        shadow: ['rgb(0, 0, 0)', 0, 0]
     };
 };
 
@@ -137,6 +137,68 @@ Style.prototype.queue = function(callback) {
 
 // private
 Style.prototype.parse = function(params) {
+    var m;
+    var v;
+    
+    params.filter = params.filter || {};
+    params.filter.grayscale = params.filter.grayscale || this.filter.grayscale;
+    params.filter.sepia = params.filter.sepia || this.filter.sepia;
+    params.filter.saturate = params.filter.saturate || this.filter.saturate;
+    params.filter.hue = params.filter.hue || this.filter.hue;
+    params.filter.invert = params.filter.invert || this.filter.invert;
+    params.filter.opacity = params.filter.opacity || this.filter.opacity;
+    params.filter.brightness = params.filter.brightness || this.filter.brightness;
+    params.filter.contrast = params.filter.contrast || this.filter.contrast;
+    params.filter.blur = params.filter.blur || this.filter.blur;
+    params.filter.shadow = params.filter.shadow || this.filter.shadow;
+    
+    for (var name in params) {
+        if (!params[name]) continue;
+        if (params[name].constructor !== String) continue;
+        if (!(m = params[name].match(/^(\+|-)=([0-9]+)$/))) continue;
+        switch (name) {
+            case 'x': v = this.position.x; break;
+            case 'y': v = this.position.y; break;
+            case 'z': v = this.position.z; break;
+            case 'rotatex': v = this.rotation.x; break;
+            case 'rotatey': v = this.rotation.y; break;
+            case 'rotatez': v = this.rotation.z; break;
+            case 'scalex': v = this.scale.x; break;
+            case 'scaley': v = this.scale.y; break;
+            case 'scalez': v = this.scale.z; break;
+            case 'skewx': v = this.skew.x; break;
+            case 'skewy': v = this.skew.y; break;
+            default: continue;
+        }
+        switch (m[1]) {
+            case '+': params[name] = add(v, (+m[2])); break;
+            case '-': params[name] = sub(v, (+m[2])); break;
+        }
+    }
+    
+    for (var name in params.filter) {
+        if (!params.filter[name]) continue;
+        if (params.filter[name].constructor !== String) continue;
+        if (!(m = params.filter[name].match(/^(\+|-)=([0-9]+)$/))) continue;
+        switch (name) {
+            case 'grayscale': v = this.filter.grayscale; break;
+            case 'sepia': v = this.filter.sepia; break;
+            case 'saturate': v = this.filter.saturate; break;
+            case 'hue': v = this.filter.hue; break;
+            case 'invert': v = this.filter.invert; break;
+            case 'opacity': v = this.filter.opacity; break;
+            case 'brightness': v = this.filter.brightness; break;
+            case 'contrast': v = this.filter.contrast; break;
+            case 'blur': v = this.filter.blur; break;
+            case 'shadow': continue;
+            default: continue;
+        }
+        switch (m[1]) {
+            case '+': params[name] = add(v, (+m[2])); break;
+            case '-': params[name] = sub(v, (+m[2])); break;
+        }
+    }
+    
     for (var name in params) {
         if (name === 'style') delete params[name];
         else if (name === 'origin') delete params[name];
@@ -149,32 +211,62 @@ Style.prototype.parse = function(params) {
         else if (name.match(/transition-timing-function$/)) delete params[name];
         else if (name.match(/transition-style$/)) delete params[name];
     }
-    // take over the values
+    
     for (var name in params) {
         if (name == 'to') this.parseTranslate(params[name]);
-        else if (name == 'x') this.position.x = params[name];
-        else if (name == 'y') this.position.y = params[name];
-        else if (name == 'z') this.position.z = params[name];
-        else if (name == 'rotate') this.parseRotation(params[name]);
-        else if (name == 'rotatex') this.rotation.x = params[name];
-        else if (name == 'rotatey') this.rotation.y = params[name];
-        else if (name == 'rotatez') this.rotation.z = params[name];
-        else if (name == 'scale') this.parseScale(params[name]);
-        else if (name == 'scalex') this.scale.x = params[name];
-        else if (name == 'scaley') this.scale.y = params[name];
-        else if (name == 'scalez') this.scale.z = params[name];
-        else if (name == 'skew') this.parseSkew(params[name]);
-        else if (name == 'skewx') this.skew.x = params[name];
-        else if (name == 'skewy') this.skew.y = params[name];
+        else if (name === 'x') this.position.x = params[name];
+        else if (name === 'y') this.position.y = params[name];
+        else if (name === 'z') this.position.z = params[name];
+        else if (name === 'rotate') this.parseRotation(params[name]);
+        else if (name === 'rotatex') this.rotation.x = params[name];
+        else if (name === 'rotatey') this.rotation.y = params[name];
+        else if (name === 'rotatez') this.rotation.z = params[name];
+        else if (name === 'scale') this.parseScale(params[name]);
+        else if (name === 'scalex') this.scale.x = params[name];
+        else if (name === 'scaley') this.scale.y = params[name];
+        else if (name === 'scalez') this.scale.z = params[name];
+        else if (name === 'skew') this.parseSkew(params[name]);
+        else if (name === 'skewx') this.skew.x = params[name];
+        else if (name === 'skewy') this.skew.y = params[name];
         else continue;
         delete params[name];
     }
+    
+    for (var name in params.filter) {
+        switch (name) {
+            case 'grayscale':
+            case 'sepia':
+            case 'saturate':
+            case 'hue':
+            case 'invert':
+            case 'opacity':
+            case 'brightness':
+            case 'contrast':
+            case 'blur':
+            case 'shadow': this.filter[name] = params.filter[name]; break;
+            default: continue;
+        }
+    }
+    delete params.filter;
+    
     return this;
 }
 
 // private
 Style.prototype.build = function(transition, params) {
     var executable = {};
+    var filter = [
+        this.buildGrayscale(this.filter.grayscale),
+        this.buildSepia(this.filter.sepia),
+        this.buildSaturate(this.filter.saturate),
+        this.buildHueRotate(this.filter.hue),
+        this.buildInvert(this.filter.invert),
+        this.buildOpacity(this.filter.opacity),
+        this.buildBrightness(this.filter.brightness),
+        this.buildContrast(this.filter.contrast),
+        this.buildBlur(this.filter.blur),
+        this.buildDropShadow(this.filter.shadow)
+    ];
     // build transition properties
     executable[Style.property('property')] = transition.property;
     executable[Style.property('duration')] = str('{0}ms').format(transition.duration);
@@ -182,30 +274,9 @@ Style.prototype.build = function(transition, params) {
     executable[Style.property('ease')] = transition.ease;
     executable[Style.property('style')] = transition.style;
     executable[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
-    // set filter properties
-    if (params.filter) {
-        // hold the value in the same way as transformation
-        for (var name in params.filter) {
-            if (name == 'grayscale') this.filter['grayscale'] = this.buildGrayscale(params.filter[name]);
-            else if (name == 'sepia') this.filter['sepia'] = this.buildSepia(params.filter[name]);
-            else if (name == 'saturate') this.filter['saturate'] = this.buildSaturate(params.filter[name]);
-            else if (name == 'hue') this.filter['hue'] = this.buildHueRotate(params.filter[name]);
-            else if (name == 'invert') this.filter['invert'] = this.buildInvert(params.filter[name]);
-            else if (name == 'opacity') this.filter['opacity'] = this.buildOpacity(params.filter[name]);
-            else if (name == 'brightness') this.filter['brightness'] = this.buildBrightness(params.filter[name]);
-            else if (name == 'contrast') this.filter['contrast'] = this.buildContrast(params.filter[name]);
-            else if (name == 'blur') this.filter['blur'] = this.buildBlur(params.filter[name]);
-            else if (name == 'shadow') this.filter['shadow'] = this.buildDropShadow(params.filter[name]);
-        }
-        delete params.filter;
-    }
-    var filter = [];
-    for (var name in this.filter) filter.push(this.filter[name]);
-    if (filter.length > 0) {
-        // attach both prefixed and unprefixed filer property as a preventive measure
-        executable[Style.property('filter')] = filter.join(' ');
-        executable['filter'] = filter.join(' ');
-    }
+    // attach both prefixed and unprefixed filer property as a preventive measure
+    executable[Style.property('filter')] = filter.join(' ');
+    executable['filter'] = filter.join(' ');
     // prefix free helps you from vendor prefix hell
     for (var name in params) {
         executable[Style.property(name)] = params[name];
