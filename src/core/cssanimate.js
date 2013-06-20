@@ -47,7 +47,7 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     
     var transition = {
         duration: typeof duration === 'number' ? duration : 400, // Specifies the amount of time it takes to change.
-        delay: delay || 0, // Specifies whether the change begins when.
+        delay: +delay || 0, // Specifies whether the change begins when.
         ease: Ease[ease] || ease || 'ease-in-out', // Specifies the timing of the change.
         style: style || 'flat', // flat || preserve-3d
         property: property || 'all' // Specifies the name of the css properties that apply the transition effect.
@@ -84,12 +84,12 @@ $.fn.cssanimate.loopback = function(elem, cssanimates) {
 // If not so, transform-origin of element would have shifted a little.
 $.fn.cssanimate.origin = function(elem, top, left) {
     $(elem).queue(function() {
-        $(elem).css(Style.property('origin'), str('{0} {1}').format(top, left));
+        $(elem).css(Style.property('transform-origin'), str('{0} {1}').format(top, left));
         var i = 0;
         // We have to wait until css property is set.
         // If not so, next queue might be executed before setting css to dom.
         while (1) {
-            if ($(elem).css(Style.property('origin'))) break;
+            if ($(elem).css(Style.property('transform-origin'))) break;
             if (++i > 50) break; // avoid infinite loop
         }
         $(elem).dequeue();

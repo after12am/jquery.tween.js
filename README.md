@@ -34,7 +34,6 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support `2d/3d` transformation
 * support `loopback` which helps you to make infinite loop animation easily
 * support `prefix free` which free you from vendor prefix hell
-+ support `filter aliases` which applies filter effects more easily
 
 ## Notes
 
