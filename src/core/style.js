@@ -77,8 +77,8 @@ Style.prototype.queue = function(callback) {
         var animated = function() {
             $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
             if (typeof callback === 'function') $.proxy(callback, this)();
-            $(this).dequeue();
             if ($(this).queue().length === 0) $.proxy(that.clear, this)();
+            $(this).dequeue();
             this.is_animated = false;
         }
         // could animate with this even just after element have been appended to dom
