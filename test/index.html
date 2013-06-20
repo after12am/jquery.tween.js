@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>jQuery Transit tests</title>
+<script>
+/*
+ * Dynamic script loading
+ */
+
+(function() {
+    var m = location.search.match(/jquery=([^&$]*)/);
+    var jQueryVersion = m ? m[1] : "1.8.1";
+
+    function addScript(src) {
+        document.write("<scr"+"ipt src='"+src+"'></scr"+"ipt>");
+    }
+
+    // Dynamically load jQuery depending on what's passed on get params.
+    // if (jQueryVersion === "1.9.0b1") {
+    //     addScript("http://code.jquery.com/jquery-1.9.0b1.js");
+    //     addScript("http://code.jquery.com/jquery-migrate-1.0.0b1.js");
+    // } else {
+    //     addScript("http://ajax.googleapis.com/ajax/libs/jquery/"+jQueryVersion+"/jquery.min.js");
+    // }
+    addScript("jquery-1.9.0b1.js");
+    addScript("../jquery.cssanimate.js");
+})();
+</script>
+<script src="test.js"></script>
+<link href="style.css" rel="stylesheet" />
+</head>
+<body>
+<!-- <div class='use'>
+    Use:
+    <a href='index.html?jquery=1.9.0b1'>jQ 1.9.0b1</a>
+    <a href='index.html?jquery=1.8.1'>jQ 1.8</a>
+    <a href='index.html?jquery=1.7.0'>jQ 1.7</a>
+    <a href='index.html?jquery=1.6.0'>jQ 1.6</a>
+    <a href='index.html?jquery=1.5.0'>jQ 1.5</a>
+    <button class='play-all'>Play all</button>
+</div> -->
+<div class='tests'></div>
+<script>
+
+group('Translate');
+
+test('x y z:[Number]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            x: 32, y: 32, z: -100
+        })
+});
+
+test('to:[Object]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            to: { x: 32, y: 32, z: -100 }
+        })
+});
+
+test('to:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            to: [32, 32, -100]
+        })
+});
+
+test('to:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            to: [32, 32]
+        })
+});
+
+test('to:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            to: [32]
+        })
+});
+
+test('to:[Number]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            to: 32
+        })
+});
+
+test('Method chain', function($box) {
+    $box.perspective(100)
+        .cssanimate({ x: 32 })
+        .cssanimate({ y: 32 })
+        .cssanimate({ z: -100 })
+});
+
+test('Duration', function($box) {
+    $box.perspective(100)
+        .cssanimate({ x: 32 }, 100)
+        .cssanimate({ y: 32 }, 1000)
+        .cssanimate({ z: -100 }, 100)
+});
+
+group('Rotate');
+
+test('rotate x y z:[Number]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            rotatex: 32, rotatey: 32, 
+            rotatez: -100 })
+});
+
+test('rotate:[Object]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            rotate: { x: 32, y: 32, z: -100 }
+        })
+});
+
+test('rotate:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            rotate: [32, 32, -100]
+        })
+});
+
+test('rotate:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            rotate: [32, 32]
+        })
+});
+
+test('rotate:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            rotate: [32]
+        })
+});
+
+test('rotate:[Number]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            rotate: 32
+        })
+});
+
+test('Method chain', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotatex: 32 })
+        .cssanimate({ rotatey: 32 })
+        .cssanimate({ rotatez: -100 })
+});
+
+test('Duration', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotatex: 32 }, 100)
+        .cssanimate({ rotatey: 32 }, 1000)
+        .cssanimate({ rotatez: -100 }, 100)
+});
+
+test('Origin', function($box) {
+    $box.origin(0, 0)
+        .cssanimate({ rotate: 60
+            
+        })
+});
+
+group('Scale');
+
+test('x y z:[Number]', function($box) {
+    $box
+        .cssanimate({ 
+            scalex: 2, scaley: 2
+        })
+});
+
+test('scale:[Object]', function($box) {
+    $box
+        .cssanimate({ 
+            scale: { x: 2, y: 2 }
+        })
+});
+
+test('scale:[Array]', function($box) {
+    $box
+        .cssanimate({ 
+            scale: [2, 2] 
+        })
+});
+
+test('scale:[Array]', function($box) {
+    $box
+        .cssanimate({ 
+            scale: [2] 
+        })
+});
+
+test('scale:[Number]', function($box) {
+    $box
+        .cssanimate({ 
+            scale: 2
+        })
+});
+
+test('Method chain', function($box) {
+    $box
+        .cssanimate({ scalex: 2 })
+        .cssanimate({ scaley: 2 })
+    ;
+});
+
+test('Duration', function($box) {
+    $box
+        .cssanimate({ scalex: 2 }, 100)
+        .cssanimate({ scaley: 2 }, 1000)
+    ;
+});
+
+test('3d', function($box) {
+    $box.perspective(100)
+        .cssanimate({ scalex: 2, scaley: 2 })
+        .cssanimate({ rotatey: 45 })
+    ;
+});
+
+group('Skew');
+
+test('x y z:[Number]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            skewx: 32, skewy: 32
+        })
+});
+
+test('skew:[Object]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            skew: { x: 32, y: 32 }
+        })
+});
+
+test('skew:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            skew: [32, 32]
+        })
+});
+
+test('skew:[Array]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            skew: [32]
+        })
+});
+
+test('skew:[Number]', function($box) {
+    $box.perspective(100)
+        .cssanimate({ 
+            skew: 32
+        })
+});
+
+test('Method chain', function($box) {
+    $box.perspective(100)
+        .cssanimate({ skewx: 32 })
+        .cssanimate({ skewy: 32 })
+    ;
+});
+
+test('Duration', function($box) {
+    $box.perspective(100)
+        .cssanimate({ skewx: 32 }, 100)
+        .cssanimate({ skewy: 32 }, 1000)
+    ;
+});
+
+
+$('.play-translate').click(function() {
+    $('.group-translate').trigger('play');
+});
+
+$('.play-rotate').click(function() {
+    $('.group-rotate').trigger('play');
+});
+
+$('.play-scale').click(function() {
+    $('.group-scale').trigger('play');
+});
+
+$('.play-skew').click(function() {
+    $('.group-skew').trigger('play');
+});
+
+</script>
+</body>
+</html>

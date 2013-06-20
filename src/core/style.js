@@ -56,8 +56,11 @@ Style.prototype.compile = function(transition, params) {
 Style.prototype.clear = function() {
     // clear related with transformation properties except transform
     var clear = {}, _ = [
-        'transition-property', 'transition-timing-function',
-        'transition-duration', 'transform-style', 'transition-delay'
+        'transition-property',
+        'transition-timing-function',
+        'transition-duration',
+        'transform-style',
+        'transition-delay'
     ];
     _.forEach(function(i) {
         clear[Style.property(i)] = '';
@@ -69,9 +72,7 @@ Style.prototype.queue = function(callback) {
     var that = this;
     var duration = Style.property('transition-duration');
     var animate = function() {
-        
         this.is_animated = true;
-        
         // callback that would execute after transition
         var animated = function() {
             $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
@@ -80,14 +81,12 @@ Style.prototype.queue = function(callback) {
             if ($(this).queue().length === 0) $.proxy(that.clear, this)();
             this.is_animated = false;
         }
-        
         // could animate with this even just after element have been appended to dom
         var i = 0;
         while (1) {
             if ($(this).css(duration)) break;
             if (++i > 50) break; // avoid infinite loop
         }
-        
         // When transition-duration propery is zero, we have to call callback function 
         // because transitionEvent would not be fired.
         if (that.executable[duration].match(/^0/)) {
@@ -104,7 +103,6 @@ Style.prototype.queue = function(callback) {
             $(this).dequeue();
             return this;
         }
-        
         // run this alternate if transitEvent is not supported
         if (!Style.transitionEvent) {
             $(this).css(that.executable);
@@ -112,20 +110,17 @@ Style.prototype.queue = function(callback) {
             setTimeout($.proxy(callback, this), m[1]);
             return this;
         }
-        
         // transition-duration propery is set with condition of (> 0)
         // transitionEnd event will completely fired.
         $(this).bind(Style.transitionEvent, $.proxy(animated, this)).css(that.executable);
         return this;
     };
-    
     // jquery bug of [Ticket #6576](http://bugs.jquery.com/ticket/6576) seems to be still in remained
     // test code is: $('.box').cssanimate({ x: 100 }).cssanimate({ y: -100 }).cssanimate({ y: 100 });
     if (this.elem.is_animated) {
         setTimeout($.proxy(animate, this.elem));
         return this;
     }
-    
     $.proxy(animate, this.elem)();
     return this;
 }
@@ -179,76 +174,64 @@ Style.prototype.parse = function(params) {
 }
 
 Style.prototype.parseTranslate = function(to) {
-    
     if (to.constructor === Array) {
         if (to[0] !== undefined) this.position.x = +to[0];
         if (to[1] !== undefined) this.position.y = +to[1];
         if (to[2] !== undefined) this.position.z = +to[2];
         return;
     }
-    
     if (to.constructor === Object) {
         if (to.x !== undefined) this.position.x = +to.x;
         if (to.y !== undefined) this.position.y = +to.y;
         if (to.z !== undefined) this.position.z = +to.z;
         return;
     }
-    
     this.position.x = +to;
 }
 
 Style.prototype.parseRotation = function(rotation) {
-    
     if (rotation.constructor === Array) {
         if (rotation[0] !== undefined) this.rotation.x = +rotation[0];
         if (rotation[1] !== undefined) this.rotation.y = +rotation[1];
         if (rotation[2] !== undefined) this.rotation.z = +rotation[2];
         return;
     }
-    
     if (rotation.constructor === Object) {
         if (rotation.x !== undefined) this.rotation.x = +rotation.x;
         if (rotation.y !== undefined) this.rotation.y = +rotation.y;
         if (rotation.z !== undefined) this.rotation.z = +rotation.z;
         return;
     }
-    
     this.rotation.z = +rotation;
 }
 
 Style.prototype.parseScale = function(scale) {
-    
     if (scale.constructor === Array) {
         if (scale[0] !== undefined) this.scale.x = +scale[0];
         if (scale[1] !== undefined) this.scale.y = +scale[1];
         if (scale[2] !== undefined) this.scale.z = +scale[2];
         return;
     }
-    
     if (scale.constructor === Object) {
         if (scale.x !== undefined) this.scale.x = +scale.x;
         if (scale.y !== undefined) this.scale.y = +scale.y;
         if (scale.z !== undefined) this.scale.z = +scale.z;
         return;
     }
-    
     this.scale.x = this.scale.y = +scale;
 }
 
 Style.prototype.parseSkew = function(skew) {
-    
     if (skew.constructor === Array) {
         if (skew[0] !== undefined) this.skew.x = +skew[0];
         if (skew[1] !== undefined) this.skew.y = +skew[1];
         return;
     }
-    
     if (skew.constructor === Object) {
         if (skew.x !== undefined) this.skew.x = +skew.x;
         if (skew.y !== undefined) this.skew.y = +skew.y;
         return;
     }
-    
     this.skew.x = this.skew.y = +skew;
 }
 
