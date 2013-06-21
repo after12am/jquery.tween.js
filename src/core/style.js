@@ -78,8 +78,8 @@ Style.prototype.queue = function(callback) {
             $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
             if (typeof callback === 'function') $.proxy(callback, this)();
             if ($(this).queue().length === 0) $.proxy(that.clear, this)();
-            $(this).dequeue();
             this.is_animated = false;
+            $(this).dequeue();
         }
         // could animate with this even just after element have been appended to dom
         var i = 0;
@@ -245,7 +245,8 @@ Style.prototype.build = function(transition, params) {
     executable[Style.property('transform-style')] = transition.style;
     executable[Style.property('transform')] = [this.buildTranslate(), this.buildRotate(), this.buildScale(), this.buildSkew()].join(' ');
     // prefix free helps you from vendor prefix hell
-    // have to attach prefixed and non prefixed property. try opacity css property.
+    // have to attach prefixed and non prefixed property. try transform property like this.
+    // $box.cssanimate({ transform: 'translateX(32px)' });
     for (var name in params) {
         executable[Style.property(name)] = params[name];
         executable[name] = params[name];

@@ -74,6 +74,8 @@ $.fn.cssanimate.loopback = function(elem, cssanimates) {
     });
     // add function which loopback to the end of the queue
     elem.queue(function() {
+        // initialize the preset values because taking over the value over the animations
+        this.cache = new Style($(this));
         elem.cssanimate(cssanimates);
         elem.dequeue();
     });
