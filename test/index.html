@@ -275,22 +275,113 @@ test('Duration', function($box) {
     ;
 });
 
+group('CSS HOOK');
 
-$('.play-translate').click(function() {
-    $('.group-translate').trigger('play');
+test('Setter', function($box) {
+    // Not working
 });
 
-$('.play-rotate').click(function() {
-    $('.group-rotate').trigger('play');
+test('Gtter', function($box) {
+    // Not working
 });
 
-$('.play-scale').click(function() {
-    $('.group-scale').trigger('play');
+group('Loopback');
+
+test('Infinite loop', function($box) {
+    $box.perspective(100).cssanimate([
+        [{ x: 32 }],
+        [{ y: 32 }],
+        [{ z: -100 }]
+    ]);
+    
+    
+    ;
 });
 
-$('.play-skew').click(function() {
-    $('.group-skew').trigger('play');
+test('Stop after 2.4s', function($box) {
+    $box.perspective(100).cssanimate([
+        [{ x: 32 }],
+        [{ y: 32 }],
+        [{ z: -100 }]
+    ]);
+    setTimeout(function() {
+        $box.stop(true, true);
+    }, 2400);
 });
+
+group('Better experience');
+
+test('Prefix free', function($box) {
+    $box.cssanimate({
+        transform: 'translateX(32px)'
+    });
+});
+
+test('Data hold', function($box) {
+    $box
+        .cssanimate({ x: 32 })
+        .cssanimate({ y: 32 })
+});
+
+test('Alternate of data hold', function($box) {
+    $box.cssanimate({ x: 32 })
+    $box.cssanimate({ y: 32 })
+    ;
+});
+
+group('Alias');
+
+test('$.fn.to', function($box) {
+    $box.perspective(100)
+        .to([32, 0])
+        .to([0, 32, -100])
+        .to([32])
+});
+
+test('$.fn.rotate', function($box) {
+    $box.perspective(100)
+        .cssanimate({scale:2})
+        .rotate([100, 0]).rotate([400])
+        .rotate([0, 200, -100])
+});
+
+test('$.fn.scale', function($box) {
+    $box.scale([2])
+        .scale([1, 2])
+    
+    ;
+});
+
+test('$.fn.skew', function($box) {
+    $box.skew([45])
+        .skew([0, 45])
+        .skew([-45, -45])
+    ;
+});
+
+test('$.fn.perspective', function($box) {
+    $box.perspective(100)
+        .to([0, 0, -100])
+        .perspective(false)
+    ;
+});
+
+test('$.fn.origin', function($box) {
+    $box.origin('100%', '100%')
+        .rotate([0, 0, 60])
+        .origin('center', 'center')
+        .rotate([0, 0, 60])
+});
+
+
+$('.play-translate').click(function() { $('.group-translate').trigger('play'); });
+$('.play-rotate').click(function() { $('.group-rotate').trigger('play'); });
+$('.play-scale').click(function() { $('.group-scale').trigger('play'); });
+$('.play-skew').click(function() { $('.group-skew').trigger('play'); });
+$('.play-css').click(function() { $('.group-css').trigger('play'); });
+$('.play-loopback').click(function() { $('.group-loopback').trigger('play'); });
+$('.play-better').click(function() { $('.group-better').trigger('play'); });
+$('.play-alias').click(function() { $('.group-alias').trigger('play'); });
 
 </script>
 </body>

@@ -55,7 +55,6 @@ jQuery Transit is authored and maintained by Rico Sta. Cruz with help from it's 
         .addClass('play')
         .addClass('play-'+name.toLowerCase())
         .attr('value', 'play all');
-    console.log(e)
     $('.tests').append(e);
     
   }
