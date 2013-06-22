@@ -388,13 +388,13 @@ test('Infinite loop', function($box) {
         [{ x: 32 }],
         [{ y: 32 }],
         [{ z: -100 }]
-    ]);
-    
-    
+    ], function(i) {
+        $box.text(i);
+    })
     ;
 });
 
-test('Stop after 2.4s', function($box) {
+test('Stop after 1.2s', function($box) {
     $box.perspective(100).cssanimate([
         [{ x: 32 }],
         [{ y: 32 }],
@@ -402,7 +402,17 @@ test('Stop after 2.4s', function($box) {
     ]);
     setTimeout(function() {
         $box.stop(true, true);
-    }, 2400);
+    }, 1200);
+});
+
+test('Stop after 1step', function($box) {
+    $box.perspective(100).cssanimate([
+        [{ x: 32 }],
+        [{ y: 32 }],
+        [{ z: -100 }]
+    ], function() {
+        $box.stop(true, true);
+    });
 });
 
 group('Prefix free');

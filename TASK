@@ -1,6 +1,5 @@
 + css hook e.g. $('any').css('x', 100)
 + getter method e.g. $('any').css('x') // return 100 of upper value
-+ callback of loopback
 + prefix free // background: -webkit-gradient(linear, left top, left bottom, from(#990), to(#066));
 + relative value of to, rotate, scale and skew
 

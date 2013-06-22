@@ -5,14 +5,15 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     
     var property, style;
     
-    if (params.constructor === Array) {
-        this.cache = this.cache || new Style($(this));
-        return this.cssanimate.loopback(this, params);
-    }
-    
     if (typeof duration === 'function') {
         callback = duration;
         duration = undefined;
+    }
+    
+    if (params.constructor === Array) {
+        this.cache = this.cache || new Style($(this));
+        this.cssanimate.loopback.has_callback = !!callback;
+        return this.cssanimate.loopback(this, params, callback);
     }
     
     if (typeof delay === 'function') {
@@ -61,10 +62,17 @@ $.fn.cssanimate = function(params, duration, delay, ease, callback) {
     });
 };
 
+// hook of $.fn.stop
+$.fn._stop = $.fn.stop;
+$.fn.stop = function(clearQueue, jumpToEnd) {
+    if (this.cssanimate.loopback.has_callback) this.cssanimate.stop = true;
+    return $.fn._stop.apply(this, arguments);
+}
+
 // When you want to stop the loop, call $.fn.stop(true, true).
-$.fn.cssanimate.loopback = function(elem, cssanimates) {
+$.fn.cssanimate.loopback = function(elem, cssanimates, callback) {
     var _ = [];
-    // we have to copy deeply for avoid that the values is overridden
+    // We have to copy deeply for avoid that the values is overridden
     cssanimates.forEach(function(args, i) {
         _[i] = $.extend(true, {}, args);
     });
@@ -72,11 +80,19 @@ $.fn.cssanimate.loopback = function(elem, cssanimates) {
         // no problem even if some of the arguments are undefined
         elem.cssanimate(args[0], args[1], args[2], args[3], args[4]);
     });
-    // add function which loopback to the end of the queue
+    // Add function which loopback to the end of the queue
+    // And it is ok even if call $.fn.stop(true, true) in the callback function of the loopback
     elem.queue(function() {
+        this.step = ++this.step || 1;
+        if (typeof callback === 'function') $.proxy(callback, elem)(this.step);
+        if (elem.cssanimate.stop) {
+            elem.cssanimate.stop = false;
+            elem.dequeue();
+            return elem;
+        }
         // initialize the preset values because taking over the value over the animations
         this.cache = new Style($(this));
-        elem.cssanimate(cssanimates);
+        elem.cssanimate(cssanimates, callback);
         elem.dequeue();
     });
     return elem;
