@@ -100,6 +100,8 @@ Style.prototype.queue = function(callback) {
             }
             // alternate callback process of animate()
             if (typeof callback === 'function') $.proxy(callback, this)();
+            if ($(this).queue().length === 0) $.proxy(that.clear, this)();
+            this.is_animated = false;
             $(this).dequeue();
             return this;
         }
@@ -127,31 +129,8 @@ Style.prototype.queue = function(callback) {
 
 // private
 Style.prototype.parse = function(params) {
+    params = this.parseRelativeValue(params);
     for (var name in params) {
-        if (params[name].constructor === String) {
-            var m, v;
-            if (m = params[name].match(/^(\+|-)=([0-9]+)$/)) {
-                switch (name) {
-                    case 'x': v = this.position.x; break;
-                    case 'y': v = this.position.y; break;
-                    case 'z': v = this.position.z; break;
-                    case 'rotatex': v = this.rotation.x; break;
-                    case 'rotatey': v = this.rotation.y; break;
-                    case 'rotatez': v = this.rotation.z; break;
-                    case 'scalex': v = this.scale.x; break;
-                    case 'scaley': v = this.scale.y; break;
-                    case 'scalez': v = this.scale.z; break;
-                    case 'skewx': v = this.skew.x; break;
-                    case 'skewy': v = this.skew.y; break;
-                }
-                if (v) {
-                    switch (m[1]) {
-                        case '+': params[name] = add(v, (+m[2])); break;
-                        case '-': params[name] = sub(v, (+m[2])); break;
-                    }
-                }
-            }
-        }
         if (name == 'to') this.parseTranslate(params[name]);
         else if (name === 'x') this.position.x = +params[name];
         else if (name === 'y') this.position.y = +params[name];
@@ -171,6 +150,32 @@ Style.prototype.parse = function(params) {
         delete params[name];
     }
     return this;
+}
+
+Style.prototype.parseRelativeValue = function(params) {
+    for (var name in params) {
+        if (params[name].constructor !== String) continue;
+        var v, m = params[name].match(/^(\+|-)=([0-9]+)$/);
+        if (!m) continue;
+        switch (name) {
+            case 'x': v = this.position.x; break;
+            case 'y': v = this.position.y; break;
+            case 'z': v = this.position.z; break;
+            case 'rotatex': v = this.rotation.x; break;
+            case 'rotatey': v = this.rotation.y; break;
+            case 'rotatez': v = this.rotation.z; break;
+            case 'scalex': v = this.scale.x; break;
+            case 'scaley': v = this.scale.y; break;
+            case 'scalez': v = this.scale.z; break;
+            case 'skewx': v = this.skew.x; break;
+            case 'skewy': v = this.skew.y; break;
+        }
+        switch (m[1]) {
+            case '+': params[name] = add(v, (+m[2])); break;
+            case '-': params[name] = sub(v, (+m[2])); break;
+        }
+    }
+    return params;
 }
 
 Style.prototype.parseTranslate = function(to) {

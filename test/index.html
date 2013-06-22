@@ -17,13 +17,12 @@
     }
 
     // Dynamically load jQuery depending on what's passed on get params.
-    // if (jQueryVersion === "1.9.0b1") {
-    //     addScript("http://code.jquery.com/jquery-1.9.0b1.js");
-    //     addScript("http://code.jquery.com/jquery-migrate-1.0.0b1.js");
-    // } else {
-    //     addScript("http://ajax.googleapis.com/ajax/libs/jquery/"+jQueryVersion+"/jquery.min.js");
-    // }
-    addScript("jquery-1.9.0b1.js");
+    if (jQueryVersion === "1.9.0b1") {
+        addScript("http://code.jquery.com/jquery-1.9.0b1.js");
+        addScript("http://code.jquery.com/jquery-migrate-1.0.0b1.js");
+    } else {
+        addScript("http://ajax.googleapis.com/ajax/libs/jquery/"+jQueryVersion+"/jquery.min.js");
+    }
     addScript("../jquery.cssanimate.js");
 })();
 </script>
@@ -31,7 +30,7 @@
 <link href="style.css" rel="stylesheet" />
 </head>
 <body>
-<!-- <div class='use'>
+<div class='use'>
     Use:
     <a href='index.html?jquery=1.9.0b1'>jQ 1.9.0b1</a>
     <a href='index.html?jquery=1.8.1'>jQ 1.8</a>
@@ -39,7 +38,7 @@
     <a href='index.html?jquery=1.6.0'>jQ 1.6</a>
     <a href='index.html?jquery=1.5.0'>jQ 1.5</a>
     <button class='play-all'>Play all</button>
-</div> -->
+</div>
 <div class='tests'></div>
 <script>
 
@@ -161,9 +160,9 @@ test('Duration', function($box) {
 
 test('Origin', function($box) {
     $box.origin(0, 0)
-        .cssanimate({ rotate: 60
-            
-        })
+        .cssanimate({ rotate: 60 })
+        
+    ;
 });
 
 group('Scale');
@@ -275,6 +274,103 @@ test('Duration', function($box) {
     ;
 });
 
+group('Duration');
+
+test('Default 400ms', function($box) {
+    $box.cssanimate({ x:45, rotatez:45 })
+});
+
+test('0 duration', function($box) {
+    $box.cssanimate({ x:45, rotatez:45 }, 0)
+});
+
+test('As the option', function($box) {
+    $box.cssanimate({ x:45, rotatez:45, duration: 400 })
+});
+
+test('As the argument', function($box) {
+    $box.cssanimate({ x:45, rotatez:45 }, 400)
+});
+
+group('Delay');
+
+test('Default 0ms', function($box) {
+    $box.cssanimate({ x:45, rotatez:45 }, 400)
+});
+
+test('Default 0ms', function($box) {
+    $box.cssanimate({ x:45, rotatez:45 }, 400, 0)
+});
+
+test('400ms delay', function($box) {
+    var s = +new Date();
+    $box.cssanimate({ x:45, rotatez:45 }, 400, 400, function() {
+        $box.append((+new Date() - s - 400));
+    })
+});
+
+test('As the option', function($box) {
+    var s = +new Date();
+    $box.cssanimate({ x:45, rotatez:45, delay: 400 }, function() {
+        $box.append((+new Date() - s - 400));
+    })
+});
+
+test('As the argument', function($box) {
+    var s = +new Date();
+    $box.cssanimate({ x:45, rotatez:45 }, 400, 400, function() {
+        $box.append((+new Date() - s - 400));
+    })
+});
+
+group('Ease');
+
+test('Default', function($box) {
+    $box.cssanimate({ x:90 })
+});
+
+test('As the option', function($box) {
+    $box.cssanimate({ x:90, ease: 'snap' })
+});
+
+test('As the argument', function($box) {
+    $box.cssanimate({ x:90 }, 400, 0, 'snap')
+});
+
+test('in', function($box) {
+    $box.cssanimate({ x:90, ease: 'in' })
+});
+
+test('cubic-bezier', function($box) {
+    $box.cssanimate({ x: 90, ease: 'cubic-bezier(0,1,.5,1)' });
+});
+
+group('Callback');
+
+test('As the 2nd argument', function($box) {
+    $box.cssanimate({x:45},function() {
+        $box.append('OK');
+    })
+});
+
+test('As the 3rd argument', function($box) {
+    $box.cssanimate({x:45},400,function() {
+        $box.append('OK');
+    })
+});
+
+test('As the 4th argument', function($box) {
+    $box.cssanimate({x:45},400,400,function() {
+        $box.append('OK');
+    })
+});
+
+test('As the 5th argument', function($box) {
+    $box.cssanimate({x:45},400,400,'snap',
+        function() { $box.append('OK');
+    })
+});
+
 group('CSS HOOK');
 
 test('Setter', function($box) {
@@ -309,13 +405,15 @@ test('Stop after 2.4s', function($box) {
     }, 2400);
 });
 
-group('Better experience');
+group('Prefix free');
 
 test('Prefix free', function($box) {
     $box.cssanimate({
         transform: 'translateX(32px)'
     });
 });
+
+group('Better experience');
 
 test('Data hold', function($box) {
     $box
@@ -373,15 +471,135 @@ test('$.fn.origin', function($box) {
         .rotate([0, 0, 60])
 });
 
+group('Relative value');
+
+test('x with \'+=\'', function($box) {
+    $box
+        .cssanimate({ x: '+=32'})
+});
+
+test('x with \'-=\'', function($box) {
+    $box
+        .cssanimate({ x: '-=32'})
+});
+
+test('y with \'+=\'', function($box) {
+    $box
+        .cssanimate({ y: '+=32'})
+});
+
+test('y with \'-=\'', function($box) {
+    $box
+        .cssanimate({ y: '-=32'})
+});
+
+test('z with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ z: '+=32'})
+});
+
+test('z with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ z: '-=32'})
+});
+
+test('rotatex with \'+=\'', function($box) {
+    $box
+        .cssanimate({ rotatex: '+=180'})
+});
+
+test('rotatex with \'-=\'', function($box) {
+    $box
+        .cssanimate({ rotatex: '-=180'})
+});
+
+test('rotatey with \'+=\'', function($box) {
+    $box
+        .cssanimate({ rotatey: '+=180'})
+});
+
+test('rotatey with \'-=\'', function($box) {
+    $box
+        .cssanimate({ rotatey: '-=180'})
+});
+
+test('rotatez with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotatez: '+=180'})
+});
+
+test('rotatez with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotatez: '-=180'})
+});
+
+test('scalex with \'+=\'', function($box) {
+    $box
+        .cssanimate({ scalex: '+=1'})
+});
+
+test('scalex with \'-=\'', function($box) {
+    $box
+        .cssanimate({ scalex: '-=1'})
+});
+
+test('scaley with \'+=\'', function($box) {
+    $box
+        .cssanimate({ scaley: '+=1'})
+});
+
+test('scaley with \'-=\'', function($box) {
+    $box
+        .cssanimate({ scaley: '-=1'})
+});
+
+test('skewx with \'+=\'', function($box) {
+    $box
+        .cssanimate({ skewx: '+=60'})
+});
+
+test('skewx with \'-=\'', function($box) {
+    $box
+        .cssanimate({ skewx: '-=60'})
+});
+
+test('skewy with \'+=\'', function($box) {
+    $box
+        .cssanimate({ skewy: '+=60'})
+});
+
+test('skewy with \'-=\'', function($box) {
+    $box
+        .cssanimate({ skewy: '-=60'})
+});
+
+group('Event');
+
+test('rotate with click', function($box) {
+    var i = 0;
+    $box.click(function() {
+        $box.cssanimate({ rotatez: '+=90'}, 
+        function() {
+            $box.text(++i * 90)
+        })
+    })
+});
 
 $('.play-translate').click(function() { $('.group-translate').trigger('play'); });
 $('.play-rotate').click(function() { $('.group-rotate').trigger('play'); });
 $('.play-scale').click(function() { $('.group-scale').trigger('play'); });
 $('.play-skew').click(function() { $('.group-skew').trigger('play'); });
+$('.play-callback').click(function() { $('.group-callback').trigger('play'); });
+$('.play-duration').click(function() { $('.group-duration').trigger('play'); });
+$('.play-delay').click(function() { $('.group-delay').trigger('play'); });
+$('.play-ease').click(function() { $('.group-ease').trigger('play'); });
 $('.play-css').click(function() { $('.group-css').trigger('play'); });
 $('.play-loopback').click(function() { $('.group-loopback').trigger('play'); });
+$('.play-prefix').click(function() { $('.group-prefix').trigger('play'); });
 $('.play-better').click(function() { $('.group-better').trigger('play'); });
 $('.play-alias').click(function() { $('.group-alias').trigger('play'); });
+$('.play-relative').click(function() { $('.group-relative').trigger('play'); });
+$('.play-event').click(function() { $('.group-event').trigger('play'); });
 
 </script>
 </body>
