@@ -129,7 +129,7 @@ Style.prototype.queue = function(callback) {
 
 // private
 Style.prototype.parse = function(params) {
-    params = this.parseRelativeValue(params);
+    this.parseRelativeValue(params);
     for (var name in params) {
         if (name == 'to') this.parseTranslate(params[name]);
         else if (name === 'x') this.position.x = +params[name];
@@ -152,30 +152,59 @@ Style.prototype.parse = function(params) {
     return this;
 }
 
+Style.prototype.matchRelativeValue = function(value) {
+    return value.match(/^(\+=|-=)([0-9]+)$/);
+}
+
 Style.prototype.parseRelativeValue = function(params) {
-    for (var name in params) {
-        if (params[name].constructor !== String) continue;
-        var v, m = params[name].match(/^(\+|-)=([0-9]+)$/);
-        if (!m) continue;
-        switch (name) {
-            case 'x': v = this.position.x; break;
-            case 'y': v = this.position.y; break;
-            case 'z': v = this.position.z; break;
-            case 'rotatex': v = this.rotation.x; break;
-            case 'rotatey': v = this.rotation.y; break;
-            case 'rotatez': v = this.rotation.z; break;
-            case 'scalex': v = this.scale.x; break;
-            case 'scaley': v = this.scale.y; break;
-            case 'scalez': v = this.scale.z; break;
-            case 'skewx': v = this.skew.x; break;
-            case 'skewy': v = this.skew.y; break;
-        }
-        switch (m[1]) {
-            case '+': params[name] = add(v, (+m[2])); break;
-            case '-': params[name] = sub(v, (+m[2])); break;
+    var m, expr = function(left, op, right) {
+        switch (op) {
+            case '+=': return add(left, right);
+            case '-=': return sub(left, right);
         }
     }
-    return params;
+    for (var name in params) {
+        if (params[name].constructor === String) {
+            var m;
+            if (!(m = this.matchRelativeValue(params[name]))) continue;
+            switch (name) {
+                case 'to': params[name] = expr(this.position.x, m[1], +m[2]); continue;
+                case 'x': params[name] = expr(this.position.x, m[1], +m[2]); continue;
+                case 'y': params[name] = expr(this.position.y, m[1], +m[2]); continue;
+                case 'z': params[name] = expr(this.position.z, m[1], +m[2]); continue;
+                case 'rotate': params[name] = expr(this.rotation.z, m[1], +m[2]); continue;
+                case 'rotatex': params[name] = expr(this.rotation.x, m[1], +m[2]); continue;
+                case 'rotatey': params[name] = expr(this.rotation.y, m[1], +m[2]); continue;
+                case 'rotatez': params[name] = expr(this.rotation.z, m[1], +m[2]); continue;
+                case 'scale': params[name] = [expr(this.scale.x, m[1], +m[2]), expr(this.scale.y, m[1], +m[2])]; continue;
+                case 'scalex': params[name] = expr(this.scale.x, m[1], +m[2]); continue;
+                case 'scaley': params[name] = expr(this.scale.y, m[1], +m[2]); continue;
+                case 'scalez': params[name] = expr(this.scale.z, m[1], +m[2]); continue;
+                case 'skew': params[name] = [expr(this.skew.x, m[1], +m[2]), expr(this.skew.y, m[1], +m[2])]; continue;
+                case 'skewx': params[name] = expr(this.skew.x, m[1], +m[2]); continue;
+                case 'skewy': params[name] = expr(this.skew.y, m[1], +m[2]); continue;
+            }
+        }
+        if (name === 'to' || name === 'rotate' || name === 'scale' || name === 'skew') {
+            var v, m;
+            switch (name) {
+                case 'to': v = this.position; break;
+                case 'rotate': v = this.rotation; break;
+                case 'scale': v = this.scale; break;
+                case 'skew': v = this.skew; break;
+            }
+            if (params[name].constructor === Array) {
+                params[name] = {
+                    x: params[name][0],
+                    y: params[name][1],
+                    z: params[name][2]
+                };
+            }
+            if (params[name].x !== undefined) if (m = this.matchRelativeValue(params[name].x)) params[name].x = expr(v.x, m[1], +m[2]);
+            if (params[name].y !== undefined) if (m = this.matchRelativeValue(params[name].y)) params[name].y = expr(v.y, m[1], +m[2]);
+            if (params[name].z !== undefined) if (m = this.matchRelativeValue(params[name].z)) params[name].z = expr(v.z, m[1], +m[2]);
+        }
+    }
 }
 
 Style.prototype.parseTranslate = function(to) {

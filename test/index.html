@@ -483,104 +483,252 @@ test('$.fn.origin', function($box) {
 
 group('Relative value');
 
+test('to with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ to: ['+=32', '+=32', '+=32']})
+});
+
+test('to with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ to: ['-=32', '-=32', '-=32']})
+});
+
+test('to with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ to: { x: '+=32', y: '+=32', z: '+=32' }})
+});
+
+test('to with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ to: { x: '-=32', y: '-=32', z: '-=32' }})
+});
+
+test('to with \'+=\'', function($box) {
+    $box
+        
+        .cssanimate({ to: '+=32'})
+});
+
+test('to with \'-=\'', function($box) {
+    $box
+        
+        .cssanimate({ to: '-=32'})
+});
+
 test('x with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ x: '+=32'})
 });
 
 test('x with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ x: '-=32'})
 });
 
 test('y with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ y: '+=32'})
 });
 
 test('y with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ y: '-=32'})
 });
 
 test('z with \'+=\'', function($box) {
-    $box.perspective(100)
+    $box
+        .perspective(100)
         .cssanimate({ z: '+=32'})
 });
 
 test('z with \'-=\'', function($box) {
-    $box.perspective(100)
+    $box
+        .perspective(100)
         .cssanimate({ z: '-=32'})
+});
+
+test('rotate with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotate: ['+=32', '+=32', '+=32']})
+});
+
+test('rotate with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotate: ['-=32', '-=32', '-=32']})
+});
+
+test('rotate with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotate: { x: '+=32', y: '+=32', z: '+=32' }})
+});
+
+test('rotate with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ rotate: { x: '-=32', y: '-=32', z: '-=32' }})
+});
+
+test('rotate with \'+=\'', function($box) {
+    $box
+        
+        .cssanimate({ rotate: '+=32'})
+});
+
+test('rotate with \'-=\'', function($box) {
+    $box
+        
+        .cssanimate({ rotate: '-=32'})
 });
 
 test('rotatex with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ rotatex: '+=180'})
 });
 
 test('rotatex with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ rotatex: '-=180'})
 });
 
 test('rotatey with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ rotatey: '+=180'})
 });
 
 test('rotatey with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ rotatey: '-=180'})
 });
 
 test('rotatez with \'+=\'', function($box) {
-    $box.perspective(100)
+    $box
+        .perspective(100)
         .cssanimate({ rotatez: '+=180'})
 });
 
 test('rotatez with \'-=\'', function($box) {
-    $box.perspective(100)
+    $box
+        .perspective(100)
         .cssanimate({ rotatez: '-=180'})
 });
 
 test('scalex with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ scalex: '+=1'})
 });
 
 test('scalex with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ scalex: '-=1'})
 });
 
 test('scaley with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ scaley: '+=1'})
 });
 
 test('scaley with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ scaley: '-=1'})
+});
+
+test('scale with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ scale: ['+=1', '+=1', '+=1']})
+});
+
+test('scale with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ scale: ['-=1', '-=1', '-=1']})
+});
+
+test('scale with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ scale: { x: '+=1', y: '+=1', z: '+=1' }})
+});
+
+test('scale with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ scale: { x: '-=1', y: '-=1', z: '-=1' }})
+});
+
+test('scale with \'+=\'', function($box) {
+    $box
+        
+        .cssanimate({ scale: '+=1'})
+});
+
+test('scale with \'-=\'', function($box) {
+    $box
+        
+        .cssanimate({ scale: '-=1'})
 });
 
 test('skewx with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ skewx: '+=60'})
 });
 
 test('skewx with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ skewx: '-=60'})
 });
 
 test('skewy with \'+=\'', function($box) {
     $box
+        
         .cssanimate({ skewy: '+=60'})
 });
 
 test('skewy with \'-=\'', function($box) {
     $box
+        
         .cssanimate({ skewy: '-=60'})
+});
+
+test('skew with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ skew: ['+=32', '+=32']})
+});
+
+test('skew with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ skew: ['-=32', '-=32']})
+});
+
+test('skew with \'+=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ skew: { x: '+=32', y: '+=32' }})
+});
+
+test('skew with \'-=\'', function($box) {
+    $box.perspective(100)
+        .cssanimate({ skew: { x: '-=32', y: '-=32' }})
+});
+
+test('skew with \'+=\'', function($box) {
+    $box
+        
+        .cssanimate({ skew: '+=32'})
+});
+
+test('skew with \'-=\'', function($box) {
+    $box
+        
+        .cssanimate({ skew: '-=32'})
 });
 
 group('Event');
