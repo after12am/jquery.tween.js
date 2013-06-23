@@ -278,10 +278,12 @@ group('Duration');
 
 test('Default 400ms', function($box) {
     $box.cssanimate({ x:45, rotatez:45 })
+    ;
 });
 
 test('0 duration', function($box) {
     $box.cssanimate({ x:45, rotatez:45 }, 0)
+    ;
 });
 
 test('As the option', function($box) {
@@ -290,16 +292,25 @@ test('As the option', function($box) {
 
 test('As the argument', function($box) {
     $box.cssanimate({ x:45, rotatez:45 }, 400)
+    ;
 });
 
 group('Delay');
 
 test('Default 0ms', function($box) {
-    $box.cssanimate({ x:45, rotatez:45 }, 400)
+    $box
+        .cssanimate({ x:45, rotatez:45 }, 400)
+    
+    
+    ;
 });
 
 test('Default 0ms', function($box) {
-    $box.cssanimate({ x:45, rotatez:45 }, 400, 0)
+    $box
+        .cssanimate({x:45, rotatez:45}, 400, 0)
+    
+    
+    ;
 });
 
 test('400ms delay', function($box) {
@@ -326,23 +337,33 @@ test('As the argument', function($box) {
 group('Ease');
 
 test('Default', function($box) {
-    $box.cssanimate({ x:90 })
+    $box.cssanimate({
+        x:90
+    })
 });
 
 test('As the option', function($box) {
-    $box.cssanimate({ x:90, ease: 'snap' })
+    $box.cssanimate({
+        x:90, ease: 'snap'
+    })
 });
 
 test('As the argument', function($box) {
-    $box.cssanimate({ x:90 }, 400, 0, 'snap')
+    $box.cssanimate(
+        { x:90 }, 400, 0, 'snap'
+    )
 });
 
 test('in', function($box) {
-    $box.cssanimate({ x:90, ease: 'in' })
+    $box.cssanimate({
+        x:90, ease: 'in'
+    })
 });
 
 test('cubic-bezier', function($box) {
-    $box.cssanimate({ x: 90, ease: 'cubic-bezier(0,1,.5,1)' });
+    $box.cssanimate({
+        x: 90, ease: 'cubic-bezier(0,1,.5,1)'
+    });
 });
 
 group('Callback');
@@ -700,12 +721,14 @@ test('skewy with \'-=\'', function($box) {
 });
 
 test('skew with \'+=\'', function($box) {
-    $box.perspective(100)
+    $box
+        .perspective(100)
         .cssanimate({ skew: ['+=32', '+=32']})
 });
 
 test('skew with \'-=\'', function($box) {
-    $box.perspective(100)
+    $box
+        .perspective(100)
         .cssanimate({ skew: ['-=32', '-=32']})
 });
 

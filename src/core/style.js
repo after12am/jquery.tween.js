@@ -185,24 +185,27 @@ Style.prototype.parseRelativeValue = function(params) {
                 case 'skewy': params[name] = expr(this.skew.y, m[1], +m[2]); continue;
             }
         }
-        if (name === 'to' || name === 'rotate' || name === 'scale' || name === 'skew') {
-            var v, m;
-            switch (name) {
-                case 'to': v = this.position; break;
-                case 'rotate': v = this.rotation; break;
-                case 'scale': v = this.scale; break;
-                case 'skew': v = this.skew; break;
+        if (params[name].constructor === Array
+         || params[name].constructor === Object) {
+            if (name === 'to' || name === 'rotate' || name === 'scale' || name === 'skew') {
+                var v, m;
+                switch (name) {
+                    case 'to': v = this.position; break;
+                    case 'rotate': v = this.rotation; break;
+                    case 'scale': v = this.scale; break;
+                    case 'skew': v = this.skew; break;
+                }
+                if (params[name].constructor === Array) {
+                    params[name] = {
+                        x: params[name][0],
+                        y: params[name][1],
+                        z: params[name][2]
+                    };
+                }
+                if (params[name].x !== undefined) if (params[name].x.constructor === String) if (m = this.matchRelativeValue(params[name].x)) params[name].x = expr(v.x, m[1], +m[2]);
+                if (params[name].y !== undefined) if (params[name].y.constructor === String) if (m = this.matchRelativeValue(params[name].y)) params[name].y = expr(v.y, m[1], +m[2]);
+                if (params[name].z !== undefined) if (params[name].z.constructor === String) if (m = this.matchRelativeValue(params[name].z)) params[name].z = expr(v.z, m[1], +m[2]);
             }
-            if (params[name].constructor === Array) {
-                params[name] = {
-                    x: params[name][0],
-                    y: params[name][1],
-                    z: params[name][2]
-                };
-            }
-            if (params[name].x !== undefined) if (m = this.matchRelativeValue(params[name].x)) params[name].x = expr(v.x, m[1], +m[2]);
-            if (params[name].y !== undefined) if (m = this.matchRelativeValue(params[name].y)) params[name].y = expr(v.y, m[1], +m[2]);
-            if (params[name].z !== undefined) if (m = this.matchRelativeValue(params[name].z)) params[name].z = expr(v.z, m[1], +m[2]);
         }
     }
 }
