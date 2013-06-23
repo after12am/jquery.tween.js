@@ -3,73 +3,24 @@ var mouseover = false;
 $('.wrapper').mouseover(function() {
 });
 
-/*
-$('#translateX .thumb .box').mouseover(function() {
-    $(this).cssanimate({ x: 30 });
-}).mouseout(function() {
-    $(this).cssanimate({ }); // cssanimate() equals cssanimate({ x: 0 })
-});
-
-$('#translateY .thumb .box').mouseover(function() {
-    $(this).cssanimate({ y: 30 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
-});
-*/
 $('#translateXY .thumb .box').mouseover(function() {
     $(this).cssanimate({ x: 30, y: 30 });
 }).mouseout(function() {
-    $(this).cssanimate({ });
-});
-/*
-$('#rotateX .thumb .box').mouseover(function() {
-    $(this).cssanimate({ rotatex: 180 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
+    $(this).cssanimate({ x: 0, y: 0});
 });
 
-$('#rotateY .thumb .box').mouseover(function() {
-    $(this).cssanimate({ rotatey: 180 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
-});
-*/
 $('#rotateXYZ .thumb .box').mouseover(function() {
-    $(this).cssanimate({ rotate: [1, 1, 0, 180] });
+    $(this).cssanimate({ rotate: [90, 90] });
 }).mouseout(function() {
-    $(this).cssanimate({ });
-});
-/*
-$('#scaleX .thumb .box').mouseover(function() {
-    $(this).cssanimate({ scalex: 4 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
+    $(this).cssanimate({ rotate: [0, 0] });
 });
 
-$('#scaleY .thumb .box').mouseover(function() {
-    $(this).cssanimate({ scaley: 4 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
-});
-*/
 $('#scaleXY .thumb .box').mouseover(function() {
     $(this).cssanimate({ scalex: 4, scaley: 4 });
 }).mouseout(function() {
-    $(this).cssanimate({ });
-});
-/*
-$('#skewX .thumb .box').mouseover(function() {
-    $(this).cssanimate({ skewx: 45 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
+    $(this).cssanimate({ scalex: 1, scaley: 1 });
 });
 
-$('#skewY .thumb .box').mouseover(function() {
-    $(this).cssanimate({ skewy: 45 });
-}).mouseout(function() {
-    $(this).cssanimate({ });
-});
-*/
 $('#skewXY .thumb .box').mouseover(function() {
     $(this).cssanimate({ skewx: 45, skewy: 45 });
 }).mouseout(function() {
@@ -81,13 +32,7 @@ $('#opacity .thumb .box').mouseover(function() {
 }).mouseout(function() {
     $(this).cssanimate({ opacity: 1 });
 });
-/*
-$('#width .thumb .box').mouseover(function() {
-    $(this).cssanimate({ width: 120 });
-}).mouseout(function() {
-    $(this).cssanimate({ width: 30 });
-});
-*/
+
 $('#radius .thumb .box').mouseover(function() {
     $(this).cssanimate({ "border-radius": 30 });
 }).mouseout(function() {
@@ -102,7 +47,7 @@ $('.method-chaine .box').mouseover(function() {
         .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
         .cssanimate({ x: 0, y: 0, scale: 1 })
 }).mouseout(function() {
-    $(this).cssanimate({ });
+    $(this).cssanimate({ x: 0, y: 0, scale: 1, rotatez: 0});
 });
 
 $('.transformation-origins .box').mouseover(function() {
@@ -124,7 +69,13 @@ $('.ease-example .box').mouseover(function() {
 $('.perspective .box').mouseover(function() {
     $(this).perspective(100).cssanimate({ x: 50, z: 50, rotatey: 60 })
 }).mouseout(function() {
-    $(this).cssanimate({});
+    $(this).cssanimate({ x: 0, z: 0, rotatey: 0 });
+});
+
+$('.relative-value .box').mouseover(function() {
+    $(this).perspective(100).cssanimate({ z: '-=100' }, 200)
+}).mouseout(function() {
+    $(this).cssanimate({ z: 0 }, 200);
 });
 
 $('.css-property .box').mouseover(function() {
@@ -136,9 +87,16 @@ $('.css-property .box').mouseover(function() {
 });
 
 $('.prefix-free .box').mouseover(function() {
-    $(this).cssanimate({ opacity: 0 });
+    $(this).cssanimate({ transform: 'translateX(44px)' });
 }).mouseout(function() {
-    $(this).cssanimate({ opacity: 1 });
+    $(this).cssanimate({ transform: 'translateX(0px)' });
+});
+
+$('.getter-setter .box').mouseover(function() {
+    $(this).css('rotatez', 45);
+    $(this).text($(this).css('rotatez'));
+}).mouseout(function() {
+    $(this).cssanimate({ rotatez: 0 }).text('');
 });
 
 $('.loopback-example .box').mouseover(function() {
@@ -155,6 +113,6 @@ $('.loopback-example .box').mouseover(function() {
 
 $('.loopback-example .stop').click(function() {
     $('.loopback-example .box').stop(true, true);
-    $('.loopback-example .box').cssanimate({});
+    $('.loopback-example .box').cssanimate({ to: [0, 0, 0], scale: [1, 1, 1], rotate: [0, 0, 0]});
     return false;
 });
