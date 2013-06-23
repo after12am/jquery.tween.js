@@ -34,6 +34,8 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support `2d/3d` transformation
 * support `loopback` which helps you to make infinite loop animation easily
 * support `prefix free` which free you from vendor prefix hell
+* support `relative value` which allows you to start with `+=` or `-=`
+* support [`css hooks`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/hook.js) which provides a way to define functions for getting and setting particular CSS values
 
 ## Notes
 
