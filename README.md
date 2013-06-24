@@ -35,8 +35,9 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support `loopback` which helps you to make infinite loop animation easily
 * support `prefix free` which free you from vendor prefix hell
 * support `relative value` which allows you to start with `+=` or `-=`
-* support [`$.fn.css`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/hook.js) which helps you to get the value of a style property for the first element in the set of matched elements and set css properties for every matched element
+* support [`$.fn.css`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/hook.js) which helps you to get the value of a style property for the first element in the set of matched elements and helps you to set css properties for every matched element
 
 ## Notes
 
 * If main usage of your app is to animate lots of elements, more than 100 elements, at the same time in pc browser, I recommend you to use $.fn.animate.
+* If rotate around x-axis or y-axis in `safari`, you should set perspective property like `$('any').perspective(100).cssanimate({ rotatey: '-=180'});` before rotating the element. Because safari treats as 3d.

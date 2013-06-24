@@ -8,28 +8,29 @@ var Style = function(elem) {
 };
 
 // return vendor prefix
-Style.prefix = (function() {
-    var e = $('<div>')[0];
-    var prefixes = {
-        WebkitTransition: '-webkit-',
-        MozTransition: '-moz-',
-        MSTransition: '-ms-',
-        OTransition: '-o-'
-    };
-    for (p in prefixes) if(p in e.style) return prefixes[p];
-    return '';
+Style.prefix = (function () {
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var pre = (Array.prototype.slice
+            .call(styles)
+            .join('')
+            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1];
+    var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+    return str('-{0}-').format(pre);
 })();
 
 Style.transitionEvent = (function() {
     var e = $('<div>')[0];
+    // firefox supports from v4.0
+    // see // https://developer.mozilla.org/en-US/docs/Web/Reference/Events/transitionend
     var transitions = {
-        WebkitTransition: 'webkitTransitionEnd',
-        MozTransition: 'mozTransitionend',
-        MSTransition: 'msTransitionEnd',
-        OTransition: 'oTransitionEnd',
-        Transition: 'transitionEnd'
+        '-webkit-': 'webkitTransitionEnd',
+        '-moz-': 'transitionend',
+        '-ms-': 'msTransitionEnd',
+        '-o-': 'webkitTransitionEnd'// opera is fork of webkit now
     };
-    for (var t in transitions) if(t in e.style) return transitions[t];
+    for (var t in transitions) if (Style.prefix === t) return transitions[t];
+    if('transitionend' in e.style) return 'transitionend';
     return null;
 })();
 
@@ -77,9 +78,9 @@ Style.prototype.queue = function(callback) {
         var animated = function() {
             $(this).unbind(Style.transitionEvent, $.proxy(animated, this));
             if (typeof callback === 'function') $.proxy(callback, this)();
-            if ($(this).queue().length === 0) $.proxy(that.clear, this)();
             this.is_animated = false;
             $(this).dequeue();
+            if ($(this).queue().length === 0) $.proxy(that.clear, this)();
         }
         // could animate with this even just after element have been appended to dom
         var i = 0;
@@ -292,6 +293,13 @@ Style.prototype.build = function(transition, params) {
 }
 
 Style.prototype.buildTranslate = function() {
+    // opera does not support 3d transformation, only support 2d transformation
+    if (Style.prefix === '-o-') {
+        return str('translate({0}px,{1}px)').format(
+            this.position.x,
+            this.position.y
+        );
+    }
     return str('translate3d({0}px,{1}px,{2}px)').format(
         this.position.x,
         this.position.y,
@@ -300,6 +308,12 @@ Style.prototype.buildTranslate = function() {
 }
 
 Style.prototype.buildRotate = function() {
+    // opera does not support 3d transformation, only support 2d transformation
+    if (Style.prefix === '-o-') {
+        return str('rotate({0}deg)').format(
+            this.rotation.z
+        );
+    }
     return str('rotateX({0}deg) rotateY({1}deg) rotateZ({2}deg)').format(
         this.rotation.x,
         this.rotation.y,
@@ -308,6 +322,14 @@ Style.prototype.buildRotate = function() {
 }
 
 Style.prototype.buildScale = function() {
+    // opera does not support 3d transformation, only support 2d transformation
+    if (Style.prefix === '-o-') {
+        return str('scale({0},{1})').format(
+            this.scale.x,
+            this.scale.y
+        );
+    }
+    // z-axis seems not to work in any browser
     return str('scale3d({0},{1},{2})').format(
         this.scale.x,
         this.scale.y,

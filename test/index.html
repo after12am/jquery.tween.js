@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>jQuery Transit tests</title>
+<title>jQuery cssanimate tests</title>
 <script>
 /*
  * Dynamic script loading
@@ -392,16 +392,6 @@ test('As the 5th argument', function($box) {
     })
 });
 
-group('CSS HOOK');
-
-test('Setter', function($box) {
-    // Not working
-});
-
-test('Gtter', function($box) {
-    // Not working
-});
-
 group('Loopback');
 
 test('Infinite loop', function($box) {
@@ -606,25 +596,25 @@ test('rotate with \'-=\'', function($box) {
 
 test('rotatex with \'+=\'', function($box) {
     $box
-        
+        .perspective(100)
         .cssanimate({ rotatex: '+=180'})
 });
 
 test('rotatex with \'-=\'', function($box) {
     $box
-        
+        .perspective(100)
         .cssanimate({ rotatex: '-=180'})
 });
 
 test('rotatey with \'+=\'', function($box) {
     $box
-        
+        .perspective(100)
         .cssanimate({ rotatey: '+=180'})
 });
 
 test('rotatey with \'-=\'', function($box) {
     $box
-        
+        .perspective(100)
         .cssanimate({ rotatey: '-=180'})
 });
 
@@ -856,7 +846,6 @@ $('.play-callback').click(function() { $('.group-callback').trigger('play'); });
 $('.play-duration').click(function() { $('.group-duration').trigger('play'); });
 $('.play-delay').click(function() { $('.group-delay').trigger('play'); });
 $('.play-ease').click(function() { $('.group-ease').trigger('play'); });
-$('.play-css').click(function() { $('.group-css').trigger('play'); });
 $('.play-loopback').click(function() { $('.group-loopback').trigger('play'); });
 $('.play-prefix').click(function() { $('.group-prefix').trigger('play'); });
 $('.play-better').click(function() { $('.group-better').trigger('play'); });
