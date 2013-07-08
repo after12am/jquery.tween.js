@@ -10,10 +10,11 @@ var Style = function(elem) {
 // return vendor prefix
 Style.prefix = (function () {
     var styles = window.getComputedStyle(document.documentElement, '');
-    var pre = (Array.prototype.slice
-            .call(styles)
-            .join('')
-            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    var pre = (Array.prototype
+        .slice
+        .call(styles)
+        .join('')
+        .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
     )[1];
     var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
     return str('-{0}-').format(pre);
@@ -293,13 +294,7 @@ Style.prototype.build = function(transition, params) {
 }
 
 Style.prototype.buildTranslate = function() {
-    // opera does not support 3d transformation, only support 2d transformation
-    if (Style.prefix === '-o-') {
-        return str('translate({0}px,{1}px)').format(
-            this.position.x,
-            this.position.y
-        );
-    }
+    if (Style.prefix === '-o-') return this.buildOTranslate();
     return str('translate3d({0}px,{1}px,{2}px)').format(
         this.position.x,
         this.position.y,
@@ -307,13 +302,16 @@ Style.prototype.buildTranslate = function() {
     );
 }
 
+// opera does not support 3d transformation, only support 2d transformation
+Style.prototype.buildOTranslate = function() {
+    return str('translate({0}px,{1}px)').format(
+        this.position.x,
+        this.position.y
+    );
+}
+
 Style.prototype.buildRotate = function() {
-    // opera does not support 3d transformation, only support 2d transformation
-    if (Style.prefix === '-o-') {
-        return str('rotate({0}deg)').format(
-            this.rotation.z
-        );
-    }
+    if (Style.prefix === '-o-') return this.buildORotate();
     return str('rotateX({0}deg) rotateY({1}deg) rotateZ({2}deg)').format(
         this.rotation.x,
         this.rotation.y,
@@ -321,19 +319,17 @@ Style.prototype.buildRotate = function() {
     );
 }
 
+// opera does not support 3d transformation, only support 2d transformation
+Style.prototype.buildORotate = function() {
+    return str('rotate({0}deg)').format(
+        this.rotation.z
+    );
+}
+
 Style.prototype.buildScale = function() {
-    // opera does not support 3d transformation, only support 2d transformation
-    if (Style.prefix === '-o-') {
-        return str('scale({0},{1})').format(
-            this.scale.x,
-            this.scale.y
-        );
-    }
-    // z-axis seems not to work in any browser
-    return str('scale3d({0},{1},{2})').format(
+    return str('scale({0},{1})').format(
         this.scale.x,
-        this.scale.y,
-        this.scale.z
+        this.scale.y
     );
 }
 
