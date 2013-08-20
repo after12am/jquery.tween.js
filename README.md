@@ -35,7 +35,7 @@ $('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
 * support `loopback` which helps you to make infinite loop animation easily
 * support `prefix free` which free you from vendor prefix hell
 * support `relative value` which allows you to start with `+=` or `-=`
-* support [`$.fn.css`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/hook.js) which helps you to get the value of a style property for the first element in the set of matched elements and helps you to set css properties for every matched element
+* support [`$.fn.css`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/supports/hook.js) which helps you to get the value of a style property for the first element in the set of matched elements and helps you to set css properties for every matched element
 
 ## Notes
 
