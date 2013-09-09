@@ -48,10 +48,11 @@ Style.property = function(name) {
 }
 
 Style.prototype.compile = function(transition, params) {
+  _ = $.extend(true, {}, params);
   // parse cssanimate properties and take over the values
-  this.parse(params);
+  this.parse(_);
   // deep copy for avoiding to overwrite by the time lag
-  this.executable = $.extend(true, {}, this.build(transition, params));
+  this.executable = $.extend(true, {}, this.build(transition, _));
   return this;
 }
 
