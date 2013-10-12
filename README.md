@@ -3,19 +3,19 @@ jquery.tween.js
 
 
 |              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
-|-------------:|:---------:|:---------:|:---------:|:---------:|:-------:|:---------:|:-------:|:-------:|:-------:|
-| x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         | ![OK][OK] |         |         |         |
-| y            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         | ![OK][OK] |         |         |         |
-| z            | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |         |           |         |         |         |
-| rotatex      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] |         |           |         |         |         |
-| rotatey      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] |         |           |         |         |         |
-| rotatez      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |           |         |         |         |
-| scalex       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |           |         |         |         |
-| scaley       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |           |         |         |         |
-| skewx        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |           |         |         |         |
-| skewy        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |           |         |         |         |
+|:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:-------:|:-------:|:-------:|
+| x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |         |         |
+| y            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |         |         |
+| z            | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |           |         |         |         |
+| rotatex      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] |           |         |         |         |
+| rotatey      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] |           |         |         |         |
+| rotatez      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |         |         |         |
+| scalex       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |         |         |         |
+| scaley       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |         |         |         |
+| skewx        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |         |         |         |
+| skewy        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |         |         |         |
 
-<!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10    | IE9     | IE8     | IE7     | IE6     | -->
+<!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9     | IE8     | IE7     | IE6     | -->
 
 
 [chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
