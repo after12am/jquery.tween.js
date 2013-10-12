@@ -1,43 +1,25 @@
-[jQuery cssanimate](http://after12am.github.io/jquery.cssanimate.js/)
-========================================================================
+[jquery.cssanimate.js](http://after12am.github.io/jquery.cssanimate.js/)
 
-jquery.cssanimate.js is a jquery plugin that provides a stylish and cute animation especially for your smartphone app using css3.
-Using css3 in dom animation will have been excellent select. Because css3 would give your app lightness and interactivity compared with javascript.
-However, it is a bit difficult to controll under dynamic usage. In view of this, I have designed jquery.cssanimate.js to take advantage of knowledge of jquery of you.
 
-## Usage
+|              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
+|:------------:|:-------:|:-------:|:--------:|:--------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Translate 2D |         |         |          |          |         |         |         |         |         |
+| Translate 3D |         |         |          |          |         |         |         |         |         |
+| Rotate 2D    |         |         |          |          |         |         |         |         |         |
+| Rotate 3D    |         |         |          |          |         |         |         |         |         |
+| Scale 2D     |         |         |          |          |         |         |         |         |         |
+| Scale 3D     |         |         |          |          |         |         |         |         |         |
+| Skew         |         |         |          |          |         |         |         |         |         |
 
-Usage is very simple. It has the same syntax as $.fn.animate.
+<!--           | CHROME  | FIREFOX | OPERA   | SAFARI  | IE10    | IE9     | IE8     | IE7     | IE6     | -->
 
-```html
-<script src='jquery.js'></script>
-<script src='jquery.cssanimate.js'></script>
-<script type="text/javascript">
-var params = {
-    x: 100,
-    rotatez: 100,
-    width: 100, // able to transform css properties
-    opacity: 0
-};
-$('.any').cssanimate(params, [callback]);
-$('.any').cssanimate(params, [duration], [callback]);
-$('.any').cssanimate(params, [duration], [delay], [callback]);
-$('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
-</script>
-```
 
-## Features
-
-* support `method chain` which will executed animation serially
-* support `origin` to set where rotations and scales start from
-* support advanced [`easing`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/core/ease.js) function which specifies the speed curve of the transition effect
-* support `2d/3d` transformation
-* support `loopback` which helps you to make infinite loop animation easily
-* support `prefix free` which free you from vendor prefix hell
-* support `relative value` which allows you to start with `+=` or `-=`
-* support [`$.fn.css`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/supports/hook.js) which helps you to get the value of a style property for the first element in the set of matched elements and helps you to set css properties for every matched element
-
-## Notes
-
-* If main usage of your app is to animate lots of elements, more than 100 elements, at the same time in pc browser, I recommend you to use $.fn.animate.
-* If rotate around x-axis or y-axis in `safari`, you should set perspective property like `$('any').perspective(100).cssanimate({ rotatey: '-=180'});` before rotating the element. Because safari treats as 3d.
+[chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
+[firefox]: https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png
+[safari]: https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png
+[opera]: https://raw.github.com/paulirish/browser-logos/master/opera/opera_48x48.png
+[ie10]: https://raw.github.com/paulirish/browser-logos/master/ie10/ie10_48x48.png
+[ie9]: https://raw.github.com/paulirish/browser-logos/master/ie9-10/ie9-10_48x48.png
+[ie8]: https://raw.github.com/paulirish/browser-logos/master/ie7-8/ie7-8_48x48.png
+[ie7]: https://raw.github.com/paulirish/browser-logos/master/ie7-8/ie7-8_48x48.png
+[ie6]: https://raw.github.com/paulirish/browser-logos/master/ie6/ie6_48x48.png

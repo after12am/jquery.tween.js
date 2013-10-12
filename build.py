@@ -1,18 +1,22 @@
 #!/usr/bin/python
 
+version = '0.1.0'
 input_path = 'src/'
-output_path = 'jquery.cssanimate.js'
+output_path = 'jquery.tween.js'
+input_order = [
+    './src/vendor.js'
+]
 
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 from SocketServer import TCPServer
 import re, os, sys, time, tempfile, threading
 
 header = '''/*
- * jquery.cssanimate.js
- *
+ * jquery.tween.js v%s
+ * 
  * A jQuery plugin provides a stylish and cute animation for your smartphone app.
  *
- * https://github.com/after12am/jquery.cssanimate.js
+ * https://github.com/after12am/jquery.tween.js
  *
  * Copyright 2012-2013 Satoshi Okami
  * Released under the MIT license
@@ -20,8 +24,8 @@ header = '''/*
 '''
 
 def sources():
-    return [os.path.join(base, f) for base, folders, files in \
-        os.walk(input_path) for f in files if f.endswith('.js')]
+    return input_order + [os.path.join(base, f) for base, folders, files in \
+        os.walk(input_path) for f in files if f.endswith('.js') and not os.path.join(base, f) in input_order]
 
 def compile(sources):
     return '\n'.join('// %s\n%s' % (path, open(path).read()) for path in sources)
@@ -51,7 +55,7 @@ def build():
         data = open(temp2_path).read()
         os.remove(temp2_path)
         data = compress_glsl(data)
-    data = header + data
+    data = header % version + data
     open(output_path, 'w').write(data)
     print 'built %s (%u lines)' % (output_path, len(data.split('\n')))
 
@@ -61,7 +65,7 @@ def stat():
 def monitor():
     a = stat()
     while True:
-        time.sleep(0.5)
+        time.sleep(0.2)
         b = stat()
         if a != b:
             a = b

@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="styles/style.css">
+
+<div class="test-1 container">
+  <div>
+    <a class="animate box">$</a>
+    <a class="tween box">css</a>
+  </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../jquery.tween.js"></script>
+<script type="text/javascript">
+$(function() {
+  
+  
+  setTimeout(function() {
+    $('.test-1 .animate').animate({ left: '+=100', width: 100 }, 'fast', 'linear').animate({ left: '-=100', width: 10 }, 1500, 'linear');
+    $('.test-1 .tween').tween({ x: "+=100", width: 100 }, 'fast', 'linear').tween({ x: '-=100', width: 10 }, 1500, 'linear', function() {
+      console.log(this)
+    });
+    
+  }, 500)
+  
+  
+});
+</script>
