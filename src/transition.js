@@ -76,7 +76,7 @@ function transit(options) {
     }
     
     transform.update(options.props);
-    console.log(transform.toString())
+    
     var transition = {
       'transition-duration': str('{0}ms').format(options.duration),
       'transition-delay': str('{0}ms').format(options.delay),
