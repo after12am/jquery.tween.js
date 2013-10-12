@@ -1,5 +1,5 @@
 var Transform = function() {
-  this.properties = ['x', 'y', 'z', 'rotatex', 'rotatey', 'rotatez', 'scalex', 'scaley', 'scalez', 'skewx', 'skewy', 'perspective_amount'];
+  this.properties = ['x', 'y', 'z', 'rotatex', 'rotatey', 'rotatez', 'scalex', 'scaley', 'scalez', 'skewx', 'skewy'];
   this.x = 0;
   this.y = 0;
   this.z = 0;
@@ -11,7 +11,6 @@ var Transform = function() {
   this.scalez = 1;
   this.skewx = 0;
   this.skewy = 0;
-  this.perspective_amount = 0;
 }
 
 // make relative value to absolute
@@ -150,12 +149,6 @@ Transform.prototype.skewY = function() {
   );
 }
 
-Transform.prototype.perspective = function() {
-  return str('perspective({0})').format(
-    this.perspective_amount
-  );
-}
-
 Transform.prototype.toString = function() {
   var transform = [];
   
@@ -173,6 +166,5 @@ Transform.prototype.toString = function() {
   transform.push(this.scale());
   transform.push(this.skewX());
   transform.push(this.skewY());
-  transform.push(this.perspective());
   return transform.join(' ');
 }

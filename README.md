@@ -4,7 +4,7 @@ jquery.tween.js
 
 |              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
 |:------------:|:---------:|:---------:|:---------:|:---------:|:-------:|:-------:|:-------:|:-------:|:-------:|
-| Translate 2D | ![OK][OK] | ![NG][NG] | ![NG][NG] | ![OK][OK] |         |         |         |         |         |
+| Translate 2D | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |         |         |         |         |
 | Translate 3D |           |           |           |           |         |         |         |         |         |
 | Rotate 2D    |           |           |           |           |         |         |         |         |         |
 | Rotate 3D    |           |           |           |           |         |         |         |         |         |
