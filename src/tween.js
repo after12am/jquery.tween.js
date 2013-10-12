@@ -35,6 +35,11 @@ $.fn.tween = function(props, duration, easing, complete) {
   }));
 };
 
+// debug options
+$.fn.tween.debug = {
+  animateType: ''
+}
+
 /*
 // When you want to stop the loop, call $.fn.stop(true, true).
 $.fn.tween.loopback = function(elem, queues, callback) {

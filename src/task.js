@@ -1,6 +1,6 @@
 function task(options) {
   
-  var animateType = transitionEnd ? 'transition': 'animation';
+  var animateType = $.fn.tween.debug.animateType || (transitionEnd ? 'transition': 'animation');
   
   return function() {
     switch (animateType) {
