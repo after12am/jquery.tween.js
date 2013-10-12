@@ -79,19 +79,19 @@ Transform.prototype.rotate = function() {
 }
 
 Transform.prototype.rotateX = function() {
-  return str('rotate({0}deg)').format(
+  return str('rotateX({0}deg)').format(
     this.rotatex
   );
 }
 
 Transform.prototype.rotateY = function() {
-  return str('rotate({0}deg)').format(
+  return str('rotateY({0}deg)').format(
     this.rotatey
   );
 }
 
 Transform.prototype.rotateZ = function() {
-  return str('rotate({0}deg)').format(
+  return str('rotateZ({0}deg)').format(
     this.rotatez
   );
 }
@@ -144,7 +144,7 @@ Transform.prototype.skewX = function() {
 }
 
 Transform.prototype.skewY = function() {
-  return str('skewX({0}deg)').format(
+  return str('skewY({0}deg)').format(
     this.skewy
   );
 }
