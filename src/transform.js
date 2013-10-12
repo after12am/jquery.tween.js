@@ -150,21 +150,29 @@ Transform.prototype.skewY = function() {
 }
 
 Transform.prototype.toString = function() {
-  var transform = [];
-  
+  return [
+    this.translate3d(),
+    this.rotateX(),
+    this.rotateY(),
+    this.rotateZ(),
+    this.scale(),
+    this.skewX(),
+    this.skewY()
+  ].join(' ');
+}
+
+var OTransform = function() {
+  Transform.call(this);
+}
+
+OTransform.prototype = Object.create(Transform.prototype);
+OTransform.prototype.toString = function() {
   // opera does support only 2d transformation.
-  if (vendorPrefix === 'o') {
-    transform.push(this.translate());
-    transform.push(this.rotate());
-  } else {
-    transform.push(this.translate3d());
-    transform.push(this.rotateX());
-    transform.push(this.rotateY());
-    transform.push(this.rotateZ());
-  }
-  
-  transform.push(this.scale());
-  transform.push(this.skewX());
-  transform.push(this.skewY());
-  return transform.join(' ');
+  return [
+    this.translate(),
+    this.rotate(),
+    this.scale(),
+    this.skewX(),
+    this.skewY()
+  ].join(' ');
 }

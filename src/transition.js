@@ -30,7 +30,7 @@ var cubicBezier = {
   'ease-in-out-back'  : 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
 };
 
-function transit(transform, options) {
+function transit(options) {
   
   // fired when transition is completed
   function done() {
@@ -65,30 +65,41 @@ function transit(transform, options) {
     }
   }
   
-  var style = $('<div>')[0].style;
-  var transition = {
-    'transition-duration': str('{0}ms').format(options.duration),
-    'transition-delay': str('{0}ms').format(options.delay),
-    'transition-timing-function': cubicBezier[options.easing],
-    'transition-property': options.property,
-    'transform-style': options.style,
-    'transform': transform.toString()
-  };
-  
-  // giving vendor prefix
-  for (var k in transition) {
-    transition[vendorPropName(style, k)] = transition[k];
-  }
-  
-  // add non transform properties
-  // i.e. width, height, color ...
-  for (var k in options.props) {
-    if ($.inArray(k, transform.properties) === -1) {
-      transition[k] = options.props[k];
-    }
-  }
-  
   return function() {
+    
+    var transform;
+    if (!(transform = $(this).data('tween:transform'))) {
+      switch (vendorPrefix) {
+        case 'o': transform = new OTransform(); break;
+        default: transform = new Transform(); break;
+      }
+    }
+    
+    transform.update(options.props);
+    console.log(transform.toString())
+    var transition = {
+      'transition-duration': str('{0}ms').format(options.duration),
+      'transition-delay': str('{0}ms').format(options.delay),
+      'transition-timing-function': cubicBezier[options.easing],
+      'transition-property': options.property,
+      'transform-style': options.style,
+      'transform': transform.toString()
+    };
+
+    // giving vendor prefix
+    for (var k in transition) {
+      transition[vendorPropName(this.style, k)] = transition[k];
+    }
+
+    // add non transform properties
+    // i.e. width, height, color ...
+    for (var k in options.props) {
+      if ($.inArray(k, transform.properties) === -1) {
+        transition[k] = options.props[k];
+      }
+    }
+    
+    $(this).data('tween:transform', transform);
     
     // A: If transform with non transform properties, width, height and etc,
     // transitionEnd event does not fired properly. 
@@ -107,7 +118,7 @@ function transit(transform, options) {
     // Because next queue might be executed before setting style to dom,
     // we have to wait until css property is set.
     if (options.duration === 0) {
-      wait(this, style);
+      wait(this, this.style);
       // comment out in relation to A.
       // setTimeout($.proxy(done, this), 0);
     }
