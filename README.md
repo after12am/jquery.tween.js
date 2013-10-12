@@ -6,7 +6,7 @@ jquery.tween.js
 |-------------:|:---------:|:---------:|:---------:|:---------:|:-------:|:---------:|:-------:|:-------:|:-------:|
 | x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         | ![OK][OK] |         |         |         |
 | y            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         | ![OK][OK] |         |         |         |
-| z            | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![OK][OK] |         |           |         |         |         |
+| z            | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |         |           |         |         |         |
 | rotatex      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] |         |           |         |         |         |
 | rotatey      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] |         |           |         |         |         |
 | rotatez      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |         |           |         |         |         |
