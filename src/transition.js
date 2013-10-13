@@ -77,6 +77,20 @@ Transition.prototype = {
     return this;
   },
   
+  style: function(style) {
+    var name = 'transform-style';
+    if (style === undefined) return this.get(name);
+    this.set(name, style);
+    return this;
+  },
+  
+  transform: function(transform) {
+    var name = 'transform';
+    if (transform === undefined) return this.get(name);
+    this.set(name, transform);
+    return this;
+  },
+  
   transit: function(callback) {
     
     // A: If transform with non transform properties, width, height and etc,
@@ -131,16 +145,15 @@ function transit(elem, options) {
   var transform = $(elem).data('tween:transform') || Transform.factory();
   var transition = new Transition(elem);
   
-  transform.update(options.props);
-  
-  transition.duration(options.duration);
-  transition.delay(options.delay);
-  transition.easing(options.easing);
-  transition.set('transform-style', options.style);
-  transition.set('transform', transform.toString());
+  transition
+    .duration(options.duration)
+    .delay(options.delay)
+    .easing(options.easing)
+    .style(options.style)
+    .transform(transform.update(options.props).toString());
   
   // add non transform properties
-  // i.e. width, height, color ...
+  // e.g. width, height, color ...
   for (var k in options.props) {
     if (!transform[k]) transition.set(k, options.props[k]);
   }
@@ -153,7 +166,7 @@ function transit(elem, options) {
     $(elem).parent().css(vendorPropName(elem.style, 'perspective'), options.props.perspective);
   }
   
-  
+  // start animation
   transition.transit(options.complete);
   
   // store updated transform properties
