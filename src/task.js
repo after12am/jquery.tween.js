@@ -4,7 +4,7 @@ function task(options) {
   
   return function() {
     switch (animateType) {
-      case 'transition': $.proxy(transit(options), this)(); break;
+      case 'transition': transit(this, options); break;
       case 'animation': $.proxy(animate(options), this)(); break;
     }
   }

@@ -10,6 +10,15 @@ var Transform = function() {
   this.scalez = 1;
   this.skewx = 0;
   this.skewy = 0;
+  this.origin = '50% 50%';
+  this.perspective = 'none';
+}
+
+Transform.factory = function() {
+  switch (vendorPrefix) {
+    case 'o': return new OTransform();
+    default: return new Transform();
+  }
 }
 
 // make relative value to absolute
