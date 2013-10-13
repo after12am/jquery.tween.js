@@ -155,13 +155,20 @@ function transit(elem, options) {
   // add non transform properties
   // e.g. width, height, color ...
   for (var k in options.props) {
-    if (!transform[k]) transition.set(k, options.props[k]);
+    // excluding perspective property, because this has to be set on parent. 
+    if (!transform[k] && k !== 'perspective') {
+      transition.set(k, options.props[k]);
+    }
   }
   
+  // The transform-origin has to applied to element before apply any other transformation.
+  // If not so, transform-origin of element would have shifted a little.
   if (options.props.origin != undefined) {
     $(elem).css(vendorPropName(elem.style, 'transform-origin'), options.props.origin);
   }
   
+  // enable 3d transformation.
+  // If you want to make perspective disable, set none on depth.
   if (options.props.perspective != undefined) {
     $(elem).parent().css(vendorPropName(elem.style, 'perspective'), options.props.perspective);
   }
