@@ -6,10 +6,10 @@ jquery.tween.js
 |:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
 | x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
 | y            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
-| z            | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |           |           |           |           |
-| rotatex      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] |           |           |           |           |
-| rotatey      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] |           |           |           |           |
-| rotatez      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |           |           |           |
+| z            | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |
+| rotatex      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |
+| rotatey      | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |
+| rotatez      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
 | scalex       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |           |           |           |
 | scaley       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |           |           |           |
 | skewx        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |           |           |           |           |

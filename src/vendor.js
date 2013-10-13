@@ -1,7 +1,7 @@
-var cssPrefixes = ["Webkit", "O", "Moz", "ms"];
-
 // return a css property mapped to a potentially vendor prefixed property
 function vendorPropName(style, name) {
+  
+  var cssPrefixes = ["Webkit", "O", "Moz", "ms"];
   
   // shortcut for names that are not vendor prefixed
   if (name in style) {

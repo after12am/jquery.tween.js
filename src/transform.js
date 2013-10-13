@@ -1,5 +1,4 @@
 var Transform = function() {
-  this.properties = ['x', 'y', 'z', 'rotatex', 'rotatey', 'rotatez', 'scalex', 'scaley', 'scalez', 'skewx', 'skewy'];
   this.x = 0;
   this.y = 0;
   this.z = 0;
@@ -32,7 +31,7 @@ Transform.prototype.set = function(k, v) {
 
 Transform.prototype.update = function(props) {
   for (var k in props) {
-    if ($.inArray(k, this.properties) !== -1) {
+    if (this[k] !== undefined) {
       this.set(k, this.toAbs(k, props[k]));
     }
   }
@@ -47,19 +46,19 @@ Transform.prototype.translate = function() {
 }
 
 Transform.prototype.translateX = function() {
-  return str('translate({0}px)').format(
+  return str('translateX({0}px)').format(
     this.x
   );
 }
 
 Transform.prototype.translateY = function() {
-  return str('translate({0}px)').format(
+  return str('translateY({0}px)').format(
     this.y
   );
 }
 
 Transform.prototype.translateZ = function() {
-  return str('translate({0}px)').format(
+  return str('translateZ({0}px)').format(
     this.z
   );
 }
@@ -69,12 +68,6 @@ Transform.prototype.translate3d = function() {
     this.x,
     this.y,
     this.z
-  );
-}
-
-Transform.prototype.rotate = function() {
-  return str('rotate({0}deg)').format(
-    this.rotatez
   );
 }
 
@@ -104,25 +97,25 @@ Transform.prototype.scale = function() {
 }
 
 Transform.prototype.scaleX = function() {
-  return str('scale({0})').format(
+  return str('scaleX({0})').format(
     this.scalex
   );
 }
 
 Transform.prototype.scaleY = function() {
-  return str('scale({0})').format(
+  return str('scaleY({0})').format(
     this.scaley
   );
 }
 
 Transform.prototype.scaleZ = function() {
-  return str('scale({0})').format(
+  return str('scaleZ({0})').format(
     this.scalez
   );
 }
 
 Transform.prototype.scale3d = function() {
-  return str('scale({0},{1},{2})').format(
+  return str('scale3d({0},{1},{2})').format(
     this.scalex,
     this.scaley,
     this.scalez
@@ -130,7 +123,6 @@ Transform.prototype.scale3d = function() {
 }
 
 Transform.prototype.skew = function() {
-  if (console && console.warn) console.warn('jquery.tween.js: Transform.skew() is something wrong. use Transform.skewX() and Transform.skewY() as alternate.');
   return str('skew({x}deg,{y}deg)').format(
     this.skewx,
     this.skewy
@@ -156,6 +148,7 @@ Transform.prototype.toString = function() {
     this.rotateY(),
     this.rotateZ(),
     this.scale(),
+    // skew is something wrong. Use skewX and skewY as alternate.
     this.skewX(),
     this.skewY()
   ].join(' ');
@@ -166,12 +159,14 @@ var OTransform = function() {
 }
 
 OTransform.prototype = Object.create(Transform.prototype);
+
 OTransform.prototype.toString = function() {
   // opera does support only 2d transformation.
   return [
     this.translate(),
-    this.rotate(),
+    this.rotateZ(),
     this.scale(),
+    // skew is something wrong. Use skewX and skewY as alternate.
     this.skewX(),
     this.skewY()
   ].join(' ');

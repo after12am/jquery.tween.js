@@ -23,19 +23,14 @@ body {
 }
 
 .box {
-  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0, 0.4), rgba(255,255,255,0.1) 0 1px 0;
-	box-shadow: inset 0 0 5px rgba(0,0,0, 0.4), rgba(255,255,255,0.1) 0 1px 0;
-	border-radius: 4px;
-	border: 1px solid transparent;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
 	color: #fff;
   text-decoration: none;
-  box-sizing: border-box;
 	letter-spacing: .05em;
 	display: inline-block;
-	padding: 6px 0;
+	background: #333;
 	width: 42px;
 	height: 42px;
+	line-height: 42px;
 	text-align: center;
 }
 

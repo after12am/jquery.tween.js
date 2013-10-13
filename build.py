@@ -4,7 +4,8 @@ version = '0.1.0'
 input_path = 'src/'
 output_path = 'jquery.tween.js'
 input_order = [
-    './src/vendor.js'
+    './src/vendor.js',
+    './src/math.js'
 ]
 
 from SimpleHTTPServer import SimpleHTTPRequestHandler
