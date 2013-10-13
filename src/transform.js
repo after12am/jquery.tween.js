@@ -39,32 +39,32 @@ Transform.prototype.update = function(props) {
 }
 
 Transform.prototype.translate = function() {
-  return str('translate({0}px,{1}px)').format(
+  return sprintf('translate(%spx,%spx)', 
     this.x,
     this.y
   );
 }
 
 Transform.prototype.translateX = function() {
-  return str('translateX({0}px)').format(
+  return sprintf('translateX(%spx)',
     this.x
   );
 }
 
 Transform.prototype.translateY = function() {
-  return str('translateY({0}px)').format(
+  return sprintf('translateY(%spx)',
     this.y
   );
 }
 
 Transform.prototype.translateZ = function() {
-  return str('translateZ({0}px)').format(
+  return sprintf('translateZ(%spx)',
     this.z
   );
 }
 
 Transform.prototype.translate3d = function() {
-  return str('translate3d({0}px,{1}px,{2}px)').format(
+  return sprintf('translate3d(%spx,%spx,%spx)',
     this.x,
     this.y,
     this.z
@@ -72,50 +72,50 @@ Transform.prototype.translate3d = function() {
 }
 
 Transform.prototype.rotateX = function() {
-  return str('rotateX({0}deg)').format(
+  return sprintf('rotateX(%sdeg)',
     this.rotatex
   );
 }
 
 Transform.prototype.rotateY = function() {
-  return str('rotateY({0}deg)').format(
+  return sprintf('rotateY(%sdeg)',
     this.rotatey
   );
 }
 
 Transform.prototype.rotateZ = function() {
-  return str('rotateZ({0}deg)').format(
+  return sprintf('rotateZ(%sdeg)',
     this.rotatez
   );
 }
 
 Transform.prototype.scale = function() {
-  return str('scale({0},{1})').format(
+  return sprintf('scale(%s,%s)',
     this.scalex,
     this.scaley
   );
 }
 
 Transform.prototype.scaleX = function() {
-  return str('scaleX({0})').format(
+  return sprintf('scaleX(%s)',
     this.scalex
   );
 }
 
 Transform.prototype.scaleY = function() {
-  return str('scaleY({0})').format(
+  return sprintf('scaleY(%s)',
     this.scaley
   );
 }
 
 Transform.prototype.scaleZ = function() {
-  return str('scaleZ({0})').format(
+  return sprintf('scaleZ(%s)',
     this.scalez
   );
 }
 
 Transform.prototype.scale3d = function() {
-  return str('scale3d({0},{1},{2})').format(
+  return sprintf('scale3d(%s,%s,%s)',
     this.scalex,
     this.scaley,
     this.scalez
@@ -123,20 +123,20 @@ Transform.prototype.scale3d = function() {
 }
 
 Transform.prototype.skew = function() {
-  return str('skew({x}deg,{y}deg)').format(
+  return sprintf('skew({x}deg,{y}deg)',
     this.skewx,
     this.skewy
   );
 }
 
 Transform.prototype.skewX = function() {
-  return str('skewX({0}deg)').format(
+  return sprintf('skewX(%sdeg)',
     this.skewx
   );
 }
 
 Transform.prototype.skewY = function() {
-  return str('skewY({0}deg)').format(
+  return sprintf('skewY(%sdeg)',
     this.skewy
   );
 }
