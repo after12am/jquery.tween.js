@@ -8,10 +8,6 @@ function Animation(elem) {
 
 Animation.prototype = {
   
-  round: function(v) {
-    return Math.round(v * 1000) / 1000;
-  },
-  
   setDefaultPosition: function() {
     var position = {
       x: parseInt($(this.elem).css('left'), 10) || 0,
@@ -22,9 +18,8 @@ Animation.prototype = {
   },
   
   setTransform: function(matrix) {
-    
     var m, k, v, arr = matrix.toArray();
-    for (var i = 0; i < arr.length; i++) arr[i] = this.round(arr[i]);
+    for (var i = 0; i < arr.length; i++) arr[i] = Math.round(arr[i] * 1000) / 1000;
     if (m = isIE()) {
       /*
         -ms-filter: IE8+
@@ -54,36 +49,34 @@ Animation.prototype = {
   
   animate: function(props, duration, easing, complete) {
     
-    var transition = {};
-    
     this.dest.update(props);
+    this.src.width = parseInt($(this.elem).width(), 10);
+    this.src.height = parseInt($(this.elem).height(), 10);
     
+    var transition = {};
     for (var k in props) {
       if (k in this.dest) {
         transition[k] = this.dest[k] - this.src[k];
       }
     }
     
-    // update matrix
-    
     // add non transform properties
     // e.g. width, height, color ...
     for (var k in props) {
-      // excluding perspective property, because this has to be set on parent. 
-      if (!this.dest[k]) transition[k] = props[k];
+      if (!this.dest[k]) {
+        transition[k] = props[k];
+      }
     }
     
     $(this.elem).animate($.extend(transition, { _update: true }), {
       duration: duration, 
       easing: easing, 
-      complete: this.complete(this, complete),
+      complete: $.proxy(complete, this.elem),
       step: this.update(this)
     });
   },
   
   update: function(that) {
-    var width = parseInt($(that.elem).width(), 10);
-    var height = parseInt($(that.elem).height(), 10);
     var inc = {
       x: 0,
       y: 0,
@@ -93,7 +86,6 @@ Animation.prototype = {
       skewx: 0,
       skewy: 0
     };
-    
     return function(value, init) {
       if (init.prop in that.src) inc[init.prop] = value;
       if (init.prop === '_update') {
@@ -126,8 +118,8 @@ Animation.prototype = {
           position.y += arr[5] + that.position.y;
         }
         
-        if (inc.scalex) position.x = -(parseInt($(that.elem).width(), 10) - width) / 2;
-        if (inc.scaley) position.y = -(parseInt($(that.elem).height(), 10) - height) / 2;
+        if (inc.scalex) position.x = -(parseInt($(that.elem).width(), 10) - that.src.width) / 2;
+        if (inc.scaley) position.y = -(parseInt($(that.elem).height(), 10) - that.src.height) / 2;
         
         // center the transform origin, from pbakaus's Transformie http://github.com/pbakaus/transformie
         if (inc.rotatez) {
@@ -136,24 +128,17 @@ Animation.prototype = {
         }
         
         $(that.elem).css({
-          'left': sprintf('%spx', position.x),
-          'top': sprintf('%spx', position.y),
-          'margin-left': sprintf('%spx', margin.x),
-          'margin-top': sprintf('%spx', margin.y)
+          left: sprintf('%spx', position.x),
+          top: sprintf('%spx', position.y),
+          marginLeft: sprintf('%spx', margin.x),
+          marginTop: sprintf('%spx', margin.y)
         });
       }
-    }
-  },
-  
-  complete: function(that, complete) {
-    return function() {
-      $.proxy(complete, that.elem)();
     }
   }
 }
 
 function animate(elem, options) {
-  
   new Animation(elem).animate(options.props, options.duration, options.easing, options.complete);
   $(elem).dequeue();
 }
