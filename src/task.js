@@ -3,9 +3,13 @@ function task(options) {
   var animateType = $.fn.tween.debug.animateType || (transitionEnd ? 'transition': 'animation');
   
   return function() {
+    switch (vendorPrefix) {
+      case 'o': return animate(this, options);
+    }
+    
     switch (animateType) {
-      case 'transition': transit(this, options); break;
-      case 'animation': animate(this, options); break;
+      case 'transition': return transit(this, options);
+      case 'animation': return animate(this, options);
     }
   }
 }

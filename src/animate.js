@@ -95,6 +95,8 @@ Animation.prototype = {
     var inc = {
       x: 0,
       y: 0,
+      rotatex: null,
+      rotatey: null,
       rotatez: 0,
       scalex: 0,
       scaley: 0,
@@ -106,7 +108,6 @@ Animation.prototype = {
       if (init.prop === '_update') {
         
         var matrix = new Matrix();
-        var margin = { x: 0, y: 0 }, position = { x: 0, y: 0 };
         
         matrix = matrix.translate({
           x: inc.x + that.src.x,
@@ -115,47 +116,58 @@ Animation.prototype = {
         
         matrix = matrix.rotate(degToRad(inc.rotatez + that.src.rotatez));
         
-        matrix = matrix.scale({
-          x: inc.scalex + that.src.scalex,
-          y: inc.scaley + that.src.scaley
-        });
+        // rotatex and rotatey is important more than scale
+        // so we use scale for rotating on XY-axis.
+        if (inc.rotatex !== null || inc.rotatey !== null) {
+          matrix = matrix.scale({
+            x: Math.cos(degToRad((inc.rotatey || 0) + that.src.rotatey)),
+            y: Math.cos(degToRad((inc.rotatex || 0) + that.src.rotatex))
+          });
+        } else {
+          matrix = matrix.scale({
+            x: inc.scalex + that.src.scalex,
+            y: inc.scaley + that.src.scaley
+          });
+        }
         
         matrix = matrix.skew({
           x: degToRad(inc.skewx + that.src.skewx),
           y: degToRad(inc.skewy + that.src.skewy)
         });
         
-        if (that.isIE) that.setDxImageTransform(matrix);
+        // set transition style
+        if (isIE) that.setDxImageTransform(matrix);
         else that.setTransform(matrix);
         
-        if (that.isIE) {
-          var arr = matrix.toArray();
-          position.x += arr[4] + that.position.x;
-          position.y += arr[5] + that.position.y;
-        }
-        
-        if (inc.scalex) position.x = -(parseInt($(that.elem).width(), 10) - that.src.width) / 2;
-        if (inc.scaley) position.y = -(parseInt($(that.elem).height(), 10) - that.src.height) / 2;
-        
-        // center the transform origin, from pbakaus's Transformie http://github.com/pbakaus/transformie
-        if (inc.rotatez) {
-          margin.x = -(that.elem.offsetWidth / 2) + (that.elem.clientWidth / 2);
-          margin.y = -(that.elem.offsetHeight / 2) + (that.elem.clientHeight / 2);
-        }
-        
-        if (that.isIE) {
-          $(that.elem).css({
-            left: sprintf('%spx', position.x),
-            top: sprintf('%spx', position.y)
-          });
-        }
-        
-        $(that.elem).css({
-          marginLeft: sprintf('%spx', margin.x),
-          marginTop: sprintf('%spx', margin.y)
-        });
+        // adjustments for ie
+        if (isIE) that.fixOnCenter(matrix, inc);
       }
     }
+  },
+  
+  // for ie
+  fixOnCenter: function(matrix, inc) {
+    var margin = { x: 0, y: 0 }, position = { x: 0, y: 0 };
+    var arr = matrix.toArray();
+    
+    position.x += arr[4] + this.position.x;
+    position.y += arr[5] + this.position.y;
+    
+    if (inc.scalex || inc.rotatey) position.x = -(parseInt($(this.elem).width(), 10) - this.src.width) / 2;
+    if (inc.scaley || inc.rotatex) position.y = -(parseInt($(this.elem).height(), 10) - this.src.height) / 2;
+
+    // center the transform origin, from pbakaus's Transformie http://github.com/pbakaus/transformie
+    if (inc.rotatez) {
+      margin.x = -(this.elem.offsetWidth / 2) + (this.elem.clientWidth / 2);
+      margin.y = -(this.elem.offsetHeight / 2) + (this.elem.clientHeight / 2);
+    }
+    
+    $(this.elem).css({
+      left: sprintf('%spx', position.x),
+      top: sprintf('%spx', position.y),
+      marginLeft: sprintf('%spx', margin.x),
+      marginTop: sprintf('%spx', margin.y)
+    });
   }
 }
 
