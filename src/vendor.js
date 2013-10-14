@@ -70,3 +70,9 @@ if (!Object.create) {
     return new F();
   };
 }
+
+var isIE = function() {
+  var m = window.navigator.userAgent.toLowerCase().match(/msie\s([6-9]{1})/);
+  if (m) return m[1];
+  return false;
+}

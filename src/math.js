@@ -16,6 +16,6 @@ var radToDeg = function() {
   };
 }();
 
-function isRelativeValue(v) {
+function isRel(v) {
   return (typeof v === 'string' && v.match(/^\s*(\+|-)=\s*([0-9]+)\s*$/));
 }
