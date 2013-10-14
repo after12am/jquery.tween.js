@@ -3,12 +3,32 @@ function Animation(elem) {
   this.src = $(elem).data('tween:transform') || Transform.factory();
   this.dest = Transform.factory();
   this.matrix = new Matrix();
-  this.position = $(elem).data('tween.position.default') || this.setDefaultPosition();
+  this.position = $(elem).data('tween.position.default') || this.setPosition();
 }
 
 Animation.prototype = {
   
-  setDefaultPosition: function() {
+  
+  isIE: (function() {
+    return !!isIE();
+  })(),
+  
+  isVersionIfIE: (function() {
+    var m = isIE();
+    if (m) return +m[1];
+    return false;
+  })(),
+  
+  css: function(k, v) {
+    $(this.elem).css(vendorPropName(this.elem.style, k), v);
+  },
+  
+  round: function(v) {
+    return Math.round(v * 1000) / 1000;
+  },
+  
+  // set default position
+  setPosition: function() {
     var position = {
       x: parseInt($(this.elem).css('left'), 10) || 0,
       y: parseInt($(this.elem).css('top'), 10) || 0
@@ -18,33 +38,29 @@ Animation.prototype = {
   },
   
   setTransform: function(matrix) {
-    var m, k, v, arr = matrix.toArray();
-    for (var i = 0; i < arr.length; i++) arr[i] = Math.round(arr[i] * 1000) / 1000;
-    if (m = isIE()) {
-      /*
-        -ms-filter: IE8+
-        filter: IE6 and 7
-      */ 
-      k = (+m[1]) === 8 ? '-ms-filter' : 'filter';
-      v = sprintf("progid:DXImageTransform.Microsoft.Matrix(M11=%s, M12=%s, M21=%s, M22=%s,sizingMethod='auto expand');",
-        arr[0],
-        arr[2],
-        arr[1],
-        arr[3]
-      );
-      
-    } else {
-      k = vendorPropName(this.elem.style, 'transform');
-      v = sprintf('matrix(%s,%s,%s,%s,%s,%s)',
-        arr[0],
-        arr[1],
-        arr[2],
-        arr[3],
-        arr[4],
-        arr[5]
-      );
-    }
-    $(this.elem).css(k, v);
+    var arr = matrix.toArray();
+    for (var i = 0; i < arr.length; i++) arr[i] = this.round(arr[i]);
+    this.css('transform', sprintf('matrix(%s,%s,%s,%s,%s,%s)',
+      arr[0],
+      arr[1],
+      arr[2],
+      arr[3],
+      arr[4],
+      arr[5]
+    ));
+  },
+  
+  setDxImageTransform: function(matrix) {
+    var arr = matrix.toArray();
+    for (var i = 0; i < arr.length; i++) arr[i] = this.round(arr[i]);
+    // if IE8, use -ms-filter. If IE6 and 7, use filter.
+    var k = this.isVersionIfIE === 8 ? '-ms-filter' : 'filter';
+    this.css(k, sprintf("progid:DXImageTransform.Microsoft.Matrix(M11=%s, M12=%s, M21=%s, M22=%s,sizingMethod='auto expand');",
+      arr[0],
+      arr[2],
+      arr[1],
+      arr[3]
+    ));
   },
   
   animate: function(props, duration, easing, complete) {
@@ -110,9 +126,10 @@ Animation.prototype = {
           y: degToRad(inc.skewy + that.src.skewy)
         });
         
-        that.setTransform(matrix);
+        if (that.isIE) that.setDxImageTransform(matrix);
+        else that.setTransform(matrix);
         
-        if (isIE()) {
+        if (that.isIE) {
           var arr = matrix.toArray();
           position.x += arr[4] + that.position.x;
           position.y += arr[5] + that.position.y;
@@ -127,9 +144,14 @@ Animation.prototype = {
           margin.y = -(that.elem.offsetHeight / 2) + (that.elem.clientHeight / 2);
         }
         
+        if (that.isIE) {
+          $(that.elem).css({
+            left: sprintf('%spx', position.x),
+            top: sprintf('%spx', position.y)
+          });
+        }
+        
         $(that.elem).css({
-          left: sprintf('%spx', position.x),
-          top: sprintf('%spx', position.y),
           marginLeft: sprintf('%spx', margin.x),
           marginTop: sprintf('%spx', margin.y)
         });
