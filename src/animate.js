@@ -8,7 +8,6 @@ function Animation(elem) {
 
 Animation.prototype = {
   
-  
   isIE: (function() {
     return !!isIE();
   })(),
