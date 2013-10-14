@@ -8,18 +8,9 @@ function Animation(elem) {
 
 Animation.prototype = {
   
-  isIE: (function() {
-    return !!isIE();
-  })(),
-  
-  isVersionIfIE: (function() {
-    var m = isIE();
-    if (m) return +m[1];
-    return false;
-  })(),
-  
   css: function(k, v) {
     $(this.elem).css(vendorPropName(this.elem.style, k), v);
+    return this;
   },
   
   round: function(v) {
@@ -53,7 +44,7 @@ Animation.prototype = {
     var arr = matrix.toArray();
     for (var i = 0; i < arr.length; i++) arr[i] = this.round(arr[i]);
     // if IE8, use -ms-filter. If IE6 and 7, use filter.
-    var k = this.isVersionIfIE === 8 ? '-ms-filter' : 'filter';
+    var k = versionIfIE === 8 ? '-ms-filter' : 'filter';
     this.css(k, sprintf("progid:DXImageTransform.Microsoft.Matrix(M11=%s, M12=%s, M21=%s, M22=%s,sizingMethod='auto expand');",
       arr[0],
       arr[2],

@@ -71,8 +71,12 @@ if (!Object.create) {
   };
 }
 
-var isIE = function() {
+var isIE = (function() {
+  return !!window.navigator.userAgent.toLowerCase().match(/msie\s([6-9]{1})/);
+})();
+
+var versionIfIE = (function() {
   var m = window.navigator.userAgent.toLowerCase().match(/msie\s([6-9]{1})/);
-  if (m) return m[1];
+  if (m) return +m[1];
   return false;
-}
+})();
