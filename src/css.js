@@ -2,125 +2,93 @@ if (!$.cssHooks) {
   // if not, output an error message
   throw("jQuery 1.4.3 or above is required for this plugin to work");
 }
-/*
+
 $.cssHooks['x'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.position.x;
+    return ($(elem).data('tween:transform') || Transform.factory()).x;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).animate({ x: m[1] }, 0);
+    $(elem).tween({ x: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['y'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.position.y;
+    return ($(elem).data('tween:transform') || Transform.factory()).y;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ y: m[1] }, 0);
+    $(elem).tween({ y: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['z'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.position.z;
+    return ($(elem).data('tween:transform') || Transform.factory()).z;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ z: m[1] }, 0);
+    $(elem).tween({ z: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['rotatex'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.rotation.x;
+    return ($(elem).data('tween:transform') || Transform.factory()).rotatex;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ rotatex: m[1] }, 0);
+    $(elem).tween({ rotatex: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['rotatey'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.rotation.y;
+    return ($(elem).data('tween:transform') || Transform.factory()).rotatey;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ rotatey: m[1] }, 0);
+    $(elem).tween({ rotatey: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['rotatez'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.rotation.z;
+    return ($(elem).data('tween:transform') || Transform.factory()).rotatez;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ rotatez: m[1] }, 0);
+    $(elem).tween({ rotatez: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['scalex'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.scale.x;
+    return ($(elem).data('tween:transform') || Transform.factory()).scalex;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ scalex: m[1] }, 0);
+    $(elem).tween({ scalex: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['scaley'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.scale.y;
+    return ($(elem).data('tween:transform') || Transform.factory()).scaley;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ scaley: m[1] }, 0);
-  }
-};
-
-$.cssHooks['scalez'] = {
-  get: function(elem, computed, extra) {
-    return elem.cache.scale.z;
-  },
-  set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ scalez: m[1] }, 0);
+    $(elem).tween({ scaley: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['skewx'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.skew.x;
+    return ($(elem).data('tween:transform') || Transform.factory()).skewx;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ skewx: m[1] }, 0);
+    $(elem).tween({ skewx: parseInt(value, 10) }, 0);
   }
 };
 
 $.cssHooks['skewy'] = {
   get: function(elem, computed, extra) {
-    return elem.cache.skew.y;
+    return ($(elem).data('tween:transform') || Transform.factory()).skewy;
   },
   set: function(elem, value) {
-    var m = value.match(/^([-?0-9]+)/);
-    if (!m) return this;
-    $(elem).cssanimate({ skewy: m[1] }, 0);
+    $(elem).tween({ skewy: parseInt(value, 10) }, 0);
   }
 };
-*/

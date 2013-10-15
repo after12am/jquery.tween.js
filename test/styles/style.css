@@ -1,47 +1,116 @@
+/*
+  © 2011, Rico Sta. Cruz. Released under the MIT License.
+
+  jQuery Transit is authored and maintained by Rico Sta. Cruz with help from it's contributors. It is sponsored by my startup, Sinefunc, Inc.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+
+html {
+  padding: 40px;
+  background: #e3e3e7;
+}
+
+body, td, input, textarea {
+  font-family: helvetica neue, sans-serif;
+  font-size: 9pt;
+  color: #444;
+  line-height: 1.4;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/*
 body {
-  background: #0769AD;
+  padding-top: 50px;
 }
 
-.container {
-  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0, 0.4), rgba(255,255,255,0.1) 0 1px 0;
-	box-shadow: inset 0 0 5px rgba(0,0,0, 0.4), rgba(255,255,255,0.1) 0 1px 0;
-	border-radius: 4px;
-	border: 1px solid transparent;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
-	width: 100%;
-	height: 110px;
-	padding: 8px;
-	box-sizing: border-box;
+.use {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+  background: rgba(250, 250, 250, 0.9);
+  z-index: 10;
+}*/
+
+.test {
+  width: 220px;
+  padding: 20px;
+  float: left;
+  margin: 0 20px 20px 0;
+  background: white;
+  border-radius: 2px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05), -1px 1px 0 rgba(0, 0, 0, 0.05), 0 1px 5px rgba(0, 0, 0, 0.05);
 }
 
-.container div {
-  width: 100%;
-	height: 100%;
+.test .area {
+  width: auto;
+  height: 100px;
+  margin: 10px 0;
   position: relative;
-  top: 0;
-  left: 0;
 }
 
-.box {
-	color: #fff;
-  text-decoration: none;
-	letter-spacing: .05em;
-	display: inline-block;
-	background: #333;
-	width: 42px;
-	height: 42px;
-	line-height: 42px;
-	text-align: center;
+.test:hover {
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05), -1px 1px 0 rgba(0, 0, 0, 0.05), 0 1px 5px rgba(0, 0, 0, 0.05), 0 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
-.animate {
+.test h3 {
+  font-size: 1.2em;
+  margin-bottom: 2px;
+  overflow: hidden;
+  line-height: 24px;
+}
+
+.test h3 em {
+  font-style: normal;
+  font-weight: 200;
+  float: right;
+  color: #37a;
+  font-size: 0.8em;
+}
+
+.test .box {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 30px;
+  left: 96px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  background: #505070;
+  border-radius: 2px;
+  z-index: 2;
+  color: #ddd;
 }
 
-.tween {
-  position: absolute;
-  top: 50px;
-  left: 0;
+.test .ghost {
+  background: #ddd;
+  z-index: 1;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.07), inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+}
+
+.test pre {
+  font-family: menlo, monospace;
+  font-size: 7pt;
+  padding: 10px;
+  background: #eee;
+  margin: 20px -20px -20px -20px;
+  border-top: solid 1px #ddd;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+h2.head {
+  margin: 20px 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: dotted 1px #ccc;
+  font-size: 1.6em;
+  clear: both;
+  color: #70a0c0;
+  font-weight: 200;
 }

@@ -62,7 +62,7 @@ Animation.prototype = {
     var transition = {};
     for (var k in props) {
       if (k in this.dest) {
-        transition[k] = this.dest[k] - this.src[k];
+        transition['__'+k] = this.dest[k] - this.src[k];
       }
     }
     
@@ -74,10 +74,15 @@ Animation.prototype = {
       }
     }
     
-    $(this.elem).animate($.extend(transition, { _update: true }), {
+    // if margin is set, animation will be rendered dirty.
+    if (parseInt($(this.elem).css('margin'))) {
+      $(this.elem).css('margin', '0');
+    }
+    
+    $(this.elem).animate($.extend(transition, { ___update: true }), {
       duration: duration, 
       easing: easing, 
-      complete: $.proxy(complete, this.elem),
+      complete: this.complete(this, complete),
       step: this.update(this)
     });
   },
@@ -95,8 +100,9 @@ Animation.prototype = {
       skewy: 0
     };
     return function(value, init) {
-      if (init.prop in that.src) inc[init.prop] = value;
-      if (init.prop === '_update') {
+      var k = init.prop.replace(/__/, '');
+      if (k in that.src) inc[k] = value;
+      if (k === '_update') {
         
         var matrix = new Matrix();
         
@@ -136,6 +142,13 @@ Animation.prototype = {
     }
   },
   
+  complete: function(that, complete) {
+    return function() {
+      $(that.elem).data('tween:transform', that.dest);
+      $.proxy(complete, that.elem)();
+    }
+  },
+  
   // for ie
   fixOnCenter: function(matrix, inc) {
     var margin = { x: 0, y: 0 }, position = { x: 0, y: 0 };
@@ -144,9 +157,14 @@ Animation.prototype = {
     position.x += arr[4] + this.position.x;
     position.y += arr[5] + this.position.y;
     
-    if (inc.scalex || inc.rotatey) position.x = -(parseInt($(this.elem).width(), 10) - this.src.width) / 2;
-    if (inc.scaley || inc.rotatex) position.y = -(parseInt($(this.elem).height(), 10) - this.src.height) / 2;
-
+    if (inc.scalex || inc.rotatey || inc.skewx) {
+      margin.x = -(parseInt($(this.elem).width(), 10) - this.src.width) / 2;
+    }
+    
+    if (inc.scaley || inc.rotatex || inc.skewy) {
+      margin.y = -(parseInt($(this.elem).height(), 10) - this.src.height) / 2;
+    }
+    
     // center the transform origin, from pbakaus's Transformie http://github.com/pbakaus/transformie
     if (inc.rotatez) {
       margin.x = -(this.elem.offsetWidth / 2) + (this.elem.clientWidth / 2);

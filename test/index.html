@@ -1,26 +1,100 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
 <link rel="stylesheet" href="styles/style.css">
-
-<div class="test-1 container">
-  <div>
-    <a class="animate box">$</a>
-    <a class="tween box">css</a>
-  </div>
-</div>
-
+</head>
+<body>
+<div class='tests'></div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../jquery.tween.js"></script>
+<script src="scripts/unit.js"></script>
 <script type="text/javascript">
+
+//$.fn.tween.debug.animateType = 'animation'
+
+function complete() {
+  var $box = $(this);
+  var prop = $(this).closest('.test').data('description');
+  var data = $box.data('tween:transform');
+  if (data) $box.text(data[prop]);
+  return false;
+}
+
+unit.module('Translate');
+
+unit.test('x', function($box) {
+  $box.tween({
+    x: 32
+  }, complete);
+});
+
+unit.test('y', function($box) {
+  $box.tween({
+    y: 32
+  }, complete);
+});
+
+unit.test('z', function($box) {
+  $box.tween({
+    perspective: 200, z: -100
+  }, complete);
+});
+
+unit.module('Rotate');
+
+unit.test('rotatex', function($box) {
+  $box.tween({
+    rotatex: 45
+  }, complete);
+});
+
+unit.test('rotatey', function($box) {
+  $box.tween({
+    rotatey: 45
+  }, complete);
+});
+
+unit.test('rotatez', function($box) {
+  $box.tween({
+    rotatez: 45
+  }, complete);
+});
+
+unit.module('Scale');
+
+unit.test('scalex', function($box) {
+  $box.tween({
+    scalex: 2
+  }, complete);
+});
+
+unit.test('scaley', function($box) {
+  $box.tween({
+    scaley: 2
+  }, complete);
+});
+
+unit.module('Skew');
+
+unit.test('skewx', function($box) {
+  $box.tween({
+    skewx: 45
+  }, complete);
+});
+
+unit.test('skewy', function($box) {
+  $box.tween({
+    skewy: 45
+  }, complete);
+});
+
 $(function() {
-  
-  
   setTimeout(function() {
-    $('.test-1 .animate').animate({ left: '+=100', width: 100 }, 'fast', 'linear').animate({ left: '-=100', width: 10 }, 1500, 'linear');
-    $('.test-1 .tween').tween({ x: "+=100", width: 100 }, 'fast', 'linear').tween({ x: '-=100', width: 10 }, 1500, 'linear', function() {
-      console.log(this)
-    });
-    
+    $('.test').mouseover();
   }, 500)
-  
-  
 });
 </script>
+</body>
+</html>
