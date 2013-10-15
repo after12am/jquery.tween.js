@@ -1,8 +1,9 @@
 function task(options) {
-  
-  var animateType = $.fn.tween.debug.animateType || (transitionEnd ? 'transition': 'animation');
-  
   return function() {
+    
+    var hasTransition = (vendorPropName(this.style, 'transition') in this.style);
+    var animateType = $.fn.tween.debug.animateType || (hasTransition ? 'transition': 'animation');
+    
     switch (vendorPrefix) {
       case 'o': return animate(this, options);
     }
