@@ -21,7 +21,7 @@ jquery.tween.js
 <!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9       | IE8       | IE7       | IE6       | -->
 
 > **Note**
-> * We have to set 0 to margin of target element on IE6-9 unfortunately. So don't use margin of target element that will be transformed.
+> * Unfortunately we have to set 0 to margin of target element, that will be transformed, on IE6-9. So don't use margin of that.
 
 [chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
 [firefox]: https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png
