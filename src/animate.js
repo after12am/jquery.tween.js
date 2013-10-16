@@ -43,9 +43,7 @@ Animation.prototype = {
   setDxImageTransform: function(matrix) {
     var arr = matrix.toArray();
     for (var i = 0; i < arr.length; i++) arr[i] = this.round(arr[i]);
-    // if IE8, use -ms-filter. If IE6 and 7, use filter.
-    var k = versionIfIE === 8 ? '-ms-filter' : 'filter';
-    this.css(k, sprintf("progid:DXImageTransform.Microsoft.Matrix(M11=%s, M12=%s, M21=%s, M22=%s,sizingMethod='auto expand');",
+    this.css('filter', sprintf("progid:DXImageTransform.Microsoft.Matrix(M11=%s, M12=%s, M21=%s, M22=%s,sizingMethod='auto expand');",
       arr[0],
       arr[2],
       arr[1],
