@@ -30,6 +30,15 @@ $.cssHooks['z'] = {
   }
 };
 
+$.cssHooks['rotate'] = {
+  get: function(elem, computed, extra) {
+    return ($(elem).data('tween:transform') || Transform.factory()).rotatez;
+  },
+  set: function(elem, value) {
+    $(elem).tween({ rotatez: parseInt(value, 10) }, 0);
+  }
+};
+
 $.cssHooks['rotatex'] = {
   get: function(elem, computed, extra) {
     return ($(elem).data('tween:transform') || Transform.factory()).rotatex;
@@ -57,6 +66,15 @@ $.cssHooks['rotatez'] = {
   }
 };
 
+$.cssHooks['scale'] = {
+  get: function(elem, computed, extra) {
+    return ($(elem).data('tween:transform') || Transform.factory()).scalex;
+  },
+  set: function(elem, value) {
+    $(elem).tween({ scalex: parseInt(value, 10), scaley: parseInt(value, 10) }, 0);
+  }
+};
+
 $.cssHooks['scalex'] = {
   get: function(elem, computed, extra) {
     return ($(elem).data('tween:transform') || Transform.factory()).scalex;
@@ -72,6 +90,15 @@ $.cssHooks['scaley'] = {
   },
   set: function(elem, value) {
     $(elem).tween({ scaley: parseInt(value, 10) }, 0);
+  }
+};
+
+$.cssHooks['skew'] = {
+  get: function(elem, computed, extra) {
+    return ($(elem).data('tween:transform') || Transform.factory()).skewx;
+  },
+  set: function(elem, value) {
+    $(elem).tween({ skewx: parseInt(value, 10), skewy: parseInt(value, 10) }, 0);
   }
 };
 

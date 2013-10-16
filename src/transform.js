@@ -40,7 +40,7 @@ Transform.prototype.set = function(k, v) {
 
 Transform.prototype.update = function(props) {
   for (var k in props) {
-    if (this[k] !== undefined) {
+    if (this[k] !== undefined && typeof this[k] !== 'function') {
       this.set(k, this.toAbs(k, props[k]));
     }
   }

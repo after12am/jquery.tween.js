@@ -17,8 +17,19 @@ $.fn.tween = function(props, duration, easing, complete) {
     default: duration = $.fx.speeds._default; break;
   }
   
+  var _props = $.extend(true, {}, props);
+  for (var k in props) {
+    switch (k) {
+      case 'rotate': _props.rotatez = props[k]; break;
+      case 'scale': _props.scalex = _props.scaley = props[k]; break;
+      case 'skew': _props.skewx = _props.skewy = props[k]; break;
+      default: continue;
+    }
+    delete _props[k]; 
+  }
+  
   return this.queue(task({
-    props: props || {},
+    props: _props || {},
     duration: duration,
     delay: 0,
     easing: easing || 'ease',

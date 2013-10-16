@@ -17,8 +17,10 @@
 function complete() {
   var $box = $(this);
   var prop = $(this).closest('.test').data('description');
-  var data = $box.data('tween:transform');
-  if (data) $box.text(data[prop]);
+  if (prop) {
+    var data = $box.css(prop);
+    if (data) $box.text(data);
+  }
   return false;
 }
 
@@ -44,6 +46,12 @@ unit.test('z', function($box) {
 
 unit.module('Rotate');
 
+unit.test('rotate', function($box) {
+  $box.tween({
+    rotatez: 45
+  }, complete);
+});
+
 unit.test('rotatex', function($box) {
   $box.tween({
     rotatex: 45
@@ -64,6 +72,12 @@ unit.test('rotatez', function($box) {
 
 unit.module('Scale');
 
+unit.test('scale', function($box) {
+  $box.tween({
+    scale: 2
+  }, complete);
+});
+
 unit.test('scalex', function($box) {
   $box.tween({
     scalex: 2
@@ -78,6 +92,12 @@ unit.test('scaley', function($box) {
 
 unit.module('Skew');
 
+unit.test('skew', function($box) {
+  $box.tween({
+    skew: 45
+  }, complete);
+});
+
 unit.test('skewx', function($box) {
   $box.tween({
     skewx: 45
@@ -90,11 +110,11 @@ unit.test('skewy', function($box) {
   }, complete);
 });
 
-$(function() {
-  setTimeout(function() {
-    $('.test').mouseover();
-  }, 500)
-});
+// $(function() {
+//   setTimeout(function() {
+//     $('.test').mouseover();
+//   }, 500)
+// });
 </script>
 </body>
 </html>

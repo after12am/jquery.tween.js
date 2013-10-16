@@ -38,6 +38,10 @@ body {
   z-index: 10;
 }*/
 
+.tests {
+  width: 840px;
+}
+
 .test {
   width: 220px;
   padding: 20px;
@@ -76,8 +80,8 @@ body {
 
 .test .box {
   position: absolute;
-  top: 30px;
-  left: 96px;
+  top: 34px;
+  left: 93px;
   width: 32px;
   height: 32px;
   line-height: 32px;
