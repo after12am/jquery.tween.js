@@ -19,7 +19,10 @@ function complete() {
   var prop = $(this).closest('.test').data('description');
   if (prop) {
     var data = $box.css(prop);
-    if (data) $box.text(data);
+    if (data) {
+      if (typeof data === 'object') $box.text([data.x, data.y]);
+      else $box.text(data);
+    }
   }
   return false;
 }

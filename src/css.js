@@ -68,7 +68,8 @@ $.cssHooks['rotatez'] = {
 
 $.cssHooks['scale'] = {
   get: function(elem, computed, extra) {
-    return ($(elem).data('tween:transform') || Transform.factory()).scalex;
+    var data = ($(elem).data('tween:transform') || Transform.factory());
+    return { x: data.scalex, y: data.scaley };
   },
   set: function(elem, value) {
     $(elem).tween({ scalex: parseInt(value, 10), scaley: parseInt(value, 10) }, 0);
@@ -95,7 +96,8 @@ $.cssHooks['scaley'] = {
 
 $.cssHooks['skew'] = {
   get: function(elem, computed, extra) {
-    return ($(elem).data('tween:transform') || Transform.factory()).skewx;
+    var data = ($(elem).data('tween:transform') || Transform.factory());
+    return { x: data.skewx, y: data.skewy };
   },
   set: function(elem, value) {
     $(elem).tween({ skewx: parseInt(value, 10), skewy: parseInt(value, 10) }, 0);
