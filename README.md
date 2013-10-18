@@ -1,7 +1,6 @@
 jquery.tween.js
 ===============
 
-
 |              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
 |:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
 | x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
@@ -21,7 +20,8 @@ jquery.tween.js
 <!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9       | IE8       | IE7       | IE6       | -->
 
 > **Note**
-> * We have to set 0 to margin of target element on IE6-9 unfortunately. So don't use margin of target element that will be transformed.
+> * Unfortunately we have to set 0 to margin of target element, that will be transformed, on IE6-9 and Opera. So don't use margin on those browsers.
+> * Modern browsers except Opera have been implemented by Transform 3D. The others by Transform 2D. You can not use (rotatex|rotatey) and (scale|scalex|scaley) on old browsers due to the implementation of rotatex and rotatey. 
 
 [chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
 [firefox]: https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png
