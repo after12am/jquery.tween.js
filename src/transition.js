@@ -51,17 +51,17 @@ Transition.prototype = {
     return this.styles[name];
   },
   
-  duration: function(duration) {
+  duration: function(duration, unit) {
     var name = 'transition-duration';
     if (duration === undefined) return parseInt(this.get(name), 10);
-    this.set(name, sprintf('%sms', duration));
+    this.set(name, sprintf('%s%s', duration, unit === undefined ? 'ms' : ''));
     return this;
   },
   
-  delay: function(delay) {
+  delay: function(delay, unit) {
     var name = 'transition-delay';
     if (delay === undefined) return parseInt(this.get(name), 10);
-    this.set(name, sprintf('%sms', delay));
+    this.set(name, sprintf('%s%s', delay, unit === undefined ? 'ms' : ''));
     return this;
   },
   
@@ -137,7 +137,7 @@ Transition.prototype = {
   
   clear: function() {
     // clear transition properties
-    this.duration('').delay('').easing('').property('');
+    this.duration('', '').delay('', '').easing('').property('');
     $(this.elem).css(this.styles);
   }
 }
