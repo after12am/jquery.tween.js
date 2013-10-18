@@ -32,7 +32,7 @@ $.fn.tween = function(props, duration, easing, complete) {
     props: _props || {},
     duration: duration,
     delay: 0,
-    easing: easing || 'ease',
+    easing: easing || 'def',
     style: 'flat', // flat || preserve-3d
     property: 'all',
     complete: complete || function() {}

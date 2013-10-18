@@ -4,10 +4,12 @@ function Transition(elem) {
 }
 
 Transition.cubicBezier = {
+  'def'               : this['ease-out-quad'],
   'in'                : 'ease-in',
   'out'               : 'ease-out',
   'in-out'            : 'ease-in-out',
-  'snap'              : 'cubic-bezier(0,1,0.5,1)',
+  // 'swing'
+  // 'snap'              : 'cubic-bezier(0,1,0.5,1)',
   'linear'            : 'cubic-bezier(0.250, 0.250, 0.750, 0.750)',
   'ease-in-quad'      : 'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
   'ease-in-cubic'     : 'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
@@ -25,8 +27,8 @@ Transition.cubicBezier = {
   'ease-out-expo'     : 'cubic-bezier(0.190, 1.000, 0.220, 1.000)',
   'ease-out-circ'     : 'cubic-bezier(0.075, 0.820, 0.165, 1.000)',
   'ease-out-back'     : 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
-  'ease-out-quad'     : 'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
-  'ease-out-cubic'    : 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+  'ease-in-out-quad'  : 'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
+  'ease-in-out-cubic' : 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
   'ease-in-out-quart' : 'cubic-bezier(0.770, 0.000, 0.175, 1.000)',
   'ease-in-out-quint' : 'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
   'ease-in-out-sine'  : 'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
