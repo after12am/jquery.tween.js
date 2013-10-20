@@ -1,8 +1,8 @@
-[jQuery Tween](http://after12am.github.io/jquery.tween.js/)
-===========================================================
+jQuery Tween
+============
 
 This is a jquery plugin provides a stylish and unified animation for your browser based app. 
-This plugin is designed to work on modern browsers in addition to old browsers like IE6-8.
+This plugin is designed to work on modern browsers including browsers of smartphone in addition to old browsers like IE 6-8.
 　  
 　  
 
@@ -56,8 +56,10 @@ $('.any').tween(props[,duration][,easing][,callback]);
 </script>
 ```
 
-> **IE6-9**
-> * You can not use margin property. This is used for fixing bug of origin.
+### IE6-9
 
-> **IE6-9 and Opera**
-> * You can not use (rotatex|rotatey) and (scale|scalex|scaley) at the same time due to the implementation using transform 2d. 
+* You can not use margin property. This is used for fixing bug of origin.
+
+### IE6-9 and Opera
+
+* You can not use (rotatex|rotatey) and (scale|scalex|scaley) at the same time due to the implementation. 
