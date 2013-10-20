@@ -43,6 +43,7 @@ Transition.prototype = {
     var style = this.elem.style;
     var name = vendorPropName(style, k);
     this.styles[name] = v;
+    return this;
   },
   
   get: function(k) {
@@ -93,7 +94,11 @@ Transition.prototype = {
     return this;
   },
   
-  transit: function(callback) {
+  transit: function(duration, delay, easing, callback) {
+    
+    this.duration(duration);
+    this.delay(delay);
+    this.easing(easing);
     
     // A: If transform with non transform properties, width, height and etc,
     // transitionEnd event does not fired properly. 
@@ -147,12 +152,8 @@ function transit(elem, options) {
   var transform = $(elem).data('tween:transform') || Transform.factory();
   var transition = new Transition(elem);
   
-  transition
-    .duration(options.duration)
-    .delay(options.delay)
-    .easing(options.easing)
-    .style(options.style)
-    .transform(transform.update(options.props).toString());
+  transition.style(options.style);
+  transition.transform(transform.update(options.props).toString());
   
   // add non transform properties
   // e.g. width, height, color ...
@@ -175,8 +176,12 @@ function transit(elem, options) {
     $(elem).parent().css(vendorPropName(elem.style, 'perspective'), options.props.perspective);
   }
   
-  // start animation
-  transition.transit(options.complete);
+  transition.transit(
+    options.duration,
+    options.delay,
+    options.easing,
+    options.complete
+  );
   
   // store updated transform properties
   $(elem).data('tween:transform', transform);

@@ -168,7 +168,6 @@ var OTransform = function() {
 }
 
 OTransform.prototype = Object.create(Transform.prototype);
-
 OTransform.prototype.toString = function() {
   // opera does support only 2d transformation.
   return [

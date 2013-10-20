@@ -16,6 +16,15 @@ var radToDeg = function() {
   };
 }();
 
+var round = function() {
+  
+  var pow = Math.pow(10, 3);
+  
+  return function(value) {
+    return Math.round(value * pow) / pow
+  }
+}();
+
 var isRel = function(v) {
   return (typeof v === 'string' && v.match(/^\s*(\+|-)=\s*([0-9]+)\s*$/));
 }
