@@ -2,8 +2,8 @@ jQuery Tween
 ============
 
 This is a jquery plugin provides a stylish and unified animation for your browser based app. 
-This plugin is designed to work on modern browsers including smartphone in addition to old browsers like IE 6-8.
-
+This plugin is designed to work on modern browsers including smartphone browsers in addition to old like IE 6-8.
+　  
 
 |              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
 |:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
