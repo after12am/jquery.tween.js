@@ -35,7 +35,8 @@ This plugin is designed to work on modern browsers including smartphone in addit
 [OK]: https://raw.github.com/after12am/jquery.tween.js/master/images/tick.png
 [NG]: https://raw.github.com/after12am/jquery.tween.js/master/images/cross.png
 
-## Requires
+
+## Require
 
 * requires jQuery 1.4.3+
 
@@ -62,10 +63,10 @@ $('.any').tween(props [,duration] [,easing] [,callback]);
 
 ### IE6-9
 
-* not allowed to use margin. margin is used for fixing bug of origin
+* Using margin is not allowed. If you set margin, it would be overrided with 0. It is used for fixing bug of origin.
 
 ### IE6-9 and Opera
 
-* not allowed to use (rotatex|rotatey) and (scale|scalex|scaley) at the same time
-* not allowed to use transform origin
+* Using (rotatex|rotatey) and (scale|scalex|scaley) at the same time is not allowed.
+* Using transform origin is not allowed.
 
