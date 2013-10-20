@@ -15,7 +15,7 @@ import re, os, sys, time, tempfile, threading
 header = '''/*
  * jquery.tween.js v%s
  * 
- * A jQuery plugin provides a stylish and cute animation for your smartphone app.
+ * A jQuery plugin provides a stylish and unified animation for your browser based app.
  *
  * https://github.com/after12am/jquery.tween.js
  *
