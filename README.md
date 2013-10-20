@@ -1,6 +1,11 @@
 jquery.tween.js
 ===============
 
+This is a jquery plugin provides a stylish and unified animation for your browser based app. 
+This plugin is designed to work on modern browsers in addition to old browsers like IE6-8 and 
+to take advantage of knowledge of jquery of you. 
+
+
 |              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
 |:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
 | x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
@@ -19,10 +24,6 @@ jquery.tween.js
 
 <!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9       | IE8       | IE7       | IE6       | -->
 
-> **Note**
-> * Unfortunately we have to set 0 to margin of target element, that will be transformed, on IE6-9 and Opera. So don't use margin on those browsers.
-> * Modern browsers except Opera have been implemented by Transform 3D. The others by Transform 2D. You can not use (rotatex|rotatey) and (scale|scalex|scaley) on old browsers due to the implementation of rotatex and rotatey. 
-
 [chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
 [firefox]: https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png
 [safari]: https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png
@@ -34,3 +35,38 @@ jquery.tween.js
 [ie6]: https://raw.github.com/paulirish/browser-logos/master/ie6/ie6_48x48.png
 [OK]: https://raw.github.com/after12am/jquery.cssanimate.js/dev/images/tick.png
 [NG]: https://raw.github.com/after12am/jquery.cssanimate.js/dev/images/cross.png
+
+## Usage
+
+Usage is the same syntax as $.fn.animate. You can take advantage of knowledge of jquery. 
+
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src='jquery.tween.js'></script>
+<script type="text/javascript">
+var properties = {
+  x: 100, // translate on x-axis
+  y: 100, // translate on y-axis
+  z: -100, // translate on z-axis
+  rotate: 45, // rotate on z-axis
+  rotatex: 45, // rotate on x-axis
+  rotatey: 45, // rotate on y-axis
+  rotatez: 45, // rotate on z-axis
+  scale: 2,  // scale on xy-axis
+  scalex: 2, // rotate on x-axis
+  scaley: 2, // rotate on y-axis
+  skew: 45, // skew on xy-axis
+  skewx: 45, // skew on x-axis
+  skewy: 45, // skew on y-axis
+  width: 100, // able to transform css properties
+  opacity: 0
+};
+$('.any').cssanimate(properties[,duration][,easing][,callback]);
+</script>
+```
+
+> **IE6-9**
+> * You can not use margin property of target element. The margin property is used for fixing bug of origin.
+
+> **IE6-9 and Opera**
+> * You can not use (rotatex|rotatey) and (scale|scalex|scaley) at the same time due to the implementation using transform 2d. 
