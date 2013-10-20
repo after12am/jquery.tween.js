@@ -1,10 +1,10 @@
-jquery.tween.js
-===============
+[jQuery Tween](http://after12am.github.io/jquery.tween.js/)
+===========================================================
 
 This is a jquery plugin provides a stylish and unified animation for your browser based app. 
-This plugin is designed to work on modern browsers in addition to old browsers like IE6-8 and 
-to take advantage of knowledge of jquery of you. 
-
+This plugin is designed to work on modern browsers in addition to old browsers like IE6-8.
+　  
+　  
 
 |              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
 |:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
@@ -38,35 +38,26 @@ to take advantage of knowledge of jquery of you.
 
 ## Usage
 
-Usage is the same syntax as $.fn.animate. You can take advantage of knowledge of jquery. 
+You can take advantage of knowledge of jquery of you. The syntax is the same as $.fn.animate.
 
 ```html
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="jquery.js"></script>
 <script src='jquery.tween.js'></script>
 <script type="text/javascript">
-var properties = {
+var props = {
   x: 100, // translate on x-axis
-  y: 100, // translate on y-axis
-  z: -100, // translate on z-axis
   rotate: 45, // rotate on z-axis
-  rotatex: 45, // rotate on x-axis
-  rotatey: 45, // rotate on y-axis
-  rotatez: 45, // rotate on z-axis
   scale: 2,  // scale on xy-axis
-  scalex: 2, // rotate on x-axis
-  scaley: 2, // rotate on y-axis
   skew: 45, // skew on xy-axis
-  skewx: 45, // skew on x-axis
-  skewy: 45, // skew on y-axis
   width: 100, // able to transform css properties
   opacity: 0
 };
-$('.any').cssanimate(properties[,duration][,easing][,callback]);
+$('.any').tween(props[,duration][,easing][,callback]);
 </script>
 ```
 
 > **IE6-9**
-> * You can not use margin property of target element. The margin property is used for fixing bug of origin.
+> * You can not use margin property. This is used for fixing bug of origin.
 
 > **IE6-9 and Opera**
 > * You can not use (rotatex|rotatey) and (scale|scalex|scaley) at the same time due to the implementation using transform 2d. 
