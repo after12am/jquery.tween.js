@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="styles/style.css">
+<link rel="stylesheet" href="styles/easing.css">
+</head>
+<body>
+<div class='tests'></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../jquery.tween.js"></script>
+<script src="scripts/unit.js"></script>
+<script type="text/javascript">
+
+//$.fn.tween.debug.animateType = 'animation'
+
+unit.module('Basic');
+
+var to =  {
+  x: 188
+};
+
+var duration = 400;
+
+unit.test('default', function($box) {
+  $box.tween(to);
+});
+
+unit.test('in', function($box) {
+  $box.tween(to, duration, 'in');
+});
+
+unit.test('out', function($box) {
+  $box.tween(to, duration, 'out');
+});
+
+unit.test('linear', function($box) {
+  $box.tween(to, duration, 'linear');
+});
+
+unit.module('EaseIn');
+
+unit.test('ease-in-quad', function($box) {
+  $box.tween(to, duration, 'ease-in-quad');
+});
+
+unit.test('ease-in-cubic', function($box) {
+  $box.tween(to, duration, 'ease-in-cubic');
+});
+
+unit.test('ease-in-quart', function($box) {
+  $box.tween(to, duration, 'ease-in-quart');
+});
+
+unit.test('ease-in-quint', function($box) {
+  $box.tween(to, duration, 'ease-in-quint');
+});
+
+unit.test('ease-in-sine', function($box) {
+  $box.tween(to, duration, 'ease-in-sine');
+});
+
+unit.test('ease-in-expo', function($box) {
+  $box.tween(to, duration, 'ease-in-expo');
+});
+
+unit.test('ease-in-circ', function($box) {
+  $box.tween(to, duration, 'ease-in-circ');
+});
+
+unit.test('ease-in-back', function($box) {
+  $box.tween(to, duration, 'ease-in-back');
+});
+
+unit.module('EaseOut');
+
+unit.test('ease-out-quad', function($box) {
+  $box.tween(to, duration, 'ease-out-quad');
+});
+
+unit.test('ease-out-cubic', function($box) {
+  $box.tween(to, duration, 'ease-out-cubic');
+});
+
+unit.test('ease-out-quart', function($box) {
+  $box.tween(to, duration, 'ease-out-quart');
+});
+
+unit.test('ease-out-quint', function($box) {
+  $box.tween(to, duration, 'ease-out-quint');
+});
+
+unit.test('ease-out-sine', function($box) {
+  $box.tween(to, duration, 'ease-out-sine');
+});
+
+unit.test('ease-out-expo', function($box) {
+  $box.tween(to, duration, 'ease-out-expo');
+});
+
+unit.test('ease-out-circ', function($box) {
+  $box.tween(to, duration, 'ease-out-circ');
+});
+
+unit.test('ease-out-back', function($box) {
+  $box.tween(to, duration, 'ease-out-back');
+});
+
+unit.module('EaseInOut');
+
+unit.test('ease-in-out-quad', function($box) {
+  $box.tween(to, duration, 'ease-in-out-quad');
+});
+
+unit.test('ease-in-out-cubic', function($box) {
+  $box.tween(to, duration, 'ease-in-out-cubic');
+});
+
+unit.test('ease-in-out-quart', function($box) {
+  $box.tween(to, duration, 'ease-in-out-quart');
+});
+
+unit.test('ease-in-out-quint', function($box) {
+  $box.tween(to, duration, 'ease-in-out-quint');
+});
+
+unit.test('ease-in-out-sine', function($box) {
+  $box.tween(to, duration, 'ease-in-out-sine');
+});
+
+unit.test('ease-in-out-expo', function($box) {
+  $box.tween(to, duration, 'ease-in-out-expo');
+});
+
+unit.test('ease-in-out-circ', function($box) {
+  $box.tween(to, duration, 'ease-in-out-circ');
+});
+
+unit.test('ease-in-out-back', function($box) {
+  $box.tween(to, duration, 'ease-in-out-back');
+});
+
+// $(function() {
+//   setTimeout(function() {
+//     $('.test').mouseover();
+//   }, 500)
+// });
+</script>
+</body>
+</html>

@@ -1,43 +1,63 @@
-[jQuery cssanimate](http://after12am.github.io/jquery.cssanimate.js/)
-========================================================================
+[jQuery Tween](http://after12am.github.io/jquery.tween.js/)
+===========================================================
 
-jquery.cssanimate.js is a jquery plugin that provides a stylish and cute animation especially for your smartphone app using css3.
-Using css3 in dom animation will have been excellent select. Because css3 would give your app lightness and interactivity compared with javascript.
-However, it is a bit difficult to controll under dynamic usage. In view of this, I have designed jquery.cssanimate.js to take advantage of knowledge of jquery of you.
+This is a jquery plugin provides a stylish and unified animation for your browser based app. 
+This plugin is designed to work on modern browsers in addition to old browsers like IE6-8.
+　  
+　  
+
+|              | ![CHROME][chrome] | ![FIREFOX][firefox] | ![OPERA][opera]   | ![SAFARI][safari] | ![IE10][ie10] | ![IE9][ie9] | ![IE8][ie8] | ![IE7][ie7] | ![IE6][ie6] |
+|:------------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
+| x            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| y            | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| z            | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![OK][OK] | ![OK][OK] | ![NG][NG] | ![NG][NG] | ![NG][NG] | ![NG][NG] |
+| rotate       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| rotatex      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| rotatey      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| rotatez      | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| scale        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| scalex       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| scaley       | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| skew         | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| skewx        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+| skewy        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+
+<!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9       | IE8       | IE7       | IE6       | -->
+
+[chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
+[firefox]: https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png
+[safari]: https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png
+[opera]: https://raw.github.com/paulirish/browser-logos/master/opera/opera_48x48.png
+[ie10]: https://raw.github.com/paulirish/browser-logos/master/ie10/ie10_48x48.png
+[ie9]: https://raw.github.com/paulirish/browser-logos/master/ie9-10/ie9-10_48x48.png
+[ie8]: https://raw.github.com/paulirish/browser-logos/master/ie7-8/ie7-8_48x48.png
+[ie7]: https://raw.github.com/paulirish/browser-logos/master/ie7-8/ie7-8_48x48.png
+[ie6]: https://raw.github.com/paulirish/browser-logos/master/ie6/ie6_48x48.png
+[OK]: https://raw.github.com/after12am/jquery.cssanimate.js/dev/images/tick.png
+[NG]: https://raw.github.com/after12am/jquery.cssanimate.js/dev/images/cross.png
 
 ## Usage
 
-Usage is very simple. It has the same syntax as $.fn.animate.
+You can take advantage of knowledge of jquery of you. The syntax is the same as $.fn.animate.
 
 ```html
-<script src='jquery.js'></script>
-<script src='jquery.cssanimate.js'></script>
+<script src="jquery.js"></script>
+<script src='jquery.tween.js'></script>
 <script type="text/javascript">
-var params = {
-    x: 100,
-    rotatez: 100,
-    width: 100, // able to transform css properties
-    opacity: 0
+var props = {
+  x: 100, // translate on x-axis
+  rotate: 45, // rotate on z-axis
+  scale: 2,  // scale on xy-axis
+  skew: 45, // skew on xy-axis
+  width: 100, // able to transform css properties
+  opacity: 0
 };
-$('.any').cssanimate(params, [callback]);
-$('.any').cssanimate(params, [duration], [callback]);
-$('.any').cssanimate(params, [duration], [delay], [callback]);
-$('.any').cssanimate(params, [duration], [delay], [easing], [callback]);
+$('.any').tween(props[,duration][,easing][,callback]);
 </script>
 ```
 
-## Features
+> **IE6-9**
+> * You can not use margin property. This is used for fixing bug of origin.
 
-* support `method chain` which will executed animation serially
-* support `origin` to set where rotations and scales start from
-* support advanced [`easing`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/core/ease.js) function which specifies the speed curve of the transition effect
-* support `2d/3d` transformation
-* support `loopback` which helps you to make infinite loop animation easily
-* support `prefix free` which free you from vendor prefix hell
-* support `relative value` which allows you to start with `+=` or `-=`
-* support [`$.fn.css`](https://github.com/after12am/jquery.cssanimate.js/blob/master/src/supports/hook.js) which helps you to get the value of a style property for the first element in the set of matched elements and helps you to set css properties for every matched element
-
-## Notes
-
-* If main usage of your app is to animate lots of elements, more than 100 elements, at the same time in pc browser, I recommend you to use $.fn.animate.
-* If rotate around x-axis or y-axis in `safari`, you should set perspective property like `$('any').perspective(100).cssanimate({ rotatey: '-=180'});` before rotating the element. Because safari treats as 3d.
+> **IE6-9 and Opera**
+> * You can not use (rotatex|rotatey) and (scale|scalex|scaley) at the same time due to the implementation using transform 2d. 

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class='tests'></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../jquery.tween.js"></script>
+<script src="scripts/unit.js"></script>
+<script type="text/javascript">
+
+//$.fn.tween.debug.animateType = 'animation'
+
+function complete() {
+  var $box = $(this);
+  var prop = $(this).closest('.test').data('description');
+  if (prop) {
+    var data = $box.css(prop);
+    if (data) {
+      if (typeof data === 'object') $box.text([data.x, data.y]);
+      else $box.text(data);
+    }
+  }
+  return false;
+}
+
+unit.module('Translate');
+
+unit.test('x', function($box) {
+  $box.tween({
+    x: 32
+  }, complete);
+});
+
+unit.test('y', function($box) {
+  $box.tween({
+    y: 32
+  }, complete);
+});
+
+unit.test('z', function($box) {
+  $box.tween({
+    perspective: 200, z: -100
+  }, complete);
+});
+
+unit.module('Rotate');
+
+unit.test('rotate', function($box) {
+  $box.tween({
+    rotatez: 45
+  }, complete);
+});
+
+unit.test('rotatex', function($box) {
+  $box.tween({
+    rotatex: 45
+  }, complete);
+});
+
+unit.test('rotatey', function($box) {
+  $box.tween({
+    rotatey: 45
+  }, complete);
+});
+
+unit.test('rotatez', function($box) {
+  $box.tween({
+    rotatez: 45
+  }, complete);
+});
+
+unit.module('Scale');
+
+unit.test('scale', function($box) {
+  $box.tween({
+    scale: 2
+  }, complete);
+});
+
+unit.test('scalex', function($box) {
+  $box.tween({
+    scalex: 2
+  }, complete);
+});
+
+unit.test('scaley', function($box) {
+  $box.tween({
+    scaley: 2
+  }, complete);
+});
+
+unit.module('Skew');
+
+unit.test('skew', function($box) {
+  $box.tween({
+    skew: 45
+  }, complete);
+});
+
+unit.test('skewx', function($box) {
+  $box.tween({
+    skewx: 45
+  }, complete);
+});
+
+unit.test('skewy', function($box) {
+  $box.tween({
+    skewy: 45
+  }, complete);
+});
+
+// $(function() {
+//   setTimeout(function() {
+//     $('.test').mouseover();
+//   }, 500)
+// });
+</script>
+</body>
+</html>
