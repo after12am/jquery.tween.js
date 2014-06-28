@@ -20,8 +20,7 @@ This plugin is designed to work on modern browsers including smartphone browsers
 | skew         | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
 | skewx        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
 | skewy        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
-|              |           |           |           |           |    IE10   |    IE9    |    IE8    |    IE7    |    IE6   
-|
+|              |  `CHROME` |  `FF`   | `SAFARI`    |  `OPERA` |  `IE10`   |   `IE9`   |   `IE8`   |   `IE7`   |   `IE6`|
 
 <!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9       | IE8       | IE7       | IE6       | -->
 
