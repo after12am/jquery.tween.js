@@ -20,18 +20,20 @@ This plugin is designed to work on modern browsers including smartphone browsers
 | skew         | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
 | skewx        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
 | skewy        | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] | ![OK][OK] |
+|              |           |           |           |           |    IE10   |    IE9    |    IE8    |    IE7    |    IE6   
+|
 
 <!--           | CHROME    | FIREFOX   | OPERA     | SAFARI    | IE10      | IE9       | IE8       | IE7       | IE6       | -->
 
 [chrome]: https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png
 [firefox]: https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png
-[safari]: https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png
 [opera]: https://raw.github.com/paulirish/browser-logos/master/opera/opera_48x48.png
-[ie10]: https://raw.github.com/paulirish/browser-logos/master/ie10/ie10_48x48.png
-[ie9]: https://raw.github.com/paulirish/browser-logos/master/ie9-10/ie9-10_48x48.png
-[ie8]: https://raw.github.com/paulirish/browser-logos/master/ie7-8/ie7-8_48x48.png
-[ie7]: https://raw.github.com/paulirish/browser-logos/master/ie7-8/ie7-8_48x48.png
-[ie6]: https://raw.github.com/paulirish/browser-logos/master/ie6/ie6_48x48.png
+[safari]: https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png
+[ie10]: https://raw.githubusercontent.com/alrra/browser-logos/master/internet-explorer-tile/internet-explorer-tile_48x48.png
+[ie9]: https://raw.githubusercontent.com/alrra/browser-logos/master/internet-explorer/internet-explorer_48x48.png
+[ie8]: https://raw.githubusercontent.com/alrra/browser-logos/master/archive/internet-explorer_7-8/internet-explorer_7-8_48x48.png
+[ie7]: https://raw.githubusercontent.com/alrra/browser-logos/master/archive/internet-explorer_7-8/internet-explorer_7-8_48x48.png
+[ie6]: https://raw.githubusercontent.com/alrra/browser-logos/master/archive/internet-explorer_6/internet-explorer_6_48x48.png
 [OK]: https://raw.github.com/after12am/jquery.tween.js/master/images/tick.png
 [NG]: https://raw.github.com/after12am/jquery.tween.js/master/images/cross.png
 
