@@ -47,8 +47,9 @@ This plugin is designed to work on modern browsers including smartphone browsers
 
 You can take advantage of knowledge of jquery of you.
 
-```
+```js
 <script src="jquery.js"></script>
+<script src='jquery.easing.1.3.js'></script>
 <script src='jquery.tween.js'></script>
 <script type="text/javascript">
 var props = {
@@ -62,6 +63,8 @@ var props = {
 $('.any').tween(props [,duration] [,easing] [,callback]);
 </script>
 ```
+
+## Note
 
 ### IE6-9
 
