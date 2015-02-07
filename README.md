@@ -66,11 +66,11 @@ $('.any').tween(props [,duration] [,easing] [,callback]);
 
 ## Note
 
-### IE6-9
+#### IE6-9
 
 * Using margin is not allowed. If you set margin, it would be overrided with 0. It is used for fixing bug of origin.
 
-### IE6-9 and Opera
+#### IE6-9 and Opera
 
 * Using (rotatex|rotatey) and (scale|scalex|scaley) at the same time is not allowed.
 * Using transform origin is not allowed.
