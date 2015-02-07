@@ -7,7 +7,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>jquery.cssanimate.js</title>
+<title>jquery.tween.js</title>
 <meta name="description" content="">
 <!-- Mobile viewport optimized: h5bp.com/viewport -->
 <meta name="viewport" content="width=device-width">
@@ -29,13 +29,13 @@
     <header class="cf">
         <div id="social-bar-holder">
             <ul id="social-bar" class="cf">
-                <li class="github"><a href="https://github.com/after12am/jquery.cssanimate.js"  title="Github" ></a></li>
+                <li class="github"><a href="https://github.com/after12am/jquery.tween.js"  title="Github" ></a></li>
                 <li class="facebook"><a href="https://www.facebook.com/satoshi.okami"  title="Facebook" ></a></li>
             </ul>
         </div>
         <div class="cf"></div>
         <div id="logo" class="cf">
-            <a href="/" >cssanimate</a>
+            <a href="/" >jQueryTween</a>
         </div>
         <nav class="cf">
             <ul id="nav" class="sf-menu">
@@ -47,7 +47,7 @@
         </nav>
     </header>
     <div role="main" id="main" class="cf">
-        <div class="headline">CSSANIMATE IS STYLISH AND CUTE</div>
+        <div class="headline">tween IS STYLISH AND CUTE</div>
         <ul class="feature cf">
             <li id="translateXY">
                 <a class="thumb" >
@@ -56,7 +56,12 @@
                     <div class="box"></div>
                 </a>
                 <a class="excerpt">Translate X / Y</a>
-                <div class="code">$('.box').cssanimate(<em>{ x: 30, y: 30 }</em>)</div>
+<pre>
+$('.box').tween({
+    x: 30,
+    y: 30
+});
+</pre>
             </li>
             <li id="rotateXYZ">
                 <a class="thumb" >
@@ -65,7 +70,12 @@
                     <div class="box"></div>
                 </a>
                 <a class="excerpt">Rotate X / Y</a>
-                <div class="code">$('.box').cssanimate(<em>{ rotate: [90, 90] }</em>)</div>
+<pre>
+$('.box').tween({
+    rotatex: 90,
+    rotatey: 90
+});
+</pre>
             </li>
             <li id="scaleXY">
                 <a class="thumb" >
@@ -74,7 +84,12 @@
                     <div class="box"></div>
                 </a>
                 <a class="excerpt">Scale X / Y</a>
-                <div class="code">$('.box').cssanimate(<em>{ scalex: 4, scaley: 4 }</em>)</div>
+<pre>
+$('.box').tween({
+    scalex: 4,
+    scaley: 4
+});
+</pre>
             </li>
             <li id="skewXY">
                 <a class="thumb" >
@@ -83,7 +98,12 @@
                     <div class="box"></div>
                 </a>
                 <a class="excerpt">Skew X / Y</a>
-                <div class="code">$('.box').cssanimate(<em>{ skewx: 45, skewy: 45 }</em>)</div>
+<pre>
+$('.box').tween({
+    skewx: 45,
+    skewy: 45
+});
+</pre>
             </li>
             <li id="opacity">
                 <a class="thumb" >
@@ -92,7 +112,12 @@
                     <div class="box"></div>
                 </a>
                 <a class="excerpt">Opacity</a>
-                <div class="code">$('.box').cssanimate(<em>{ opacity: 0 }</em>)</div>
+<pre>
+$('.box').tween({
+    opacity: 0
+});
+
+</pre>
             </li>
             <li id="radius">
                 <a class="thumb" >
@@ -101,7 +126,12 @@
                     <div class="box"></div>
                 </a>
                 <a class="excerpt">Radius</a>
-                <div class="code">$('.box').cssanimate(<em>{ border-radius: 30 }</em>)</div>
+<pre>
+$('.box').tween({
+    border-radius: 30
+});
+
+</pre>
             </li>
         </ul>
     </div>
@@ -114,15 +144,16 @@
                         <li class="tweet_first tweet_odd">
                             <span class="tweet_time"><a href="#" class="date"></a></span>
                             <span class="tweet_text"><a class="message"></a> committed by <a class="committer"></a></span>
-                            <span style="display:block;">authored by <a href="https://github.com/after12am/jquery.cssanimate.js">after12am</a></span>
+                            <span style="display:block;">authored by <a href="https://github.com/after12am/jquery.tween.js">after12am</a></span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="ribbon-right"></div>
         </div>
-        <ul id="more" class="widget-cols cf">
-            <li class="first-col">
+        
+        <div class="widget-cols cf">
+            <div class="inner">
                 <div class="widget-block">
                     <h4>method chain</h4>
                     <div class="page-content recent-post cf method-chaine">
@@ -131,14 +162,14 @@
                             <span>&nbsp&nbspMethod chain is supported. Animation will be executed serially exactly like animate of jQuery.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box')
-                                    .cssanimate({ x: 100, y: 0, scale: 0.5, rotatez: 90 })
-                                    .cssanimate({ x: 100, y: 100, scale: 1, rotatez: 180 })
-                                    .cssanimate({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
-                                    .cssanimate({ x: -100, y: 0, scale: 1, rotatez: 360 })
-                                    .cssanimate({ x: 0, y: 0, scale: 1 })
-                                </span>
+<pre>
+$('.box')
+    .tween({ x: 100,  y: 0,   scale: 0.5, rotatez: 90  })
+    .tween({ x: 100,  y: 100, scale: 1,   rotatez: 180 })
+    .tween({ x: -100, y: 100, scale: 0.5, rotatez: 270 })
+    .tween({ x: -100, y: 0,   scale: 1,   rotatez: 360 })
+    .tween({ x: 0,    y: 0,   scale: 1,   rotatez: 0   })
+</pre>
                             </div>
                         </div>
                     </div>
@@ -150,49 +181,43 @@
                             <div class="box"></div>
                         </div>
                         <div class="post-head">
-                            <span>&nbsp&nbspYou can control elements using 3D transforms. Set value on $.fn.perspective() which is how 3D elements are viewed.</span>
+                            <span>&nbsp&nbspYou can control elements using 3D transforms. Set perspective value which is how 3D elements are viewed. If want to disable 3d transformation, set false.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box')
-                                    .perspective(100)
-                                    .cssanimate({ x: 50, z: 50, rotatey: 60 })
-                                </span>
-                                <span>
-                                    $('.box')
-                                    .perspective(false)
-                                    .cssanimate({ rotatey: 60 })
-                                </span>
+<pre>
+$('.box').tween({
+    perspective: 100, // false
+    x: 50,
+    z: 50,
+    rotatey: 60
+});
+</pre>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--
                 <div class="widget-block" style="margin-top: 50px;">
                     <h4>origin</h4>
                     <div class="page-content recent-post cf transformation-origins">
                         <div class="container"><div class="box"></div></div>
                         <div class="post-head">
-                            <span>&nbsp&nbspYou can use origin to set where rotations and scales start from.</span>
+                            <span>&nbsp&nbspYou can use origin to set where rotations and scales start from. [Percentage | left | center | right | top | bottom] also available.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box')
-                                    .origin(0, 0)
-                                    .cssanimate({ rotatez: 45 })
-                                    .cssanimate({ rotatez: 20 })
-                                    .cssanimate({ rotatez: 45 })
-                                </span>
-                                <em>alternate</em>
-                                <span>origin('50%', '50%')</span>
-                                <span>origin('bottom', 'right')</span>
-                                <span>origin('30px', '20px')</span>
+<pre>
+$('.box')
+    .origin(0, 0) // or 50%, bottom, right, 30px
+    .tween({ rotatez: 45 })
+    .tween({ rotatez: 20 })
+    .tween({ rotatez: 45 });
+</pre>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="second-col">
-                <div class="widget-block">
+                -->
+                <div class="widget-block" style="margin-top: 50px;">
                     <h4>Transform Any CSS</h4>
                     <div class="page-content recent-post cf css-property">
                         <div class="container"><div class="box"></div></div>
@@ -200,10 +225,12 @@
                             <span>&nbsp&nbspYou can transform any css properties. The example shows how to change the color and width.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box')
-                                    .cssanimate({ width: 0, 'background-color': '#CF3932' })
-                                </span>
+<pre>
+$('.box').tween({
+    width: 0,
+    backgroundColor: '#CF3932'
+});
+</pre>
                             </div>
                         </div>
                     </div>
@@ -216,9 +243,11 @@
                             <span>&nbsp&nbspPrefix free that free you from vendor prefix hell is supported. You can use unprefixed css property everywhere.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box').cssanimate({ transform: 'translateX(48px)' })
-                                </span>
+<pre>
+$('.box').tween({
+    transform: 'translateX(48px)'
+});
+</pre>
                             </div>
                         </div>
                     </div>
@@ -233,11 +262,12 @@
                             <span>&nbsp&nbspRelative value allows you to start with '+=' or '-='.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box')
-                                    .perspective(100)
-                                    .cssanimate({ z: '-=100' })
-                                </span>
+<pre>
+$('.box').tween({
+    perspective: 100,
+    z: '-=100'
+});
+</pre>
                             </div>
                         </div>
                     </div>
@@ -250,36 +280,37 @@
                             <span>&nbsp&nbsp$.fn.css helps you to get the value of a style property for the first element in the set of matched elements and helps you to set css properties for every matched element.</span>
                             <div class="code" style="margin-top:14px;">
                                 <em>e.g.</em>
-                                <span>
-                                    $(this)
-                                    .css('rotatez', 45);
-                                    $(this)
-                                    .text($(this)
-                                    .css('rotatez'));
-                                </span>
+<pre>
+$(this)
+    .css('rotatez', 45)
+    .text($(this).css('rotatez'));
+</pre>
                             </div>
                         </div>
                     </div>
                 </div>
-            </li>
-            <li class="third-col">
-                <div class="widget-block">
+                <div class="widget-block" style="margin-top: 50px;">
                     <h4>ease</h4>
                     <div class="page-content ease-example">
                         <div class="container"><div class="box"></div></div>
                         <div class="post-head">
-                            <span>&nbsp&nbspYou can use advanced easing function. <a href="https://github.com/after12am/jquery.cssanimate.js/blob/master/src/core/ease.js" target="_blank">29 types</a> are supported.</span>
+                            <span>&nbsp&nbspYou can use advanced easing function. <a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank">29 types</a> are supported.</span>
                             <div class="code" style="margin-top:14px; margin-bottom: 10px">
                                 <em>e.g.</em>
-                                <span>
-                                    $('.box)
-                                    .cssanimate({ scaleX: 3, rotate: 360, 'background-color': '#CF3932', ease: 'snap' })
-                                </span>
+<pre>
+$('.box).tween({
+    scaleX: 3,
+    rotate: 360,
+    backgroundColor: '#CF3932',
+    ease: 'snap'
+});
+</pre>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="widget-block">
+                <!--
+                <div class="widget-block" style="margin-top: 50px;">
                     <h4>Loopback</h4>
                     <div class="page-content loopback-example">
                         <div class="container"><div class="box"></div></div>
@@ -287,19 +318,19 @@
                             <span>&nbsp&nbspLoopback helps you to make infinite loop animation easily. When want to stop, click <a class="stop" href="#">stop animation</a>.</span>
                             <div class="code" style="margin-top:14px; margin-bottom: 10px">
                                 <em>e.g.</em>
-                                <span>
-                                    var rand = Math.random;
-                                    var to = [rand() * 100, rand() * 100, rand() * 100];
-                                    var scale = rand()* 1.4;
-                                    var rotate = [rand() * 720, rand() * 720, rand() * 720];
-                                    $('.box').cssanimate([
-                                        [{ to: to, scale: scale, rotate: rotate }]
-                                    ]);
-                                </span>
+<pre>
+var rand = Math.random;
+var to = [rand() * 100, rand() * 100, rand() * 100];
+var scale = rand()* 1.4;
+var rotate = [rand() * 720, rand() * 720, rand() * 720];
+$('.box').tween([
+    [{ to: to, scale: scale, rotate: rotate }]
+]);
+</pre>
                                 <em>usage</em>
                                 <span>
                                     <span style="display: inline-block; margin: 10px; color: #fff">var step1 = [params, [duration], [delay], [easing], [callback]];</span>
-                                    $('.any').cssanimate([
+                                    $('.any').tween([
                                         step1,
                                         step2,
                                         ...
@@ -311,8 +342,9 @@
                         </div>
                     </div>
                 </div>
-            </li>
-        </ul>
+                -->
+            </div>
+        </div>
         <div id="bottom">
             <div id="widget-trigger-holder"><a id="widget-trigger" href="#" title="View More" class="poshytip"></a></div>
             <div id="content">HalfTone Theme by <a href="http://www.luiszuno.com" >luiszuno.com</a> </div>
@@ -324,18 +356,17 @@
 <!-- scripts concatenated and minified via build script -->
 <script src="js/custom.js"></script>
 <!-- superfish -->
-<script  src="js/superfish-1.4.8/js/hoverIntent.js"></script>
-<script  src="js/superfish-1.4.8/js/superfish.js"></script>
-<script  src="js/superfish-1.4.8/js/supersubs.js"></script>
+<script src="js/superfish-1.4.8/js/hoverIntent.js"></script>
+<script src="js/superfish-1.4.8/js/superfish.js"></script>
+<script src="js/superfish-1.4.8/js/supersubs.js"></script>
 <!-- ENDS superfish -->
 <script src="js/jquery.isotope.min.js"></script>
 <script src="js/jquery.nivo.slider.js" ></script>
 <script src="js/css3-mediaqueries.js"></script>
 <script src="js/tabs.js"></script>
-<script  src="js/poshytip-1.1/src/jquery.poshytip.min.js"></script>
-<script src="js/jquery.cssanimate.js"></script>
+<script src="js/poshytip-1.1/src/jquery.poshytip.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.tween.js"></script>
 <script src="js/script.js"></script>
-<script type="text/javascript">
-</script>
 </body>
 </html>

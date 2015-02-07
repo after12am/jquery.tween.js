@@ -177,7 +177,7 @@ jQuery(document).ready(function($) {
     var sha = '';
     $.ajax({
         type: "GET",
-        url: "https://api.github.com/repos/after12am/jquery.cssanimate.js/git/refs/heads/master",
+        url: "https://api.github.com/repos/after12am/jquery.tween.js/git/refs/heads/master",
         async: false,
         success: function(data) {
             sha = data.object.sha;
@@ -189,17 +189,17 @@ jQuery(document).ready(function($) {
 
     $.ajax({
         type: "GET",
-        url: "https://api.github.com/repos/after12am/jquery.cssanimate.js/commits/" + sha,
+        url: "https://api.github.com/repos/after12am/jquery.tween.js/commits/" + sha,
         async: false,
         success: function(data) {
             // console.log(data.commit.committer)
             // console.log(data.commit.message)
             $('.tweet_time .date').append(niceTime(data.commit.committer.date));
-            $('.tweet_time .date').attr('href', 'https://github.com/after12am/jquery.cssanimate.js/commit/' + sha);
+            $('.tweet_time .date').attr('href', 'https://github.com/after12am/jquery.tween.js/commit/' + sha);
             $('.tweet_text .committer').append(data.committer.login);
             $('.tweet_text .committer').attr('href', data.committer.html_url);
             $('.tweet_text .message').append(data.commit.message);
-            $('.tweet_text .message').attr('href', 'https://github.com/after12am/jquery.cssanimate.js/commit/' + sha);
+            $('.tweet_text .message').attr('href', 'https://github.com/after12am/jquery.tween.js/commit/' + sha);
         },
         error: function(data) {
             console.log(data)

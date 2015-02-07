@@ -777,7 +777,20 @@ nav {
     box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
     background-color: #CF3932;
 }
-.widget-cols h1,
+.widget-cols .code em {
+    border-radius: 2px;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+    background-color: #CF3932;
+}
+.widget-cols .code pre {
+  background: none;
+  border: 2px dotted #fff;
+}
+
+/*.widget-cols .code pre {
+  color: #3e3e3e;
+}
+*/.widget-cols h1,
 .widget-cols h2,
 .widget-cols h3,
 .widget-cols h4,
@@ -802,6 +815,10 @@ nav {
 .multiplebgs .widget-cols {
   background-image: url(../img/widgets-bg.png), url(../img/widgets-degree.png);
   background-repeat: repeat, repeat-x;
+}
+.multiplebgs .widget-cols .inner {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 /* BOTTOM ------------------------------------------------------------*/
 #bottom {
