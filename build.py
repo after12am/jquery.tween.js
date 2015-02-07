@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-version = '0.1.0'
+version = '0.1.1'
 input_path = 'src/'
 output_path = 'jquery.tween.js'
 input_order = [
@@ -19,7 +19,7 @@ header = '''/*
  *
  * https://github.com/after12am/jquery.tween.js
  *
- * Copyright 2012-2013 Satoshi Okami
+ * Copyright 2012-2015 Satoshi Okami
  * Released under the MIT license
  */
 '''
