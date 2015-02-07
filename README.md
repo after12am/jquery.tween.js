@@ -64,7 +64,7 @@ $('.any').tween(props [,duration] [,easing] [,callback]);
 </script>
 ```
 
-## Note
+## Notes
 
 #### IE6-9
 
