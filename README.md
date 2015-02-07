@@ -39,7 +39,8 @@ This plugin is designed to work on modern browsers including smartphone browsers
 
 ## Require
 
-* requires jQuery 1.4.3+
+* jQuery 1.4.3+
+* jquery.easing.1.3.js
 
 
 ## Usage
