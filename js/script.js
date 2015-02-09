@@ -67,6 +67,9 @@ $('.ease-example .box').mouseover(function() {
     $(this).tween({ rotate: 0, 'background-color': '#a8c8ca' });
 });
 
+$('.duration-example .box').mouseover(function() {
+    $(this).tween({ rotatey: 540 }, 750).tween({ rotatey: 0 }, 2000)
+})
 
 $('.perspective .box').mouseover(function() {
     $(this).tween({ perspective: 100, x: 50, z: 50, rotatey: 60 })
