@@ -159,7 +159,7 @@ function transit(elem, options) {
   // e.g. width, height, color ...
   for (var k in options.props) {
     // excluding perspective property, because this has to be set on parent. 
-    if (!transform[k] && k !== 'perspective') {
+    if (transform[k] === undefined && k !== 'perspective') {
       transition.set(k, options.props[k]);
     }
   }
