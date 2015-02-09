@@ -40,7 +40,7 @@ This plugin is designed to work on modern browsers including smartphone browsers
 ## Require
 
 * jQuery 1.4.3+
-* jquery.easing.1.3.js
+* [jquery.easing.1.3.js](https://github.com/gdsmith/jquery.easing)
 
 
 ## Usage
