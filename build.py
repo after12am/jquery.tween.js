@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-version = '0.1.1'
+version = '0.1.2'
 input_path = 'src/'
 output_path = 'jquery.tween.js'
 input_order = [
