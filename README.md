@@ -47,7 +47,8 @@ This plugin is designed to work on modern browsers including smartphone browsers
 
 You can take advantage of knowledge of jquery of you.
 
-```js
+```html
+<div class="any"></div>
 <script src="jquery.js"></script>
 <script src='jquery.easing.1.3.js'></script>
 <script src='jquery.tween.js'></script>
