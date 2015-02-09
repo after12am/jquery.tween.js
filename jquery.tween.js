@@ -1,5 +1,5 @@
 /*
- * jquery.tween.js v0.1.2
+ * jquery.tween.js v0.1.3
  * 
  * A jQuery plugin provides a stylish and unified animation for your browser based app.
  *
