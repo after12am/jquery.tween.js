@@ -132,7 +132,7 @@ Transform.prototype.scale3d = function() {
 }
 
 Transform.prototype.skew = function() {
-  return sprintf('skew({x}deg,{y}deg)',
+  return sprintf('skew(%sdeg,%sdeg)',
     this.skewx,
     this.skewy
   );
